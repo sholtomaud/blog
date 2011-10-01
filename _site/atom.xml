@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>Zero Wind</title>
+ <link href="http://jamie-wong.com/atom.xml" rel="self"/>
+ <link href="http://jamie-wong.com/"/>
+ <updated>2011-10-01T03:10:08-07:00</updated>
+ <id>http://jamie-wong.com/</id>
+ <author>
+   <name>Jamie Wongk</name>
+   <email>jamie.lf.wong@gmail.com</email>
+ </author>
+
+ 
+ <entry>
+   <title>Second Post</title>
+   <link href="http://jamie-wong.com/2010/11/10/second-post.html"/>
+   <updated>2010-11-10T00:00:00-08:00</updated>
+   <id>http://jamie-wong.com/2010/11/10/second-post</id>
+   <content type="html">
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env ruby&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;42&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;times&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hello World!&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>First post</title>
+   <link href="http://jamie-wong.com/2010/11/01/first-post.html"/>
+   <updated>2010-11-01T00:00:00-07:00</updated>
+   <id>http://jamie-wong.com/2010/11/01/first-post</id>
+   <content type="html">&lt;p&gt;This is the first post.  It has been updated since the post so has a last_updated value in the frontmatter.&lt;/p&gt;
+</content>
+ </entry>
+ 
+
+</feed>

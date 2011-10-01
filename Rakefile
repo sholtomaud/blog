@@ -52,6 +52,11 @@ task :check_links do
   end
 end
 
+desc 'Watch and recompile sass'
+task :compass do
+  sh 'compass watch -c config.rb --force'
+end
+
 def cleanup
   sh 'rm -rf _site'
 end
