@@ -1,3 +1,6 @@
 *.swp
 _site
 _layouts
+_site
+_sass/.sass-cache
+.sass-cache
