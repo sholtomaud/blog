@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
- <title>Zero Wind</title>
+ <title>Jamie Wong</title>
  <link href="http://jamie-wong.com/atom.xml" rel="self"/>
  <link href="http://jamie-wong.com/"/>
- <updated>2011-10-01T17:55:03-07:00</updated>
+ <updated>2011-10-01T20:27:34-07:00</updated>
  <id>http://jamie-wong.com/</id>
  <author>
-   <name>Jamie Wongk</name>
+   <name>Jamie Wong</name>
    <email>jamie.lf.wong@gmail.com</email>
  </author>
 

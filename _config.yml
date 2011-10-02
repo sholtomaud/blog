@@ -8,8 +8,8 @@ markdown: rdiscount
 # configuration required for some pages
 
 domain: jamie-wong.com
-title: Zero Wind
-author: Jamie Wongk
+title: Jamie Wong
+author: Jamie Wong
 email: jamie.lf.wong@gmail.com
 
 # configuration for ehancements, uncomment to enable

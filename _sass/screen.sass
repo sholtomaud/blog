@@ -2,19 +2,24 @@ $page-bg: #2C2C29
 $orange: rgb(240, 140, 60)
 
 // This import applies a global reset to any page that imports this stylesheet.
-@import "blueprint/reset"
+@import blueprint/reset
 
 // To configure blueprint, edit the partials/base.sass file.
-@import "partials/base"
+@import partials/base
 
 // Import all the default blueprint modules so that we can access their mixins.
-@import "blueprint"
+@import blueprint
 
 // Import the non-default scaffolding module.
-@import "blueprint/scaffolding"
+@import blueprint/scaffolding
+
+@import compass/css3
 
 // CSS3 border radius
-@import "compass/css3/border-radius"
+@import compass/css3/border-radius
+
+// CSS3 image background
+@import compass/css3/images
 
 // To generate css equivalent to the blueprint css but with your
 // configuration applied, uncomment:
@@ -32,53 +37,91 @@ body.bp
   // Remove the scaffolding when you're ready to start doing visual design.
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
 
+  width: 100%
+  min-height: 100%
+
   background-color: $page-bg
+
+  a
+    text-decoration: none
+
+html, body
+  height: 100%
+
 
 .orange
   color: $orange
 
+$sidebar-width: 150px
+
+$container-width: 800px
+
 .page-container
-  width: 650px
-  margin: 25px auto
+  min-height: 100%
+  width: $container-width
 
-  .page-header, .page-footer
-    padding: 0 15px
-    color: white
+.page-sidebar
+  position: fixed
+  width: $sidebar-width
 
-  .page-header
-    $header-fg: white
-    text-shadow: 2px 2px mix($header-fg, $page-bg, 25%)
+  min-height: 100%
+
+  $zero-wind-bg: lighten($page-bg, 30%)
+
+  .zero-wind
+    margin: 20px
+    padding: 10px
+    border: 1px solid lighten($page-bg, 45%)
+
+    +background(linear-gradient(top, lighten($zero-wind-bg, 5%), darken($zero-wind-bg, 5%)))
+    +border-radius(10px)
+    +box-shadow(darken($page-bg, 10%) 0 3px 20px)
+
+    h1
+      font-size: 36px
+      color: $page-bg
+      +text-shadow(lighten($zero-wind-bg, 10%) 0 1px 2px, darken($zero-wind-bg, 10%) 0 -1px 2px)
+      text-align: center
+      text-decoration: none
+      margin: 0
+
+  h2.my-name
+    font-size: 22px
+    text-align: center
+    color: $zero-wind-bg
+    +text-shadow(lighten($page-bg, 10%) 0 1px 2px, darken($page-bg, 5%) 0 -1px 2px)
+    margin: 0 0 25px 0
+
+  .page-nav
+    +text-shadow(lighten($page-bg, 10%) 0 1px 1px, darken($page-bg, 5%) 0 -1px 1px)
+
+    $link-color: $zero-wind-bg
 
     a
-      text-decoration: none
+      color: $link-color
 
-    h1.site-title
-      font-size: 40px
-      color: $header-fg
+      &:visited
+        color: $link-color
 
-    .page-nav
-      font-size: 18px
+      &:hover
+        color: lighten($link-color, 25%)
 
-      a
-        color: $header-fg
-        text-shadow: 1px 1px mix($header-fg, $page-bg, 25%)
+    ul
+      margin: 0
+      padding: 0 15px
 
-        &:hover
-          color: darken($header-fg, 25%)
+    li
+      list-style: none
+      font-size: 16px
+      text-align: right
+      line-height: 30px
 
-      ul
-        list-style: none
-        padding: 0
-        margin: 0
+    li + li
+      border-top: 1px solid lighten($page-bg, 10%)
 
-        li
-          display: inline
-          color: $header-fg
-
-        li + li
-          padding-left: 5px
-
-  .page-content
-    background-color: white
-    padding: 15px
-    @include border-radius(10px)
+.page-content
+  position: absolute
+  margin-left: $sidebar-width
+  background-color: white
+  min-height: 100%
+  width: $container-width - $sidebar-width
