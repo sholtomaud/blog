@@ -403,6 +403,9 @@ html, body {
   text-decoration: none;
   margin: 0;
 }
+.page-sidebar .zero-wind h1:hover {
+  color: #464642;
+}
 .page-sidebar h2.my-name {
   font-size: 22px;
   text-align: center;
