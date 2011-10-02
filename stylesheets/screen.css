@@ -455,7 +455,7 @@ html, body {
 }
 
 body.bp .post-list ul.post-list-ul {
-  width: 570px;
+  width: 770px;
   margin: 0;
   padding: 0;
 }
@@ -468,7 +468,7 @@ body.bp .post-list li {
   font-size: 14px;
 }
 body.bp .post-list li a {
-  width: 420px;
+  width: 620px;
   line-height: 30px;
   border: none;
 }
@@ -486,7 +486,7 @@ body.bp .page-content {
   position: absolute;
   margin-left: 150px;
   min-height: 100%;
-  max-width: 570px;
+  max-width: 770px;
   font-size: 16px;
 }
 body.bp .page-content h1.page-title {
