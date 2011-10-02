@@ -52,15 +52,15 @@ a img {
 body.bp {
   line-height: 1.5;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-  color: #333333;
-  font-size: 75%;
+  color: #503e2b;
+  font-size: 87.5%;
   width: 100%;
   min-height: 100%;
   background-color: #eeeeee;
 }
 body.bp h1, body.bp h2, body.bp h3, body.bp h4, body.bp h5, body.bp h6 {
   font-weight: normal;
-  color: #222222;
+  color: #503e2b;
 }
 body.bp h1 img, body.bp h2 img, body.bp h3 img, body.bp h4 img, body.bp h5 img, body.bp h6 img {
   margin: 0;
@@ -250,10 +250,10 @@ body.bp .showgrid {
   background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.5) 5%, rgba(0, 0, 0, 0) 5%), -o-linear-gradient(left, rgba(0, 0, 0, 0) 0px, rgba(100, 100, 225, 0.25) 0px, rgba(100, 100, 225, 0.25) 30px, rgba(0, 0, 0, 0) 30px, rgba(0, 0, 0, 0) 40px, rgba(100, 100, 225, 0.25) 40px, rgba(100, 100, 225, 0.25) 70px, rgba(0, 0, 0, 0) 70px, rgba(0, 0, 0, 0) 80px, rgba(100, 100, 225, 0.25) 80px, rgba(100, 100, 225, 0.25) 110px, rgba(0, 0, 0, 0) 110px, rgba(0, 0, 0, 0) 120px, rgba(100, 100, 225, 0.25) 120px, rgba(100, 100, 225, 0.25) 150px, rgba(0, 0, 0, 0) 150px, rgba(0, 0, 0, 0) 160px, rgba(100, 100, 225, 0.25) 160px, rgba(100, 100, 225, 0.25) 190px, rgba(0, 0, 0, 0) 190px, rgba(0, 0, 0, 0) 200px, rgba(100, 100, 225, 0.25) 200px, rgba(100, 100, 225, 0.25) 230px, rgba(0, 0, 0, 0) 230px, rgba(0, 0, 0, 0) 240px, rgba(100, 100, 225, 0.25) 240px, rgba(100, 100, 225, 0.25) 270px, rgba(0, 0, 0, 0) 270px, rgba(0, 0, 0, 0) 280px, rgba(100, 100, 225, 0.25) 280px, rgba(100, 100, 225, 0.25) 310px, rgba(0, 0, 0, 0) 310px, rgba(0, 0, 0, 0) 320px, rgba(100, 100, 225, 0.25) 320px, rgba(100, 100, 225, 0.25) 350px, rgba(0, 0, 0, 0) 350px, rgba(0, 0, 0, 0) 360px, rgba(100, 100, 225, 0.25) 360px, rgba(100, 100, 225, 0.25) 390px, rgba(0, 0, 0, 0) 390px, rgba(0, 0, 0, 0) 400px, rgba(100, 100, 225, 0.25) 400px, rgba(100, 100, 225, 0.25) 430px, rgba(0, 0, 0, 0) 430px, rgba(0, 0, 0, 0) 440px, rgba(100, 100, 225, 0.25) 440px, rgba(100, 100, 225, 0.25) 470px, rgba(0, 0, 0, 0) 470px, rgba(0, 0, 0, 0) 480px, rgba(100, 100, 225, 0.25) 480px, rgba(100, 100, 225, 0.25) 510px, rgba(0, 0, 0, 0) 510px, rgba(0, 0, 0, 0) 520px, rgba(100, 100, 225, 0.25) 520px, rgba(100, 100, 225, 0.25) 550px, rgba(0, 0, 0, 0) 550px, rgba(0, 0, 0, 0) 560px, rgba(100, 100, 225, 0.25) 560px, rgba(100, 100, 225, 0.25) 590px, rgba(0, 0, 0, 0) 590px, rgba(0, 0, 0, 0) 600px, rgba(100, 100, 225, 0.25) 600px, rgba(100, 100, 225, 0.25) 630px, rgba(0, 0, 0, 0) 630px, rgba(0, 0, 0, 0) 640px, rgba(100, 100, 225, 0.25) 640px, rgba(100, 100, 225, 0.25) 670px, rgba(0, 0, 0, 0) 670px, rgba(0, 0, 0, 0) 680px, rgba(100, 100, 225, 0.25) 680px, rgba(100, 100, 225, 0.25) 710px, rgba(0, 0, 0, 0) 710px, rgba(0, 0, 0, 0) 720px, rgba(100, 100, 225, 0.25) 720px, rgba(100, 100, 225, 0.25) 750px, rgba(0, 0, 0, 0) 750px, rgba(0, 0, 0, 0) 760px, rgba(100, 100, 225, 0.25) 760px, rgba(100, 100, 225, 0.25) 790px, rgba(0, 0, 0, 0) 790px, rgba(0, 0, 0, 0) 800px, rgba(100, 100, 225, 0.25) 800px, rgba(100, 100, 225, 0.25) 830px, rgba(0, 0, 0, 0) 830px, rgba(0, 0, 0, 0) 840px, rgba(100, 100, 225, 0.25) 840px, rgba(100, 100, 225, 0.25) 870px, rgba(0, 0, 0, 0) 870px, rgba(0, 0, 0, 0) 880px, rgba(100, 100, 225, 0.25) 880px, rgba(100, 100, 225, 0.25) 910px, rgba(0, 0, 0, 0) 910px, rgba(0, 0, 0, 0) 920px, rgba(100, 100, 225, 0.25) 920px, rgba(100, 100, 225, 0.25) 950px, rgba(0, 0, 0, 0) 950px, rgba(0, 0, 0, 0) 960px);
   background-image: -ms-linear-gradient(bottom, rgba(0, 0, 0, 0.5) 5%, rgba(0, 0, 0, 0) 5%), -ms-linear-gradient(left, rgba(0, 0, 0, 0) 0px, rgba(100, 100, 225, 0.25) 0px, rgba(100, 100, 225, 0.25) 30px, rgba(0, 0, 0, 0) 30px, rgba(0, 0, 0, 0) 40px, rgba(100, 100, 225, 0.25) 40px, rgba(100, 100, 225, 0.25) 70px, rgba(0, 0, 0, 0) 70px, rgba(0, 0, 0, 0) 80px, rgba(100, 100, 225, 0.25) 80px, rgba(100, 100, 225, 0.25) 110px, rgba(0, 0, 0, 0) 110px, rgba(0, 0, 0, 0) 120px, rgba(100, 100, 225, 0.25) 120px, rgba(100, 100, 225, 0.25) 150px, rgba(0, 0, 0, 0) 150px, rgba(0, 0, 0, 0) 160px, rgba(100, 100, 225, 0.25) 160px, rgba(100, 100, 225, 0.25) 190px, rgba(0, 0, 0, 0) 190px, rgba(0, 0, 0, 0) 200px, rgba(100, 100, 225, 0.25) 200px, rgba(100, 100, 225, 0.25) 230px, rgba(0, 0, 0, 0) 230px, rgba(0, 0, 0, 0) 240px, rgba(100, 100, 225, 0.25) 240px, rgba(100, 100, 225, 0.25) 270px, rgba(0, 0, 0, 0) 270px, rgba(0, 0, 0, 0) 280px, rgba(100, 100, 225, 0.25) 280px, rgba(100, 100, 225, 0.25) 310px, rgba(0, 0, 0, 0) 310px, rgba(0, 0, 0, 0) 320px, rgba(100, 100, 225, 0.25) 320px, rgba(100, 100, 225, 0.25) 350px, rgba(0, 0, 0, 0) 350px, rgba(0, 0, 0, 0) 360px, rgba(100, 100, 225, 0.25) 360px, rgba(100, 100, 225, 0.25) 390px, rgba(0, 0, 0, 0) 390px, rgba(0, 0, 0, 0) 400px, rgba(100, 100, 225, 0.25) 400px, rgba(100, 100, 225, 0.25) 430px, rgba(0, 0, 0, 0) 430px, rgba(0, 0, 0, 0) 440px, rgba(100, 100, 225, 0.25) 440px, rgba(100, 100, 225, 0.25) 470px, rgba(0, 0, 0, 0) 470px, rgba(0, 0, 0, 0) 480px, rgba(100, 100, 225, 0.25) 480px, rgba(100, 100, 225, 0.25) 510px, rgba(0, 0, 0, 0) 510px, rgba(0, 0, 0, 0) 520px, rgba(100, 100, 225, 0.25) 520px, rgba(100, 100, 225, 0.25) 550px, rgba(0, 0, 0, 0) 550px, rgba(0, 0, 0, 0) 560px, rgba(100, 100, 225, 0.25) 560px, rgba(100, 100, 225, 0.25) 590px, rgba(0, 0, 0, 0) 590px, rgba(0, 0, 0, 0) 600px, rgba(100, 100, 225, 0.25) 600px, rgba(100, 100, 225, 0.25) 630px, rgba(0, 0, 0, 0) 630px, rgba(0, 0, 0, 0) 640px, rgba(100, 100, 225, 0.25) 640px, rgba(100, 100, 225, 0.25) 670px, rgba(0, 0, 0, 0) 670px, rgba(0, 0, 0, 0) 680px, rgba(100, 100, 225, 0.25) 680px, rgba(100, 100, 225, 0.25) 710px, rgba(0, 0, 0, 0) 710px, rgba(0, 0, 0, 0) 720px, rgba(100, 100, 225, 0.25) 720px, rgba(100, 100, 225, 0.25) 750px, rgba(0, 0, 0, 0) 750px, rgba(0, 0, 0, 0) 760px, rgba(100, 100, 225, 0.25) 760px, rgba(100, 100, 225, 0.25) 790px, rgba(0, 0, 0, 0) 790px, rgba(0, 0, 0, 0) 800px, rgba(100, 100, 225, 0.25) 800px, rgba(100, 100, 225, 0.25) 830px, rgba(0, 0, 0, 0) 830px, rgba(0, 0, 0, 0) 840px, rgba(100, 100, 225, 0.25) 840px, rgba(100, 100, 225, 0.25) 870px, rgba(0, 0, 0, 0) 870px, rgba(0, 0, 0, 0) 880px, rgba(100, 100, 225, 0.25) 880px, rgba(100, 100, 225, 0.25) 910px, rgba(0, 0, 0, 0) 910px, rgba(0, 0, 0, 0) 920px, rgba(100, 100, 225, 0.25) 920px, rgba(100, 100, 225, 0.25) 950px, rgba(0, 0, 0, 0) 950px, rgba(0, 0, 0, 0) 960px);
   background-image: linear-gradient(bottom, rgba(0, 0, 0, 0.5) 5%, rgba(0, 0, 0, 0) 5%), linear-gradient(left, rgba(0, 0, 0, 0) 0px, rgba(100, 100, 225, 0.25) 0px, rgba(100, 100, 225, 0.25) 30px, rgba(0, 0, 0, 0) 30px, rgba(0, 0, 0, 0) 40px, rgba(100, 100, 225, 0.25) 40px, rgba(100, 100, 225, 0.25) 70px, rgba(0, 0, 0, 0) 70px, rgba(0, 0, 0, 0) 80px, rgba(100, 100, 225, 0.25) 80px, rgba(100, 100, 225, 0.25) 110px, rgba(0, 0, 0, 0) 110px, rgba(0, 0, 0, 0) 120px, rgba(100, 100, 225, 0.25) 120px, rgba(100, 100, 225, 0.25) 150px, rgba(0, 0, 0, 0) 150px, rgba(0, 0, 0, 0) 160px, rgba(100, 100, 225, 0.25) 160px, rgba(100, 100, 225, 0.25) 190px, rgba(0, 0, 0, 0) 190px, rgba(0, 0, 0, 0) 200px, rgba(100, 100, 225, 0.25) 200px, rgba(100, 100, 225, 0.25) 230px, rgba(0, 0, 0, 0) 230px, rgba(0, 0, 0, 0) 240px, rgba(100, 100, 225, 0.25) 240px, rgba(100, 100, 225, 0.25) 270px, rgba(0, 0, 0, 0) 270px, rgba(0, 0, 0, 0) 280px, rgba(100, 100, 225, 0.25) 280px, rgba(100, 100, 225, 0.25) 310px, rgba(0, 0, 0, 0) 310px, rgba(0, 0, 0, 0) 320px, rgba(100, 100, 225, 0.25) 320px, rgba(100, 100, 225, 0.25) 350px, rgba(0, 0, 0, 0) 350px, rgba(0, 0, 0, 0) 360px, rgba(100, 100, 225, 0.25) 360px, rgba(100, 100, 225, 0.25) 390px, rgba(0, 0, 0, 0) 390px, rgba(0, 0, 0, 0) 400px, rgba(100, 100, 225, 0.25) 400px, rgba(100, 100, 225, 0.25) 430px, rgba(0, 0, 0, 0) 430px, rgba(0, 0, 0, 0) 440px, rgba(100, 100, 225, 0.25) 440px, rgba(100, 100, 225, 0.25) 470px, rgba(0, 0, 0, 0) 470px, rgba(0, 0, 0, 0) 480px, rgba(100, 100, 225, 0.25) 480px, rgba(100, 100, 225, 0.25) 510px, rgba(0, 0, 0, 0) 510px, rgba(0, 0, 0, 0) 520px, rgba(100, 100, 225, 0.25) 520px, rgba(100, 100, 225, 0.25) 550px, rgba(0, 0, 0, 0) 550px, rgba(0, 0, 0, 0) 560px, rgba(100, 100, 225, 0.25) 560px, rgba(100, 100, 225, 0.25) 590px, rgba(0, 0, 0, 0) 590px, rgba(0, 0, 0, 0) 600px, rgba(100, 100, 225, 0.25) 600px, rgba(100, 100, 225, 0.25) 630px, rgba(0, 0, 0, 0) 630px, rgba(0, 0, 0, 0) 640px, rgba(100, 100, 225, 0.25) 640px, rgba(100, 100, 225, 0.25) 670px, rgba(0, 0, 0, 0) 670px, rgba(0, 0, 0, 0) 680px, rgba(100, 100, 225, 0.25) 680px, rgba(100, 100, 225, 0.25) 710px, rgba(0, 0, 0, 0) 710px, rgba(0, 0, 0, 0) 720px, rgba(100, 100, 225, 0.25) 720px, rgba(100, 100, 225, 0.25) 750px, rgba(0, 0, 0, 0) 750px, rgba(0, 0, 0, 0) 760px, rgba(100, 100, 225, 0.25) 760px, rgba(100, 100, 225, 0.25) 790px, rgba(0, 0, 0, 0) 790px, rgba(0, 0, 0, 0) 800px, rgba(100, 100, 225, 0.25) 800px, rgba(100, 100, 225, 0.25) 830px, rgba(0, 0, 0, 0) 830px, rgba(0, 0, 0, 0) 840px, rgba(100, 100, 225, 0.25) 840px, rgba(100, 100, 225, 0.25) 870px, rgba(0, 0, 0, 0) 870px, rgba(0, 0, 0, 0) 880px, rgba(100, 100, 225, 0.25) 880px, rgba(100, 100, 225, 0.25) 910px, rgba(0, 0, 0, 0) 910px, rgba(0, 0, 0, 0) 920px, rgba(100, 100, 225, 0.25) 920px, rgba(100, 100, 225, 0.25) 950px, rgba(0, 0, 0, 0) 950px, rgba(0, 0, 0, 0) 960px);
-  -moz-background-size: 100% 18px, auto;
-  -webkit-background-size: 100% 18px, auto;
-  -o-background-size: 100% 18px, auto;
-  background-size: 100% 18px, auto;
+  -moz-background-size: 100% 21px, auto;
+  -webkit-background-size: 100% 21px, auto;
+  -o-background-size: 100% 21px, auto;
+  background-size: 100% 21px, auto;
   background-position: left top;
 }
 body.bp .feedback, body.bp .error, body.bp .alert, body.bp .notice, body.bp .success, body.bp .info {
@@ -359,17 +359,12 @@ html, body {
   height: 100%;
 }
 
-.orange {
-  color: #f08c3c;
-}
-
 .page-container {
   min-height: 100%;
-  width: 800px;
 }
 
 .page-sidebar {
-  background-color: #2c2c29;
+  background-color: #443e37;
   position: fixed;
   width: 150px;
   height: 100%;
@@ -377,44 +372,46 @@ html, body {
 .page-sidebar .zero-wind {
   margin: 20px;
   padding: 10px;
-  border: 1px solid #a1a19a;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #88887f), color-stop(100%, #6e6e67));
-  background: -webkit-linear-gradient(top, #88887f, #6e6e67);
-  background: -moz-linear-gradient(top, #88887f, #6e6e67);
-  background: -o-linear-gradient(top, #88887f, #6e6e67);
-  background: -ms-linear-gradient(top, #88887f, #6e6e67);
-  background: linear-gradient(top, #88887f, #6e6e67);
+  border: 1px solid #b8b0a8;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #a1978c), color-stop(100%, #8a7e71));
+  background: -webkit-linear-gradient(top, #a1978c, #8a7e71);
+  background: -moz-linear-gradient(top, #a1978c, #8a7e71);
+  background: -o-linear-gradient(top, #a1978c, #8a7e71);
+  background: -ms-linear-gradient(top, #a1978c, #8a7e71);
+  background: linear-gradient(top, #a1978c, #8a7e71);
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   -o-border-radius: 10px;
   -ms-border-radius: 10px;
   -khtml-border-radius: 10px;
   border-radius: 10px;
-  -moz-box-shadow: #121210 0 3px 20px;
-  -webkit-box-shadow: #121210 0 3px 20px;
-  -o-box-shadow: #121210 0 3px 20px;
-  box-shadow: #121210 0 3px 20px;
+  -moz-box-shadow: #282420 0 3px 20px;
+  -webkit-box-shadow: #282420 0 3px 20px;
+  -o-box-shadow: #282420 0 3px 20px;
+  box-shadow: #282420 0 3px 20px;
 }
 .page-sidebar .zero-wind h1 {
+  border: none;
   font-size: 36px;
-  color: #2c2c29;
-  text-shadow: #94948d 0 1px 2px, #61615a 0 -1px 2px;
+  color: #443e37;
+  text-shadow: #ada49a 0 1px 2px, #7c7165 0 -1px 2px;
   text-align: center;
   text-decoration: none;
   margin: 0;
 }
 .page-sidebar .zero-wind h1:hover {
-  color: #464642;
+  color: #60574e;
 }
 .page-sidebar h2.my-name {
+  border: none;
   font-size: 22px;
   text-align: center;
-  color: #7b7b73;
-  text-shadow: #464642 0 1px 2px, #1f1f1d 0 -1px 2px;
+  color: #968a7e;
+  text-shadow: #60574e 0 1px 2px, #36312c 0 -1px 2px;
 }
 .page-sidebar .short-bio {
-  text-shadow: #464642 0 1px 1px, #1f1f1d 0 -1px 1px;
-  color: #7b7b73;
+  text-shadow: #60574e 0 1px 1px, #36312c 0 -1px 1px;
+  color: #968a7e;
   font-style: italic;
   font-size: 12px;
   padding: 0 15px;
@@ -426,16 +423,16 @@ html, body {
   margin: 0;
 }
 .page-sidebar .page-nav {
-  text-shadow: #464642 0 1px 1px, #1f1f1d 0 -1px 1px;
+  text-shadow: #60574e 0 1px 1px, #36312c 0 -1px 1px;
 }
 .page-sidebar .page-nav a {
-  color: #7b7b73;
+  color: #968a7e;
 }
 .page-sidebar .page-nav a:visited {
-  color: #7b7b73;
+  color: #968a7e;
 }
 .page-sidebar .page-nav a:hover {
-  color: #b9b9b4;
+  color: #cfcac4;
 }
 .page-sidebar .page-nav ul {
   margin: 0;
@@ -448,37 +445,72 @@ html, body {
   line-height: 30px;
 }
 .page-sidebar .page-nav li + li {
-  border-top: 1px solid #464642;
+  border-top: 1px solid #60574e;
 }
 
-.page-content {
-  padding: 15px;
-  position: absolute;
-  margin-left: 150px;
-  min-height: 100%;
-  width: 620px;
+.related {
+  outline: 1px red;
 }
 
-.post-list ul.post-list-ul {
+body.bp .post-list ul.post-list-ul {
+  width: 570px;
   margin: 0;
   padding: 0;
 }
-.post-list li + li {
+body.bp .post-list li + li {
   border-top: 1px solid #c8c8c8;
 }
-.post-list li {
+body.bp .post-list li {
+  clear: both;
   list-style: none;
   font-size: 14px;
 }
-.post-list li a {
-  width: 470px;
+body.bp .post-list li a {
+  width: 420px;
   line-height: 30px;
 }
-.post-list li span.date {
+body.bp .post-list li span.date {
   color: #a2a2a2;
   font-style: italic;
   line-height: 30px;
   width: 150px;
   float: right;
   text-align: right;
+}
+
+body.bp .page-content {
+  padding: 15px;
+  position: absolute;
+  margin-left: 150px;
+  min-height: 100%;
+  max-width: 570px;
+  font-size: 16px;
+}
+body.bp .page-content h1.page-title {
+  margin-bottom: 0;
+}
+body.bp .page-content .post-date {
+  font-style: italic;
+  text-align: right;
+  color: #9f968c;
+  font-size: 80%;
+  margin-bottom: 10px;
+}
+body.bp .page-content h1, body.bp .page-content h2, body.bp .page-content h3 {
+  color: #503e2b;
+  text-shadow: #7b7b7b 0 -1px 1px, white 0 1px 1px;
+}
+body.bp .page-content h1 {
+  font-size: 150%;
+  line-height: 150%;
+  border-bottom: 4px solid #d4d4d4;
+}
+body.bp .page-content h2 {
+  font-size: 135%;
+  line-height: 135%;
+  border-bottom: 2px solid #d4d4d4;
+}
+body.bp .page-content h3 {
+  font-size: 120%;
+  line-height: 120%;
 }

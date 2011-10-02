@@ -31,7 +31,7 @@
 
         <div class="zero-wind">
           <a href="/"><h1 class="site-title">
-            Zero Wind
+            Zerø Wind
           </h1></a>
         </div>
 
@@ -56,11 +56,12 @@
       </div>
 
       <div class="page-content">
-        {% if page.title %}<h1>{{ page.title }}</h1>{% endif %}
+        {% if page.title %}
+          <h1 class='page-title'>{{ page.title }}</h1>
+        {% endif %}
+
         {{ content }}
       </div>
-
-      <div class="clear">
     </div>
   </body>
 </html>
