@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JSONimal - Elegant DOM Contruction with jQuery - Zero Wind :: Jamie Wong</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
+    
+    
+  </head>
+
+  <body class="bp">
+    <div class="page-container">
+      <div class="page-sidebar">
+
+        <div class="zero-wind">
+          <a href="/"><h1 class="site-title">
+            Zero Wind
+          </h1></a>
+        </div>
+
+        <h2 class='my-name'>Jamie Wong</h2>
+
+        <div class="page-nav">
+          <ul>
+            <li><a href="/">blog</a></li>
+            <li><a href="/resume">resume</a></li>
+            <li><a href="https://github.com/phleet">github</a></li>
+            <li><a href="http://stackoverflow.com/users/303911/jamie-wong">stack overflow</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="page-content">
+        <h1>JSONimal - Elegant DOM Contruction with jQuery</h1>
+        <div class="postdate">Posted on 16 Jul 2010</div>
+
+<div class="post">
+<p><strong>EDIT</strong> There is a more complete project achieving exactly the goals I set out for called jquery-haml: <a href="">http://github.com/creationix/jquery-haml</a></p>
+
+<p>Occasionally for Javascript projects, I found myself building a lot of HTML programatically, and I wasn't satisfied with any of the techniques available, so I built JSONimal. I was originally going to just call it JSONML, but that was taken.</p>
+
+<p>What's it do? This example should demonstrate my goal fairly well.</p>
+
+<pre><code>$(function() {
+    $.mktag("#demo").jsonimal([
+        ["h1", {text: "JSONimal!"}],
+        ["table",{style: 'border: 1px solid black'},[
+            ["thead",[
+                ["tr",{style: 'text-transform: uppercase'},[
+                    ["th", {text: "one"}],
+                    ["th", {text: "two"}],
+                    ["th", {text: "three"}]
+                ]]
+            ]],
+            ["tbody", [
+                ["tr",[
+                    ["td", {html: "&lt;u&gt;a&lt;/u&gt;"}],
+                    ["td", {text: "b"}],
+                    ["td", {text: "c"}]
+                ]],
+                ["tr",[
+                    ["td",[
+                        ["a", {href: "http://www.google.ca", text: "Google"}]
+                    ]],
+                    ["td", {text: "b"}],
+                    ["td", {text: "c"}]
+                ]],
+                ["tr",[
+                    ["td", {text: "a"}],
+                    ["td", {text: "b"}],
+                    ["td", {text: "c"}]
+                ]]
+            ]]
+        ]]
+    ]).appendTo("body");
+});
+</code></pre>
+
+<p>Which will add this to the body:</p>
+
+<h1>JSONimal!</h1>
+
+
+<table style="border: 1px solid black;"><thead><tr style="text-transform: uppercase;"><th>one</th><th>two</th><th>three</th></tr></thead><tbody><tr><td><u>a</u></td><td>b</td><td>c</td></tr><tr><td><a href="http://www.google.ca">Google</a></td><td>b</td><td>c</td></tr><tr><td>a</td><td>b</td><td>c</td></tr></tbody></table>
+
+
+<p>For more information and examples, check out the github page: <a href="http://github.com/phleet/JSONimal">JSONimal @ github</a>.</p>
+
+<p>I also posted it as on the jQuery plugins page - but that just points to the github page anyway. <a href="http://plugins.jquery.com/project/jsonimal">JSONimal @ plugins.jquery.com</a></p>
+
+</div>
+ 
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>25 Jun 2011</span> - <a href="/2011/06/25/complex-asynchronous-queries-in-javascript/">Complex Asynchronous Queries in JavaScript</a></li>
+    
+      <li><span>12 Jan 2011</span> - <a href="/2011/01/12/hacker-cup-qualification-round-solutions/">Hacker Cup Qualification Round - Solutions</a></li>
+    
+      <li><span>17 Nov 2010</span> - <a href="/2010/11/17/mechanize-and-uwace-downloader/">Mechanize and UWAce Downloader</a></li>
+    
+      <li><span>16 Oct 2010</span> - <a href="/2010/10/16/dfas-and-graphviz-dot/">DFAs and Graphviz DOT</a></li>
+    
+      <li><span>30 Sep 2010</span> - <a href="/2010/09/30/make-your-life-easier-with-gnu-make/">Make your life easier with GNU Make.</a></li>
+    
+  </ul>
+</div>
+
+
+</div>
+      </div>
+
+      <div class="clear">
+    </div>
+  </body>
+</html>

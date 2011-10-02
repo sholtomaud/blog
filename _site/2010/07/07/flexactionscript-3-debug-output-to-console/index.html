@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flex/Actionscript 3: Debug Output to Console - Zero Wind :: Jamie Wong</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
+    
+    
+  </head>
+
+  <body class="bp">
+    <div class="page-container">
+      <div class="page-sidebar">
+
+        <div class="zero-wind">
+          <a href="/"><h1 class="site-title">
+            Zero Wind
+          </h1></a>
+        </div>
+
+        <h2 class='my-name'>Jamie Wong</h2>
+
+        <div class="page-nav">
+          <ul>
+            <li><a href="/">blog</a></li>
+            <li><a href="/resume">resume</a></li>
+            <li><a href="https://github.com/phleet">github</a></li>
+            <li><a href="http://stackoverflow.com/users/303911/jamie-wong">stack overflow</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="page-content">
+        <h1>Flex/Actionscript 3: Debug Output to Console</h1>
+        <div class="postdate">Posted on 07 Jul 2010</div>
+
+<div class="post">
+<p>I recently started messing around with the <a href="http://flixel.org/">Flixel</a> framework - something built on top of <a href="http://www.adobe.com/products/flex/">Flex</a> to make retro games. One of the first things I noticed was how difficult it is to debug things - especially complex objects.</p>
+
+<p>The first problem is capturing <em>any</em> debug output. For whatever reason, I was unable to output traces to anywhere useful.
+My first success was with using <a href="http://demonsterdebugger.com/">De MonsterDebugger</a> to capture the output. While this was better than nothing, I needed very little of the functionality of De MonsterDebugger and it still didn't give me what I really wanted: formatted console output.</p>
+
+<h2>print_r style output in actionscript</h2>
+
+<p>I found a good starting point <a href="http://dev.base86.com/solo/47/actionscript_3_equivalent_of_phps_printr.html">here</a>, but the output of this wasn't exactly what I wanted. I messed around with it until I got something more familiar to me.</p>
+
+<pre><code>package learning {
+  import org.flixel.*;
+
+  public class Debugger {
+    public static function pr(obj:*, level:int = 0, output:String = ""):* {
+      var objtype:String = typeof(obj);
+      if (objtype == "boolean" || objtype == "string" || objtype == "number") {
+        return obj;
+      }
+
+      var tabs:String = "";
+      for(var i:int = 0; i &lt; level; i++) { 
+        tabs += "\t"
+      }
+
+      output += "{\n";
+      for(var child:* in obj) {
+        output += tabs +"\t["+ child +"] =&gt; ";
+
+        var childOutput:String = pr(obj[child], level+1);
+        if(childOutput != '') output += childOutput
+
+        output += "\n";
+      }
+      output += tabs + "}\n";
+
+      return output;
+    }
+
+    public static function log(obj:*):void {
+      FlxG.log(pr(obj));
+      // This is a flixel thing. If you're not using flixel
+      // Just use trace(pr(obj));
+    }
+  }
+}
+</code></pre>
+
+<p>Example output</p>
+
+<pre><code>{
+    [0] =&gt; {
+        [tile] =&gt; 4
+        [rule] =&gt; {
+            [0] =&gt; xxx
+            [1] =&gt; x1x
+            [2] =&gt; x1x
+        }
+    }
+    [1] =&gt; {
+        [tile] =&gt; 8
+        [rule] =&gt; {
+            [0] =&gt; x1x
+            [1] =&gt; x1x
+            [2] =&gt; xxx
+        }
+    }
+}
+</code></pre>
+
+<p><strong>NOTE</strong>: The colored output is from <a href="http://code.google.com/p/google-code-prettify/">Prettify</a>, not the script</p>
+
+<h2>trace output to console</h2>
+
+<p>This, fortunately, was much less of a hassle for me to get working.</p>
+
+<p>Reference: <a href="http://livedocs.adobe.com/flex/3/html/help.html?content=logging_04.html">Configuring the debugger version of Flash Player</a></p>
+
+<p><strong>Step 1</strong></p>
+
+<p>Locate/create your <code>mm.cfg</code> file. For me this was in <code>~/mm.cfg</code>. See <a href="http://livedocs.adobe.com/flex/3/html/help.html?content=logging_04.html">reference</a>.</p>
+
+<p>Stick this in it: <code>TraceOutputFileEnable=1</code></p>
+
+<p>Or, in one command: <code>echo "TraceOutputFileEnable=1" &gt; ~/mm.cfg</code></p>
+
+<p><strong>Step 2</strong></p>
+
+<p>Locate the location of the log file. Mine is in</p>
+
+<p> <code>~/Library/Preferences/Macromedia/Flash Player/Logs/flashlog.txt</code></p>
+
+<p>See <a href="http://livedocs.adobe.com/flex/3/html/help.html?content=logging_04.html">reference</a>.</p>
+
+<p>You don't want to type this in every time you want to view the log, so add a function to your <code>.bash_profile</code></p>
+
+<p>This is what I have:</p>
+
+<pre><code>flashlog() { 
+  tail -f $* ~/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.txt; 
+}
+</code></pre>
+
+<p><strong>Step 3</strong></p>
+
+<p>Start debugging!</p>
+
+<pre><code>  [learning]  flashlog -100
+Warning: 'flash' has no property 'prototype'
+Warning: 'flash' has no property 'prototype'
+flixel v2.35 [debug]
+----------------------------------------------------
+{
+    [0] =&gt; {
+        [tile] =&gt; 4
+        [rule] =&gt; {
+            [0] =&gt; xxx
+            [1] =&gt; x1x
+            [2] =&gt; x1x
+        }
+    }
+    [1] =&gt; {
+        [tile] =&gt; 8
+        [rule] =&gt; {
+            [0] =&gt; x1x
+            [1] =&gt; x1x
+            [2] =&gt; xxx
+        }
+    }
+}
+</code></pre>
+
+</div>
+ 
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>25 Jun 2011</span> - <a href="/2011/06/25/complex-asynchronous-queries-in-javascript/">Complex Asynchronous Queries in JavaScript</a></li>
+    
+      <li><span>12 Jan 2011</span> - <a href="/2011/01/12/hacker-cup-qualification-round-solutions/">Hacker Cup Qualification Round - Solutions</a></li>
+    
+      <li><span>17 Nov 2010</span> - <a href="/2010/11/17/mechanize-and-uwace-downloader/">Mechanize and UWAce Downloader</a></li>
+    
+      <li><span>16 Oct 2010</span> - <a href="/2010/10/16/dfas-and-graphviz-dot/">DFAs and Graphviz DOT</a></li>
+    
+      <li><span>30 Sep 2010</span> - <a href="/2010/09/30/make-your-life-easier-with-gnu-make/">Make your life easier with GNU Make.</a></li>
+    
+  </ul>
+</div>
+
+
+</div>
+      </div>
+
+      <div class="clear">
+    </div>
+  </body>
+</html>

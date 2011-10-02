@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DFAs and Graphviz DOT - Zero Wind :: Jamie Wong</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
+    
+    
+  </head>
+
+  <body class="bp">
+    <div class="page-container">
+      <div class="page-sidebar">
+
+        <div class="zero-wind">
+          <a href="/"><h1 class="site-title">
+            Zero Wind
+          </h1></a>
+        </div>
+
+        <h2 class='my-name'>Jamie Wong</h2>
+
+        <div class="page-nav">
+          <ul>
+            <li><a href="/">blog</a></li>
+            <li><a href="/resume">resume</a></li>
+            <li><a href="https://github.com/phleet">github</a></li>
+            <li><a href="http://stackoverflow.com/users/303911/jamie-wong">stack overflow</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="page-content">
+        <h1>DFAs and Graphviz DOT</h1>
+        <div class="postdate">Posted on 16 Oct 2010</div>
+
+<div class="post">
+<p>As is usually the case with CS assignments, I tend to focus on reducing debugging time as much as possible by spending time coding things to make my life (and hopefully yours) easier.</p>
+
+<p>On the latest assignment we are required to describe DFAs (Deterministic Finite Automatas) in a <a href="http://www.student.cs.uwaterloo.ca/~cs241/dfa/DFAfileformat.html">format</a> with very low human readability, I knew immediately that I was going to write something to allow me to write my DFAs in a more human readable format so that I could sanely debug them. So instead of this:</p>
+
+<pre><code>2
+0
+1
+5
+start
+zero
+0mod3
+1mod3
+2mod3
+start
+2
+zero
+0mod3
+8
+start 0 zero
+start 1 1mod3
+1mod3 0 2mod3
+1mod3 1 0mod3
+2mod3 0 1mod3
+2mod3 1 2mod3
+0mod3 0 0mod3
+0mod3 1 1mod3
+</code></pre>
+
+<p>I can do this in Ruby:</p>
+
+<pre><code>dfa = {
+  :alphabet =&gt; %w(
+    0
+    1
+  ),
+  :states =&gt; %w(
+    start
+    zero
+    0mod3
+    1mod3
+    2mod3
+  ),
+  :initial =&gt; 'start',
+  :final =&gt; %w(
+    zero
+    0mod3
+  ),
+  :transitions =&gt; {
+    'start' =&gt; [
+      ['0','zero'],
+      ['1','1mod3']
+    ],
+    '1mod3' =&gt; [
+      ['0','2mod3'],
+      ['1','0mod3']
+    ],
+    '2mod3' =&gt; [
+      ['0','1mod3'],
+      ['1','2mod3']
+    ],
+    '0mod3' =&gt; [
+      ['0','0mod3'],
+      ['1','1mod3']
+    ]
+  }
+}
+</code></pre>
+
+<p>For those of you not familiar with ruby, <code>%w(one two three)</code> is equivalent to <code>['one','two','three']</code>. Just a bit of syntactic sugar.</p>
+
+<p>You can generate the DFA format required by Marmoset with the following function:</p>
+
+<pre><code>def dfa_output(dfa)
+  lines = []
+  lines &lt;&lt; dfa[:alphabet].length.to_s
+  dfa[:alphabet].each {|c| lines &lt;&lt; c.to_s}
+
+  lines &lt;&lt; dfa[:states].length.to_s
+  dfa[:states].each {|s| lines &lt;&lt; s.to_s}
+
+  lines &lt;&lt; dfa[:initial].to_s
+
+  lines &lt;&lt; dfa[:final].length.to_s
+  dfa[:final].each {|f| lines &lt;&lt; f.to_s}
+
+  transitions = []
+  dfa[:transitions].each do |start,pair_array|
+    pair_array.each do |(sym,targ)| 
+      if sym.is_a? String 
+        transitions &lt;&lt; "#{start} #{sym} #{targ}"
+      else
+        sym.each do |s|
+          transitions &lt;&lt; "#{start} #{s} #{targ}"
+        end
+      end
+    end
+  end
+
+  lines &lt;&lt; transitions.length.to_s
+  lines += transitions
+
+  return lines.join("\n")
+end
+</code></pre>
+
+<p>And then invoking with</p>
+
+<pre><code>puts dfa_output(dfa)
+</code></pre>
+
+<p>I designed the function with ranges and multiple transition tokens in mind, so you can do stuff like this:</p>
+
+<pre><code>'start_state' =&gt; [
+  [%w(one that other),'end_state'],
+  [1..9,'X']
+]
+</code></pre>
+
+<p>Now, this makes fixing problems, once discovered, much much simpler than trying to locate the error in the DFA format, but it still doesn't help much by way of identifying problems in the DFA itself. Probably the easiest way to look at a DFA is as a picture. Thankfully, there exists a set of tools perfect for this task known as <a href="http://www.graphviz.org/">Graphviz</a>.</p>
+
+<h1>Graphviz DOT</h1>
+
+<p><img src="http://imgur.com/FBFpb.png" alt="Sample Graph" /></p>
+
+<p>Graphviz is a collection of utilities used for visualizing graphs. The tool of interest for this post is DOT.
+It produces the kind of thing you can see above - which is the same graph described by the ruby code and the DFA format above.</p>
+
+<p>The syntax of DOT is very simple, and is better explained by <a href="http://en.wikipedia.org/wiki/DOT_language">the DOT language wiki entry</a> than by the official documentation.
+The DOT description of the above graph is as follows:</p>
+
+<pre><code>digraph dfa {
+    "" [shape=none]
+    "start" [shape=circle]
+    "zero" [shape=doublecircle]
+    "0mod3" [shape=doublecircle]
+    "1mod3" [shape=circle]
+    "2mod3" [shape=circle]
+
+    "" -&gt; "start"
+    "1mod3" -&gt; "2mod3" [label="0"]
+    "1mod3" -&gt; "0mod3" [label="1"]
+    "0mod3" -&gt; "0mod3" [label="0"]
+    "0mod3" -&gt; "1mod3" [label="1"]
+    "2mod3" -&gt; "1mod3" [label="0"]
+    "2mod3" -&gt; "2mod3" [label="1"]
+    "start" -&gt; "zero" [label="0"]
+    "start" -&gt; "1mod3" [label="1"]
+} 
+</code></pre>
+
+<p>And this is the ruby code to generate that output using the <code>dfa = { ... }</code> format at the beginning of the post.</p>
+
+<pre><code>def dot_output(dfa)
+  lines = []
+  lines &lt;&lt; "digraph dfa {"
+
+  lines &lt;&lt; %(\t"" [shape=none])
+
+  dfa[:states].each do |state|
+    if (dfa[:final].include? state)
+      lines &lt;&lt; %(\t"#{state}" [shape=doublecircle])
+    else
+      lines &lt;&lt; %(\t"#{state}" [shape=circle])
+    end
+  end
+
+  lines &lt;&lt; ''
+  lines &lt;&lt; %(\t"" -&gt; "#{dfa[:initial]}")
+
+  dfa[:transitions].each do |start,pair_array|
+    pair_array.each do |(sym,targ)| 
+      if sym.is_a? String
+        lines &lt;&lt; %(\t"#{start}" -&gt; "#{targ}" [label="#{sym}"])
+      else
+        lines &lt;&lt; %(\t"#{start}" -&gt; "#{targ}" [label="[#{sym.collect(&amp;:to_s).join(',')}]"])
+      end
+    end
+  end
+
+  lines &lt;&lt; "}"
+
+  return lines.join("\n")
+end
+</code></pre>
+
+<p>Once you've installed Graphviz, you can generate a PNG of the graph by running</p>
+
+<pre><code>dot -Tpng &lt; graph.dot &gt; graph.png
+</code></pre>
+
+<p>Enjoy CS241 A5.</p>
+
+</div>
+ 
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>25 Jun 2011</span> - <a href="/2011/06/25/complex-asynchronous-queries-in-javascript/">Complex Asynchronous Queries in JavaScript</a></li>
+    
+      <li><span>12 Jan 2011</span> - <a href="/2011/01/12/hacker-cup-qualification-round-solutions/">Hacker Cup Qualification Round - Solutions</a></li>
+    
+      <li><span>17 Nov 2010</span> - <a href="/2010/11/17/mechanize-and-uwace-downloader/">Mechanize and UWAce Downloader</a></li>
+    
+      <li><span>30 Sep 2010</span> - <a href="/2010/09/30/make-your-life-easier-with-gnu-make/">Make your life easier with GNU Make.</a></li>
+    
+      <li><span>14 Aug 2010</span> - <a href="/2010/08/14/javascript-dependency-loading-jquery-atreq/">Javascript Dependency Loading – jquery.atreq</a></li>
+    
+  </ul>
+</div>
+
+
+</div>
+      </div>
+
+      <div class="clear">
+    </div>
+  </body>
+</html>

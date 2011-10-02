@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hacker Cup Qualification Round - Solutions - Zero Wind :: Jamie Wong</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
+    
+    
+  </head>
+
+  <body class="bp">
+    <div class="page-container">
+      <div class="page-sidebar">
+
+        <div class="zero-wind">
+          <a href="/"><h1 class="site-title">
+            Zero Wind
+          </h1></a>
+        </div>
+
+        <h2 class='my-name'>Jamie Wong</h2>
+
+        <div class="page-nav">
+          <ul>
+            <li><a href="/">blog</a></li>
+            <li><a href="/resume">resume</a></li>
+            <li><a href="https://github.com/phleet">github</a></li>
+            <li><a href="http://stackoverflow.com/users/303911/jamie-wong">stack overflow</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="page-content">
+        <h1>Hacker Cup Qualification Round - Solutions</h1>
+        <div class="postdate">Posted on 12 Jan 2011</div>
+
+<div class="post">
+<p>Overall, I was fairly disappointed with the organization and general structure of hacker cup qualification round. Hopefully the next round will be better, but for now - here are the solutions to the three questions. Unfortunately it seems the questions themselves have been taken down. I did manage to score 3/3, so I can be fairly sure that these are correct to the spec of the questions Facebook wrote.</p>
+
+<h1>Squares</h1>
+
+<p><strong>Problem</strong>: For each given z,  Find the # of pairs (x,y) such that x &lt;= y and x<sup>2</sup> + y<sup>2</sup> = z.</p>
+
+<p><strong>Solution</strong>: Pre-generate the set of perfect squares. Iterate through this set. Check to see if z - x<sup>2</sup> is also in this set, where x is the current perfect square.</p>
+
+<p><strong>Implementation</strong>:</p>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;set&gt;
+#include &lt;cmath&gt;
+using namespace std;
+
+typedef long long unsigned int llu;
+set&lt;llu&gt; squares;
+
+int main() {
+  for (int i = 0; i &lt; 50000; i++) {
+    llu i2 = i*i;
+    if (i2 &gt; 2147483647L * 2L) {
+      break;
+    } else {
+      squares.insert(i2);
+    }
+  }
+
+  int N;
+  cin &gt;&gt; N;
+
+  for (int i = 0; i &lt; N; i++) {
+    int num;
+    cin &gt;&gt; num;
+    int ans = 0;
+    for(set&lt;llu&gt;::iterator it = squares.begin(); it != squares.end(); ++it) {
+      llu first = *it;
+      if (2 * first &gt; num) break;
+      if (squares.count(num - first)) {
+        ans++;
+      }
+    }
+    cout &lt;&lt; ans &lt;&lt; endl;
+  }
+}
+</code></pre>
+
+<h1>Students</h1>
+
+<p><strong>Problem</strong>: For a given set of words (sequences of lowercase letters), find the the lexicographically lowest string result from the concatenation of these words in any order.</p>
+
+<p><strong>Solution</strong>: I'm fairly sure simply sorting the words then concatenating them would suffice, but I was having issues string comparison yielding the same results at Facebook's output. Since the constraints were so low - maximum of 9 words per set, I simply did it exhaustively. This finishes easily within the 6 minute time limit since 9 factorial is relatively small.</p>
+
+<p><strong>Implementation</strong>:</p>
+
+<pre><code>from itertools import permutations
+
+def doit():
+    words = raw_input().split()[1:]
+
+    best = ""
+
+    for x in permutations(words):
+        concatted = "".join(x)
+        if best == "" or concatted &lt; best:
+            best = concatted
+
+    print best
+
+n = input()
+
+for z in range(n):
+    doit() 
+</code></pre>
+
+<h1>Pegs</h1>
+
+<p><strong>Problem</strong>: Given a peg board in the format like this:</p>
+
+<pre><code>x.x.x
+ x.x
+x.x.x
+</code></pre>
+
+<p>defined by the number of rows and cols of pegs, except with a few pegs missing, like this:</p>
+
+<pre><code>x.x.x.x.x
+ x...x.x
+x...x.x.x
+ x.x...x
+x.x.x.x.x
+</code></pre>
+
+<p>Determine the optimal location to drop a ball in order to maximize the probability of the ball landing in a specific slot in the bottom row. The probability of the ball going to either side of a peg is 0.5.</p>
+
+<p><strong>Solution</strong>: There's no real trick to this one - you just create an array of the probabilities that the ball reaches each available cell given which pegs are missing. This one is more of a coding problem than anything else.</p>
+
+<p>I'm sure I could have written a more elegant solution to this problem, but I just wanted to get it done.</p>
+
+<p><strong>Implementation</strong>:</p>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;set&gt;
+#include &lt;cmath&gt;
+#include &lt;utility&gt;
+using namespace std;
+
+void doit() {
+    int R, C, K, M;    
+    cin &gt;&gt; R &gt;&gt; C &gt;&gt; K &gt;&gt; M;
+    set&lt;pair&lt;int,int&gt; &gt; missing;
+    for (int i = 0; i &lt; M; i++) {
+        int ri, ci;
+        cin &gt;&gt; ri &gt;&gt; ci;
+        missing.insert(make_pair(ri,ci));
+    }
+
+    int best_pos = 0;
+    long double best_prob = 0;
+    for (int cur_pos = 0; cur_pos &lt; C-1; cur_pos++) {
+        long double probs[R][C];
+        for (int r = 0; r &lt; R; r++) {
+            for (int c = 0; c &lt; C; c++) {
+                probs[r][c] = 0.00;
+            }
+        }
+        probs[0][cur_pos] = 1.00;
+
+        for (int r = 1; r &lt; R; r++) {
+            if (r % 2 == 1) { // odd row
+                for(int peg = 0; peg &lt; C-1; peg++) {
+                    if (missing.count(make_pair(r,peg))) {
+                        if (r+1 &lt; R) probs[r+1][peg] += probs[r-1][peg];
+                    } else {
+                        if (peg == 0) {
+                            probs[r][peg] += probs[r-1][peg];
+                        } else if (peg == C-2) {
+                            probs[r][peg-1] += probs[r-1][peg];
+                        } else {
+                            probs[r][peg]   += 0.5 * probs[r-1][peg];
+                            probs[r][peg-1] += 0.5 * probs[r-1][peg];
+                        }
+                    }
+                }
+            } else { // even row
+                for(int peg = 1; peg &lt; C-1; peg++) {
+                    if (missing.count(make_pair(r,peg))) {
+                        if (r+1 &lt; R) probs[r+1][peg-1] += probs[r-1][peg-1];
+                    } else {
+                        probs[r][peg]   += 0.5 * probs[r-1][peg-1];
+                        probs[r][peg-1] += 0.5 * probs[r-1][peg-1];
+                    }
+                }
+            }
+        }
+
+        long double cur_prob = probs[R-1][K];
+        if (cur_prob &gt; best_prob) {
+            best_prob = cur_prob;
+            best_pos = cur_pos;
+        }
+    }
+
+    printf("%d %.6Lf\n", best_pos, best_prob);
+}
+
+int main() {
+    int z;
+    cin &gt;&gt; z;
+    while(z--)doit();
+}
+</code></pre>
+
+</div>
+ 
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>25 Jun 2011</span> - <a href="/2011/06/25/complex-asynchronous-queries-in-javascript/">Complex Asynchronous Queries in JavaScript</a></li>
+    
+      <li><span>17 Nov 2010</span> - <a href="/2010/11/17/mechanize-and-uwace-downloader/">Mechanize and UWAce Downloader</a></li>
+    
+      <li><span>16 Oct 2010</span> - <a href="/2010/10/16/dfas-and-graphviz-dot/">DFAs and Graphviz DOT</a></li>
+    
+      <li><span>30 Sep 2010</span> - <a href="/2010/09/30/make-your-life-easier-with-gnu-make/">Make your life easier with GNU Make.</a></li>
+    
+      <li><span>14 Aug 2010</span> - <a href="/2010/08/14/javascript-dependency-loading-jquery-atreq/">Javascript Dependency Loading – jquery.atreq</a></li>
+    
+  </ul>
+</div>
+
+
+</div>
+      </div>
+
+      <div class="clear">
+    </div>
+  </body>
+</html>

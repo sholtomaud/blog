@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Projects - Zero Wind :: Jamie Wong</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
+    
+    
+  </head>
+
+  <body class="bp">
+    <div class="page-container">
+      <div class="page-sidebar">
+
+        <div class="zero-wind">
+          <a href="/"><h1 class="site-title">
+            Zero Wind
+          </h1></a>
+        </div>
+
+        <h2 class='my-name'>Jamie Wong</h2>
+
+        <div class="page-nav">
+          <ul>
+            <li><a href="/">blog</a></li>
+            <li><a href="/resume">resume</a></li>
+            <li><a href="https://github.com/phleet">github</a></li>
+            <li><a href="http://stackoverflow.com/users/303911/jamie-wong">stack overflow</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="page-content">
+        <h1>Projects</h1>
+        <div class="postdate">Posted on 05 Nov 2009</div>
+
+<div class="post">
+<p>Part of the reason I made this website was to document my progress thinking of and working on various projects of mine. I claim these ideas as my own intellectual property. If you intend to implement one of them, you <strong>must</strong> contact me for permission first. If you're interested though, contact me.</p>
+
+<p>Projects in Progress (Read: on Hiatus)</p>
+
+<ul>
+<li><strong>Budgyt</strong> When I came to University, I had to start considering how I was going to handle budgeting. There was a bunch of free software available all over the place which let you enter in all your expenses and get summaries of that data. The problem with many of these pieces of software was the extreme tedium associated with entering in all your transactions. It normally meant many many mouse clicks, which I would rather avoid. Budgyt was my solution to this. The idea behind it was to construct a web based application in which transaction entry could be done with only a few presses of keyboard keys. Instead of selecting menus and click "next", you would simply have to hit a hotkey associated with each category of menu. After seeing how some banks (TD) provide transactions as downloadable CSV files, it would be great to incorporate those somehow. This project is in the early development phase and I may restart it, since the code for it is a little messy at the moment.</li>
+
+<li><strong>Omegle Voyeur</strong> <a href="http://www.omegle.com">Omegle</a> is a website where you are connected to a stranger for a chat. It is dominated mostly by trolls whose primary purpose is to coerce you into a cyber session and then switch genders or to make you lose the game. Talking to these people is a rather tiresome endeavour, but seeing exactly what happens in these conversations is interesting. Omegle Voyeur is a way of watching a conversation which you aren't part of. What Voyeur does is form two simultaneous connections and then pass the input of one to the output of the other. This sets you up as a conversation proxy, allowing you to watch. Currently, this is exclusively a "sit and watch" program. Later I intend to add functionality to add more than 2 people into a conversation, automatically name the participants so it will be obvious that there are more than 2 people in the conversation, and allow the ability to interfere (mute participants/say things yourself) with a conversation. This concept was spawned during discussion (read: boredom) at CCC Stage 2, 2009. You can see the current project here: <a href="http://jamie-wong.com/omegle">Omegle Voyeur</a></li>
+
+<li><strong>wwwpaper</strong> This idea came about when I was looking at desktop customization options like <a href="http://rainmeter.net/RainCMS/">Rainmeter</a> and <a href="http://www.samurize.com/modules/news/">Samurize</a> (website down at the time of the post.) The really really cool thing about these applications was not only the basic abilities provided by them such as analog clocks and calendars, but the ability to modify them and add cool things like frequently updating website information retrieved via regular expressions. I wanted something that would be even more customizable and more web integrated. The idea was to make a website full of widgets which could be used as an active desktop. In Windows, this means using a website as your wallpaper - hence the name wwwpaper. I began working on this to do various things, but this was heavily damaged when the gumblar.cn virus came around. The idea was to provide users with accounts which they could log into which would load up all of their widgets on their desktop. This way, they could switch between computers with NO change to the setup of their widgets, so long as they had the same URL set up as their active desktop. </li>
+</ul>
+
+
+<p>Past Projects (Finished/Need Restarting)</p>
+
+<ul>
+<li><strong>Kwizr</strong> Something I started back in grade 10 because I was tiring of studying for French vocabulary tests by staring at a huge list of words. Kwizr (originally Quizulator) was my way of making this process less excruciating. It would take input as a CSV file containing columns with common elements. In the case of French vocab, column 1 would contain French words and column 2 would contain English words. These would be plugged in to user defined expressions, causing the quizzing program to ask "How to you say _____ in French?" or "Comment dit-on ______ en Anglais?". This data would be stored in a MySQL database. The program would quiz the user via an AJAX prompt, in which they would type in answers and the program would give immediate feedback of "correct" or "wrong answer". If the answer was wrong, it would spit out the correct answer. I had this whole system working fairly well, but unfortunately it was on a friend's server when their hosting service went under. Should have backed it up. I need to restart this project anyway, because the way I read the CVS data didn't follow the real CVS standard - which I didn't know existed when I started working on it.</li>
+
+<li><strong>ASCII Converter</strong> Picture to image converters are by no means a new idea on the internet. The thing I didn't like about many of them was the inability to modify settings on the fly. If you made a mistake in settings at the beginning, you couldn't modify them without restarting. Also, some of them cheated and simply coloured individual characters. I wanted to make a much more comprehensive system which would scale the image, use an ASCII gradient, and allow the user to grab the source code without actually having to go to "view source". The result can be seen here: <a href="http://jamie-wong.com/asciiconvert/">ASCII Convert</a></li>
+</ul>
+
+
+<p>Future Projects/Concepts</p>
+
+<ul>
+<li><strong>WXML</strong> One of the reasons I'm so fond of web applications is the code structure used to make them. The complete separation of backend processing and user interface, and the construction of the user interface using markup greatly appeals to me. The real power comes from the interaction of these two things, such as running some javascript script when a certain triggering event happens - like a key press. I want to build something that provides this power and structure to the desktop. I want to have some custom defined XML files that will create a GUI and have an instruction set for handling events. So I want to implement functionality similar to the HTML/Javascript code of
+<div style='text-align: center'>&lt;input type='button' value='click me' onclick='solve()' /&gt;</div>
+in desktop computing. This is in the future projects/concepts section because I haven't yet planned on how exactly I would want to go about implementing this, but I'm leaning towards a python implementation using TkInter or wxPython.</li>
+<li><strong>Learning Alarm Clock</strong> This concept came about in a discussion with David Hu on the way to the 2009 ACM Regionals at McMaster University. I, personally, am a horrible abuser of the snooze button. I've heard of various solutions to this, like the <a href="http://gizmodo.com/157999/puzzle-alarm-clock-presents-mild-challenge-wakes-you-up">Puzzle Alarm Clock</a>, but I wanted to take a slightly different route. The discussion started with the idea that you could have a Rubik's Cube alarm clock which would not turn off until it was solved. The idea was that you would have to wake up to be able to do it. But what if you eventually got SO good at it that you could do it in your sleep, thereby reverting to the cycle of snooze abuse. Well, that would mean that you were learn how to solve it really really fast. Now apply this concept to learning to do something else. Problem: I can't wake up in the morning and linear algebra is roundhouse kicking me in the face. Solution: Make your alarm stay on until you can diagonalize a matrix successfully. Problems would be randomly generated following a certain template, so you would have new input every morning. Continue solving the same variety of problems every morning until you can solve the problem instinctively, as a matter of urgency. Granted, this might make you panic even more on midterms - but atleast you'll be correctly solving problems while panicking.</li>
+</ul>
+
+
+<p>So these are my ghosts of projects past, present and future.</p>
+
+<p>Have you heard of any of these projects being implemented by anyone else? Are any of these problems already solved somehow? Which of these projects are you most interested in seeing completed/updated?</p>
+
+</div>
+ 
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>25 Jun 2011</span> - <a href="/2011/06/25/complex-asynchronous-queries-in-javascript/">Complex Asynchronous Queries in JavaScript</a></li>
+    
+      <li><span>12 Jan 2011</span> - <a href="/2011/01/12/hacker-cup-qualification-round-solutions/">Hacker Cup Qualification Round - Solutions</a></li>
+    
+      <li><span>17 Nov 2010</span> - <a href="/2010/11/17/mechanize-and-uwace-downloader/">Mechanize and UWAce Downloader</a></li>
+    
+      <li><span>16 Oct 2010</span> - <a href="/2010/10/16/dfas-and-graphviz-dot/">DFAs and Graphviz DOT</a></li>
+    
+      <li><span>30 Sep 2010</span> - <a href="/2010/09/30/make-your-life-easier-with-gnu-make/">Make your life easier with GNU Make.</a></li>
+    
+  </ul>
+</div>
+
+
+</div>
+      </div>
+
+      <div class="clear">
+    </div>
+  </body>
+</html>

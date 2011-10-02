@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Make your life easier with GNU Make. - Zero Wind :: Jamie Wong</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
+    
+    
+  </head>
+
+  <body class="bp">
+    <div class="page-container">
+      <div class="page-sidebar">
+
+        <div class="zero-wind">
+          <a href="/"><h1 class="site-title">
+            Zero Wind
+          </h1></a>
+        </div>
+
+        <h2 class='my-name'>Jamie Wong</h2>
+
+        <div class="page-nav">
+          <ul>
+            <li><a href="/">blog</a></li>
+            <li><a href="/resume">resume</a></li>
+            <li><a href="https://github.com/phleet">github</a></li>
+            <li><a href="http://stackoverflow.com/users/303911/jamie-wong">stack overflow</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="page-content">
+        <h1>Make your life easier with GNU Make.</h1>
+        <div class="postdate">Posted on 30 Sep 2010</div>
+
+<div class="post">
+<p>I've been trying to keep at least one post per month going, and I was sick with stomach flu today, so here goes:</p>
+
+<p>As our CS assignments get more and more complex, it's starting to become time consuming to build, test, and submit each assignment. I could either do this every time I want to test:</p>
+
+<pre><code>java cs241.binasm &lt; a2p8.asm &gt; a2p8.mips
+java mips.array a2p8.mips &lt; a2p8.sample.in
+java mips.array a2p8.mips &lt; a2p8.onenode.in
+</code></pre>
+
+<p>Or I could just run <code>make</code>.</p>
+
+<h1>What is make?</h1>
+
+<p><a href="http://www.gnu.org/software/make/">GNU Make</a> is a system for constructing executables or other non-source code files from source code. It allows you to specify dependencies for files and define rules for constructing them from source. For example, the rule to build <code>a2p8.mips</code> would look like this:</p>
+
+<pre><code>a2p8.mips: a2p8.asm
+    java cs241.binasm &lt; a2p8.asm &gt; a2p8.mips
+</code></pre>
+
+<p>This says, to make <code>a2p8.mips</code>, run <code>java cs241.binasm &lt; a2p.asm &gt; a2p8.mips</code>. To use <code>make</code>, stick your ruleset in a file called <code>Makefile</code> in the same directory as your source then run <code>make</code>. This command will only run if <code>a2p8.asm</code> has changed since the last time it was run. These dependencies stack as well. For instance, say I need to join two files together before I compile them. I can define a ruleset like this:</p>
+
+<pre><code>linked.mips: linked.asm
+    java cs241.binasm &lt; linked.asm &gt; linked.mips
+
+linked.asm: a2p7.asm print.asm
+    cat a2p7.asm print.asm &gt; linked.asm
+</code></pre>
+
+<p>This will link the files together before it tries to compile them. It'll also make sure it's up to date whenever you change either <code>a2p7.asm</code> or <code>print.asm</code>. The build rule at the top of the <code>Makefile</code> is called the default rule. This is the one that gets run when you just run <code>make</code> at the command line. You can also pass a parameter to tell <code>make</code> to construct something specific. For instance, I could run <code>make linked.asm</code> here to just build the linked file without actually compiling it to machine code.</p>
+
+<h1>Automatic Variables in Make</h1>
+
+<p>One of the principles of writing good code is DRY: Don't Repeat Yourself. Make provides various ways to support this through the use of automatic variables. Automatic variables are ones that are set for you with useful values. For instance, the following rule:</p>
+
+<pre><code>linked.asm: a2p7.asm print.asm
+    cat a2p7.asm print.asm &gt; linked.asm
+</code></pre>
+
+<p>can be reduced to this:</p>
+
+<pre><code>linked.asm: a2p7.asm print.asm
+    cat $^ &gt; $@
+</code></pre>
+
+<p>The variable <code>$^</code> is a space separated list of all the dependencies. <code>$@</code> is the target. See <a href="http://www.gnu.org/software/make/manual/make.html#Automatic-Variables">GNU make - Automatic Variables</a> for the full list and description of such variables.</p>
+
+<h1>Writing Implicit Rules</h1>
+
+<p>Another unnecessary piece of code duplication exists for compiling multiple files of the same type. For instance, the following is repetitive:</p>
+
+<pre><code>a2p8.mips: a2p8.asm
+    java cs241.binasm &lt; $&lt; &gt; $@
+
+a2p7.mips: a2p7.asm
+    java cs241.binasm &lt; $&lt; &gt; $@
+</code></pre>
+
+<p>Instead, I can define my own implicit rule for building all <code>*.mips</code> files like so:</p>
+
+<pre><code>%.mips: %.asm
+    java cs241.binasm &lt; $*.asm &gt; $*.mips
+</code></pre>
+
+<h1>Testing Using Make</h1>
+
+<p>One of the things I took away from my co-op term at The Working Group was the benefits of test driven development. Untested code is broken code, and manual testing is tedious and annoying. As your code gets more and more complicated, there will be more and more edge cases to deal with. These cannot be dealt with a single test case. Normally, you would be forced to write multiple input files and pass them each individually to the executable to see if everything worked. I don't like having to do this. So instead, I defined my own ruleset:</p>
+
+<pre><code>ASSIGNMENT = a2p7
+
+test: linked.mips Empty.test All.test
+
+%.test: $(ASSIGNMENT).%.in
+  @echo ----------- $* ------------------
+  java mips.array linked.mips &lt; $^
+
+%.mips: %.asm
+  java cs241.binasm &lt; $*.asm &gt; $*.mips
+
+linked.asm: $(ASSIGNMENT).asm print.asm
+  cat $^ &gt; $@
+</code></pre>
+
+<p>This one merits a bit of explanation. The default task here is <code>test</code>, and it has no recipe associated with it. Instead, it just makes sure all of its dependencies are up to date. <code>Empty.test</code> and <code>All.test</code> here aren't actual files. They're simple methods of referring to another rule, in this case the <code>%.test</code> implicit rule.</p>
+
+<p>The <code>%.test</code> implicit rule depends on a corresponding input file. For example, <code>Empty.test</code> will rely on <code>a2p7.Empty.in</code>, which will then be passed in as input to the executable. The result from running looks like this:</p>
+
+<pre><code>  [P7]  make
+----------- Empty ------------------
+java mips.array linked.mips &lt; a2p7.Empty.in
+Enter length of array: MIPS program completed normally.
+$01 = 0x000001c4   $02 = 0x00000000   $03 = 0x00000000   $04 = 0x00000000   
+$05 = 0x00000000   $06 = 0x00000000   $07 = 0x00000000   $08 = 0x00000000   
+$09 = 0x00000000   $10 = 0x00000000   $11 = 0x000001c4   $12 = 0x00000000   
+$13 = 0x00000000   $14 = 0x00000000   $15 = 0x00000000   $16 = 0x00000000   
+$17 = 0x00000000   $18 = 0x00000000   $19 = 0x00000000   $20 = 0x00000000   
+$21 = 0x00000000   $22 = 0x00000000   $23 = 0x00000000   $24 = 0x00000000   
+$25 = 0x00000000   $26 = 0x00000000   $27 = 0x00000000   $28 = 0x00000000   
+$29 = 0x00000000   $30 = 0x01000000   $31 = 0x8123456c   
+----------- All ------------------
+java mips.array linked.mips &lt; a2p7.All.in
+Enter length of array: Enter array element 0: Enter array element 1: Enter array element 2: 123
+0
+-456
+MIPS program completed normally.
+$01 = 0xfffffe38   $02 = 0x00000003   $03 = 0x00000001   $04 = 0x00000000   
+$05 = 0x00000000   $06 = 0x00000000   $07 = 0x00000000   $08 = 0x00000000   
+$09 = 0x00000000   $10 = 0x00000000   $11 = 0x000001d0   $12 = 0x00000000   
+$13 = 0x00000000   $14 = 0x00000000   $15 = 0x00000000   $16 = 0x00000000   
+$17 = 0x00000000   $18 = 0x00000000   $19 = 0x00000000   $20 = 0x00000000   
+$21 = 0x00000000   $22 = 0x00000000   $23 = 0x00000000   $24 = 0x00000000   
+$25 = 0x00000000   $26 = 0x00000000   $27 = 0x00000000   $28 = 0x00000000   
+$29 = 0x00000000   $30 = 0x01000000   $31 = 0x8123456c   
+</code></pre>
+
+<p>The <code>echo</code> line above that simple outputs the name of the test before running it so it looks nicer on the console. The <code>@</code> before the echo prevents make from displaying the command, otherwise it would look like this:</p>
+
+<pre><code>[P7]  make
+cat a2p7.asm print.asm &gt; linked.asm
+java cs241.binasm &lt; linked.asm &gt; linked.mips
+echo ----------- Empty ------------------
+----------- Empty ------------------
+</code></pre>
+
+<h1>Submitting to Marmoset from the Commandline</h1>
+
+<p>Just for kicks and because I wanted to mess around with <a href="http://github.com/tenderlove/mechanize">Mechanize</a>, I built a ruby script which will submit to Marmoset for me. You can try it out yourself if you have Ruby and <a href="https://rubygems.org/">Rubygems</a> by running</p>
+
+<pre><code>sudo gem install marmoset
+</code></pre>
+
+<p>Or you can browse the code yourself here: <a href="">http://github.com/phleet/MarmosetSubmit</a></p>
+
+<p>Here's how you can integrate the submission process into your <code>Makefile</code>:</p>
+
+<pre><code>submit: $(ASSIGNMENT).asm
+    marmoset -u jlfwong -c cs241 -a $(ASSIGNMENT) -f $(ASSIGNMENT).asm
+</code></pre>
+
+<p>For now, it only submits - there's no way of checking to see if it was successful or running the release tests. I can build that if people are really interested in that, or you can fork the github repo and do it yourself.</p>
+
+<p>Well, that's all for now. Time to study up for Electrodeath.</p>
+
+</div>
+ 
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>25 Jun 2011</span> - <a href="/2011/06/25/complex-asynchronous-queries-in-javascript/">Complex Asynchronous Queries in JavaScript</a></li>
+    
+      <li><span>12 Jan 2011</span> - <a href="/2011/01/12/hacker-cup-qualification-round-solutions/">Hacker Cup Qualification Round - Solutions</a></li>
+    
+      <li><span>17 Nov 2010</span> - <a href="/2010/11/17/mechanize-and-uwace-downloader/">Mechanize and UWAce Downloader</a></li>
+    
+      <li><span>16 Oct 2010</span> - <a href="/2010/10/16/dfas-and-graphviz-dot/">DFAs and Graphviz DOT</a></li>
+    
+      <li><span>14 Aug 2010</span> - <a href="/2010/08/14/javascript-dependency-loading-jquery-atreq/">Javascript Dependency Loading – jquery.atreq</a></li>
+    
+  </ul>
+</div>
+
+
+</div>
+      </div>
+
+      <div class="clear">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Game of Life - Zero Wind :: Jamie Wong</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
+    
+    
+  </head>
+
+  <body class="bp">
+    <div class="page-container">
+      <div class="page-sidebar">
+
+        <div class="zero-wind">
+          <a href="/"><h1 class="site-title">
+            Zero Wind
+          </h1></a>
+        </div>
+
+        <h2 class='my-name'>Jamie Wong</h2>
+
+        <div class="page-nav">
+          <ul>
+            <li><a href="/">blog</a></li>
+            <li><a href="/resume">resume</a></li>
+            <li><a href="https://github.com/phleet">github</a></li>
+            <li><a href="http://stackoverflow.com/users/303911/jamie-wong">stack overflow</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="page-content">
+        <h1>Game of Life</h1>
+        <div class="postdate">Posted on 01 Dec 2009</div>
+
+<div class="post">
+<p>For my latest project, I'm implementing Conway's Game of Life in python into animated GIFs.</p>
+
+<p>Before I even explain what Conway's Game of Life is, be amused by the below, generated animation:
+<img src="/images/queenbee.gif" alt="Queenbee"></p>
+
+<p>As always, the code I'm using here is open source: <a href="http://www.github.com/phleet/GameOfLife/">Game Of Life @ Github</a>.
+In addition to the source code, there's also a few animation demos such as the one above.</p>
+
+<p>Conway's Game of Life is a cellular automaton following very simple rules, as outlined in the Wikipedia article.It is a zero player game played on a 2 dimensional grid of squares, each holding either a state of dead or alive. The state of any cell is dependent on the state of the 8 cells neighbouring it in the previous generation. There are only 4 rules.</p>
+
+<p>From the Wikipedia article <a href="http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway's Game of Life</a>:</p>
+
+<blockquote>
+   1. Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
+   2. Any live cell with more than three live neighbours dies, as if by overcrowding.
+   3. Any live cell with two or three live neighbours lives on to the next generation.
+   4. Any dead cell with exactly three live neighbours becomes a live cell.
+</blockquote>
+
+
+<p>The colours you see in the above animation represent the alive status of each cell and also how many neighbours that cell has if it's alive.</p>
+
+<p>This project is my first time making use of two utilities: optparse in python, and gifsicle.</p>
+
+<p><b>optparse</b> is a python library designed to make the creation of command line application much simpler. Specifically it's targeted towards making application with many possible flags easy to maintain. lifeImage.py falls into this category. From the commandline, you can control the source of input, the colour scheme, the number of generations to output, the scaling of the image and various other things to produce the exact animation or image you want.</p>
+
+<p>You can take a look at optparse here: <a href="http://docs.python.org/library/optparse.html">optparse @ docs.python.org</a>.
+The tutorial included there was enough for me to create this application.</p>
+
+<p><b>gifsicle</b> is a command line application for the creation and modification of animated gifs. It can create gifs out of a sequence of images, convert an image into a sequence of images, or even modify replace a single frame of an animated gif with an external image.</p>
+
+<p>You can see and download gifsicle here: <a href="http://www.lcdf.org/gifsicle/">Official Gifsicle Page</a></p>
+
+<p>Why did I use gifsicle instead of the much more universal convert in ImageMagick? Simply put: gifsicle is faster. If someone would like to do a benchmark to (dis)prove this, I'd be happy to post the results, but from simple experimentation, it seemed obvious to me that gifsicle took less time to make the animation.</p>
+
+<p><b>What's Next?</b>
+Now that I have a working command line utility, my next goal is to make an AJAX powered web interface for the thing. This might explain why I have ProcMonitor in the github for Game of Life. The web interface was another key motivator behind using gifs for the output medium. People may want to use these things for avatar, and they're simply easier to share and move around than a java applet, or a flash swf, or some database stored simulation. It also helps that gifs are designed for palette based images, which works out nicely for optimizing the file size of these animations. The first 1000 generations of acorn is 2.5 MB as it is.</p>
+
+<p>Another thing I want to do is make lifeImage.py read the .cells format from the <a href="http://www.bitstorm.org/gameoflife/lexicon/">Life Lexicon</a>. This would save me a lot of time having to code all the states myself. This will be a very straightforward process, as the .cells files are simply plaintext with 2 lines of header.</p>
+
+<p>Suggestions/bug fixes for my implementation of Game of Life are welcomed.</p>
+
+<p>I'm almost 100% sure that some combination of the command line flags of lifeImage.py don't work nicely together, and would like to know what they are.</p>
+
+</div>
+ 
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>25 Jun 2011</span> - <a href="/2011/06/25/complex-asynchronous-queries-in-javascript/">Complex Asynchronous Queries in JavaScript</a></li>
+    
+      <li><span>12 Jan 2011</span> - <a href="/2011/01/12/hacker-cup-qualification-round-solutions/">Hacker Cup Qualification Round - Solutions</a></li>
+    
+      <li><span>17 Nov 2010</span> - <a href="/2010/11/17/mechanize-and-uwace-downloader/">Mechanize and UWAce Downloader</a></li>
+    
+      <li><span>16 Oct 2010</span> - <a href="/2010/10/16/dfas-and-graphviz-dot/">DFAs and Graphviz DOT</a></li>
+    
+      <li><span>30 Sep 2010</span> - <a href="/2010/09/30/make-your-life-easier-with-gnu-make/">Make your life easier with GNU Make.</a></li>
+    
+  </ul>
+</div>
+
+
+</div>
+      </div>
+
+      <div class="clear">
+    </div>
+  </body>
+</html>

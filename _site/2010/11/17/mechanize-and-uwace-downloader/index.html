@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mechanize and UWAce Downloader - Zero Wind :: Jamie Wong</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
+    
+    
+  </head>
+
+  <body class="bp">
+    <div class="page-container">
+      <div class="page-sidebar">
+
+        <div class="zero-wind">
+          <a href="/"><h1 class="site-title">
+            Zero Wind
+          </h1></a>
+        </div>
+
+        <h2 class='my-name'>Jamie Wong</h2>
+
+        <div class="page-nav">
+          <ul>
+            <li><a href="/">blog</a></li>
+            <li><a href="/resume">resume</a></li>
+            <li><a href="https://github.com/phleet">github</a></li>
+            <li><a href="http://stackoverflow.com/users/303911/jamie-wong">stack overflow</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="page-content">
+        <h1>Mechanize and UWAce Downloader</h1>
+        <div class="postdate">Posted on 17 Nov 2010</div>
+
+<div class="post">
+<p>A while ago I made something in php that would let you download things form UW-Ace (the University of Waterloo's course management system) from the command-line. Michael Chang had the excellent idea of making something that would simply download everything available to you from Ace so you could have a local copy of everything.</p>
+
+<p>His solution was an extension of my php solution.</p>
+
+<p>Because I wanted to make the product easier to distribute and because I wanted to make use of Mechanize, I rewrote the solution in ruby and packaged it as a gem.</p>
+
+<h1>UWAce Downloader</h1>
+
+<p>The new version looks like this:</p>
+
+<p><img src="http://phleet.github.com/images/uwacegem.png" alt="uwace gem screenshot" /></p>
+
+<p>To get it running, you'll need a copy of RubyGems, which you can get here: <a href="http://rubygems.org/pages/download">Download RubyGems</a>. It's a simple package management and distribution system for ruby, which is used by more or less every ruby project you can think of.</p>
+
+<p>Once you have that set up, just run</p>
+
+<pre><code>sudo gem install uwace
+</code></pre>
+
+<p>Wait for it to finish installing, then run
+   uwace</p>
+
+<p>Which will prompt you for a username and password.
+Of course, I wouldn't release anything that asks for your password without releasing source, so here it is:</p>
+
+<ul>
+<li><a href="https://github.com/phleet/UWAngel-CLI">uwace gem @ github</a></li>
+<li><a href="https://rubygems.org/gems/uwace">uwace gem @ RubyGems</a></li>
+</ul>
+
+
+<h1>Mechanize</h1>
+
+<p>This version of the downloader is written in ruby with the aid of Mechanize for ruby.
+Mechanize is a set of tools for automating webpage interactions and retrieving data. It can identify links and forms on a page, fill them in, submit them and grab any data you want. Perfect for this task.</p>
+
+<p>There's a simple guide on github here: <a href="https://github.com/tenderlove/mechanize/blob/master/GUIDE.rdoc">Getting Started with Mechanize</a></p>
+
+<p>To demonstrate how simple form interaction is, here's the method for login:</p>
+
+<pre><code>  def login
+    @username ||= ask("Username: ")
+    @password ||= ask("Password: ") {|q| q.echo = '*'}
+
+    say "Logging in ..."
+
+    login_page = angel_get 'home.asp'
+    form = login_page.form_with(:name =&gt; "frmLogon")
+    form.username = @username
+    form.password = @password
+
+    login_submit_page = @agent.submit form
+
+    if login_submit_page.uri.to_s.include? 'authenticate.asp'
+      raise InvalidLogin
+    end
+  rescue InvalidLogin
+    say 'Invalid Username/Password'
+    exit
+  end
+</code></pre>
+
+<p>While I've only used the Mechanize bindings for ruby, there bindings for many other languages:</p>
+
+<ul>
+<li><a href="http://wwwsearch.sourceforge.net/mechanize/">Python's Mechanize</a></li>
+<li><a href="http://search.cpan.org/dist/WWW-Mechanize/lib/WWW/Mechanize/Cookbook.pod">Perl's WWW::Mechanize</a> - This was actually the original Mechanize</li>
+</ul>
+
+
+</div>
+ 
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>25 Jun 2011</span> - <a href="/2011/06/25/complex-asynchronous-queries-in-javascript/">Complex Asynchronous Queries in JavaScript</a></li>
+    
+      <li><span>12 Jan 2011</span> - <a href="/2011/01/12/hacker-cup-qualification-round-solutions/">Hacker Cup Qualification Round - Solutions</a></li>
+    
+      <li><span>16 Oct 2010</span> - <a href="/2010/10/16/dfas-and-graphviz-dot/">DFAs and Graphviz DOT</a></li>
+    
+      <li><span>30 Sep 2010</span> - <a href="/2010/09/30/make-your-life-easier-with-gnu-make/">Make your life easier with GNU Make.</a></li>
+    
+      <li><span>14 Aug 2010</span> - <a href="/2010/08/14/javascript-dependency-loading-jquery-atreq/">Javascript Dependency Loading – jquery.atreq</a></li>
+    
+  </ul>
+</div>
+
+
+</div>
+      </div>
+
+      <div class="clear">
+    </div>
+  </body>
+</html>

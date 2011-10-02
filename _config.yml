@@ -1,6 +1,6 @@
 # standard jekyll configuration
 
-permalink: date
+permalink: pretty
 pygments: true
 exclude: ['Rakefile', 'README.md', 'config.rb']
 markdown: rdiscount
@@ -8,7 +8,7 @@ markdown: rdiscount
 # configuration required for some pages
 
 domain: jamie-wong.com
-title: Jamie Wong
+title: "Zero Wind :: Jamie Wong"
 author: Jamie Wong
 email: jamie.lf.wong@gmail.com
 
