@@ -56,7 +56,7 @@ body.bp {
   font-size: 75%;
   width: 100%;
   min-height: 100%;
-  background-color: #2c2c29;
+  background-color: #eeeeee;
 }
 body.bp h1, body.bp h2, body.bp h3, body.bp h4, body.bp h5, body.bp h6 {
   font-weight: normal;
@@ -369,9 +369,10 @@ html, body {
 }
 
 .page-sidebar {
+  background-color: #2c2c29;
   position: fixed;
   width: 150px;
-  min-height: 100%;
+  height: 100%;
 }
 .page-sidebar .zero-wind {
   margin: 20px;
@@ -436,9 +437,9 @@ html, body {
 }
 
 .page-content {
+  padding: 15px;
   position: absolute;
   margin-left: 150px;
-  background-color: white;
   min-height: 100%;
-  width: 650px;
+  width: 620px;
 }
