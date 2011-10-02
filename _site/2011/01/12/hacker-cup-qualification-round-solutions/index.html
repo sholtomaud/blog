@@ -4,12 +4,16 @@
     <title>Hacker Cup Qualification Round - Solutions - Zero Wind :: Jamie Wong</title>
     
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
     <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
+    <link rel="stylesheet" media="screen" href="/stylesheets/prettify.css" type="text/css" />
+    <script type="text/javascript" src="/javascript/prettify.js"></script>
+
     
     
   </head>
 
-  <body class="bp">
+  <body class="bp" onload="prettyPrint()">
     <div class="page-container">
       <div class="page-sidebar">
 
@@ -123,7 +127,7 @@ def doit():
 n = input()
 
 for z in range(n):
-    doit() 
+    doit()
 </code></pre>
 
 <h1>Pegs</h1>
@@ -159,7 +163,7 @@ x.x.x.x.x
 using namespace std;
 
 void doit() {
-    int R, C, K, M;    
+    int R, C, K, M;
     cin &gt;&gt; R &gt;&gt; C &gt;&gt; K &gt;&gt; M;
     set&lt;pair&lt;int,int&gt; &gt; missing;
     for (int i = 0; i &lt; M; i++) {

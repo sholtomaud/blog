@@ -4,12 +4,16 @@
     <title>Google Codejam 2010 Solutions - Qualification - Zero Wind :: Jamie Wong</title>
     
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
     <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
+    <link rel="stylesheet" media="screen" href="/stylesheets/prettify.css" type="text/css" />
+    <script type="text/javascript" src="/javascript/prettify.js"></script>
+
     
     
   </head>
 
-  <body class="bp">
+  <body class="bp" onload="prettyPrint()">
     <div class="page-container">
       <div class="page-sidebar">
 
@@ -64,8 +68,7 @@
 
 <p>For interest, here's what the snapper chain looks like in the first 30 iterations. The left side, labeled "P:" shows which of the snappers are powered, and the right side, labeled "S:" shows the current state of the snappers, with "#" being ON and "." being OFF in both cases. I did this so it would be easier to see the pattern. The first row is the initial set up, before any snaps.</p>
 
-<pre lang='txt'>
-P: #.........   S: ..........
+<pre><code>P: #.........   S: ..........
 P: ##........   S: #.........
 P: #.........   S: .#........
 P: ###.......   S: ##........
@@ -95,51 +98,56 @@ P: #.........   S: .#.##.....
 P: ###.......   S: ##.##.....
 P: #.........   S: ..###.....
 P: ##........   S: #.###.....
-</pre>
+</code></pre>
 
+<p>What we're interested in is how to tell where a specific snapper is on. It turns
+out that this is quite simple - so long as all snappers before it are on the ON
+settings, it will be powered. This means that ultimately, the power column above
+is irrelevant. All we need to know is that the N-1 least significant bits are
+set. This is fairly trivial to check.</p>
 
-<p>What we're interested in is how to tell where a specific snapper is on. It turns out that this is quite simple - so long as all snappers before it are on the ON settings, it will be powered. This means that ultimately, the power column above is irrelevant. All we need to know is that the N-1 least significant bits are set. This is fairly trivial to check.</p>
-
-<pre lang='cpp'>
-#include <iostream>
+<pre><code>#include &lt;iostream&gt;
 using namespace std;
 int main() {
-    int T,N,K;
-    cin >> T;
-    for(int t = 0; t < T; t++) {
-        cin >> N >> K;
-        int mask = (1 << N) - 1;
-        printf("Case #%d: ",t+1);
-        if ( (mask & K) == mask) puts("ON");
-        else puts("OFF");
-    }
-    return 0;
+  int T,N,K;
+  cin &gt;&gt; T;
+  for(int t = 0; t &lt; T; t++) {
+    cin &gt;&gt; N &gt;&gt; K;
+    int mask = (1 &lt;&lt; N) - 1;
+    printf("Case #%d: ",t+1);
+    if ( (mask &amp; K) == mask) puts("ON");
+    else puts("OFF");
+  }
+  return 0;
 }
-</pre>
-
+</code></pre>
 
 <p>Time for the large case:</p>
 
-<pre lang='txt'>
-  [google]  time ./a.out < snapper.in > snapper.out
+<pre><code>$ time ./a.out &lt; snapper.in &gt; snapper.out
 
 real    0m0.071s
 user    0m0.026s
 sys     0m0.040s
-</pre>
-
-
-
+</code></pre>
 
 <h1>Problem 2: Fair Warning</h1>
 
 
-<p>This problem took me about 40 minutes to think of the solution for and about 5 minutes to code. Honour's Algebra (MATH 115) came in handy here. You can first calculate T (the optimal anniversary) by looking at the gcd (greatest common divisor) of the differences between the time elapsed since the events. This works because in order for T to divide the time elapsed since the events, it must also divide the time elapsed between the events. After that, you just need to find the first y that makes any of the numbers divisible by T. I just wrote out the congruences on my whiteboard (which I probably shouldn't have needed to do) then typed in my answer.</p>
+<p>This problem took me about 40 minutes to think of the solution for and about 5
+minutes to code. Honour's Algebra (MATH 115) came in handy here. You can first
+calculate T (the optimal anniversary) by looking at the gcd (greatest common
+divisor) of the differences between the time elapsed since the events. This
+works because in order for T to divide the time elapsed since the events, it
+must also divide the time elapsed between the events. After that, you just need
+to find the first y that makes any of the numbers divisible by T. I just wrote
+out the congruences on my whiteboard (which I probably shouldn't have needed to
+do) then typed in my answer.</p>
 
-<p>The only remaining problem here is dealing with the large numbers, which is hardly a problem in python. Here's my solution:</p>
+<p>The only remaining problem here is dealing with the large numbers, which is
+hardly a problem in python. Here's my solution:</p>
 
-<pre lang='python'>
-def gcd(x,y):
+<pre><code>def gcd(x,y):
     while x:
         x, y = y % x, x
     return y
@@ -147,63 +155,68 @@ def gcd(x,y):
 testcases = open("warning.in").readlines()
 t = 1
 for tc in testcases[1:]:
-    tc = map(lambda x: int(x), tc.split(" ")[1:])
-    if len(tc) == 0:
-        break
-    tc.sort()
-    #print tc
+  tc = map(lambda x: int(x), tc.split(" ")[1:])
+  if len(tc) == 0:
+    break
+  tc.sort()
+  #print tc
 
-    diff = []
-    for i in range(len(tc)-1):
-        diff += [tc[i+1] - tc[i]]
+  diff = []
+  for i in range(len(tc)-1):
+    diff += [tc[i+1] - tc[i]]
 
-    T = diff[0]
-    for d in diff[1:]:
-        T = gcd(T,d)
-    
-    #print T
-    print "Case #%d: %d" % (t, (-tc[0] % T))
+  T = diff[0]
+  for d in diff[1:]:
+    T = gcd(T,d)
 
-    t += 1
-</pre>
+  #print T
+  print "Case #%d: %d" % (t, (-tc[0] % T))
 
+  t += 1
+</code></pre>
 
 <p>Time for large case:</p>
 
-<pre lang='txt'>
-  [google]  time python warning.py > warning.out
+<pre><code>$ time python warning.py &gt; warning.out
 
 real    0m0.250s
 user    0m0.037s
 sys     0m0.021s
-</pre>
-
-
-
+</code></pre>
 
 <h1>Problem 3: Theme Park</h1>
 
 
-<p>This is an optimization problem. There are a lot of different optimizations you can apply, but I figured "to hell with it" and decided the solution getting it down to O(R) was probably sufficient. If you want to look at a better list of optimizations, go look here: <a href="http://code.google.com/codejam/contest/dashboard?c=433101#s=a&a=2">Google Codejam 2010 Qualification Round Contest Analysis</a>.</p>
+<p>This is an optimization problem. There are a lot of different optimizations you
+can apply, but I figured "to hell with it" and decided the solution getting it
+down to O(R) was probably sufficient. If you want to look at a better list of
+optimizations, go look here: <a
+href="http://code.google.com/codejam/contest/dashboard?c=433101#s=a&a=2">Google
+Codejam 2010 Qualification Round Contest Analysis</a>.</p>
 
-<p>All I figured I needed to do was make it so I didn't have to find the groups every single time the ride was loaded. To do this, I simulated using queue until I arrived at a position where the group at the front of the line had been at the front before. While doing this, I record how many euros were made for a given start of the line, and who ends up at the front of the line while they're on the roller coaster. After this, the O(R) loop is very simple. Just add the number of euros for the run, then move on to the next front of the line.</p>
+<p>All I figured I needed to do was make it so I didn't have to find the groups
+every single time the ride was loaded. To do this, I simulated using a queue
+until I arrived at a position where the group at the front of the line had been
+at the front before. While doing this, I record how many euros were made for a
+given start of the line, and who ends up at the front of the line while they're
+on the roller coaster. After this, the O(R) loop is very simple. Just add the
+number of euros for the run, then move on to the next front of the line.</p>
 
-<pre lang='cpp'>
-#include <cmath>
-#include <algorithm>
-#include <iostream>
-#include <fstream>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <queue>
-#include <set>
-#include <map>
-#include <sstream>
-#include <vector>
+<pre><code>#include &lt;cmath&gt;
+#include &lt;algorithm&gt;
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cstring&gt;
+#include &lt;queue&gt;
+#include &lt;set&gt;
+#include &lt;map&gt;
+#include &lt;sstream&gt;
+#include &lt;vector&gt;
 using namespace std;
 
-#define FR(i,a,b) for(int i=(a);i<(b);++i)
+#define FR(i,a,b) for(int i=(a);i&lt;(b);++i)
 #define FOR(i,n) FR(i,0,n)
 #define SETMIN(a,b) a = min(a,b)
 #define SETMAX(a,b) a = max(a,b)
@@ -223,25 +236,25 @@ int main() {
     freopen("themepark.out","w",stdout);
 
     int T;
-    cin >> T;
+    cin &gt;&gt; T;
     FOR(t,T) {
         int R,k,N;
-        cin >> R >> k >> N;
+        cin &gt;&gt; R &gt;&gt; k &gt;&gt; N;
         int grps[1001], done[1001], pts[1001], next[1001];
         CLR(done,0);
-        queue<pair<int,int> > q;
+        queue&lt;pair&lt;int,int&gt; &gt; q;
         FOR(i,N) {
-            cin >> grps[i];
+            cin &gt;&gt; grps[i];
             q.push(MP(i,grps[i]));
         }
-        
+
         while(!done[q.front().A]) {
             int cur = 0;
             int start = q.front().A;
             done[start] = 1;
 
             FOR(i,N) {
-                if (cur + q.front().B > k) break;
+                if (cur + q.front().B &gt; k) break;
 
                 cur += q.front().B;
                 q.push(q.front());
@@ -264,21 +277,19 @@ int main() {
     }
     return 0;
 }
-</pre>
-
+</code></pre>
 
 <p>Time for large test case:</p>
 
-<pre lang='txt'>
-  [google]  time ./a.out
+<pre><code>$ time ./a.out
 
 real    0m11.606s
 user    0m11.542s
 sys     0m0.022s
-</pre>
+</code></pre>
 
-
-<p>I might code up an O(N) solution later, which really isn't that difficult, but at this point in the contest, it simply didn't matter enough.</p>
+<p>I might code up an O(N) solution later, which really isn't that difficult, but
+at this point in the contest, it simply didn't matter enough.</p>
 
 </div>
 

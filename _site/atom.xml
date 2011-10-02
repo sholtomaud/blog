@@ -4,7 +4,7 @@
  <title>Zero Wind :: Jamie Wong</title>
  <link href="http://jamie-wong.com/atom.xml" rel="self"/>
  <link href="http://jamie-wong.com/"/>
- <updated>2011-10-02T02:50:47-07:00</updated>
+ <updated>2011-10-02T05:36:18-07:00</updated>
  <id>http://jamie-wong.com/</id>
  <author>
    <name>Jamie Wong</name>
@@ -17,7 +17,7 @@
    <link href="http://jamie-wong.com/2011/06/25/complex-asynchronous-queries-in-javascript/"/>
    <updated>2011-06-25T00:00:00-07:00</updated>
    <id>http://jamie-wong.com/2011/06/25/complex-asynchronous-queries-in-javascript</id>
-   <content type="html">&lt;p&gt;Over the past couple of weeks, I finally got around to working on personal projects at an events I decided to create with the help of my housemates which we call &lt;a href=&quot;http://www.sehackday.com/&quot;&gt;SEHackDay&lt;/a&gt;. The first and only project I worked on over the 3 nights was &lt;a href=&quot;http://myfriendkarma.heroku.com/&quot;&gt;Karma&lt;/a&gt;, a Facebook App which gives you statistics about your posts and how they stack up against your friends.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Over the past couple of weeks, I finally got around to working on personal projects at an event I decided to create with the help of my housemates which we call &lt;a href=&quot;http://www.sehackday.com/&quot;&gt;SEHackDay&lt;/a&gt;. The first and only project I worked on over the 3 nights was &lt;a href=&quot;http://myfriendkarma.heroku.com/&quot;&gt;Karma&lt;/a&gt;, a Facebook App which gives you statistics about your posts and how they stack up against your friends.&lt;/p&gt;
 
 &lt;p&gt;While it has not been remotely as successful as &lt;a href=&quot;http://the.wubmachine.com/&quot;&gt;The Wub Machine&lt;/a&gt; by one of my housemates, &lt;a href=&quot;http://www.petersobot.com/&quot;&gt;Peter Sobot&lt;/a&gt;, it did make me think about how to make complex asynchronous queries in JavaScript.&lt;/p&gt;
 
@@ -27,7 +27,7 @@
 
 &lt;p&gt;&lt;em&gt;If you already understand AJAX, skip to the complex queries below&lt;/em&gt;.&lt;/p&gt;
 
-&lt;p&gt;JavaScript is, by nature, an asynchronous language. A few of the language's built-in constructs use callbacks, including &lt;code&gt;setTimeout&lt;/code&gt; and &lt;code&gt;registerEventListener&lt;/code&gt;. The basic principle of a callback is this:&lt;/p&gt;
+&lt;p&gt;JavaScript is, by nature, an asynchronous language. A few of the language's built-in constructs use callbacks, including &lt;code&gt;setTimeout&lt;/code&gt; and &lt;code&gt;addEventListener&lt;/code&gt;. The basic principle of a callback is this:&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;When something happens, do this, but keep doing other things while you're waiting.&lt;/strong&gt;&lt;/p&gt;
 
@@ -225,7 +225,7 @@ def doit():
 n = input()
 
 for z in range(n):
-    doit() 
+    doit()
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1&gt;Pegs&lt;/h1&gt;
@@ -261,7 +261,7 @@ x.x.x.x.x
 using namespace std;
 
 void doit() {
-    int R, C, K, M;    
+    int R, C, K, M;
     cin &amp;gt;&amp;gt; R &amp;gt;&amp;gt; C &amp;gt;&amp;gt; K &amp;gt;&amp;gt; M;
     set&amp;lt;pair&amp;lt;int,int&amp;gt; &amp;gt; missing;
     for (int i = 0; i &amp;lt; M; i++) {
@@ -373,26 +373,26 @@ Mechanize is a set of tools for automating webpage interactions and retrieving d
 
 &lt;p&gt;To demonstrate how simple form interaction is, here's the method for login:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;  def login
-    @username ||= ask(&quot;Username: &quot;)
-    @password ||= ask(&quot;Password: &quot;) {|q| q.echo = '*'}
+&lt;pre&gt;&lt;code&gt;def login
+  @username ||= ask(&quot;Username: &quot;)
+  @password ||= ask(&quot;Password: &quot;) {|q| q.echo = '*'}
 
-    say &quot;Logging in ...&quot;
+  say &quot;Logging in ...&quot;
 
-    login_page = angel_get 'home.asp'
-    form = login_page.form_with(:name =&amp;gt; &quot;frmLogon&quot;)
-    form.username = @username
-    form.password = @password
+  login_page = angel_get 'home.asp'
+  form = login_page.form_with(:name =&amp;gt; &quot;frmLogon&quot;)
+  form.username = @username
+  form.password = @password
 
-    login_submit_page = @agent.submit form
+  login_submit_page = @agent.submit form
 
-    if login_submit_page.uri.to_s.include? 'authenticate.asp'
-      raise InvalidLogin
-    end
-  rescue InvalidLogin
-    say 'Invalid Username/Password'
-    exit
+  if login_submit_page.uri.to_s.include? 'authenticate.asp'
+    raise InvalidLogin
   end
+rescue InvalidLogin
+  say 'Invalid Username/Password'
+  exit
+end
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;While I've only used the Mechanize bindings for ruby, there bindings for many other languages:&lt;/p&gt;
@@ -881,11 +881,11 @@ This means you won't get useful behaviour if one of the files you're including h
 
 &lt;p&gt;$.atreq:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://phleet.github.com/images/atreq/atreqfirebug.png&quot; alt=&quot;$.atreq firebug&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/atreqfirebug.png&quot; alt=&quot;$.atreq firebug&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;$.require:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://phleet.github.com/images/atreq/dotreqfirebug.png&quot; alt=&quot;$.require firebug&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/dotreqfirebug.png&quot; alt=&quot;$.require firebug&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Note the difference in the load order - there's no reason why 1.js and 2.js shouldn't load at the same time.&lt;/p&gt;
 
@@ -1108,11 +1108,9 @@ flixel v2.35 [debug]
 
 &lt;p&gt;In all the examples below, the stuff inside [ ]'s is my current working directory. It's the result of my .bash_profile command&lt;/p&gt;
 
-&lt;pre class='cmd'&gt;
-export PS1=&quot;\[\e]2;Jamie@Local \a\e[32;1m\] 
-\033[1;32m  [\W]  \033[1;34;40m\033[1;32;0m&quot;
-&lt;/pre&gt;
-
+&lt;pre&gt;&lt;code&gt;export PS1=&quot;\[\e]2;Jamie@Local \a\e[32;1m\] \033[1;32m  [\W]
+\033[1;34;40m\033[1;32;0m&quot;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;And yes, I have been spending a lot of time on &lt;a href=&quot;http://stackoverflow.com/users/303911/jamie-wong&quot;&gt;Stack Overflow&lt;/a&gt;.&lt;/p&gt;
 
@@ -1123,8 +1121,7 @@ export PS1=&quot;\[\e]2;Jamie@Local \a\e[32;1m\]
 
 
 
-&lt;pre class=&quot;cmd&quot;&gt;
-  [stackoverflow]  pwd
+&lt;pre&gt;&lt;code&gt;  [stackoverflow]  pwd
 /Users/jamiewong/code/stackoverflow
 
   [stackoverflow]  cd /usr/bin
@@ -1137,162 +1134,138 @@ export PS1=&quot;\[\e]2;Jamie@Local \a\e[32;1m\]
 
   [stackoverflow]  pwd
 /Users/jamiewong/code/stackoverflow
-
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2&gt;Rerun the last command&lt;/h2&gt;
 
 
 &lt;p&gt;From: &lt;a href=&quot;http://www.commandlinefu.com/commands/view/1189/run-the-previous-command-with-sudo&quot;&gt;Run the previous command with sudo @ commandlinefu.com&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre class='cmd'&gt;
-  [stackoverflow]  echo hello
+&lt;pre&gt;&lt;code&gt;  [stackoverflow]  echo hello
 hello
- 
+
   [stackoverflow]  !!
 echo hello
 hello
-&lt;/pre&gt;
 
-
-&lt;pre class='cmd'&gt;
   [stackoverflow]  ln -s some_script.sh /usr/bin/some_script
 ln: /usr/bin/some_script: Permission denied
- 
+
   [stackoverflow]  sudo !!
 sudo ln -s some_script.sh /usr/bin/some_script
- 
+
   [stackoverflow]  ls -l /usr/bin/some_script
-lrwxr-xr-x  1 root  wheel  14 30 Jun 00:44 /usr/bin/some_script -&gt; some_script.sh
-&lt;/pre&gt;
+lrwxr-xr-x  1 root  wheel  14 30 Jun 00:44 /usr/bin/some_script -&amp;gt; some_script.sh
 
-
-&lt;pre class='cmd'&gt;
-  [stackoverflow]  cat /etc/apache2/passenger_pane_vhosts/searchgraph* 
+  [stackoverflow]  cat /etc/apache2/passenger_pane_vhosts/searchgraph*
 &amp;lt;VirtualHost *:80&amp;gt;
   ServerName searchgraph.local
-  DocumentRoot &amp;quot;/Users/jamiewong/Code/searchgraph/public&amp;quot;
+  DocumentRoot &quot;/Users/jamiewong/Code/searchgraph/public&quot;
   RailsEnv development
-  &amp;lt;Directory &amp;quot;/Users/jamiewong/Code/searchgraph/public&amp;quot;&amp;gt;
+  &amp;lt;Directory &quot;/Users/jamiewong/Code/searchgraph/public&quot;&amp;gt;
     Order allow,deny
     Allow from all
   &amp;lt;/Directory&amp;gt;
-&amp;lt;/VirtualHost&amp;gt; 
-  [stackoverflow]  echo &amp;quot;!!&amp;quot;
-echo &amp;quot;cat /etc/apache2/passenger_pane_vhosts/searchgraph* &amp;quot;
+&amp;lt;/VirtualHost&amp;gt;
+
+  [stackoverflow]  echo &quot;!!&quot;
+echo &quot;cat /etc/apache2/passenger_pane_vhosts/searchgraph*&quot;;
 cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf
-&lt;/pre&gt;
-
-
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2&gt;Modify the last command and run it&lt;/h2&gt;
 
 
 &lt;p&gt;From: &lt;a href=&quot;http://www.commandlinefu.com/commands/view/19/runs-previous-command-but-replacing&quot;&gt;Runs the previous command but replacing @ commandlinefu.com&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre class=&quot;cmd&quot;&gt;
-  [stackoverflow]  echo hello world
+&lt;pre&gt;&lt;code&gt;  [stackoverflow]  echo hello world
 hello world
 
   [stackoverflow]  ^world^friends
 echo hello friends
 hello friends
-&lt;/pre&gt;
 
-
-&lt;pre class=&quot;cmd&quot;&gt;
   [stackoverflow]  ls *.php
 bolding.php shd.php     stream.php
- 
+
   [stackoverflow]  ^php^rb
 ls *.rb
 hms.rb           split_orderby.rb
- &lt;/pre&gt;
-
-
-&lt;pre class=&quot;cmd&quot;&gt;
+&amp;lt;/pre&amp;gt;&amp;lt;pre class=&quot;cmd&quot;&amp;gt;
   [stackoverflow]  cds ..
 -bash: cds: command not found
- 
+
   [stackoverflow]  ^s
 cd ..
- 
+
   [code]  
-&lt;/pre&gt;
-
-
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2&gt;List your last n commands&lt;/h2&gt;
 
 
-&lt;pre class='cmd'&gt;
-  [stackoverflow]  history 10
-  522  locate mysqld
-  523  sudo /Library/StartupItems/MySQLCOM/MySQLCOM start
-  524  sudo /Library/PreferencePanes/MySQL.prefPane/Contents/MacOS/MySQL
-  525  sudo mysqld_safe
-  526  sudo /usr/local/mysql/bin/mysqld_safe
-  527  mysql
-  528  history
-  529  history | awk '{a[$2]++}END{for(i in a){print a[i] &quot; &quot; i}}' | sort -rn | head
-  530  history
-  531  history 10
-&lt;/pre&gt;
-
+&lt;pre&gt;&lt;code&gt; [stackoverflow]  history 10
+ 522  locate mysqld
+ 523  sudo /Library/StartupItems/MySQLCOM/MySQLCOM start
+ 524  sudo /Library/PreferencePanes/MySQL.prefPane/Contents/MacOS/MySQL
+ 525  sudo mysqld_safe
+ 526  sudo /usr/local/mysql/bin/mysqld_safe
+ 527  mysql
+ 528  history
+ 529  history | awk '{a[$2]++}END{for(i in a){print a[i] &quot; &quot; i}}' | sort -rn | head
+ 530  history
+ 531  history 10
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2&gt;Edit and run a previous command&lt;/h2&gt;
 
 
-&lt;p&gt;From: &lt;a href=&quot;http://www.commandlinefu.com/commands/view/1561/edit-the-last-or-previous-command-line-in-an-editor-then-execute&quot;&gt;Edit the last command line in an editor then execute @ commandlinefu.com&lt;/a&gt;
-This one requires a bit of explanation. The fc command will, by default, open your last command in the console editor you specify (emacs by default - yuck). If you want it to be vim (yay!), stick this in your .bash_profile to just run it when you want to use it.&lt;/p&gt;
+&lt;p&gt;From: &lt;a href=&quot;http://www.commandlinefu.com/commands/view/1561/edit-the-last-or-previous-command-line-in-an-editor-then-execute&quot;&gt;Edit the last command line in an editor then execute @ commandlinefu.com&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre class='cmd'&gt;
-export EDITOR=vim
-&lt;/pre&gt;
+&lt;p&gt;This one requires a bit of explanation. The &lt;code&gt;fc&lt;/code&gt; command will, by default, open
+your last command in the console editor you specify (emacs by default).&lt;br/&gt;
+If you want it to be vim, stick this in your &lt;code&gt;.bash_profile&lt;/code&gt; to just run
+it when you want to use it.&lt;/p&gt;
 
+&lt;pre&gt;&lt;code&gt;export EDITOR=vim
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Then run fc, and it will open up your editor with your last command in it. Save and exit (:wq) to run that command.
-If you just want to execute it immediately, use fc -s.&lt;/p&gt;
+&lt;p&gt;Then run &lt;code&gt;fc&lt;/code&gt;, and it will open up your editor with your last command in it.
+Save and exit (&lt;code&gt;:wq&lt;/code&gt;) to run that command.
+If you just want to execute it immediately, use &lt;code&gt;fc -s&lt;/code&gt;.&lt;/p&gt;
 
-&lt;pre class='cmd'&gt;
-  [stackoverflow]  history 5
-   86  cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf 
-   87  echo &quot;cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf &quot;
-   88  history 10
-   89  echo &quot;cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf &quot;
-   90  history 5
- 
+&lt;pre&gt;&lt;code&gt;  [stackoverflow]  history 5
+  86  cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf 
+  87  echo &quot;cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf &quot;
+  88  history 10
+  89  echo &quot;cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf &quot;
+  90  history 5
+
   [stackoverflow]  fc -s 87
 echo &quot;cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf &quot;
 cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf 
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;If you don't care to look up the history number but happen to remember that it
+was the command you executed two lines ago, you can use negative history numbers&lt;/p&gt;
 
-&lt;p&gt;If you don't care to look up the history number but happen to remember that it was the command you executed two lines ago, you can use negative history numbers&lt;/p&gt;
-
-&lt;pre class='cmd'&gt;
-  [stackoverflow]  echo hello
+&lt;pre&gt;&lt;code&gt;  [stackoverflow]  echo hello
 hello
- 
+
   [stackoverflow]  echo world
 world
- 
+
   [stackoverflow]  fc -s -2
 echo hello
 hello
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2&gt;Follow new output to a log&lt;/h2&gt;
 
 
 &lt;p&gt;This one comes from my coworkers&lt;/p&gt;
 
-&lt;pre class='cmd'&gt;
-  [stackoverflow]  tail -f ~/code/searchgraph/log/development.log 
+&lt;pre&gt;&lt;code&gt;  [stackoverflow]  tail -f ~/code/searchgraph/log/development.log 
 
 
 Processing HomeController#bp (for 127.0.0.1 at 2010-06-23 22:19:27) [GET]
@@ -1303,32 +1276,29 @@ Completed in 6ms (View: 5, DB: 0) | 200 OK [http://searchgraph.local/bp]
 Processing HomeController#bp (for 127.0.0.1 at 2010-06-23 22:20:46) [GET]
 Rendering home/bp
 Completed in 9ms (View: 7, DB: 0) | 200 OK [http://searchgraph.local/bp]
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-
-&lt;p&gt;Then if I go open up searchgraph.local, my console window will get updated on its own&lt;/p&gt;
+&lt;p&gt;Then if I go open up searchgraph.local, my console window will get updated on
+its own&lt;/p&gt;
 
 &lt;h2&gt;Copying and pasting from files&lt;/h2&gt;
 
 
 &lt;p&gt;The pbcopy and pbpaste commands copy and paste from your clipboard.&lt;/p&gt;
 
-&lt;pre class='cmd'&gt;
-  [stackoverflow]  echo test &amp;gt; test.txt
- 
+&lt;pre&gt;&lt;code&gt;  [stackoverflow]  echo test &amp;gt; test.txt
+
   [stackoverflow]  pbcopy &amp;lt; test.txt
- 
+
   [stackoverflow]  pbpaste
 test
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;And if you want to paste content you have in your clipboard to a file, just
+redirect, with&lt;/p&gt;
 
-&lt;p&gt;And if you want to paste content you have in your clipboard to a file, just redirect, with&lt;/p&gt;
-
-&lt;pre class='cmd'&gt;
-pbpaste &gt; output.txt
-&lt;/pre&gt;
-
+&lt;pre&gt;&lt;code&gt;pbpaste &amp;gt; output.txt
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;That's all for now - I'll write more down as I find them.&lt;/p&gt;
 </content>
@@ -1352,8 +1322,7 @@ pbpaste &gt; output.txt
 
 &lt;p&gt;For interest, here's what the snapper chain looks like in the first 30 iterations. The left side, labeled &quot;P:&quot; shows which of the snappers are powered, and the right side, labeled &quot;S:&quot; shows the current state of the snappers, with &quot;#&quot; being ON and &quot;.&quot; being OFF in both cases. I did this so it would be easier to see the pattern. The first row is the initial set up, before any snaps.&lt;/p&gt;
 
-&lt;pre lang='txt'&gt;
-P: #.........   S: ..........
+&lt;pre&gt;&lt;code&gt;P: #.........   S: ..........
 P: ##........   S: #.........
 P: #.........   S: .#........
 P: ###.......   S: ##........
@@ -1383,51 +1352,56 @@ P: #.........   S: .#.##.....
 P: ###.......   S: ##.##.....
 P: #.........   S: ..###.....
 P: ##........   S: #.###.....
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;What we're interested in is how to tell where a specific snapper is on. It turns
+out that this is quite simple - so long as all snappers before it are on the ON
+settings, it will be powered. This means that ultimately, the power column above
+is irrelevant. All we need to know is that the N-1 least significant bits are
+set. This is fairly trivial to check.&lt;/p&gt;
 
-&lt;p&gt;What we're interested in is how to tell where a specific snapper is on. It turns out that this is quite simple - so long as all snappers before it are on the ON settings, it will be powered. This means that ultimately, the power column above is irrelevant. All we need to know is that the N-1 least significant bits are set. This is fairly trivial to check.&lt;/p&gt;
-
-&lt;pre lang='cpp'&gt;
-#include &lt;iostream&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;iostream&amp;gt;
 using namespace std;
 int main() {
-    int T,N,K;
-    cin &gt;&gt; T;
-    for(int t = 0; t &lt; T; t++) {
-        cin &gt;&gt; N &gt;&gt; K;
-        int mask = (1 &lt;&lt; N) - 1;
-        printf(&quot;Case #%d: &quot;,t+1);
-        if ( (mask &amp; K) == mask) puts(&quot;ON&quot;);
-        else puts(&quot;OFF&quot;);
-    }
-    return 0;
+  int T,N,K;
+  cin &amp;gt;&amp;gt; T;
+  for(int t = 0; t &amp;lt; T; t++) {
+    cin &amp;gt;&amp;gt; N &amp;gt;&amp;gt; K;
+    int mask = (1 &amp;lt;&amp;lt; N) - 1;
+    printf(&quot;Case #%d: &quot;,t+1);
+    if ( (mask &amp;amp; K) == mask) puts(&quot;ON&quot;);
+    else puts(&quot;OFF&quot;);
+  }
+  return 0;
 }
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Time for the large case:&lt;/p&gt;
 
-&lt;pre lang='txt'&gt;
-  [google]  time ./a.out &lt; snapper.in &gt; snapper.out
+&lt;pre&gt;&lt;code&gt;$ time ./a.out &amp;lt; snapper.in &amp;gt; snapper.out
 
 real    0m0.071s
 user    0m0.026s
 sys     0m0.040s
-&lt;/pre&gt;
-
-
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1&gt;Problem 2: Fair Warning&lt;/h1&gt;
 
 
-&lt;p&gt;This problem took me about 40 minutes to think of the solution for and about 5 minutes to code. Honour's Algebra (MATH 115) came in handy here. You can first calculate T (the optimal anniversary) by looking at the gcd (greatest common divisor) of the differences between the time elapsed since the events. This works because in order for T to divide the time elapsed since the events, it must also divide the time elapsed between the events. After that, you just need to find the first y that makes any of the numbers divisible by T. I just wrote out the congruences on my whiteboard (which I probably shouldn't have needed to do) then typed in my answer.&lt;/p&gt;
+&lt;p&gt;This problem took me about 40 minutes to think of the solution for and about 5
+minutes to code. Honour's Algebra (MATH 115) came in handy here. You can first
+calculate T (the optimal anniversary) by looking at the gcd (greatest common
+divisor) of the differences between the time elapsed since the events. This
+works because in order for T to divide the time elapsed since the events, it
+must also divide the time elapsed between the events. After that, you just need
+to find the first y that makes any of the numbers divisible by T. I just wrote
+out the congruences on my whiteboard (which I probably shouldn't have needed to
+do) then typed in my answer.&lt;/p&gt;
 
-&lt;p&gt;The only remaining problem here is dealing with the large numbers, which is hardly a problem in python. Here's my solution:&lt;/p&gt;
+&lt;p&gt;The only remaining problem here is dealing with the large numbers, which is
+hardly a problem in python. Here's my solution:&lt;/p&gt;
 
-&lt;pre lang='python'&gt;
-def gcd(x,y):
+&lt;pre&gt;&lt;code&gt;def gcd(x,y):
     while x:
         x, y = y % x, x
     return y
@@ -1435,63 +1409,68 @@ def gcd(x,y):
 testcases = open(&quot;warning.in&quot;).readlines()
 t = 1
 for tc in testcases[1:]:
-    tc = map(lambda x: int(x), tc.split(&quot; &quot;)[1:])
-    if len(tc) == 0:
-        break
-    tc.sort()
-    #print tc
+  tc = map(lambda x: int(x), tc.split(&quot; &quot;)[1:])
+  if len(tc) == 0:
+    break
+  tc.sort()
+  #print tc
 
-    diff = []
-    for i in range(len(tc)-1):
-        diff += [tc[i+1] - tc[i]]
+  diff = []
+  for i in range(len(tc)-1):
+    diff += [tc[i+1] - tc[i]]
 
-    T = diff[0]
-    for d in diff[1:]:
-        T = gcd(T,d)
-    
-    #print T
-    print &quot;Case #%d: %d&quot; % (t, (-tc[0] % T))
+  T = diff[0]
+  for d in diff[1:]:
+    T = gcd(T,d)
 
-    t += 1
-&lt;/pre&gt;
+  #print T
+  print &quot;Case #%d: %d&quot; % (t, (-tc[0] % T))
 
+  t += 1
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Time for large case:&lt;/p&gt;
 
-&lt;pre lang='txt'&gt;
-  [google]  time python warning.py &gt; warning.out
+&lt;pre&gt;&lt;code&gt;$ time python warning.py &amp;gt; warning.out
 
 real    0m0.250s
 user    0m0.037s
 sys     0m0.021s
-&lt;/pre&gt;
-
-
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1&gt;Problem 3: Theme Park&lt;/h1&gt;
 
 
-&lt;p&gt;This is an optimization problem. There are a lot of different optimizations you can apply, but I figured &quot;to hell with it&quot; and decided the solution getting it down to O(R) was probably sufficient. If you want to look at a better list of optimizations, go look here: &lt;a href=&quot;http://code.google.com/codejam/contest/dashboard?c=433101#s=a&amp;a=2&quot;&gt;Google Codejam 2010 Qualification Round Contest Analysis&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This is an optimization problem. There are a lot of different optimizations you
+can apply, but I figured &quot;to hell with it&quot; and decided the solution getting it
+down to O(R) was probably sufficient. If you want to look at a better list of
+optimizations, go look here: &lt;a
+href=&quot;http://code.google.com/codejam/contest/dashboard?c=433101#s=a&amp;a=2&quot;&gt;Google
+Codejam 2010 Qualification Round Contest Analysis&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;All I figured I needed to do was make it so I didn't have to find the groups every single time the ride was loaded. To do this, I simulated using queue until I arrived at a position where the group at the front of the line had been at the front before. While doing this, I record how many euros were made for a given start of the line, and who ends up at the front of the line while they're on the roller coaster. After this, the O(R) loop is very simple. Just add the number of euros for the run, then move on to the next front of the line.&lt;/p&gt;
+&lt;p&gt;All I figured I needed to do was make it so I didn't have to find the groups
+every single time the ride was loaded. To do this, I simulated using a queue
+until I arrived at a position where the group at the front of the line had been
+at the front before. While doing this, I record how many euros were made for a
+given start of the line, and who ends up at the front of the line while they're
+on the roller coaster. After this, the O(R) loop is very simple. Just add the
+number of euros for the run, then move on to the next front of the line.&lt;/p&gt;
 
-&lt;pre lang='cpp'&gt;
-#include &lt;cmath&gt;
-#include &lt;algorithm&gt;
-#include &lt;iostream&gt;
-#include &lt;fstream&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstdlib&gt;
-#include &lt;cstring&gt;
-#include &lt;queue&gt;
-#include &lt;set&gt;
-#include &lt;map&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;cmath&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;fstream&amp;gt;
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cstdlib&amp;gt;
+#include &amp;lt;cstring&amp;gt;
+#include &amp;lt;queue&amp;gt;
+#include &amp;lt;set&amp;gt;
+#include &amp;lt;map&amp;gt;
+#include &amp;lt;sstream&amp;gt;
+#include &amp;lt;vector&amp;gt;
 using namespace std;
 
-#define FR(i,a,b) for(int i=(a);i&lt;(b);++i)
+#define FR(i,a,b) for(int i=(a);i&amp;lt;(b);++i)
 #define FOR(i,n) FR(i,0,n)
 #define SETMIN(a,b) a = min(a,b)
 #define SETMAX(a,b) a = max(a,b)
@@ -1511,25 +1490,25 @@ int main() {
     freopen(&quot;themepark.out&quot;,&quot;w&quot;,stdout);
 
     int T;
-    cin &gt;&gt; T;
+    cin &amp;gt;&amp;gt; T;
     FOR(t,T) {
         int R,k,N;
-        cin &gt;&gt; R &gt;&gt; k &gt;&gt; N;
+        cin &amp;gt;&amp;gt; R &amp;gt;&amp;gt; k &amp;gt;&amp;gt; N;
         int grps[1001], done[1001], pts[1001], next[1001];
         CLR(done,0);
-        queue&lt;pair&lt;int,int&gt; &gt; q;
+        queue&amp;lt;pair&amp;lt;int,int&amp;gt; &amp;gt; q;
         FOR(i,N) {
-            cin &gt;&gt; grps[i];
+            cin &amp;gt;&amp;gt; grps[i];
             q.push(MP(i,grps[i]));
         }
-        
+
         while(!done[q.front().A]) {
             int cur = 0;
             int start = q.front().A;
             done[start] = 1;
 
             FOR(i,N) {
-                if (cur + q.front().B &gt; k) break;
+                if (cur + q.front().B &amp;gt; k) break;
 
                 cur += q.front().B;
                 q.push(q.front());
@@ -1552,21 +1531,19 @@ int main() {
     }
     return 0;
 }
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Time for large test case:&lt;/p&gt;
 
-&lt;pre lang='txt'&gt;
-  [google]  time ./a.out
+&lt;pre&gt;&lt;code&gt;$ time ./a.out
 
 real    0m11.606s
 user    0m11.542s
 sys     0m0.022s
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-
-&lt;p&gt;I might code up an O(N) solution later, which really isn't that difficult, but at this point in the contest, it simply didn't matter enough.&lt;/p&gt;
+&lt;p&gt;I might code up an O(N) solution later, which really isn't that difficult, but
+at this point in the contest, it simply didn't matter enough.&lt;/p&gt;
 </content>
  </entry>
  
@@ -1575,22 +1552,38 @@ sys     0m0.022s
    <link href="http://jamie-wong.com/2010/04/19/ajax-method-callbacks-and-omegle-voyeur-update/"/>
    <updated>2010-04-19T00:00:00-07:00</updated>
    <id>http://jamie-wong.com/2010/04/19/ajax-method-callbacks-and-omegle-voyeur-update</id>
-   <content type="html">&lt;p&gt;I finally got back around to updating Omegle Voyeur with the ability to interfere, and decided to re-implement the whole thing in jQuery while I'm at it. Since jQuery doesn't come with a built-in method of building classes, I used &lt;a href=&quot;http://www.danwebb.net/2008/1/31/low-pro-for-jquery&quot;&gt;lowpro for jQuery&lt;/a&gt;. It's a port of a class building scheme from Prototype. It doesn't do everything I could have hoped for, but it served most of my needs.&lt;/p&gt;
+   <content type="html">&lt;p&gt;I finally got back around to updating Omegle Voyeur with the ability to
+interfere, and decided to re-implement the whole thing in jQuery while I'm at
+it. Since jQuery doesn't come with a built-in method of building classes, I used
+&lt;a href=&quot;http://www.danwebb.net/2008/1/31/low-pro-for-jquery&quot;&gt;lowpro for
+jQuery&lt;/a&gt;. It's a port of a class building scheme from Prototype. It doesn't do
+everything I could have hoped for, but it served most of my needs.&lt;/p&gt;
 
-&lt;p&gt;The other thing I implemented was a way of knowing when Omegle is blocking requests. They have a more robust form of detection now - it isn't just manual IP ban. Once you request too many things from them too fast, they start requesting a captcha. Locally, this isn't a problem - I simply embed an iframe with Omegle in it and provide instructions to the user. Hosted, this is a more troublesome problem, since the captcha is directed towards an IP, so it must be responded to from that IP. I have no solution to this problem at the moment, but I'm going to look into implementing the whole thing using Greasemonkey so this isn't an issue at all.&lt;/p&gt;
+&lt;p&gt;The other thing I implemented was a way of knowing when Omegle is blocking
+requests. They have a more robust form of detection now - it isn't just manual
+IP ban. Once you request too many things from them too fast, they start
+requesting a captcha. Locally, this isn't a problem - I simply embed an iframe
+with Omegle in it and provide instructions to the user. Hosted, this is a more
+troublesome problem, since the captcha is directed towards an IP, so it must be
+responded to from that IP. I have no solution to this problem at the moment, but
+I'm going to look into implementing the whole thing using Greasemonkey so this
+isn't an issue at all.&lt;/p&gt;
 
-&lt;p&gt;For now, you can see the latest version here: &lt;a href=&quot;http://jamie-wong.com/omegle/&quot;&gt;Omegle Voyeur&lt;/a&gt;.
-Don't be surprised if it's down, and please go grab your own copy: &lt;a href=&quot;http://github.com/phleet/Omegle-Voyeur&quot;&gt;Omegle-Voyeur @ github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For now, you can see the latest version here: &lt;a
+href=&quot;http://jamie-wong.com/omegle/&quot;&gt;Omegle Voyeur&lt;/a&gt;.
+Don't be surprised if it's down, and please go grab your own copy: &lt;a
+href=&quot;http://github.com/phleet/Omegle-Voyeur&quot;&gt;Omegle-Voyeur @ github&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Now on to the customary technical concept to go along with my own self promotion.&lt;/p&gt;
 
 &lt;h1&gt;AJAX Method Callbacks&lt;/h1&gt;
 
 
-&lt;p&gt; While passing functions as arguments is a pretty standard thing among almost all languages, attempting to pass methods of specific instances as arguments in Javascript presents an interesting problem. Consider the following:&lt;/p&gt;
+&lt;p&gt; While passing functions as arguments is a pretty standard thing among almost
+ all languages, attempting to pass methods of specific instances as arguments in
+ JavaScript presents an interesting problem. Consider the following:&lt;/p&gt;
 
-&lt;pre lang='javascript'&gt;
-function car(price) {
+&lt;pre&gt;&lt;code&gt;function car(price) {
     this.price = price;
 
     this.setPrice = function(price) {
@@ -1608,56 +1601,72 @@ redcar.setPrice(123);
 alert(redcar.price);
 pass666(redcar.setPrice);
 alert(redcar.price);
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;As you might expect, the first two alerts will say 2000 and 123 respectively.
+But the last one also says 123. Why?&lt;/p&gt;
 
-&lt;p&gt;As you might expect, the first two alerts will say 2000 and 123 respectively. But the last one also says 123. Why?
-It all has to do with what &quot;this&quot; refers to. Both in the initialization of redcar and the modifier call redcar.setPrice, &quot;this&quot; refers to the instance of the function car given the identifier name &quot;redcar&quot;. In the pass666 version, &quot;this&quot; refers to the function pass666. As a result, it does nothing to modify the properties of the car because it isn't told anything about redcar.&lt;/p&gt;
+&lt;p&gt;It all has to do with what &lt;code&gt;this&lt;/code&gt; refers to. Both in the initialization of
+&lt;code&gt;redcar&lt;/code&gt; and the modifier call &lt;code&gt;redcar.setPrice&lt;/code&gt;, &quot;this&quot; refers to the instance
+of the function car given the identifier name &lt;code&gt;redcar&lt;/code&gt;. In the &lt;code&gt;pass666&lt;/code&gt;
+version, &lt;code&gt;this&lt;/code&gt; refers to the function &lt;code&gt;pass666&lt;/code&gt;. As a result, it does nothing
+to modify the properties of the car because it isn't told anything about
+&lt;code&gt;redcar&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;One way to fix this is to use a placeholder variable. I used &quot;self&quot;. Change the definition of car to the following yields the desired result.&lt;/p&gt;
+&lt;p&gt;One way to fix this is to use a placeholder variable. I used &quot;self&quot;. Change the
+definition of car to the following yields the desired result.&lt;/p&gt;
 
-&lt;pre lang='javascript'&gt;
-function car(price) {
-    this.price = price;
+&lt;pre&gt;&lt;code&gt;function car(price) {
+  this.price = price;
 
-    var self = this;
-    this.setPrice = function(price) {
-        self.price = price;
-    };
+  var self = this;
+  this.setPrice = function(price) {
+    self.price = price;
+  };
 }
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;In this example, it's difficult to see why you would ever want to use this in
+the first place. The reason I encountered this problem is my need to use
+instance methods as callback functions for AJAX calls. Here's an excerpt of the
+jQuery version of Omegle Voyeur to see what I'm talking about.&lt;/p&gt;
 
-&lt;p&gt;In this example, it's difficult to see why you would ever want to use this in the first place. The reason I encountered this problem is my need to use instance methods as callback functions for AJAX calls. Here's an excerpt of the jQuery version of Omegle Voyeur to see what I'm talking about.&lt;/p&gt;
-
-&lt;pre lang='javascript' line='106'&gt;
-sendQuery: function(target,respFunc) {
-    // Send a query to the omegle server
-    //log('sending');
-    var self = this;
-    if (respFunc == null) {
-        respFunc = function(self,data) {}
+&lt;pre&gt;&lt;code&gt;sendQuery: function(target,respFunc) {
+  // Send a query to the omegle server
+  //log('sending');
+  var self = this;
+  if (respFunc == null) {
+    respFunc = function(self,data) {}
+  }
+  $.ajax({
+    url: 'omegle.php?'+target,
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+      respFunc(self,data);
     }
-    $.ajax({
-        url: 'omegle.php?'+target,
-        type: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            respFunc(self,data);
-        }
-    });
+  });
 },
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;Sending a request to the Omegle server is a very common task in Omegle Voyeur,
+so I wanted all the AJAX requests leaving from the same method. This means I
+have to accept the callback function as a parameter. I've written all the
+callback methods to accept a parameter &lt;code&gt;self&lt;/code&gt; which will refer to the instance
+of interest.&lt;/p&gt;
 
-&lt;p&gt;Sending a request to the Omegle server is a very common task in Omegle Voyeur, so I wanted all the AJAX requests leaving from the same method. This means I have to accept the callback function as a parameter. I've written all the callback methods to accept a parameter &quot;self&quot; which will refer to the instance of interest.&lt;/p&gt;
+&lt;p&gt;This aspect is one of the many things that makes Prototype's class system
+superior to jQuery's. However, since jQuery makes a lot of other things nicer
+and the two libraries don't play together very well, I decided to port over to
+jQuery nonetheless. In Prototype, there's a function called &lt;a
+href=&quot;http://www.prototypejs.org/api/function/bind&quot;&gt;bind&lt;/a&gt; (not to be confused
+with &lt;a href=&quot;http://api.jquery.com/bind/&quot;&gt;jQuery's bind&lt;/a&gt; which does
+something completely different,) which solves this problem elegantly.&lt;/p&gt;
 
-&lt;p&gt;This aspect is one of the many things that makes Prototype's class system superior to jQuery's. However, since jQuery makes a lot of other things nicer and the two libraries don't play together very well, I decided to port over to jQuery nonetheless. In Prototype, there's a function called &lt;a href=&quot;http://www.prototypejs.org/api/function/bind&quot;&gt;bind&lt;/a&gt; (not to be confused with &lt;a href=&quot;http://api.jquery.com/bind/&quot;&gt;jQuery's bind&lt;/a&gt; which does something completely different,) which solves this problem elegantly.&lt;/p&gt;
+&lt;p&gt;To fix the redcar problem with the aid of Prototype without having to use a
+placeholder variable, you can use bind like so:&lt;/p&gt;
 
-&lt;p&gt;To fix the redcar problem with the aid of Prototype without having to use a placeholder variable, you can use bind like so:&lt;/p&gt;
-
-&lt;pre lang=&quot;javascript&quot;&gt;
-function car(price) {
+&lt;pre&gt;&lt;code&gt;function car(price) {
     this.price = price;
 
     this.setPrice = function(price) {
@@ -1677,12 +1686,14 @@ alert(redcar.price);
 pass666(redcar.setPrice.bind(redcar));
 
 alert(redcar.price);
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;The line &lt;code&gt;pass666(redcar.setPrice.bind(redcar));&lt;/code&gt; is what makes this work out.
+We're explicitly saying that we want &lt;code&gt;setPrice&lt;/code&gt; executed from the scope of the
+instance.&lt;/p&gt;
 
-&lt;p&gt;The line &lt;pre lang='javascript' line='18'&gt;pass666(redcar.setPrice.bind(redcar));&lt;/pre&gt; is what makes this work out. We're explicitly saying that we want setPrice executed from the scope of the instance.&lt;/p&gt;
-
-&lt;p&gt;If I ever have to hire someone for a web development job, I'll be sure to ask something about this.&lt;/p&gt;
+&lt;p&gt;If I ever have to hire someone for a web development job, I'll be sure to ask
+something about this.&lt;/p&gt;
 </content>
  </entry>
  
@@ -1691,7 +1702,9 @@ alert(redcar.price);
    <link href="http://jamie-wong.com/2010/03/09/learn-source-control-with-git/"/>
    <updated>2010-03-09T00:00:00-08:00</updated>
    <id>http://jamie-wong.com/2010/03/09/learn-source-control-with-git</id>
-   <content type="html">&lt;div style='text-align:center'&gt;&lt;img alt=&quot;&quot; src=&quot;http://marklodato.github.com/visual-git-guide/basic-usage.svg.png&quot; title=&quot;Git Visual Guide&quot; class=&quot;alignnone&quot; width=&quot;728&quot; height=&quot;312&quot; /&gt;&lt;/div&gt;
+   <content type="html">&lt;div style='text-align:center'&gt;
+  &lt;img alt=&quot;&quot; src=&quot;/images/git.png&quot; /&gt;
+&lt;/div&gt;
 
 
 &lt;p&gt;One of the gaps among my tech skills upon entering university was source/revision control.&lt;/p&gt;
@@ -1718,7 +1731,10 @@ alert(redcar.price);
 &lt;/ol&gt;
 
 
-&lt;p&gt;For those of you more interested in learning Mercurial (Hg), &lt;a href=&quot;http://se2014.com/~zmanji/&quot;&gt;Zameer Manji&lt;/a&gt; has recommended the following guide: &lt;a href=&quot;http://hginit.com/index.html&quot;&gt;Hg Init: a Mercurial tutorial by Joel Spolsky&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For those of you more interested in learning Mercurial (Hg), &lt;a
+href=&quot;http://zameermanji.com/&quot;&gt;Zameer Manji&lt;/a&gt; has recommended the following
+guide: &lt;a href=&quot;http://hginit.com/index.html&quot;&gt;Hg Init: a Mercurial tutorial by
+Joel Spolsky&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;I would recommend you go grab an account of GitHub to help yourself learning. If you're in need of something to fool around with, fork one of my projects: &lt;a href=&quot;http://github.com/phleet&quot;&gt;phleet @ github&lt;/a&gt;.&lt;/p&gt;
 </content>
@@ -1729,12 +1745,19 @@ alert(redcar.price);
    <link href="http://jamie-wong.com/2010/02/05/jobmine-improved-greasemonkey-jquery/"/>
    <updated>2010-02-05T00:00:00-08:00</updated>
    <id>http://jamie-wong.com/2010/02/05/jobmine-improved-greasemonkey-jquery</id>
-   <content type="html">&lt;div style='text-align: center'&gt;&lt;img src=&quot;http://jamie-wong.com/wordpress/wp-content/uploads/2010/02/JobmineImproved.png&quot; alt=&quot;JobmineImproved&quot; title=&quot;JobmineImproved&quot; width=&quot;482&quot; height=&quot;263&quot; class=&quot;alignnone size-full wp-image-184&quot; /&gt;&lt;/div&gt;
+   <content type="html">&lt;div style='text-align: center'&gt;
+  &lt;img src=&quot;/images/JobmineImproved.png&quot; /&gt;
+&lt;/div&gt;
 
 
-&lt;p&gt;&lt;strong&gt;EDIT&lt;/strong&gt; I will no longer be supporting this script, there's a much better version maintained by Matthew Ng. See Jobmine Plus: &lt;a href=&quot;&quot;&gt;http://userscripts.org/scripts/show/80771&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;I will no longer be supporting this script, there's a much better version
+called &lt;a href=&quot;http://userscripts.org/scripts/show/80771&quot;&gt;Jobmine Plus&lt;/a&gt; maintained by
+Matthew Ng.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;I, like many (most) Waterloo Co-op students, am forced to use Jobmine and am extremely dissatisfied with its functionality. So I decided to kill three birds with one stone: improve Jobmine, learn Greasemonkey and learn jQuery all at the same time.&lt;/p&gt;
+&lt;p&gt;I, like many (most) Waterloo Co-op students, am forced to use Jobmine and am
+extremely dissatisfied with its functionality. So I decided to kill three birds
+with one stone: improve Jobmine, learn Greasemonkey and learn jQuery all at the
+same time.&lt;/p&gt;
 
 &lt;p&gt;The result is, unsurprisingly, a Greasemonkey script written using jQuery that improves on some features of Jobmine.&lt;/p&gt;
 
@@ -1768,33 +1791,31 @@ You can get the script here: &lt;a href=&quot;http://userscripts.org/scripts/sho
 
 &lt;p&gt;jQuery is a javascript framework specifically designed for doing things involving the DOM tree absurdly quickly. Example: highlighting alternating rows of a table (zebra-striping).&lt;/p&gt;
 
-&lt;pre lang=&quot;javascript&quot;&gt;
-// Standard Javascript method:
+&lt;pre&gt;&lt;code&gt;// Standard Javascript method:
 var tables = document.getElementsByTagName(&quot;table&quot;);
-for (var i = 0; i &lt; tables.length; i++) {
+for (var i = 0; i &amp;lt; tables.length; i++) {
     var rows = tables[i].tBodies[0].rows;
-    for (var j = 0; j &lt; rows.length; j++) {
+    for (var j = 0; j &amp;lt; rows.length; j++) {
         var rowColor;
         if (j % 2 == 1) {
-            rowColor = &quot;#eef&quot;; 
+            rowColor = &quot;#eef&quot;;
         } else {
             rowColor = &quot;#fff&quot;;
         }
 
         var cells = rows[j].cells;
-        for (var k = 0; k &lt; cells.length; k++) {
+        for (var k = 0; k &amp;lt; cells.length; k++) {
             cells[k].style.backgroundColor = rowColor;
             cells[k].style.borderBottom = &quot;1px solid #ccc&quot;;
         }
     }
-} 
+}
 
 // jQuery way:
 $(&quot;td&quot;).css(&quot;border-bottom&quot;,&quot;1px solid #ccc&quot;);
-$(&quot;tr:even &gt; td&quot;).css(&quot;background-color&quot;,&quot;#fff&quot;);
-$(&quot;tr:odd &gt; td&quot;).css(&quot;background-color&quot;,&quot;#eef&quot;);
-&lt;/pre&gt;
-
+$(&quot;tr:even &amp;gt; td&quot;).css(&quot;background-color&quot;,&quot;#fff&quot;);
+$(&quot;tr:odd &amp;gt; td&quot;).css(&quot;background-color&quot;,&quot;#eef&quot;);
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Now before someone says it, I know usually you can set the background-color for the whole row, and the cells will inherit it. But since, for some crazy reason, each cell is assigned a background colour on Jobmine, each cell needs to be set individually. In any case, you can see that things are made substantially easier with jQuery. I figured out jQuery mostly just using the API and looking at other people's code, but this is a decent place to start: &lt;a href=&quot;http://docs.jquery.com/Tutorials:Getting_Started_with_jQuery&quot;&gt;Getting Started with jQuery&lt;/a&gt;.&lt;/p&gt;
 
@@ -1811,49 +1832,81 @@ $(&quot;tr:odd &gt; td&quot;).css(&quot;background-color&quot;,&quot;#eef&quot;)
    <link href="http://jamie-wong.com/2010/01/07/tools-ideone-regexr-jitouch-2-opengnome-open-ditaa/"/>
    <updated>2010-01-07T00:00:00-08:00</updated>
    <id>http://jamie-wong.com/2010/01/07/tools-ideone-regexr-jitouch-2-opengnome-open-ditaa</id>
-   <content type="html">&lt;p&gt;Through reading proggit and hearing about new technology from classmates, every once in a while, I build up a list of tools which I plan on checking out and see whether they're useful enough to add to my regular routine. The first four on this list fall into that category, and I may eventually find a use for the last.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Through reading proggit and hearing about new technology from classmates, every
+once in a while, I build up a list of tools which I plan on checking out and see
+whether they're useful enough to add to my regular routine. The first four on
+this list fall into that category, and I may eventually find a use for the last.&lt;/p&gt;
 
 &lt;h1&gt;ideone&lt;/h1&gt;
 
+&lt;p&gt;&lt;img src=&quot;/images/ideone.png&quot; class=&quot;inline&quot;/&gt;&lt;a
+href=&quot;http://www.ideone.com&quot;&gt;ideone&lt;/a&gt; is an in-browser, syntax-highlighted
+code editor complete with interpreters and compilers. Basically, if you've ever
+wanted to try out a language but really didn't feel like installing it on your
+system, this is the perfect place to start. The site even runs Brainf**k.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://jamie-wong.com/wordpress/wp-content/uploads/2010/01/ideone.png&quot; alt=&quot;ideone&quot; title=&quot;ideone&quot; width=&quot;300&quot; height=&quot;55&quot; style=&quot;float:left;margin-right:10px;&quot;/&gt;&lt;a href=&quot;http://www.ideone.com&quot;&gt;ideone&lt;/a&gt; is an in-browser, syntax-highlighted code editor complete with interpreters and compilers. Basically, if you've ever wanted to try out a language but really didn't feel like installing it on your system, this is the perfect place to start. The site even runs Brainf**k.&lt;/p&gt;
-
-&lt;p&gt;There's another site which accomplishes the same task, but less elegantly: &lt;a href=&quot;http://codepad.org/&quot;&gt;Codepad&lt;/a&gt;. This site is so much less elegant that I wasn't originally planning on posting it, but decided to once I saw there was a &lt;a href=&quot;http://www.vim.org/scripts/script.php?script_id=2298&quot;&gt;Codepad vim plugin&lt;/a&gt;. There's also emacs integrations.&lt;/p&gt;
+&lt;p&gt;There's another site which accomplishes the same task, but less elegantly: &lt;a
+href=&quot;http://codepad.org/&quot;&gt;Codepad&lt;/a&gt;. This site is so much less elegant that I
+wasn't originally planning on posting it, but decided to once I saw there was a
+&lt;a href=&quot;http://www.vim.org/scripts/script.php?script_id=2298&quot;&gt;Codepad vim
+plugin&lt;/a&gt;. There's also emacs integrations.&lt;/p&gt;
 
 &lt;h1&gt;RegExr&lt;/h1&gt;
 
-
-&lt;p&gt;&lt;img src=&quot;http://jamie-wong.com/wordpress/wp-content/uploads/2010/01/regexr-300x111.png&quot; alt=&quot;regexr&quot; title=&quot;regexr&quot; width=&quot;300&quot; height=&quot;111&quot; class=&quot;alignnone size-medium wp-image-148&quot; style='float:left;margin-right:10px;'/&gt; &lt;a href=&quot;http://gskinner.com/RegExr/&quot;&gt;Regexr&lt;/a&gt; is an online tool, implemented in Adobe Flex, to test out regular expressions in real time. If you haven't learned about regular expressions yet, &lt;a href=&quot;http://www.regular-expressions.info/&quot;&gt;go learn&lt;/a&gt; right now. They're just about the most powerful text matching, user verification and error correction tool in existence. They're also implemented in nearly all languages now in some form or another. Before I saw this site, I would test out all my regular expressions just using vim, but found it frustrating when the expressions needed to be changed to be compatible with php. So I'm likely going to start using RegExr instead.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/regexr-300x111.png&quot; class=&quot;inline&quot;/&gt; &lt;a
+href=&quot;http://gskinner.com/RegExr/&quot;&gt;Regexr&lt;/a&gt; is an online tool, implemented in
+Adobe Flex, to test out regular expressions in real time. If you haven't learned
+about regular expressions yet, &lt;a href=&quot;http://www.regular-expressions.info/&quot;&gt;go
+learn&lt;/a&gt; right now. They're just about the most powerful text matching, user
+verification and error correction tool in existence. They're also implemented in
+nearly all languages now in some form or another. Before I saw this site, I
+would test out all my regular expressions just using vim, but found it
+frustrating when the expressions needed to be changed to be compatible with php.&lt;br/&gt;
+So I'm likely going to start using RegExr instead.&lt;/p&gt;
 
 &lt;h1&gt;jitouch 2&lt;/h1&gt;
 
-
-&lt;p&gt;&lt;img src=&quot;http://jamie-wong.com/wordpress/wp-content/uploads/2010/01/Screen-shot-2010-01-07-at-11.09.43-AM.png&quot; alt=&quot;Screen shot 2010-01-07 at 11.09.43 AM&quot; title=&quot;Screen shot 2010-01-07 at 11.09.43 AM&quot; width=&quot;311&quot; height=&quot;101&quot; class=&quot;alignnone size-full wp-image-162&quot; style='float:left;margin-right:10px'/&gt; &lt;a href=&quot;http://www.jitouch.com/&quot;&gt;Jitouch 2&lt;/a&gt; is an application expanding on the multi-touch gestures available to MacBook Pro users who want to do more with just the touch pad. The two big things that this enables me to do that I love are opening links in new tabs using only taps on the keypad, and switching tabs using a gesture equivalent to ctrl-tab to switch tabs. I actually saw this reading &lt;a href=&quot;http://blag.xkcd.com/&quot;&gt;Randal Munroe's blag&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/jitouch2.png&quot; class=&quot;inline&quot;/&gt; &lt;a
+href=&quot;http://www.jitouch.com/&quot;&gt;Jitouch 2&lt;/a&gt; is an application expanding on the
+multi-touch gestures available to MacBook Pro users who want to do more with
+just the touch pad. The two big things that this enables me to do that I love
+are opening links in new tabs using only taps on the keypad, and switching tabs
+using a gesture equivalent to ctrl-tab to switch tabs. I actually saw this
+reading &lt;a href=&quot;http://blag.xkcd.com/&quot;&gt;Randal Munroe's blag&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h1&gt;Mac OS X/Gnome open&lt;/h1&gt;
 
+&lt;p&gt;&lt;img src=&quot;/images/osx-open.png&quot; class=&quot;inline&quot;/&gt;open &amp;amp; gnome-open are terminal
+commands in Mac OS X and gnome respectively, but they do the same thing.
+Whenever you double click on a file in Finder or Nautilus, the operating system
+has a database of which extensions are opened by which applications. You can
+leverage that database by calling &lt;code&gt;open&lt;/code&gt;. Examples:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://jamie-wong.com/wordpress/wp-content/uploads/2010/01/Screen-shot-2010-01-07-at-11.16.08-AM-300x43.png&quot; alt=&quot;Screen shot 2010-01-07 at 11.16.08 AM&quot; title=&quot;Screen shot 2010-01-07 at 11.16.08 AM&quot; width=&quot;300&quot; height=&quot;43&quot; class=&quot;alignnone size-medium wp-image-165&quot; style='float:left;margin-right:10px'/&gt;open &amp;amp; gnome-open are terminal commands in Mac OS X and gnome respectively, but they do the same thing. Whenever you double click on a file in Finder or Nautilus, the operating system has a database of which extensions are opened by which applications. What's actually happening here is that it's called open. Examples:&lt;/p&gt;
-
-&lt;pre&gt;open &quot;Office Space.avi&quot;&lt;/pre&gt;
-
+&lt;pre&gt;&lt;code&gt;open &quot;Office Space.avi&quot;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Open up Office Space in your default viewer.&lt;/p&gt;
 
-&lt;pre&gt;open http://www.jamie-wong.com&lt;/pre&gt;
-
+&lt;pre&gt;&lt;code&gt;open http://www.jamie-wong.com
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Visit my website from the commandline, opening in your default browser&lt;/p&gt;
 
-&lt;pre&gt;open -a &quot;Adobe Photoshop CS3&quot;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;open -a &quot;Adobe Photoshop CS3&quot;
+&lt;/code&gt;&lt;/pre&gt;
 
-
-&lt;p&gt;Launch Photoshop. Open -a opens files with an application.&lt;/p&gt;
+&lt;p&gt;Launch Photoshop. &lt;code&gt;open -a&lt;/code&gt; opens files with an application.&lt;/p&gt;
 
 &lt;h1&gt;ditaa&lt;/h1&gt;
 
+&lt;p&gt;&lt;img src=&quot;/images/ditaa.png&quot; class=&quot;inline&quot;/&gt; &lt;a
+href=&quot;http://ditaa.sourceforge.net/&quot;&gt;ditaa&lt;/a&gt; is a tool for converting ASCII
+art diagrams into graphical diagrams. This is pretty well illustrated in the
+picture to the left. I haven't actually found much of a use for this yet, but
+some of you might.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://jamie-wong.com/wordpress/wp-content/uploads/2010/01/Screen-shot-2010-01-07-at-11.44.21-AM-300x278.png&quot; alt=&quot;Screen shot 2010-01-07 at 11.44.21 AM&quot; title=&quot;Screen shot 2010-01-07 at 11.44.21 AM&quot; width=&quot;300&quot; height=&quot;278&quot; class=&quot;alignnone size-medium wp-image-168&quot; style=&quot;float:left;margin-right:10px;&quot;/&gt; &lt;a href=&quot;http://ditaa.sourceforge.net/&quot;&gt;ditaa&lt;/a&gt; is a tool for converting ASCII art diagrams into graphical diagrams. This is pretty well illustrated in the picture to the left. I haven't actually found much of a use for this yet, but some of you might.&lt;/p&gt;
+&lt;div style='clear:both; height: 10px'&gt;&lt;/div&gt;
+
 </content>
  </entry>
  
@@ -1862,24 +1915,35 @@ $(&quot;tr:odd &gt; td&quot;).css(&quot;background-color&quot;,&quot;#eef&quot;)
    <link href="http://jamie-wong.com/2009/12/27/uwangel-cli/"/>
    <updated>2009-12-27T00:00:00-08:00</updated>
    <id>http://jamie-wong.com/2009/12/27/uwangel-cli</id>
-   <content type="html">&lt;div style='text-align:center'&gt;&lt;img src=&quot;http://jamie-wong.com/wordpress/wp-content/uploads/2009/12/Screen-shot-2009-12-27-at-1.39.50-AM.png&quot; alt=&quot;Screen shot 2009-12-27 at 1.39.50 AM&quot; title=&quot;Screen shot 2009-12-27 at 1.39.50 AM&quot; width=&quot;480&quot; height=&quot;244&quot; class=&quot;alignnone size-full wp-image-132&quot; /&gt;&lt;/div&gt;
+   <content type="html">&lt;div style='text-align:center'&gt;
+  &lt;img src=&quot;/images/uwangel-cli-1.png&quot; width=&quot;480&quot; height=&quot;244&quot; /&gt;
+&lt;/div&gt;
 
 
-&lt;p&gt;Near the end of the semester, I was getting kind of tired of navigating UW-ACE so frequently through my browsing and opening all the different tabs to grab all the files I wanted. While all the pretty graphics make for a decent user interface, it reduces the speed of the service.&lt;/p&gt;
+&lt;p&gt;Near the end of the semester, I was getting kind of tired of navigating UW-ACE
+so frequently through my browsing and opening all the different tabs to grab all
+the files I wanted. While all the pretty graphics make for a decent user
+interface, it reduces the speed of the service.&lt;/p&gt;
 
-&lt;p&gt;But aside from that, I like being able to do as much as I possibly can from the console.&lt;/p&gt;
+&lt;p&gt;But aside from that, I like being able to do as much as I possibly can from the
+console.&lt;/p&gt;
 
-&lt;p&gt;So I made a Command Line Interface (CLI) for UW-ACE in php using cUrl. I built in on my Macbook Pro in Snow Leopard, but it should work just fine on any *nix machine, and possibly in Cygwin or other emulators.&lt;/p&gt;
+&lt;p&gt;So I made a Command Line Interface (CLI) for UW-ACE in php using cUrl. I built
+in on my Macbook Pro in Snow Leopard, but it should work just fine on any *nix
+machine, and possibly in Cygwin or other emulators.&lt;/p&gt;
 
-&lt;p&gt;As always, source is available on github: &lt;a href=&quot;http://github.com/phleet/UWAngel-CLI&quot;&gt;UWAngel-CLI @ Github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;As always, source is available on github: &lt;a
+href=&quot;http://github.com/phleet/UWAngel-CLI&quot;&gt;UWAngel-CLI @ Github&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Since I always like to post snippets of code from my projects that may be universally useful, I'll do that here too.&lt;/p&gt;
+&lt;p&gt;Since I always like to post snippets of code from my projects that may be
+universally useful, I'll do that here too.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;CLI Colour in PHP&lt;/strong&gt;
-cli_colours.php included in the UWAngel-CLI source is just a collection of constants which allow you to print out colours in your CLI scripts.&lt;/p&gt;
+&lt;h2&gt;CLI Colour in PHP&lt;/h2&gt;
 
-&lt;pre lang='php'&gt;
-&lt;?
+&lt;p&gt;&lt;code&gt;cli_colours.php&lt;/code&gt; included in the UWAngel-CLI source is just a collection of
+constants which allow you to print out colours in your CLI scripts.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?
 $COLOR_BLACK = &quot;\033[0;30m&quot;;
 $COLOR_DARKGRAY = &quot;\033[1;30m&quot;;
 $COLOR_BLUE = &quot;\033[0;34m&quot;;
@@ -1898,41 +1962,63 @@ $COLOR_LIGHTGRAY = &quot;\033[0;37m&quot;;
 $COLOR_WHITE = &quot;\033[1;37m&quot;;
 $COLOR_DEFAULT = &quot;\033[0;37m&quot;;
 
-echo &lt;&lt;&lt; EOT
-One fish, 
-two fish, 
-{$COLOR_RED}red{$COLOR_DEFAULT} fish, 
+echo &amp;lt;&amp;lt;&amp;lt; EOT
+One fish,
+two fish,
+{$COLOR_RED}red{$COLOR_DEFAULT} fish,
 {$COLOR_BLUE}blue{$COLOR_DEFAULT} fish.
 
 EOT;
-?&gt;
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;The only gripe I have about this is that &lt;code&gt;COLOR_DEFAULT&lt;/code&gt; it's the same colour as
+I have on by default in iTerm. Anyone know the escape code to make it actually
+revert to what it was before instead of just making an assumption about what
+color is being used?&lt;/p&gt;
 
-&lt;p&gt;The only gripe I have about this is that COLOR_DEFAULT it's the same colour as I have on by default in iTerm. Anyone know the escape code to make it actually revert to what it was before instead of just making an assumption about what color is being used?&lt;/p&gt;
+&lt;h2&gt;Hide Commandline Input&lt;/h2&gt;
 
-&lt;p&gt;&lt;strong&gt;Hide Commandline Input&lt;/strong&gt;
-One of the first things I looked up when I started this project today was how to hide user input from the command line. I sure as hell didn't want people typing their passwords for UWACE on screen and having it actually display.
-It turns out you can do this by temporarily telling your TTY to stop echoing what you type. The command for this is &quot;stty -echo&quot; and can be re-enabled using &quot;stty echo&quot;. Below is how I implemented as part of the AngelAccess class to meet my needs.&lt;/p&gt;
+&lt;p&gt;One of the first things I looked up when I started this project today was how to
+hide user input from the command line. I sure as hell didn't want people typing
+their passwords for UWACE on screen and having it actually display.&lt;/p&gt;
 
-&lt;pre lang='php'&gt;
- function Prompt($prompt_text,$hide = false) {
-     echo $prompt_text;
-     $input = &quot;&quot;;
-     if ($hide) {
-         $input = trim(`stty -echo;head -n1;stty echo`);
-         echo &quot;\n&quot;;
-     } else {
-         $input = trim(fgets(STDIN));
-     }
-     return $input;
- }
-&lt;/pre&gt;
+&lt;p&gt;It turns out you can do this by temporarily telling your TTY to stop echoing
+what you type. The command for this is &lt;code&gt;stty -echo&lt;/code&gt; and can be re-enabled using
+&lt;code&gt;stty echo&lt;/code&gt;. Below is how I implemented as part of the AngelAccess class to meet
+my needs.&lt;/p&gt;
 
+&lt;pre&gt;&lt;code&gt;function Prompt($prompt_text,$hide = false) {
+    echo $prompt_text;
+    $input = &quot;&quot;;
+    if ($hide) {
+        $input = trim(`stty -echo;head -n1;stty echo`);
+        echo &quot;\n&quot;;
+    } else {
+        $input = trim(fgets(STDIN));
+    }
+    return $input;
+}
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;As a complete side note, thanks to a boot-camped installation of Windows 7 (or at least I'm fairly sure that's the culprit,) my Macbook Pro is now stuck on Digital Out. This means I can't use the internal speakers on my computer under Mac OS X. Well... what I should say is that I can't use them without some annoying tricks. If I plug in my headphones, then tell my mac to use the input jack for audio input, then my internal speakers appear under the output options and let me use them. The speakers then work perfectly fine. They also work fine under Windows 7. A direct side effect of digital out being stuck on is a read light emanating from the audio jack.&lt;/p&gt;
+&lt;p&gt;As a complete side note, thanks to a boot-camped installation of Windows 7 (or
+at least I'm fairly sure that's the culprit,) my Macbook Pro is now stuck on
+Digital Out. This means I can't use the internal speakers on my computer under
+Mac OS X. Well... what I should say is that I can't use them without some
+annoying tricks. If I plug in my headphones, then tell my mac to use the input
+jack for audio input, then my internal speakers appear under the output options
+and let me use them. The speakers then work perfectly fine. They also work fine
+under Windows 7. A direct side effect of digital out being stuck on is a read
+light emanating from the audio jack.&lt;/p&gt;
 
-&lt;p&gt;The problem is apparently fairly common, unfortunately the only confirmed fixes for it are sending it back to Apple or &lt;a href=&quot;http://forums.macrumors.com/showthread.php?t=239287&quot;&gt;wiggling a toothpick around&lt;/a&gt; in the audio jack. I had absolutely no luck with the toothpick, or precision screwdriver, or pen cartridge, or paintbrush handle. If anyone knows how to fix this problem, I would love to know. Otherwise, I'm just going to take it into the Apple store in Rideau some time this week and hope they can fix the problem. I really don't want to have to send my Mac in during my first week at Velocity.&lt;/p&gt;
+&lt;p&gt;The problem is apparently fairly common, unfortunately the only confirmed fixes
+for it are sending it back to Apple or &lt;a
+href=&quot;http://forums.macrumors.com/showthread.php?t=239287&quot;&gt;wiggling a toothpick
+around&lt;/a&gt; in the audio jack. I had absolutely no luck with the toothpick, or
+precision screwdriver, or pen cartridge, or paintbrush handle. If anyone knows
+how to fix this problem, I would love to know. Otherwise, I'm just going to take
+it into the Apple store in Rideau some time this week and hope they can fix the
+problem. I really don't want to have to send my Mac in during my first week at
+Velocity.&lt;/p&gt;
 </content>
  </entry>
  
@@ -1941,7 +2027,9 @@ It turns out you can do this by temporarily telling your TTY to stop echoing wha
    <link href="http://jamie-wong.com/2009/12/12/manual-sorting/"/>
    <updated>2009-12-12T00:00:00-08:00</updated>
    <id>http://jamie-wong.com/2009/12/12/manual-sorting</id>
-   <content type="html">&lt;div style='text-align:center'&gt;&lt;img src=&quot;http://jamie-wong.com/wordpress/wp-content/uploads/2009/12/cards.jpg&quot; alt=&quot;cards&quot; title=&quot;cards&quot; width=&quot;427&quot; height=&quot;466&quot; class=&quot;alignnone size-full wp-image-115&quot; /&gt;&lt;/div&gt;
+   <content type="html">&lt;div style='text-align:center'&gt;
+  &lt;img src=&quot;/images/cards.jpg&quot; width=&quot;427&quot; height=&quot;466&quot; /&gt;
+&lt;/div&gt;
 
 
 &lt;p&gt;The basis for this post is the following question: &lt;strong&gt;what is the fastest algorithm for sorting a deck of cards by hand?&lt;/strong&gt;&lt;/p&gt;
@@ -1991,127 +2079,134 @@ It turns out you can do this by temporarily telling your TTY to stop echoing wha
    <link href="http://jamie-wong.com/2009/12/06/lambda-functions/"/>
    <updated>2009-12-06T00:00:00-08:00</updated>
    <id>http://jamie-wong.com/2009/12/06/lambda-functions</id>
-   <content type="html">&lt;p&gt;One day, a friend of mine called me up asking for help with his CS assignment. It was about lambda functions in scheme. Lambda functions had always been something confusing both in theory and practice for me. Why do you need them? Before I explain what they are, I'll start with a simple probably justifying &lt;i&gt;why&lt;/i&gt; they are.&lt;/p&gt;
+   <content type="html">&lt;p&gt;One day, a friend of mine called me up asking for help with his CS assignment.
+It was about lambda functions in scheme. Lambda functions had always been
+something confusing both in theory and practice for me. Why do you need them?
+Before I explain what they are, I'll start with a simple probably justifying
+&lt;em&gt;why&lt;/em&gt; they are.&lt;/p&gt;
 
-&lt;p&gt;All code in this post is going to be in python, but most of it can be applied to other high level languages. I've only used lambda functions in python and scheme, but I'm sure the functionality exists in many, many other languages.&lt;/p&gt;
+&lt;p&gt;All code in this post is going to be in python, but most of it can be applied to
+other high level languages. I've only used lambda functions in python and
+scheme, but I'm sure the functionality exists in many, many other languages.&lt;/p&gt;
 
-&lt;h2&gt; Sorting &lt;/h2&gt;
-
+&lt;h1&gt;Sorting&lt;/h1&gt;
 
 &lt;p&gt;Sorting in python is very straight forward. If I have a list of strings in python and want to sort them, I do this:&lt;/p&gt;
 
-&lt;pre lang='python'&gt;
-a = [&quot;banana&quot;,&quot;apple&quot;,&quot;pear&quot;,&quot;elephant&quot;,&quot;zebra&quot;,&quot;mango&quot;]
+&lt;pre&gt;&lt;code&gt;a = [&quot;banana&quot;,&quot;apple&quot;,&quot;pear&quot;,&quot;elephant&quot;,&quot;zebra&quot;,&quot;mango&quot;]
 a.sort()
 print a
 # OUT: ['apple', 'banana', 'elephant', 'mango', 'pear', 'zebra']
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;But what happens when you try to sort a list of words containing capital letters?&lt;/p&gt;
 
-&lt;pre lang='python'&gt;
-a = [&quot;pear&quot;,&quot;Police&quot;,&quot;apple&quot;,&quot;Airplane&quot;,&quot;banana&quot;,&quot;Bear&quot;]
+&lt;pre&gt;&lt;code&gt;a = [&quot;pear&quot;,&quot;Police&quot;,&quot;apple&quot;,&quot;Airplane&quot;,&quot;banana&quot;,&quot;Bear&quot;]
 a.sort()
 print a
 # OUT: ['Airplane', 'Bear', 'Police', 'apple', 'banana', 'pear']
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;The sorting is done purely based on the byte values of the characters. Since 'P'
+(ASCII 80) &amp;lt; 'a' (ASCII 97), &quot;Police&quot; is placed before &quot;apple&quot; in the list of
+words. Normally when you're trying to sort a list of words, you want to do it
+alphabetically. So how do you fix this? You make a comparator function. Here's
+python's definition of the sort function.&lt;/p&gt;
 
-&lt;p&gt;The sorting is done purely based on the byte values of the characters. Since 'P' (ASCII 80) &amp;lt; 'a' (ASCII 97), &quot;Police&quot; is placed before &quot;apple&quot; in the list of words. Normally when you're trying to sort a list of words, you want to do it alphabetically. So how do you fix this? You make a comparator function. Here's python's definition of the sort function.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;L.sort(cmp=None, key=None, reverse=False) -- stable sort *IN PLACE*;
+cmp(x, y) -&amp;gt; -1, 0, 1
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;blockquote&gt;
-    L.sort(cmp=None, key=None, reverse=False) -- stable sort *IN PLACE*;
-    cmp(x, y) -&gt; -1, 0, 1
-&lt;/blockquote&gt;
+&lt;p&gt;For those of you who have used &lt;code&gt;qsort&lt;/code&gt; in the standard C library, this isn't
+such an arcane concept. In python however, it is much easier (no &lt;code&gt;void*&lt;/code&gt;
+madness).&lt;/p&gt;
 
-
-&lt;p&gt;For those of you who have used qsort in the standard C library, this isn't such an arcane concept. In python however, it is much easier (no void* madness).&lt;/p&gt;
-
-&lt;pre lang='python'&gt;
-def alphacmp(x,y):
+&lt;pre&gt;&lt;code&gt;def alphacmp(x,y):
     return cmp(x.lower(),y.lower())
 
 a = [&quot;pear&quot;,&quot;Police&quot;,&quot;apple&quot;,&quot;Airplane&quot;,&quot;banana&quot;,&quot;Bear&quot;]
 a.sort(alphacmp)
 print a
 # OUT: ['Airplane', 'apple', 'banana', 'Bear', 'pear', 'Police']
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;Okay, great! We now have our list sorted in the intuitive way. The lower()
+function will ensure that the lowercase version of the strings are being
+compared, removing the issues of the byte comparisons. But this code seems a
+little longer than it could be. Normally, you wouldn't create a function for
+task you do only once if it was just as readable within the code body. But the
+sort function needs a comparator function. So how can you give sort a comparator
+function without having to actually declare a function? The answer is lambda
+functions.&lt;/p&gt;
 
-&lt;p&gt;Okay, great! We now have our list sorted in the intuitive way. The lower() function will ensure that the lowercase version of the strings are being compared, removing the issues of the byte comparisons. But this code seems a little longer than it could be. Normally, you wouldn't create a function for task you do only once if it was just as readable within the code body. But the sort function needs a comparator function. So how can you give sort a comparator function without having to actually declare a function? The answer is lambda functions.&lt;/p&gt;
+&lt;h1&gt;Lambda Functions&lt;/h1&gt;
 
-&lt;h2&gt; Lambda Functions &lt;/h2&gt;
+&lt;p&gt;Lambda functions are anonymous functions. What does that mean? They're functions
+without a declared name. Let's look at an example so you can see what I mean. In
+the above example, we can sort alphabetically without defining the &lt;code&gt;alphacmp&lt;/code&gt;
+function like so:&lt;/p&gt;
 
-
-&lt;p&gt;Lambda functions are anonymous functions. What does that mean? They're functions without a declared name. Let's look at an example so you can see what I mean. In the above example, we can sort alphabetically without defining the alphacmp function like so:&lt;/p&gt;
-
-&lt;pre lang='python'&gt;
-a = [&quot;pear&quot;,&quot;Police&quot;,&quot;apple&quot;,&quot;Airplane&quot;,&quot;banana&quot;,&quot;Bear&quot;]
+&lt;pre&gt;&lt;code&gt;a = [&quot;pear&quot;,&quot;Police&quot;,&quot;apple&quot;,&quot;Airplane&quot;,&quot;banana&quot;,&quot;Bear&quot;]
 a.sort(lambda x,y: cmp(x.lower(),y.lower()))
 print a
 # OUT: ['Airplane', 'apple', 'banana', 'Bear', 'pear', 'Police'] 
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-
-&lt;p&gt;So what does lambda x,y: cmp(x.lower(),y.lower()) mean? &quot;lambda&quot; says that the statements following define an anonymous function. &quot;x,y:&quot; defines the parameter list accepted by the anonymous function. &quot;cmp(x.lower(),y.lower())&quot; defines the return value for the lambda function. If you're still a little bit confused, read on for many many more examples. At some point, it will likely click and you'll see how valuable lambda really is.&lt;/p&gt;
+&lt;p&gt;So what does lambda x,y: cmp(x.lower(),y.lower()) mean? &quot;lambda&quot; says that the
+statements following define an anonymous function. &quot;x,y:&quot; defines the parameter
+list accepted by the anonymous function. &quot;cmp(x.lower(),y.lower())&quot; defines the
+return value for the lambda function. If you're still a little bit confused,
+read on for many many more examples. At some point, it will likely click and
+you'll see how valuable lambda really is.&lt;/p&gt;
 
 &lt;p&gt;Another sorting example: what if I want to sort by length of the strings instead of alphabetically? Easily done with lambda.&lt;/p&gt;
 
-&lt;pre lang='python'&gt;
-a = [&quot;pencil&quot;,&quot;pen&quot;,&quot;cap&quot;,&quot;zebra&quot;,&quot;Blizzard&quot;,&quot;0xB4DC0DE&quot;,&quot;!&quot;]
+&lt;pre&gt;&lt;code&gt;a = [&quot;pencil&quot;,&quot;pen&quot;,&quot;cap&quot;,&quot;zebra&quot;,&quot;Blizzard&quot;,&quot;0xB4DC0DE&quot;,&quot;!&quot;]
 a.sort(lambda x,y: len(x) - len(y))
 print a
 # OUT: ['!', 'pen', 'cap', 'zebra', 'pencil', 'Blizzard', '0xB4DC0DE']
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The use of lambda functions makes the use of many higher level functions much nicer. I'll be outlining a few of them here.&lt;/p&gt;
 
-&lt;h2&gt; map &lt;/h2&gt;
+&lt;h1&gt;map&lt;/h1&gt;
 
+&lt;blockquote&gt;&lt;p&gt;  map(function, sequence[, sequence, ...]) -&gt; list&lt;/p&gt;
 
-&lt;blockquote&gt;
-    map(function, sequence[, sequence, ...]) -&gt; list
-    
-    Return a list of the results of applying the function to the items of
-    the argument sequence(s).  If more than one sequence is given, the
-    function is called with an argument list consisting of the corresponding
-    item of each sequence, substituting None for missing values when not all
-    sequences have the same length.  If the function is None, return a list of
-    the items of the sequence (or a list of tuples if more than one sequence).
-&lt;/blockquote&gt;
+&lt;p&gt;  Return a list of the results of applying the function to the items of
+  the argument sequence(s).  If more than one sequence is given, the
+  function is called with an argument list consisting of the corresponding
+  item of each sequence, substituting None for missing values when not all
+  sequences have the same length.  If the function is None, return a list of
+  the items of the sequence (or a list of tuples if more than one sequence).&lt;/p&gt;&lt;/blockquote&gt;
 
-
-&lt;p&gt;More or less, what map does is apply a function on every element of an array then return an array of the corresponding return values.&lt;/p&gt;
+&lt;p&gt;More or less, what map does is apply a function on every element of an array
+then return an array of the corresponding return values.&lt;/p&gt;
 
 &lt;p&gt;A very simple use for map would be making every word in a list upper case.&lt;/p&gt;
 
-&lt;pre lang='python'&gt;
-a = [&quot;abc&quot;,&quot;cattle&quot;,&quot;not even if there's a FIRE&quot;,&quot;Jeymi!?&quot;]
+&lt;pre&gt;&lt;code&gt;a = [&quot;abc&quot;,&quot;cattle&quot;,&quot;not even if there's a FIRE&quot;,&quot;Jeymi!?&quot;]
 b = map(lambda x: x.upper(),a)
 print b
 # OUT: ['ABC', 'CATTLE', &quot;NOT EVEN IF THERE'S A FIRE&quot;, 'JEYMI!?']
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;A more useful example involves printing out grids. Say I have a matrix of
+numbers, represented as a list of lists in python. The default output formatting
+for this in python is extremely difficult to look at.&lt;/p&gt;
 
-&lt;p&gt;A more useful example involves printing out grids. Say I have a matrix of numbers, represented as a list of lists in python. The default output formatting for this in python is extremely difficult to look at.&lt;/p&gt;
-
-&lt;pre lang='python'&gt;
-a = [
+&lt;pre&gt;&lt;code&gt;a = [
     [1,212,-13],
     [41,5,614],
     [7,8,91]
 ]
 print a
 # OUT: [[1, 212, -13], [41, 5, 614], [7, 8, 91]]
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;What would be better is to output one row per line.&lt;/p&gt;
 
-&lt;pre lang='python'&gt;
-a = [
+&lt;pre&gt;&lt;code&gt;a = [
     [1,212,-13],
     [41,5,614],
     [7,8,91]
@@ -2121,15 +2216,15 @@ print &quot;\n&quot;.join(map(lambda x: str(x), a))
 # [1, 212, -13]
 # [41, 5, 614]
 # [7, 8, 91]
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;&lt;em&gt;The join function concatenates a list of string, separating the elements with
+the separator character - in this case: &quot;\n&quot;&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;The join function concatenates a list of string, separating the elements with the separator character - in this case: &quot;\n&quot;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Much better! But what would be even better would be to print out the numbers in
+columns that line up nicely too.&lt;/p&gt;
 
-&lt;p&gt;Much better! But what would be even better would be to print out the numbers in columns that line up nicely too.&lt;/p&gt;
-
-&lt;pre lang='python'&gt;
-a = [
+&lt;pre&gt;&lt;code&gt;a = [
     [1,212,-13],
     [41,5,614],
     [7,8,91]
@@ -2148,17 +2243,15 @@ print &quot;\n&quot;.join(
 #   1  212  -13
 #  41    5  614
 #   7    8   91
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;&lt;code&gt;&quot;%4d&quot; % y&lt;/code&gt; is applying the formatting string &lt;code&gt;%4d&lt;/code&gt; to &lt;code&gt;y&lt;/code&gt;, much the same way
+that &lt;code&gt;printf&lt;/code&gt; in C and php do&lt;/p&gt;
 
-&lt;/pre&gt;
+&lt;p&gt;Now, using a lambda function inside of a lambda function is less than readable,
+so I'll write out what this function does first without the maps and lambdas.&lt;/p&gt;
 
-
-&lt;p&gt;&lt;em&gt;&quot;%4d&quot; % y is applying the formatting string %4d to y, much the same way that printf in C and php do&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Now, using a lambda function inside of a lambda function is less than readable, so I'll write out what this function does first without the maps and lambdas.&lt;/p&gt;
-
-&lt;pre lang='python'&gt;
-a = [
+&lt;pre&gt;&lt;code&gt;a = [
     [1,212,-13],
     [41,5,614],
     [7,8,91]
@@ -2179,51 +2272,44 @@ print &quot;\n&quot;.join(formatted_rows)
 #   1  212  -13
 #  41    5  614
 #   7    8   91
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;In this case, &lt;code&gt;rowformat(row)&lt;/code&gt; plays the exact same roles as &lt;code&gt;lambda row:&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;In this case, &quot;rowformat(row)&quot; plays the exact same roles as &quot;lambda row:&quot;.&lt;/p&gt;
+&lt;h1&gt;filter&lt;/h1&gt;
 
-&lt;h2&gt; filter &lt;/h2&gt;
+&lt;blockquote&gt;&lt;p&gt;  filter(function or None, sequence) -&gt; list, tuple, or string&lt;/p&gt;
 
+&lt;p&gt;  Return those items of sequence for which function(item) is true.  If
+  function is None, return the items that are true.  If sequence is a tuple
+  or string, return the same type, else return a list.&lt;/p&gt;&lt;/blockquote&gt;
 
-&lt;blockquote&gt;
-    filter(function or None, sequence) -&gt; list, tuple, or string
-    
-    Return those items of sequence for which function(item) is true.  If
-    function is None, return the items that are true.  If sequence is a tuple
-    or string, return the same type, else return a list.
-&lt;/blockquote&gt;
-
-
-&lt;p&gt;The filter function does just what it's name suggests: filters out items that don't meet certain requirements. Specifically, any element which does not evaluate to true when passed to the provided function will be discarded. Note that this is &lt;em&gt;not&lt;/em&gt; in place - it returns the filtered list.&lt;/p&gt;
+&lt;p&gt;The filter function does just what it's name suggests: filters out items that
+don't meet certain requirements. Specifically, any element which does not
+evaluate to true when passed to the provided function will be discarded. Note
+that this is &lt;em&gt;not&lt;/em&gt; in place - it returns the filtered list.&lt;/p&gt;
 
 &lt;p&gt;Example: remove all odd numbers from a list of numbers&lt;/p&gt;
 
-&lt;pre lang='python'&gt;
-a = [1,2,5,0,-15,100,1400,-1337,135]
+&lt;pre&gt;&lt;code&gt;a = [1,2,5,0,-15,100,1400,-1337,135]
 a = filter(lambda x: x % 2 == 0, a)
 print a
-#OUT: [2, 0, 100, 1400]
-&lt;/pre&gt;
-
+# OUT: [2, 0, 100, 1400]
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Example: remove all vowels from a string&lt;/p&gt;
 
-&lt;pre lang='python'&gt;
-a = &quot;Hello there! My name is Jamie, not to be confused with Jeymi.&quot;
+&lt;pre&gt;&lt;code&gt;a = &quot;Hello there! My name is Jamie, not to be confused with Jeymi.&quot;
 a = &quot;&quot;.join(filter(lambda x: &quot;aeiou&quot;.find(x) == -1, list(a)))
 print a
 # OUT: Hll thr! My nm s Jm, nt t b cnfsd wth Jym.
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Example: build a list of all prime numbers between 0 and 100 inclusive&lt;/p&gt;
 
-&lt;pre lang='python'&gt;
-# NOTE: This prime test is inefficient - used for readability)
+&lt;pre&gt;&lt;code&gt;# NOTE: This prime test is inefficient - used for readability)
 def isprime(x):
-    if (x &lt; 2): 
+    if (x &amp;lt; 2):
         return False
     for i in range(2,x):
         if (x % i == 0):
@@ -2234,43 +2320,32 @@ print filter(isprime,range(101))
 # OUT (placed on multiple lines for readability)
 # [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 
 # 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;h1&gt;reduce&lt;/h1&gt;
 
+&lt;blockquote&gt;&lt;p&gt;  reduce(function, sequence[, initial]) -&gt; value&lt;/p&gt;
 
-
-&lt;h2&gt; reduce &lt;/h2&gt;
-
-
-&lt;blockquote&gt;
-    reduce(function, sequence[, initial]) -&gt; value
-    
-    Apply a function of two arguments cumulatively to the items of a sequence,
-    from left to right, so as to reduce the sequence to a single value.
-    For example, reduce(lambda x, y: x+y, [1, 2, 3, 4, 5]) calculates
-    ((((1+2)+3)+4)+5).  If initial is present, it is placed before the items
-    of the sequence in the calculation, and serves as a default when the
-    sequence is empty.
-&lt;/blockquote&gt;
-
+&lt;p&gt;  Apply a function of two arguments cumulatively to the items of a sequence,
+  from left to right, so as to reduce the sequence to a single value.
+  For example, reduce(lambda x, y: x+y, [1, 2, 3, 4, 5]) calculates
+  ((((1+2)+3)+4)+5).  If initial is present, it is placed before the items
+  of the sequence in the calculation, and serves as a default when the
+  sequence is empty.&lt;/p&gt;&lt;/blockquote&gt;
 
 &lt;p&gt;Example: Calculate 30 factorial without using local variables&lt;/p&gt;
 
-&lt;pre lang='python'&gt;
-# Note that range(2,n) -&gt; [2,3,...,n-1]
+&lt;pre&gt;&lt;code&gt;# Note that range(2,n) -&amp;gt; [2,3,...,n-1]
 print reduce(lambda x,y: x*y, range(2,31))
 # OUT: 265252859812191058636308480000000
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Example: Find the longest word in a list of words&lt;/p&gt;
 
-&lt;pre lang='python'&gt;
-a = [&quot;pencil&quot;,&quot;pen&quot;,&quot;cap&quot;,&quot;zebra&quot;,&quot;Blizzard&quot;,&quot;0xB4DC0DE&quot;,&quot;!&quot;]
-print reduce(lambda x,y: y if len(y) &gt; len(x) else x, a)
+&lt;pre&gt;&lt;code&gt;a = [&quot;pencil&quot;,&quot;pen&quot;,&quot;cap&quot;,&quot;zebra&quot;,&quot;Blizzard&quot;,&quot;0xB4DC0DE&quot;,&quot;!&quot;]
+print reduce(lambda x,y: y if len(y) &amp;gt; len(x) else x, a)
 # OUT: 0xB4DC0DE 
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;And that's all for now. If you're in SE 2014 reading this and don't think you need to know how to use lambda functions - have fun with scheme.&lt;/p&gt;
 </content>
@@ -2283,23 +2358,30 @@ print reduce(lambda x,y: y if len(y) &gt; len(x) else x, a)
    <id>http://jamie-wong.com/2009/12/01/game-of-life</id>
    <content type="html">&lt;p&gt;For my latest project, I'm implementing Conway's Game of Life in python into animated GIFs.&lt;/p&gt;
 
-&lt;p&gt;Before I even explain what Conway's Game of Life is, be amused by the below, generated animation:
-&lt;img src=&quot;/images/queenbee.gif&quot; alt=&quot;Queenbee&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Before I even explain what Conway's Game of Life is, be amused by the below, generated animation:&lt;/p&gt;
+
+&lt;div style='text-align: center'&gt;
+  &lt;img src=&quot;/images/queenbee.gif&quot; alt=&quot;Queenbee&quot;&gt;
+&lt;/div&gt;
+
 
 &lt;p&gt;As always, the code I'm using here is open source: &lt;a href=&quot;http://www.github.com/phleet/GameOfLife/&quot;&gt;Game Of Life @ Github&lt;/a&gt;.
 In addition to the source code, there's also a few animation demos such as the one above.&lt;/p&gt;
 
-&lt;p&gt;Conway's Game of Life is a cellular automaton following very simple rules, as outlined in the Wikipedia article.It is a zero player game played on a 2 dimensional grid of squares, each holding either a state of dead or alive. The state of any cell is dependent on the state of the 8 cells neighbouring it in the previous generation. There are only 4 rules.&lt;/p&gt;
+&lt;p&gt;Conway's Game of Life is a cellular automaton following very simple rules, as outlined in the Wikipedia article. It is a zero player game played on a 2 dimensional grid of squares, each holding either a state of dead or alive. The state of any cell is dependent on the state of the 8 cells neighbouring it in the previous generation. There are only 4 rules.&lt;/p&gt;
 
 &lt;p&gt;From the Wikipedia article &lt;a href=&quot;http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life&quot;&gt;Conway's Game of Life&lt;/a&gt;:&lt;/p&gt;
 
-&lt;blockquote&gt;
-   1. Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
-   2. Any live cell with more than three live neighbours dies, as if by overcrowding.
-   3. Any live cell with two or three live neighbours lives on to the next generation.
-   4. Any dead cell with exactly three live neighbours becomes a live cell.
+&lt;blockquote&gt;&lt;ol&gt;
+&lt;li&gt;Any live cell with fewer than two live neighbours dies, as if caused by
+underpopulation.&lt;/li&gt;
+&lt;li&gt;Any live cell with more than three live neighbours dies, as if by
+overcrowding.&lt;/li&gt;
+&lt;li&gt;Any live cell with two or three live neighbours lives on to the next
+generation.&lt;/li&gt;
+&lt;li&gt;Any dead cell with exactly three live neighbours becomes a live cell.&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/blockquote&gt;
-
 
 &lt;p&gt;The colours you see in the above animation represent the alive status of each cell and also how many neighbours that cell has if it's alive.&lt;/p&gt;
 
@@ -2314,16 +2396,34 @@ The tutorial included there was enough for me to create this application.&lt;/p&
 
 &lt;p&gt;You can see and download gifsicle here: &lt;a href=&quot;http://www.lcdf.org/gifsicle/&quot;&gt;Official Gifsicle Page&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Why did I use gifsicle instead of the much more universal convert in ImageMagick? Simply put: gifsicle is faster. If someone would like to do a benchmark to (dis)prove this, I'd be happy to post the results, but from simple experimentation, it seemed obvious to me that gifsicle took less time to make the animation.&lt;/p&gt;
+&lt;p&gt;Why did I use gifsicle instead of the much more universal convert in
+ImageMagick? Simply put: gifsicle is faster. If someone would like to do a
+benchmark to (dis)prove this, I'd be happy to post the results, but from simple
+experimentation, it seemed obvious to me that gifsicle took less time to make
+the animation.&lt;/p&gt;
 
-&lt;p&gt;&lt;b&gt;What's Next?&lt;/b&gt;
-Now that I have a working command line utility, my next goal is to make an AJAX powered web interface for the thing. This might explain why I have ProcMonitor in the github for Game of Life. The web interface was another key motivator behind using gifs for the output medium. People may want to use these things for avatar, and they're simply easier to share and move around than a java applet, or a flash swf, or some database stored simulation. It also helps that gifs are designed for palette based images, which works out nicely for optimizing the file size of these animations. The first 1000 generations of acorn is 2.5 MB as it is.&lt;/p&gt;
+&lt;h1&gt;What's Next?&lt;/h1&gt;
 
-&lt;p&gt;Another thing I want to do is make lifeImage.py read the .cells format from the &lt;a href=&quot;http://www.bitstorm.org/gameoflife/lexicon/&quot;&gt;Life Lexicon&lt;/a&gt;. This would save me a lot of time having to code all the states myself. This will be a very straightforward process, as the .cells files are simply plaintext with 2 lines of header.&lt;/p&gt;
+&lt;p&gt;Now that I have a working command line utility, my next goal is to make an AJAX
+powered web interface for the thing. This might explain why I have &lt;code&gt;ProcMonitor&lt;/code&gt;
+in the github for Game of Life. The web interface was another key motivator
+behind using gifs for the output medium. People may want to use these things for
+avatar, and they're simply easier to share and move around than a java applet,
+or a flash swf, or some database stored simulation. It also helps that gifs are
+designed for palette based images, which works out nicely for optimizing the
+file size of these animations. The first 1000 generations of acorn is 2.5 MB as
+it is.&lt;/p&gt;
+
+&lt;p&gt;Another thing I want to do is make &lt;code&gt;lifeImage.py&lt;/code&gt; read the &lt;code&gt;.cells&lt;/code&gt; format from
+the &lt;a href=&quot;http://www.bitstorm.org/gameoflife/lexicon/&quot;&gt;Life Lexicon&lt;/a&gt;. This
+would save me a lot of time having to code all the states myself. This will be a
+very straightforward process, as the &lt;code&gt;.cells&lt;/code&gt; files are simply plaintext with 2
+lines of header.&lt;/p&gt;
 
 &lt;p&gt;Suggestions/bug fixes for my implementation of Game of Life are welcomed.&lt;/p&gt;
 
-&lt;p&gt;I'm almost 100% sure that some combination of the command line flags of lifeImage.py don't work nicely together, and would like to know what they are.&lt;/p&gt;
+&lt;p&gt;I'm almost 100% sure that some combination of the command line flags of
+&lt;code&gt;lifeImage.py&lt;/code&gt; don't work nicely together, and would like to know what they are.&lt;/p&gt;
 </content>
  </entry>
  
@@ -2411,29 +2511,28 @@ The idea behind every solution here (with some variation) is to generate all the
 
 &lt;p&gt;&lt;strong&gt;C++&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang='cpp'&gt;
-/// PRIME1 - C++ (g++)
+&lt;pre&gt;&lt;code&gt;/// PRIME1 - C++ (g++)
 // AC Time: 2.52s
 // NOTE: I am aware that the use of vector and set actually
 //  makes this code run _slower_
 // I used vector and set simply as a way of practicing STL
-#include &lt;iostream&gt;
-#include &lt;cmath&gt;
-#include &lt;vector&gt;
-#include &lt;set&gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;cmath&amp;gt;
+#include &amp;lt;vector&amp;gt;
+#include &amp;lt;set&amp;gt;
 using namespace std;
 
 int main() {
-    vector&lt;int&gt; primes;
+    vector&amp;lt;int&amp;gt; primes;
     primes.push_back(2);
 
-    for (int i = 3; i &lt;= 32000; i+=2) {
+    for (int i = 3; i &amp;lt;= 32000; i+=2) {
         bool isprime = true;
         int cap = sqrt(i) + 1;
 
-        vector&lt;int&gt;::iterator p;
+        vector&amp;lt;int&amp;gt;::iterator p;
         for (p = primes.begin(); p != primes.end(); p++) {
-            if (*p &gt;= cap) break;
+            if (*p &amp;gt;= cap) break;
             if (i % *p == 0) {
                 isprime = false;
                 break;
@@ -2444,69 +2543,63 @@ int main() {
 
     int T,N,M;
 
-    cin &gt;&gt; T;
+    cin &amp;gt;&amp;gt; T;
 
-    for (int t = 0; t &lt; T; t++) {
-        if (t) cout &lt;&lt; endl;
+    for (int t = 0; t &amp;lt; T; t++) {
+        if (t) cout &amp;lt;&amp;lt; endl;
 
-        cin &gt;&gt; M &gt;&gt; N;
-        if (M &lt; 2) M = 2;
+        cin &amp;gt;&amp;gt; M &amp;gt;&amp;gt; N;
+        if (M &amp;lt; 2) M = 2;
 
         int cap = sqrt(N) + 1;
-        
-        set&lt;int&gt; notprime;
+
+        set&amp;lt;int&amp;gt; notprime;
         notprime.clear();
-    
-        vector&lt;int&gt;::iterator p;
+
+        vector&amp;lt;int&amp;gt;::iterator p;
         for (p = primes.begin(); p != primes.end(); p++) {
 
-            if (*p &gt;= cap) break;
+            if (*p &amp;gt;= cap) break;
             int start;
 
-            if (*p &gt;= M) start = (*p)*2;
+            if (*p &amp;gt;= M) start = (*p)*2;
             else start = M + ((*p - M % *p) % *p);
-            
-            for (int j = start; j &lt;= N; j += *p) {
+
+            for (int j = start; j &amp;lt;= N; j += *p) {
                 notprime.insert(j);
             }
         }
 
-        for (int i = M; i &lt;= N; i++) {
+        for (int i = M; i &amp;lt;= N; i++) {
             if (notprime.count(i) == 0) {
-                cout &lt;&lt; i &lt;&lt; endl;
+                cout &amp;lt;&amp;lt; i &amp;lt;&amp;lt; endl;
             }
         }
 
     }
     return 0;
 }
-
-&lt;/pre&gt;
-
-
-&lt;!--more Read More: View my solutions in C99, php, python, bash, perl, ruby, C#, pascal and Java--&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;C99&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang='c'&gt;
-// PRIME1 - C99 (gcc)
+&lt;pre&gt;&lt;code&gt;// PRIME1 - C99 (gcc)
 // AC Time: 0.07s
-#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-#include &lt;stdbool.h&gt;
-#include &lt;math.h&gt;
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;stdbool.h&amp;gt;
+#include &amp;lt;math.h&amp;gt;
 
 int main() {
     int primes[4000];
     int numprimes = 0;
 
     primes[numprimes++] = 2;
-    for (int i = 3; i &lt;= 32000; i+=2) {
+    for (int i = 3; i &amp;lt;= 32000; i+=2) {
         bool isprime = true;
         int cap = sqrt(i)+1;
-        for (int j = 0; j &lt; numprimes; j++) {
-            if (primes[j] &gt;= cap) break;
+        for (int j = 0; j &amp;lt; numprimes; j++) {
+            if (primes[j] &amp;gt;= cap) break;
             if (i % primes[j] == 0) {
                 isprime = false;
                 break;
@@ -2514,65 +2607,63 @@ int main() {
         }
         if (isprime) primes[numprimes++] = i;
     }
-    
-    int T,N,M;
-    scanf(&quot;%d&quot;,&amp;T);
 
-    for (int t = 0; t &lt; T; t++) {
+    int T,N,M;
+    scanf(&quot;%d&quot;,&amp;amp;T);
+
+    for (int t = 0; t &amp;lt; T; t++) {
         if (t) printf(&quot;\n&quot;);
-        scanf(&quot;%d %d&quot;,&amp;M,&amp;N);
-        if (M &lt; 2) M = 2;
+        scanf(&quot;%d %d&quot;,&amp;amp;M,&amp;amp;N);
+        if (M &amp;lt; 2) M = 2;
 
         int cap = sqrt(N) + 1;
 
         bool isprime[100001];
-        memset(isprime,true,sizeof(isprime));    
+        memset(isprime,true,sizeof(isprime));
 
-        for (int i = 0; i &lt; numprimes; i++) {
+        for (int i = 0; i &amp;lt; numprimes; i++) {
             int p = primes[i];
 
-            if(p &gt;= cap) break;
+            if(p &amp;gt;= cap) break;
 
             int start;
 
-            if (p &gt;= M) start = p*2;
+            if (p &amp;gt;= M) start = p*2;
             else start = M + ((p - M % p) % p);
-            
-            for (int j = start; j &lt;= N; j += p) {
+
+            for (int j = start; j &amp;lt;= N; j += p) {
                 isprime[j - M] = false;
             }
         }
 
-        int start = (M % 2)?M:M+1;    
-        
+        int start = (M % 2)?M:M+1;
+
         if (M == 2) {
             printf(&quot;2\n&quot;);
         }
-        for (int i = start; i &lt;= N; i+=2) {
+        for (int i = start; i &amp;lt;= N; i+=2) {
             if (isprime[i-M]) printf(&quot;%d\n&quot;,i);
         }
     }
     return 0;
 }
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;PHP&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang='php'&gt;
-&lt;?
+&lt;pre&gt;&lt;code&gt;&amp;lt;?
 // PRIME1 - PHP
 // AC Time: 5.73
 
 $primes = array(2);
 $numprimes = 1;
 
-for ($i = 3; $i &lt;= 32000; $i+=2) {
+for ($i = 3; $i &amp;lt;= 32000; $i+=2) {
     $isprime = true;
     $cap = sqrt($i)+1;
 
-    for ($j = 0; $j &lt; $numprimes; ++$j) {
-        if ($j &gt;= $cap) break;
+    for ($j = 0; $j &amp;lt; $numprimes; ++$j) {
+        if ($j &amp;gt;= $cap) break;
         if (!($i % $primes[$j])) {
             $isprime = false;
             break;
@@ -2585,36 +2676,36 @@ fscanf(STDIN,&quot;%d&quot;,$T);
 
 $output = &quot;&quot;;
 
-for ($t = 0; $t &lt; $T; $t++) {
+for ($t = 0; $t &amp;lt; $T; $t++) {
     if ($t) $output .= &quot;\n&quot;;
 
     fscanf(STDIN,&quot;%d %d&quot;,$M,$N);
-    if ($M &lt; 2) $M = 2;
+    if ($M &amp;lt; 2) $M = 2;
 
     $isprime = array();
 
     $cap = sqrt($N)+1;
 
     $i = 0;
-    while($i &lt; $numprimes) {
+    while($i &amp;lt; $numprimes) {
         $p = $primes[$i];
 
-        if ($p &gt;= $cap) break;
+        if ($p &amp;gt;= $cap) break;
 
-        if ($p &gt;= $M) {
+        if ($p &amp;gt;= $M) {
             $start = $p*2;
         } else {
             $start = $M + (($p - $M % $p) % $p);
         }
 
-        for ($j = $start; $j &lt;= $N; $j += $p) {
+        for ($j = $start; $j &amp;lt;= $N; $j += $p) {
             $isprime[$j - $M] = false;
         }
 
         ++$i;
     }
 
-    for ($i = $M; $i &lt;= $N; ++$i) {
+    for ($i = $M; $i &amp;lt;= $N; ++$i) {
         if (!isset($isprime[$i-$M])) {
             $output .= &quot;$i\n&quot;;
         }
@@ -2622,25 +2713,23 @@ for ($t = 0; $t &lt; $T; $t++) {
 }
 
 echo $output;
-?&gt;
-&lt;/pre&gt;
-
+?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;Python&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang='python'&gt;
-# PRIME1 - Python
+&lt;pre&gt;&lt;code&gt;# PRIME1 - Python
 # AC Time: 3.10s
 from math import sqrt
 primes = [2]
 
 for i in range(3,32000,2):
     isprime = True
-    
+
     cap = sqrt(i)+1
 
     for j in primes:
-        if (j &gt;= cap):
+        if (j &amp;gt;= cap):
             break
         if (i % j == 0):
             isprime = False
@@ -2652,7 +2741,7 @@ T = input()
 output = &quot;&quot;
 for t in range(T):
 
-    if (t &gt; 0):
+    if (t &amp;gt; 0):
         output += &quot;\n&quot;
 
     M,N = raw_input().split(' ')
@@ -2660,16 +2749,16 @@ for t in range(T):
     N = int(N)
     cap = sqrt(N)+1
 
-    if (M &lt; 2):
+    if (M &amp;lt; 2):
         M = 2
 
     isprime = [True]*100001
 
     for i in primes:
-        if (i &gt;= cap):
+        if (i &amp;gt;= cap):
             break
 
-        if (i &gt;= M):
+        if (i &amp;gt;= M):
             start = i*2
         else:
             start = M + ((i - M % i)%i)
@@ -2688,19 +2777,17 @@ for t in range(T):
             output += str(i) + &quot;\n&quot;
 
 print output[:-1]
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;Bash&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang='bash'&gt;
-# PRIME1 Incomplete - BASH
+&lt;pre&gt;&lt;code&gt;# PRIME1 Incomplete - BASH
 # This is not a complete solution
-# The speed of bash parsing makes getting an 
+# The speed of bash parsing makes getting an
 #  AC submission infeasible
 
 # The following code is a working prime generator
-# Giving enough time, it will output all prime 
+# Giving enough time, it will output all prime
 #  numbers from 0 to 32000
 # ..which is the first step in the solution to PRIME1
 
@@ -2710,7 +2797,7 @@ for i in {3..32000}; do
     let ISPRIME=1
 
     #for j in {0..$NUMPRIMES}; do
-    for (( j = 0;j&lt;$NUMPRIMES;j++ )); do
+    for (( j = 0;j&amp;lt;$NUMPRIMES;j++ )); do
         let CURPRIME=${PRIMES[$j]}
         if [[ $CURPRIME*$CURPRIME -gt $i ]]; then
             break
@@ -2722,22 +2809,21 @@ for i in {3..32000}; do
             break
         fi
     done
-    
+
     if [ $ISPRIME -eq 1 ]; then
         echo $i
         let PRIMES[NUMPRIMES]=$i
         let NUMPRIMES=NUMPRIMES+1
     fi
 done
-&lt;/pre&gt;
-
+&amp;lt;/pre&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;Ruby&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang='ruby'&gt;
-# PRIME1 - Ruby
+&lt;pre&gt;&lt;code&gt;# PRIME1 - Ruby
 # AC Time: 4.65s
-# 
+#
 # While I would have liked to use more
 # Ruby idioms such as for p in primes
 # or primes.each do |p| (used once),
@@ -2752,7 +2838,7 @@ primes = [2]
     cap = Math.sqrt(i) + 1
 
     primes.each do |p|
-        if (p &gt;= cap)
+        if (p &amp;gt;= cap)
             break
         end
 
@@ -2763,7 +2849,7 @@ primes = [2]
     end
 
     if isprime
-        primes &lt;&lt; i
+        primes &amp;lt;&amp;lt; i
     end
 end
 numprimes = primes.length
@@ -2773,41 +2859,41 @@ T = gets.to_i
 
 output = &quot;&quot;
 t = 0
-while t &lt; T
-    print &quot;\n&quot; if t &gt; 0
+while t &amp;lt; T
+    print &quot;\n&quot; if t &amp;gt; 0
     line = gets.split(&quot; &quot;)
     m = line[0].to_i
     n = line[1].to_i
-    
-    m = 2 if m &lt; 2
+
+    m = 2 if m &amp;lt; 2
 
     cap = Math.sqrt(n) + 1
 
     notprime = {}
 
     i = 0
-    while i &lt; numprimes
+    while i &amp;lt; numprimes
         p = primes[i]
         i+=1
-        if (p &gt;= cap)
+        if (p &amp;gt;= cap)
             break
         end
-        
-        if (p &gt;= m)
+
+        if (p &amp;gt;= m)
             start = p*2
         else 
             start = m + ((p - m % p)%p)
         end
 
         j = start
-        while j &lt;= n
+        while j &amp;lt;= n
             notprime[j] = true
             j += p
         end
     end
 
     i = m
-    while (i &lt;= n)
+    while (i &amp;lt;= n)
         if (notprime[i] == nil)
             print i,&quot;\n&quot;
         end
@@ -2815,13 +2901,11 @@ while t &lt; T
     end
     t += 1
 end
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;Java&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang='java'&gt;
-// PRIME1 - Java
+&lt;pre&gt;&lt;code&gt;// PRIME1 - Java
 // AC Time: 2.20
 
 import java.io.*;
@@ -2836,12 +2920,12 @@ public class Main {
         int numprimes = 0;
 
         primes[numprimes++] = 2;
-        for (int i = 3; i &lt;= 32000; i+=2) {
+        for (int i = 3; i &amp;lt;= 32000; i+=2) {
             boolean isprime = true;
             double cap = Math.sqrt(i) + 1.0;
 
-            for (int j = 0; j &lt; numprimes; j++) {
-                if (j &gt;= cap) break;
+            for (int j = 0; j &amp;lt; numprimes; j++) {
+                if (j &amp;gt;= cap) break;
                 if (i % primes[j] == 0) {
                     isprime = false;
                     break;
@@ -2855,52 +2939,50 @@ public class Main {
 
         T = in.nextInt();
 
-        for (int t = 0; t &lt; T; t++) {
-            if (t &gt; 0) System.out.println(&quot;&quot;);
-                
+        for (int t = 0; t &amp;lt; T; t++) {
+            if (t &amp;gt; 0) System.out.println(&quot;&quot;);
+
             M = in.nextInt();
             N = in.nextInt();
 
-            if (M &lt; 2) M = 2;
+            if (M &amp;lt; 2) M = 2;
 
             boolean[] isprime = new boolean[100001];
-            for (int j = 0; j &lt; 100001; j++) {
+            for (int j = 0; j &amp;lt; 100001; j++) {
                 isprime[j] = true;
             }
 
-            for (int i = 0; i &lt; numprimes; i++) {
+            for (int i = 0; i &amp;lt; numprimes; i++) {
                 int p = primes[i];
                 int start;
 
-                if (p &gt;= M) start = p*2;
+                if (p &amp;gt;= M) start = p*2;
                 else start = M + ((p - M % p)%p);
 
-                for (int j = start; j &lt;= N; j += p) {
+                for (int j = start; j &amp;lt;= N; j += p) {
                     isprime[j - M] = false;
                 }
             }
 
-            for (int i = M; i &lt;= N; i++) {
+            for (int i = M; i &amp;lt;= N; i++) {
                 if (isprime[i-M]) System.out.println(i);
             }
         }
     }
 }
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;Perl&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang='perl'&gt;
-# PRIME1 - Perl
+&lt;pre&gt;&lt;code&gt;# PRIME1 - Perl
 # AC Time: 4.28s
 @primes = (2);
 
-for ($i = 3; $i &lt;= 32000; $i+=2) {
+for ($i = 3; $i &amp;lt;= 32000; $i+=2) {
     $isprime = 1;
     $cap = sqrt($i) + 1;
     foreach $p (@primes) {
-        if ($p &gt;= $cap) { 
+        if ($p &amp;gt;= $cap) { 
             last;
         }
         if ($i % $p == 0) {
@@ -2914,55 +2996,53 @@ for ($i = 3; $i &lt;= 32000; $i+=2) {
 }
 
 
-$T = &lt;STDIN&gt;;
+$T = &amp;lt;STDIN&amp;gt;;
 
-for ($t = 0; $t &lt; $T; $t++) {
-    if ($t &gt; 0) {
+for ($t = 0; $t &amp;lt; $T; $t++) {
+    if ($t &amp;gt; 0) {
         print &quot;&quot;;
     }
 
-    $in = &lt;STDIN&gt;;
+    $in = &amp;lt;STDIN&amp;gt;;
     @line = split(/ /,$in);
     $M = $line[0];
     $N = $line[1];
 
-    if ($M &lt; 2) {
+    if ($M &amp;lt; 2) {
         $M = 2;
     }
 
     $cap = sqrt($N) + 1;
 
     @isprime = ((1) x 100001);
-    
+
     foreach $p (@primes) {
-        if ($p &gt;= $cap) {
+        if ($p &amp;gt;= $cap) {
             last;
         }
 
-        if ($p &gt;= $M) {
+        if ($p &amp;gt;= $M) {
             $start = $p*2;
         } else {
             $start = $M + (($p - $M % $p) % $p);
         }
 
-        for ($j = $start; $j &lt;= $N; $j += $p) {
+        for ($j = $start; $j &amp;lt;= $N; $j += $p) {
             $isprime[$j-$M] = 0;
         }
     }
 
-    for ($i = $M; $i &lt;= $N; $i++) {
+    for ($i = $M; $i &amp;lt;= $N; $i++) {
         if ($isprime[$i-$M] == 1) {
             print &quot;$i\n&quot;;
         }
     }
 }
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;C#&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang='csharp'&gt;
-// PRIME1 - C# (gmcs)
+&lt;pre&gt;&lt;code&gt;// PRIME1 - C# (gmcs)
 // AC Time: 1.50s
 
 using System;
@@ -2973,11 +3053,11 @@ class PRIME1 {
         int numprimes = 0;
 
         primes[numprimes++] = 2;
-        for (int i = 3; i &lt;= 32000; i+=2) {
+        for (int i = 3; i &amp;lt;= 32000; i+=2) {
             bool isprime = true;
             double cap = Math.Sqrt(i) + 1.0;
-            for (int j = 0; j &lt; numprimes; j++) {
-                if (j &gt;= cap) break;
+            for (int j = 0; j &amp;lt; numprimes; j++) {
+                if (j &amp;gt;= cap) break;
                 if (i % primes[j] == 0) {
                     isprime = false;
                     break;
@@ -2989,47 +3069,44 @@ class PRIME1 {
         int T,N,M;
         T = int.Parse(Console.ReadLine());
 
-        for (int t = 0; t &lt; T; t++) {
-            if (t &gt; 0) Console.WriteLine(&quot;&quot;);
+        for (int t = 0; t &amp;lt; T; t++) {
+            if (t &amp;gt; 0) Console.WriteLine(&quot;&quot;);
 
             string[] parts = Console.ReadLine().Split(' ');
             M = int.Parse(parts[0]);
             N = int.Parse(parts[1]);
 
 
-            if (M &lt; 2) M = 2;
+            if (M &amp;lt; 2) M = 2;
             double cap = Math.Sqrt(N)+1;
 
             bool[] isprime = new bool[100001];
-            for (int i = 0; i &lt; 100001; i++) isprime[i] = true;
+            for (int i = 0; i &amp;lt; 100001; i++) isprime[i] = true;
 
-            for (int i = 0; i &lt; numprimes; i++) {
+            for (int i = 0; i &amp;lt; numprimes; i++) {
                 int p = primes[i];
-                if (p &gt;= cap) break;
+                if (p &amp;gt;= cap) break;
                 int start;
-                
 
-                if (p &gt;= M) start = p*2;
+                if (p &amp;gt;= M) start = p*2;
                 else start = M + ((p - M % p)%p);
 
-                for (int j = start; j &lt;= N; j+= p) {
+                for (int j = start; j &amp;lt;= N; j+= p) {
                     isprime[j - M] = false;
                 }
             }
 
-            for (int i = M; i &lt;= N; i++) {
+            for (int i = M; i &amp;lt;= N; i++) {
                 if (isprime[i-M] == true) Console.WriteLine(i);
             }
         }
     }
 }
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;GNU Pascal&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang='pascal'&gt;
-{ 
+&lt;pre&gt;&lt;code&gt;{
     PRIME1 - GNU Pascal
     AC Time: 0.54
 }
@@ -3055,9 +3132,9 @@ begin
         cap := sqrt(i) + 1;
         for j := 1 to numprimes do
         begin
-            if primes[j] &gt;= cap then 
+            if primes[j] &amp;gt;= cap then 
                     break;
-            
+
             if (i MOD primes[j] = 0) then
             begin
                 isprime := false;
@@ -3076,36 +3153,36 @@ begin
 
     for t := 1 to T do
     begin
-        if t &gt; 0 then
+        if t &amp;gt; 0 then
             writeln('');
 
         read(M);
         read(N);
 
-        if M &lt; 2 then
+        if M &amp;lt; 2 then
             M := 2;
-    
+
         cap := sqrt(N) + 1;
 
         for i := 0 to 100001 do
             isp[i] := true;
-        
+
 
         for i := 1 to numprimes do
         begin
-            p := primes[i];            
-            if p &gt;= cap then 
+            p := primes[i];
+            if p &amp;gt;= cap then
                 break;
-    
-            if p &gt;= M then
+
+            if p &amp;gt;= M then
                 start := (p * 2);
-            
-            if p &lt; M then
+
+            if p &amp;lt; M then
                 start := M + ((p - (M MOD p)) MOD p);
 
             j := start;
 
-            while j &lt;= N do
+            while j &amp;lt;= N do
             begin
                 isp[j - M] := false;
                 j := j + p;
@@ -3119,8 +3196,7 @@ begin
         end;
     end;
 end.
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 </content>
  </entry>
  
@@ -3145,171 +3221,151 @@ Your program is to use the brute-force approach in order to find the Answer to L
 
 &lt;p&gt;&lt;strong&gt;C++&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre LANG='cpp'&gt;
-//TEST AC - CPP (g++)
-#include &lt;iostream&gt;
+&lt;pre&gt;&lt;code&gt;//TEST AC - CPP (g++)
+#include &amp;lt;iostream&amp;gt;
 using namespace std;
 
 int main() {
-    int n;
-    while(1) {
-        cin &gt;&gt; n;
-        if (n == 42) break;
-        cout &lt;&lt; n &lt;&lt; endl;
-    }
-    return 0;
+  int n;
+  while(1) {
+    cin &amp;gt;&amp;gt; n;
+    if (n == 42) break;
+    cout &amp;lt;&amp;lt; n &amp;lt;&amp;lt; endl;
+  }
+  return 0;
 }
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;C99&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang='c'&gt;
-//TEST AC - (gcc C99)
-#include &lt;stdio.h&gt;
+&lt;pre&gt;&lt;code&gt;//TEST AC - (gcc C99)
+#include &amp;lt;stdio.h&amp;gt;
 int main() {
-    int n;
-    while(1) {
-        scanf(&quot;%d&quot;,&amp;n);
-        if (n == 42) break;
-        printf(&quot;%d\n&quot;,n);
-    }
-    return 0;
+  int n;
+  while(1) {
+    scanf(&quot;%d&quot;,&amp;amp;n);
+    if (n == 42) break;
+    printf(&quot;%d\n&quot;,n);
+  }
+  return 0;
 }
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;php&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang='php'&gt;
-&lt;?
+&lt;pre&gt;&lt;code&gt;&amp;lt;?
 //TEST AC - PHP
 while(1) {
-    fscanf(STDIN,&quot;%d&quot;,$n);
-    if ($n == 42) break;
-    print &quot;$n\n&quot;;
+  fscanf(STDIN,&quot;%d&quot;,$n);
+  if ($n == 42) break;
+  print &quot;$n\n&quot;;
 }
-?&gt;
-&lt;/pre&gt;
-
+?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;Python&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang='python'&gt;
-#TEST AC - Python
+&lt;pre&gt;&lt;code&gt;#TEST AC - Python
 while 1:
-    num = input()
-    if (num == 42):
-        break
-    print num
-&lt;/pre&gt;
-
+  num = input()
+  if (num == 42):
+    break
+  print num
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;Bash&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang='bash'&gt;
-#!/bin/bash
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
 # TEST AC - BASH
 
 while true; do
-    read n
-    if [ $n -eq 42 ]; then
-        break
-    fi
-    echo &quot;$n&quot;
+  read n
+  if [ $n -eq 42 ]; then
+    break
+  fi
+  echo &quot;$n&quot;
 done
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;Ruby&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang=&quot;ruby&quot;&gt;
-#TEST AC - Ruby
+&lt;pre&gt;&lt;code&gt;#TEST AC - Ruby
 while 1
-    n = gets.to_i
-    if n == 42
-        break
-    end
-    puts n
+  n = gets.to_i
+  if n == 42
+    break
+  end
+  puts n
 end
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;Java&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang='java'&gt;
-//TEST AC - Java
+&lt;pre&gt;&lt;code&gt;//TEST AC - Java
 import java.io.*;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+  public static void main(String[] args) {
+    Scanner in = new Scanner(System.in);
 
-        while(true) {
-            int n = in.nextInt();
-            if (n == 42) break;
-            System.out.println(n);
-        }
+    while(true) {
+      int n = in.nextInt();
+      if (n == 42) break;
+      System.out.println(n);
     }
+  }
 }
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;Perl&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang='perl'&gt;
-#TEST AC - Perl
+&lt;pre&gt;&lt;code&gt;#TEST AC - Perl
 while (1)
 {
-    $n = &lt;STDIN&gt;;
-    if ($n == 42) {
-        last;
-    }
-    print $n
+  $n = &amp;lt;STDIN&amp;gt;;
+  if ($n == 42) {
+    last;
+  }
+  print $n
 }
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;C#&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang='csharp'&gt;
-//TEST AC - C# (gmcs + Mono)
+&lt;pre&gt;&lt;code&gt;//TEST AC - C# (gmcs + Mono)
 using System;
 class WelcomeCSS {
-    static void Main() {
-        while(true) {
-            int n;
-            n = int.Parse(Console.ReadLine());
-            if (n == 42) break;
-            Console.WriteLine(n);
-        }
+  static void Main() {
+    while(true) {
+      int n;
+      n = int.Parse(Console.ReadLine());
+      if (n == 42) break;
+      Console.WriteLine(n);
     }
+  }
 }
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;strong&gt;GNU Pascal&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre lang='pascal'&gt;
-{TEST AC - GPC Pascal}
+&lt;pre&gt;&lt;code&gt;{TEST AC - GPC Pascal}
 
 program TEST;
 
 var n:integer;
 
 begin
-    while true do
-        begin
-            readln(n);
-            if n = 42 then begin
-                break;
-            end;
-            writeln(n);
-        end;
+  while true do
+    begin
+      readln(n);
+      if n = 42 then begin
+        break;
+      end;
+      writeln(n);
+    end;
 end.
-&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;You can see Thor's Project Euler solutions here: &lt;a href=&quot;http://www.thurn.ca/category/project-euler/&quot;&gt;Derek Thurn's Website - Project Euler&lt;/a&gt;&lt;/p&gt;
 </content>

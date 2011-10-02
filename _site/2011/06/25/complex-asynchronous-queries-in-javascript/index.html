@@ -4,12 +4,16 @@
     <title>Complex Asynchronous Queries in JavaScript - Zero Wind :: Jamie Wong</title>
     
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
     <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
+    <link rel="stylesheet" media="screen" href="/stylesheets/prettify.css" type="text/css" />
+    <script type="text/javascript" src="/javascript/prettify.js"></script>
+
     
     
   </head>
 
-  <body class="bp">
+  <body class="bp" onload="prettyPrint()">
     <div class="page-container">
       <div class="page-sidebar">
 
@@ -51,7 +55,7 @@
 
 
 <div class="post">
-<p>Over the past couple of weeks, I finally got around to working on personal projects at an events I decided to create with the help of my housemates which we call <a href="http://www.sehackday.com/">SEHackDay</a>. The first and only project I worked on over the 3 nights was <a href="http://myfriendkarma.heroku.com/">Karma</a>, a Facebook App which gives you statistics about your posts and how they stack up against your friends.</p>
+<p>Over the past couple of weeks, I finally got around to working on personal projects at an event I decided to create with the help of my housemates which we call <a href="http://www.sehackday.com/">SEHackDay</a>. The first and only project I worked on over the 3 nights was <a href="http://myfriendkarma.heroku.com/">Karma</a>, a Facebook App which gives you statistics about your posts and how they stack up against your friends.</p>
 
 <p>While it has not been remotely as successful as <a href="http://the.wubmachine.com/">The Wub Machine</a> by one of my housemates, <a href="http://www.petersobot.com/">Peter Sobot</a>, it did make me think about how to make complex asynchronous queries in JavaScript.</p>
 
@@ -61,7 +65,7 @@
 
 <p><em>If you already understand AJAX, skip to the complex queries below</em>.</p>
 
-<p>JavaScript is, by nature, an asynchronous language. A few of the language's built-in constructs use callbacks, including <code>setTimeout</code> and <code>registerEventListener</code>. The basic principle of a callback is this:</p>
+<p>JavaScript is, by nature, an asynchronous language. A few of the language's built-in constructs use callbacks, including <code>setTimeout</code> and <code>addEventListener</code>. The basic principle of a callback is this:</p>
 
 <p><strong>When something happens, do this, but keep doing other things while you're waiting.</strong></p>
 

@@ -4,12 +4,16 @@
     <title>Game of Life - Zero Wind :: Jamie Wong</title>
     
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
     <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
+    <link rel="stylesheet" media="screen" href="/stylesheets/prettify.css" type="text/css" />
+    <script type="text/javascript" src="/javascript/prettify.js"></script>
+
     
     
   </head>
 
-  <body class="bp">
+  <body class="bp" onload="prettyPrint()">
     <div class="page-container">
       <div class="page-sidebar">
 
@@ -53,23 +57,30 @@
 <div class="post">
 <p>For my latest project, I'm implementing Conway's Game of Life in python into animated GIFs.</p>
 
-<p>Before I even explain what Conway's Game of Life is, be amused by the below, generated animation:
-<img src="/images/queenbee.gif" alt="Queenbee"></p>
+<p>Before I even explain what Conway's Game of Life is, be amused by the below, generated animation:</p>
+
+<div style='text-align: center'>
+  <img src="/images/queenbee.gif" alt="Queenbee">
+</div>
+
 
 <p>As always, the code I'm using here is open source: <a href="http://www.github.com/phleet/GameOfLife/">Game Of Life @ Github</a>.
 In addition to the source code, there's also a few animation demos such as the one above.</p>
 
-<p>Conway's Game of Life is a cellular automaton following very simple rules, as outlined in the Wikipedia article.It is a zero player game played on a 2 dimensional grid of squares, each holding either a state of dead or alive. The state of any cell is dependent on the state of the 8 cells neighbouring it in the previous generation. There are only 4 rules.</p>
+<p>Conway's Game of Life is a cellular automaton following very simple rules, as outlined in the Wikipedia article. It is a zero player game played on a 2 dimensional grid of squares, each holding either a state of dead or alive. The state of any cell is dependent on the state of the 8 cells neighbouring it in the previous generation. There are only 4 rules.</p>
 
 <p>From the Wikipedia article <a href="http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway's Game of Life</a>:</p>
 
-<blockquote>
-   1. Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
-   2. Any live cell with more than three live neighbours dies, as if by overcrowding.
-   3. Any live cell with two or three live neighbours lives on to the next generation.
-   4. Any dead cell with exactly three live neighbours becomes a live cell.
+<blockquote><ol>
+<li>Any live cell with fewer than two live neighbours dies, as if caused by
+underpopulation.</li>
+<li>Any live cell with more than three live neighbours dies, as if by
+overcrowding.</li>
+<li>Any live cell with two or three live neighbours lives on to the next
+generation.</li>
+<li>Any dead cell with exactly three live neighbours becomes a live cell.</li>
+</ol>
 </blockquote>
-
 
 <p>The colours you see in the above animation represent the alive status of each cell and also how many neighbours that cell has if it's alive.</p>
 
@@ -84,16 +95,34 @@ The tutorial included there was enough for me to create this application.</p>
 
 <p>You can see and download gifsicle here: <a href="http://www.lcdf.org/gifsicle/">Official Gifsicle Page</a></p>
 
-<p>Why did I use gifsicle instead of the much more universal convert in ImageMagick? Simply put: gifsicle is faster. If someone would like to do a benchmark to (dis)prove this, I'd be happy to post the results, but from simple experimentation, it seemed obvious to me that gifsicle took less time to make the animation.</p>
+<p>Why did I use gifsicle instead of the much more universal convert in
+ImageMagick? Simply put: gifsicle is faster. If someone would like to do a
+benchmark to (dis)prove this, I'd be happy to post the results, but from simple
+experimentation, it seemed obvious to me that gifsicle took less time to make
+the animation.</p>
 
-<p><b>What's Next?</b>
-Now that I have a working command line utility, my next goal is to make an AJAX powered web interface for the thing. This might explain why I have ProcMonitor in the github for Game of Life. The web interface was another key motivator behind using gifs for the output medium. People may want to use these things for avatar, and they're simply easier to share and move around than a java applet, or a flash swf, or some database stored simulation. It also helps that gifs are designed for palette based images, which works out nicely for optimizing the file size of these animations. The first 1000 generations of acorn is 2.5 MB as it is.</p>
+<h1>What's Next?</h1>
 
-<p>Another thing I want to do is make lifeImage.py read the .cells format from the <a href="http://www.bitstorm.org/gameoflife/lexicon/">Life Lexicon</a>. This would save me a lot of time having to code all the states myself. This will be a very straightforward process, as the .cells files are simply plaintext with 2 lines of header.</p>
+<p>Now that I have a working command line utility, my next goal is to make an AJAX
+powered web interface for the thing. This might explain why I have <code>ProcMonitor</code>
+in the github for Game of Life. The web interface was another key motivator
+behind using gifs for the output medium. People may want to use these things for
+avatar, and they're simply easier to share and move around than a java applet,
+or a flash swf, or some database stored simulation. It also helps that gifs are
+designed for palette based images, which works out nicely for optimizing the
+file size of these animations. The first 1000 generations of acorn is 2.5 MB as
+it is.</p>
+
+<p>Another thing I want to do is make <code>lifeImage.py</code> read the <code>.cells</code> format from
+the <a href="http://www.bitstorm.org/gameoflife/lexicon/">Life Lexicon</a>. This
+would save me a lot of time having to code all the states myself. This will be a
+very straightforward process, as the <code>.cells</code> files are simply plaintext with 2
+lines of header.</p>
 
 <p>Suggestions/bug fixes for my implementation of Game of Life are welcomed.</p>
 
-<p>I'm almost 100% sure that some combination of the command line flags of lifeImage.py don't work nicely together, and would like to know what they are.</p>
+<p>I'm almost 100% sure that some combination of the command line flags of
+<code>lifeImage.py</code> don't work nicely together, and would like to know what they are.</p>
 
 </div>
 

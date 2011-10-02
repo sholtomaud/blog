@@ -1,7 +1,7 @@
 # standard jekyll configuration
 
 permalink: pretty
-pygments: true
+pygments: false
 exclude: ['Rakefile', 'README.md', 'config.rb']
 markdown: rdiscount
 

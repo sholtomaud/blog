@@ -13,11 +13,18 @@ meta:
   _edit_lock: "1285900502"
   _edit_last: "1"
 ---
-<div style='text-align: center'><img src="http://jamie-wong.com/wordpress/wp-content/uploads/2010/02/JobmineImproved.png" alt="JobmineImproved" title="JobmineImproved" width="482" height="263" class="alignnone size-full wp-image-184" /></div>
+<div style='text-align: center'>
+  <img src="/images/JobmineImproved.png" />
+</div>
 
-**EDIT** I will no longer be supporting this script, there's a much better version maintained by Matthew Ng. See Jobmine Plus: [http://userscripts.org/scripts/show/80771]()
+_I will no longer be supporting this script, there's a much better version 
+called [Jobmine Plus](http://userscripts.org/scripts/show/80771) maintained by 
+Matthew Ng._
 
-I, like many (most) Waterloo Co-op students, am forced to use Jobmine and am extremely dissatisfied with its functionality. So I decided to kill three birds with one stone: improve Jobmine, learn Greasemonkey and learn jQuery all at the same time.
+I, like many (most) Waterloo Co-op students, am forced to use Jobmine and am 
+extremely dissatisfied with its functionality. So I decided to kill three birds 
+with one stone: improve Jobmine, learn Greasemonkey and learn jQuery all at the 
+same time.
 
 The result is, unsurprisingly, a Greasemonkey script written using jQuery that improves on some features of Jobmine.
 
@@ -44,32 +51,31 @@ Greasemonkey is a tool for customizing the way a web page displays and interacts
 
 <h1>jQuery</h1>
 jQuery is a javascript framework specifically designed for doing things involving the DOM tree absurdly quickly. Example: highlighting alternating rows of a table (zebra-striping).
-<pre lang="javascript">
-// Standard Javascript method:
-var tables = document.getElementsByTagName("table");
-for (var i = 0; i < tables.length; i++) {
-    var rows = tables[i].tBodies[0].rows;
-    for (var j = 0; j < rows.length; j++) {
-        var rowColor;
-        if (j % 2 == 1) {
-            rowColor = "#eef"; 
-        } else {
-            rowColor = "#fff";
-        }
 
-        var cells = rows[j].cells;
-        for (var k = 0; k < cells.length; k++) {
-            cells[k].style.backgroundColor = rowColor;
-            cells[k].style.borderBottom = "1px solid #ccc";
+    // Standard Javascript method:
+    var tables = document.getElementsByTagName("table");
+    for (var i = 0; i < tables.length; i++) {
+        var rows = tables[i].tBodies[0].rows;
+        for (var j = 0; j < rows.length; j++) {
+            var rowColor;
+            if (j % 2 == 1) {
+                rowColor = "#eef";
+            } else {
+                rowColor = "#fff";
+            }
+
+            var cells = rows[j].cells;
+            for (var k = 0; k < cells.length; k++) {
+                cells[k].style.backgroundColor = rowColor;
+                cells[k].style.borderBottom = "1px solid #ccc";
+            }
         }
     }
-} 
 
-// jQuery way:
-$("td").css("border-bottom","1px solid #ccc");
-$("tr:even > td").css("background-color","#fff");
-$("tr:odd > td").css("background-color","#eef");
-</pre>
+    // jQuery way:
+    $("td").css("border-bottom","1px solid #ccc");
+    $("tr:even > td").css("background-color","#fff");
+    $("tr:odd > td").css("background-color","#eef");
 
 Now before someone says it, I know usually you can set the background-color for the whole row, and the cells will inherit it. But since, for some crazy reason, each cell is assigned a background colour on Jobmine, each cell needs to be set individually. In any case, you can see that things are made substantially easier with jQuery. I figured out jQuery mostly just using the API and looking at other people's code, but this is a decent place to start: <a href="http://docs.jquery.com/Tutorials:Getting_Started_with_jQuery">Getting Started with jQuery</a>.
 

@@ -14,7 +14,7 @@ meta:
   _edit_last: "1"
   _wp_old_slug: ""
 ---
-Over the past couple of weeks, I finally got around to working on personal projects at an events I decided to create with the help of my housemates which we call [SEHackDay][]. The first and only project I worked on over the 3 nights was [Karma][], a Facebook App which gives you statistics about your posts and how they stack up against your friends.
+Over the past couple of weeks, I finally got around to working on personal projects at an event I decided to create with the help of my housemates which we call [SEHackDay][]. The first and only project I worked on over the 3 nights was [Karma][], a Facebook App which gives you statistics about your posts and how they stack up against your friends.
 
 While it has not been remotely as successful as [The Wub Machine][] by one of my housemates, [Peter Sobot][], it did make me think about how to make complex asynchronous queries in JavaScript.
 
@@ -29,7 +29,7 @@ Asynchronous Callbacks
 ---------------------
 *If you already understand AJAX, skip to the complex queries below*.
 
-JavaScript is, by nature, an asynchronous language. A few of the language's built-in constructs use callbacks, including `setTimeout` and `registerEventListener`. The basic principle of a callback is this:
+JavaScript is, by nature, an asynchronous language. A few of the language's built-in constructs use callbacks, including `setTimeout` and `addEventListener`. The basic principle of a callback is this:
 
 **When something happens, do this, but keep doing other things while you're waiting.**
 
@@ -38,7 +38,7 @@ Here's a simple example:
     window.setTimeout(function() {
       console.log("Three");
     }, 1000);
-    
+
     console.log("One");
     console.log("Two");
 

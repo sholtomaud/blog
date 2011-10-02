@@ -16,7 +16,10 @@ meta:
   _edit_lock: "1274333057"
   _edit_last: "1"
 ---
-<div style='text-align:center'><img alt="" src="http://marklodato.github.com/visual-git-guide/basic-usage.svg.png" title="Git Visual Guide" class="alignnone" width="728" height="312" /></div>
+
+<div style='text-align:center'>
+  <img alt="" src="/images/git.png" />
+</div>
 
 One of the gaps among my tech skills upon entering university was source/revision control.
 
@@ -40,6 +43,9 @@ In order to learn how to use git, I can recommend two sources of information.
 
 2. <a href="http://marklodato.github.com/visual-git-guide/">Visual Git Guide</a>: Pictures are awesome, especially for those people of the tl;dr mindset. Or those attracted to colourful pictures. The picture at the top of the post is from the visual git guide. This is a fairly in depth explanation of some of the functionality of git and shows you what's actually happening behind the scenes.
 
-For those of you more interested in learning Mercurial (Hg), <a href="http://se2014.com/~zmanji/">Zameer Manji</a> has recommended the following guide: <a href="http://hginit.com/index.html">Hg Init: a Mercurial tutorial by Joel Spolsky</a>.
+For those of you more interested in learning Mercurial (Hg), <a 
+href="http://zameermanji.com/">Zameer Manji</a> has recommended the following 
+guide: <a href="http://hginit.com/index.html">Hg Init: a Mercurial tutorial by 
+Joel Spolsky</a>.
 
 I would recommend you go grab an account of GitHub to help yourself learning. If you're in need of something to fool around with, fork one of my projects: <a href="http://github.com/phleet">phleet @ github</a>.

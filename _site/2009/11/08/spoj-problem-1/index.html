@@ -4,12 +4,16 @@
     <title>SPOJ Problem 1 - Zero Wind :: Jamie Wong</title>
     
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
     <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
+    <link rel="stylesheet" media="screen" href="/stylesheets/prettify.css" type="text/css" />
+    <script type="text/javascript" src="/javascript/prettify.js"></script>
+
     
     
   </head>
 
-  <body class="bp">
+  <body class="bp" onload="prettyPrint()">
     <div class="page-container">
       <div class="page-sidebar">
 
@@ -67,171 +71,151 @@ Your program is to use the brute-force approach in order to find the Answer to L
 
 <p><strong>C++</strong></p>
 
-<pre LANG='cpp'>
-//TEST AC - CPP (g++)
-#include <iostream>
+<pre><code>//TEST AC - CPP (g++)
+#include &lt;iostream&gt;
 using namespace std;
 
 int main() {
-    int n;
-    while(1) {
-        cin >> n;
-        if (n == 42) break;
-        cout << n << endl;
-    }
-    return 0;
+  int n;
+  while(1) {
+    cin &gt;&gt; n;
+    if (n == 42) break;
+    cout &lt;&lt; n &lt;&lt; endl;
+  }
+  return 0;
 }
-</pre>
-
+</code></pre>
 
 <p><strong>C99</strong></p>
 
-<pre lang='c'>
-//TEST AC - (gcc C99)
-#include <stdio.h>
+<pre><code>//TEST AC - (gcc C99)
+#include &lt;stdio.h&gt;
 int main() {
-    int n;
-    while(1) {
-        scanf("%d",&n);
-        if (n == 42) break;
-        printf("%d\n",n);
-    }
-    return 0;
+  int n;
+  while(1) {
+    scanf("%d",&amp;n);
+    if (n == 42) break;
+    printf("%d\n",n);
+  }
+  return 0;
 }
-</pre>
-
+</code></pre>
 
 <p><strong>php</strong></p>
 
-<pre lang='php'>
-<?
+<pre><code>&lt;?
 //TEST AC - PHP
 while(1) {
-    fscanf(STDIN,"%d",$n);
-    if ($n == 42) break;
-    print "$n\n";
+  fscanf(STDIN,"%d",$n);
+  if ($n == 42) break;
+  print "$n\n";
 }
-?>
-</pre>
-
+?&gt;
+</code></pre>
 
 <p><strong>Python</strong></p>
 
-<pre lang='python'>
-#TEST AC - Python
+<pre><code>#TEST AC - Python
 while 1:
-    num = input()
-    if (num == 42):
-        break
-    print num
-</pre>
-
+  num = input()
+  if (num == 42):
+    break
+  print num
+</code></pre>
 
 <p><strong>Bash</strong></p>
 
-<pre lang='bash'>
-#!/bin/bash
+<pre><code>#!/bin/bash
 # TEST AC - BASH
 
 while true; do
-    read n
-    if [ $n -eq 42 ]; then
-        break
-    fi
-    echo "$n"
+  read n
+  if [ $n -eq 42 ]; then
+    break
+  fi
+  echo "$n"
 done
-</pre>
-
+</code></pre>
 
 <p><strong>Ruby</strong></p>
 
-<pre lang="ruby">
-#TEST AC - Ruby
+<pre><code>#TEST AC - Ruby
 while 1
-    n = gets.to_i
-    if n == 42
-        break
-    end
-    puts n
+  n = gets.to_i
+  if n == 42
+    break
+  end
+  puts n
 end
-</pre>
-
+</code></pre>
 
 <p><strong>Java</strong></p>
 
-<pre lang='java'>
-//TEST AC - Java
+<pre><code>//TEST AC - Java
 import java.io.*;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+  public static void main(String[] args) {
+    Scanner in = new Scanner(System.in);
 
-        while(true) {
-            int n = in.nextInt();
-            if (n == 42) break;
-            System.out.println(n);
-        }
+    while(true) {
+      int n = in.nextInt();
+      if (n == 42) break;
+      System.out.println(n);
     }
+  }
 }
-</pre>
-
+</code></pre>
 
 <p><strong>Perl</strong></p>
 
-<pre lang='perl'>
-#TEST AC - Perl
+<pre><code>#TEST AC - Perl
 while (1)
 {
-    $n = <STDIN>;
-    if ($n == 42) {
-        last;
-    }
-    print $n
+  $n = &lt;STDIN&gt;;
+  if ($n == 42) {
+    last;
+  }
+  print $n
 }
-</pre>
-
+</code></pre>
 
 <p><strong>C#</strong></p>
 
-<pre lang='csharp'>
-//TEST AC - C# (gmcs + Mono)
+<pre><code>//TEST AC - C# (gmcs + Mono)
 using System;
 class WelcomeCSS {
-    static void Main() {
-        while(true) {
-            int n;
-            n = int.Parse(Console.ReadLine());
-            if (n == 42) break;
-            Console.WriteLine(n);
-        }
+  static void Main() {
+    while(true) {
+      int n;
+      n = int.Parse(Console.ReadLine());
+      if (n == 42) break;
+      Console.WriteLine(n);
     }
+  }
 }
-</pre>
-
+</code></pre>
 
 <p><strong>GNU Pascal</strong></p>
 
-<pre lang='pascal'>
-{TEST AC - GPC Pascal}
+<pre><code>{TEST AC - GPC Pascal}
 
 program TEST;
 
 var n:integer;
 
 begin
-    while true do
-        begin
-            readln(n);
-            if n = 42 then begin
-                break;
-            end;
-            writeln(n);
-        end;
+  while true do
+    begin
+      readln(n);
+      if n = 42 then begin
+        break;
+      end;
+      writeln(n);
+    end;
 end.
-</pre>
-
+</code></pre>
 
 <p>You can see Thor's Project Euler solutions here: <a href="http://www.thurn.ca/category/project-euler/">Derek Thurn's Website - Project Euler</a></p>
 

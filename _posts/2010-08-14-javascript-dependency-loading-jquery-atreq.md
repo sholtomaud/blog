@@ -133,11 +133,11 @@ Inside each file is the required include statements, a loop iterating 10000 time
 
 $.atreq:
 
-![$.atreq firebug](http://phleet.github.com/images/atreq/atreqfirebug.png)
+![$.atreq firebug](/images/atreqfirebug.png)
 
 $.require:
 
-![$.require firebug](http://phleet.github.com/images/atreq/dotreqfirebug.png)
+![$.require firebug](/images/dotreqfirebug.png)
 
 Note the difference in the load order - there's no reason why 1.js and 2.js shouldn't load at the same time.
 

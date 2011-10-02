@@ -12,7 +12,9 @@ meta:
   _edit_lock: "1261898946"
   _edit_last: "1"
 ---
-<div style='text-align:center'><img src="http://jamie-wong.com/wordpress/wp-content/uploads/2009/12/cards.jpg" alt="cards" title="cards" width="427" height="466" class="alignnone size-full wp-image-115" /></div>
+<div style='text-align:center'>
+  <img src="/images/cards.jpg" width="427" height="466" />
+</div>
 
 The basis for this post is the following question: <strong>what is the fastest algorithm for sorting a deck of cards by hand?</strong>
 

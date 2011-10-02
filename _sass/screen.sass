@@ -27,6 +27,11 @@
 // what pages use blueprint when stylesheets are concatenated together.
 
 $font-color: #503e2b
+$link-color: lighten($font-color, 35%)
+$link-hover-color: darken($link-color, 25%)
+$link-active-color: lighten(adjust-hue($link-color, 75deg), 10%)
+$link-visited-color: darken($link-color, 20%)
+
 $blueprint-font-size: 14px
 $header-color: $font-color
 
@@ -48,18 +53,23 @@ body.bp
 
   a
     text-decoration: none
+    border-bottom: 1px dotted $link-color
+
+    &:hover
+      border-bottom: none
 
 html, body
   height: 100%
 
 $sidebar-width: 150px
 $container-width: 750px
+$sidebar-bg: desaturate($font-color, 20%)
 
 .page-container
   min-height: 100%
 
 .page-sidebar
-  $sidebar-bg: desaturate($font-color, 20%)
+  z-index: 9000
 
   background-color: $sidebar-bg
   position: fixed
@@ -118,6 +128,7 @@ $container-width: 750px
 
     a
       color: $link-color
+      border: none
 
       &:visited
         color: $link-color
@@ -141,9 +152,6 @@ $container-width: 750px
 $padding: 15px
 $content-width: $container-width - $sidebar-width - 2*$padding
 
-.related
-  outline: 1px red
-
 body.bp .post-list
   ul.post-list-ul
     width: $content-width
@@ -164,9 +172,10 @@ body.bp .post-list
     a
       width: $content-width - $date-width
       line-height: $line-height
+      border: none
 
     span.date
-      color: darken($body-bg, 30%)
+      color: lighten($link-color, 20%)
       font-style: italic
       line-height: $line-height
       width: $date-width
@@ -210,3 +219,21 @@ body.bp .page-content
   h3
     font-size: 120%
     line-height: 120%
+
+  code
+    font-size: 90%
+    color: lighten($font-color, 10%)
+
+  pre code
+    padding: 10px
+    display: block
+    border: 0px solid #888
+    background: darken($sidebar-bg, 10%)
+    font-size: 12px
+    +border-radius(10px)
+    overflow-y: hidden
+    overflow-x: auto
+
+img.inline
+  float: left
+  margin-right: 10px

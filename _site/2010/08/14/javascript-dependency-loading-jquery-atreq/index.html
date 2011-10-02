@@ -4,12 +4,16 @@
     <title>Javascript Dependency Loading – jquery.atreq - Zero Wind :: Jamie Wong</title>
     
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
     <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
+    <link rel="stylesheet" media="screen" href="/stylesheets/prettify.css" type="text/css" />
+    <script type="text/javascript" src="/javascript/prettify.js"></script>
+
     
     
   </head>
 
-  <body class="bp">
+  <body class="bp" onload="prettyPrint()">
     <div class="page-container">
       <div class="page-sidebar">
 
@@ -174,11 +178,11 @@ This means you won't get useful behaviour if one of the files you're including h
 
 <p>$.atreq:</p>
 
-<p><img src="http://phleet.github.com/images/atreq/atreqfirebug.png" alt="$.atreq firebug" /></p>
+<p><img src="/images/atreqfirebug.png" alt="$.atreq firebug" /></p>
 
 <p>$.require:</p>
 
-<p><img src="http://phleet.github.com/images/atreq/dotreqfirebug.png" alt="$.require firebug" /></p>
+<p><img src="/images/dotreqfirebug.png" alt="$.require firebug" /></p>
 
 <p>Note the difference in the load order - there's no reason why 1.js and 2.js shouldn't load at the same time.</p>
 

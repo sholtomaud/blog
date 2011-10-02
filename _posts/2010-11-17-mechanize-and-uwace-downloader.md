@@ -51,26 +51,26 @@ There's a simple guide on github here: [Getting Started with Mechanize][]
 
 To demonstrate how simple form interaction is, here's the method for login:
 
-      def login
-        @username ||= ask("Username: ")
-        @password ||= ask("Password: ") {|q| q.echo = '*'}
-    
-        say "Logging in ..."
-    
-        login_page = angel_get 'home.asp'
-        form = login_page.form_with(:name => "frmLogon")
-        form.username = @username
-        form.password = @password
-    
-        login_submit_page = @agent.submit form
-    
-        if login_submit_page.uri.to_s.include? 'authenticate.asp'
-          raise InvalidLogin
-        end
-      rescue InvalidLogin
-        say 'Invalid Username/Password'
-        exit
+    def login
+      @username ||= ask("Username: ")
+      @password ||= ask("Password: ") {|q| q.echo = '*'}
+
+      say "Logging in ..."
+
+      login_page = angel_get 'home.asp'
+      form = login_page.form_with(:name => "frmLogon")
+      form.username = @username
+      form.password = @password
+
+      login_submit_page = @agent.submit form
+
+      if login_submit_page.uri.to_s.include? 'authenticate.asp'
+        raise InvalidLogin
       end
+    rescue InvalidLogin
+      say 'Invalid Username/Password'
+      exit
+    end
 
 While I've only used the Mechanize bindings for ruby, there bindings for many other languages:
 

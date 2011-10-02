@@ -1,4 +1,4 @@
---- 
+---
 layout: post
 title: Hacker Cup Qualification Round - Solutions
 tags: []
@@ -6,7 +6,7 @@ tags: []
 status: publish
 type: post
 published: true
-meta: 
+meta:
   _edit_lock: "1294822476"
   _edit_last: "1"
   _wp_old_slug: ""
@@ -26,10 +26,10 @@ Squares
     #include <set>
     #include <cmath>
     using namespace std;
-    
+
     typedef long long unsigned int llu;
     set<llu> squares;
-    
+
     int main() {
       for (int i = 0; i < 50000; i++) {
         llu i2 = i*i;
@@ -39,10 +39,10 @@ Squares
           squares.insert(i2);
         }
       }
-    
+
       int N;
       cin >> N;
-    
+
       for (int i = 0; i < N; i++) {
         int num;
         cin >> num;
@@ -68,23 +68,23 @@ Students
 **Implementation**:
 
     from itertools import permutations
-    
+
     def doit():
         words = raw_input().split()[1:]
-    
+
         best = ""
-    
+
         for x in permutations(words):
             concatted = "".join(x)
             if best == "" or concatted < best:
                 best = concatted
-    
+
         print best
-    
+
     n = input()
-    
+
     for z in range(n):
-        doit() 
+        doit()
 
 Pegs
 ===
@@ -102,7 +102,7 @@ defined by the number of rows and cols of pegs, except with a few pegs missing, 
     x...x.x.x
      x.x...x
     x.x.x.x.x
-    
+
 Determine the optimal location to drop a ball in order to maximize the probability of the ball landing in a specific slot in the bottom row. The probability of the ball going to either side of a peg is 0.5.
 
 **Solution**: There's no real trick to this one - you just create an array of the probabilities that the ball reaches each available cell given which pegs are missing. This one is more of a coding problem than anything else.
@@ -119,7 +119,7 @@ I'm sure I could have written a more elegant solution to this problem, but I jus
     using namespace std;
 
     void doit() {
-        int R, C, K, M;    
+        int R, C, K, M;
         cin >> R >> C >> K >> M;
         set<pair<int,int> > missing;
         for (int i = 0; i < M; i++) {
@@ -127,7 +127,7 @@ I'm sure I could have written a more elegant solution to this problem, but I jus
             cin >> ri >> ci;
             missing.insert(make_pair(ri,ci));
         }
-        
+
         int best_pos = 0;
         long double best_prob = 0;
         for (int cur_pos = 0; cur_pos < C-1; cur_pos++) {
@@ -138,7 +138,7 @@ I'm sure I could have written a more elegant solution to this problem, but I jus
                 }
             }
             probs[0][cur_pos] = 1.00;
-    
+
             for (int r = 1; r < R; r++) {
                 if (r % 2 == 1) { // odd row
                     for(int peg = 0; peg < C-1; peg++) {
@@ -166,17 +166,17 @@ I'm sure I could have written a more elegant solution to this problem, but I jus
                     }
                 }
             }
-    
+
             long double cur_prob = probs[R-1][K];
             if (cur_prob > best_prob) {
                 best_prob = cur_prob;
                 best_pos = cur_pos;
             }
         }
-    
+
         printf("%d %.6Lf\n", best_pos, best_prob);
     }
-    
+
     int main() {
         int z;
         cin >> z;

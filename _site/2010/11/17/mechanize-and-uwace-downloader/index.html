@@ -4,12 +4,16 @@
     <title>Mechanize and UWAce Downloader - Zero Wind :: Jamie Wong</title>
     
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
     <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
+    <link rel="stylesheet" media="screen" href="/stylesheets/prettify.css" type="text/css" />
+    <script type="text/javascript" src="/javascript/prettify.js"></script>
+
     
     
   </head>
 
-  <body class="bp">
+  <body class="bp" onload="prettyPrint()">
     <div class="page-container">
       <div class="page-sidebar">
 
@@ -91,26 +95,26 @@ Mechanize is a set of tools for automating webpage interactions and retrieving d
 
 <p>To demonstrate how simple form interaction is, here's the method for login:</p>
 
-<pre><code>  def login
-    @username ||= ask("Username: ")
-    @password ||= ask("Password: ") {|q| q.echo = '*'}
+<pre><code>def login
+  @username ||= ask("Username: ")
+  @password ||= ask("Password: ") {|q| q.echo = '*'}
 
-    say "Logging in ..."
+  say "Logging in ..."
 
-    login_page = angel_get 'home.asp'
-    form = login_page.form_with(:name =&gt; "frmLogon")
-    form.username = @username
-    form.password = @password
+  login_page = angel_get 'home.asp'
+  form = login_page.form_with(:name =&gt; "frmLogon")
+  form.username = @username
+  form.password = @password
 
-    login_submit_page = @agent.submit form
+  login_submit_page = @agent.submit form
 
-    if login_submit_page.uri.to_s.include? 'authenticate.asp'
-      raise InvalidLogin
-    end
-  rescue InvalidLogin
-    say 'Invalid Username/Password'
-    exit
+  if login_submit_page.uri.to_s.include? 'authenticate.asp'
+    raise InvalidLogin
   end
+rescue InvalidLogin
+  say 'Invalid Username/Password'
+  exit
+end
 </code></pre>
 
 <p>While I've only used the Mechanize bindings for ruby, there bindings for many other languages:</p>
