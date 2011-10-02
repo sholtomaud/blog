@@ -411,7 +411,19 @@ html, body {
   text-align: center;
   color: #7b7b73;
   text-shadow: #464642 0 1px 2px, #1f1f1d 0 -1px 2px;
-  margin: 0 0 25px 0;
+}
+.page-sidebar .short-bio {
+  text-shadow: #464642 0 1px 1px, #1f1f1d 0 -1px 1px;
+  color: #7b7b73;
+  font-style: italic;
+  font-size: 12px;
+  padding: 0 15px;
+  margin: 0 0 5px 0;
+  text-align: justify;
+}
+.page-sidebar .short-bio p {
+  text-indent: 2em;
+  margin: 0;
 }
 .page-sidebar .page-nav {
   text-shadow: #464642 0 1px 1px, #1f1f1d 0 -1px 1px;
@@ -445,4 +457,28 @@ html, body {
   margin-left: 150px;
   min-height: 100%;
   width: 620px;
+}
+
+.post-list ul.post-list-ul {
+  margin: 0;
+  padding: 0;
+}
+.post-list li + li {
+  border-top: 1px solid #c8c8c8;
+}
+.post-list li {
+  list-style: none;
+  font-size: 14px;
+}
+.post-list li a {
+  width: 470px;
+  line-height: 30px;
+}
+.post-list li span.date {
+  color: #a2a2a2;
+  font-style: italic;
+  line-height: 30px;
+  width: 150px;
+  float: right;
+  text-align: right;
 }
