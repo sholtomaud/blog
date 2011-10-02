@@ -367,10 +367,21 @@ html, body {
   min-height: 100%;
 }
 
-.page-sidebar {
+.page-sidebar-container {
   z-index: 9000;
   background-color: #443e37;
   position: fixed;
+  width: 30%;
+  height: 100%;
+}
+
+.page-content-container {
+  margin-left: 30%;
+  width: 70%;
+}
+
+.page-sidebar {
+  float: right;
   width: 150px;
   height: 100%;
 }
@@ -455,7 +466,7 @@ html, body {
 }
 
 body.bp .post-list ul.post-list-ul {
-  width: 770px;
+  max-width: 620px;
   margin: 0;
   padding: 0;
 }
@@ -468,7 +479,7 @@ body.bp .post-list li {
   font-size: 14px;
 }
 body.bp .post-list li a {
-  width: 620px;
+  width: 470px;
   line-height: 30px;
   border: none;
 }
@@ -483,10 +494,8 @@ body.bp .post-list li span.date {
 
 body.bp .page-content {
   padding: 15px;
-  position: absolute;
-  margin-left: 150px;
   min-height: 100%;
-  max-width: 770px;
+  max-width: 620px;
   font-size: 16px;
 }
 body.bp .page-content h1.page-title {

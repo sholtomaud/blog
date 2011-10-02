@@ -62,20 +62,30 @@ html, body
   height: 100%
 
 $sidebar-width: 150px
-$container-width: 950px
+$container-width: 800px
 $sidebar-bg: desaturate($font-color, 20%)
 
 .page-container
   min-height: 100%
 
-.page-sidebar
+$left-pct: 30%
+
+.page-sidebar-container
   z-index: 9000
 
   background-color: $sidebar-bg
   position: fixed
 
-  width: $sidebar-width
+  width: $left-pct
+  height: 100%
 
+.page-content-container
+  margin-left: $left-pct
+  width: 100% - $left-pct
+
+.page-sidebar
+  float: right
+  width: $sidebar-width
   height: 100%
 
   $zero-wind-bg: lighten($sidebar-bg, 30%)
@@ -154,7 +164,7 @@ $content-width: $container-width - $sidebar-width - 2*$padding
 
 body.bp .post-list
   ul.post-list-ul
-    width: $content-width
+    max-width: $content-width
     margin: 0
     padding: 0
 
@@ -185,8 +195,6 @@ body.bp .post-list
 body.bp .page-content
   padding: $padding
 
-  position: absolute
-  margin-left: $sidebar-width
   min-height: 100%
   max-width: $content-width
 
