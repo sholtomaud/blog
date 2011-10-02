@@ -14,25 +14,44 @@
     <!-- google analytics async -->
     <script type="text/javascript">
       var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '{{ site.google_analytics.account }}']);
-      _gaq.push(['_trackPageview']);
+      _gaq.push(["_setAccount", "{{ site.google_analytics.account }}"]);
+      _gaq.push(["_trackPageview"]);
       (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        var ga = document.createElement("script"); ga.type = "text/javascript"; ga.async = true;
+        ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
+        var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
     {% endif %}
   </head>
 
-  <body>
-    <div id="page">
-      <div id="header">
-        <a href="/"><h1>{{ site.title }}</h1></a>
+  <body class="bp">
+    <div class="page-container">
+      <div class="page-header">
+
+        <a href="/"><h1 class="site-title">
+          Zero Wind :: Jamie Wong
+        </h1></a>
+
+        <div class="page-nav">
+          <ul>
+            <li><a href="/">Blog</a></li>
+            <li>&bull;</li>
+            <li><a href="/resume">Resume</a></li>
+            <li>&bull;</li>
+            <li><a href="https://github.com/phleet">Github</a></li>
+            <li>&bull;</li>
+            <li><a href="http://stackoverflow.com/users/303911/jamie-wong">Stack Overflow</a></li>
+          </ul>
+        </div>
       </div>
-      <div id="body">
+
+      <div class="page-content">
         {% if page.title %}<h1>{{ page.title }}</h1>{% endif %}
         {{ content }}
+      </div>
+      <div class="page-footer">
+        Copyright © 2011 Zero Wind - Jamie Wong
       </div>
     </div>
   </body>

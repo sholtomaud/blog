@@ -1,0 +1,84 @@
+$page-bg: #2C2C29
+$orange: rgb(240, 140, 60)
+
+// This import applies a global reset to any page that imports this stylesheet.
+@import "blueprint/reset"
+
+// To configure blueprint, edit the partials/base.sass file.
+@import "partials/base"
+
+// Import all the default blueprint modules so that we can access their mixins.
+@import "blueprint"
+
+// Import the non-default scaffolding module.
+@import "blueprint/scaffolding"
+
+// CSS3 border radius
+@import "compass/css3/border-radius"
+
+// To generate css equivalent to the blueprint css but with your
+// configuration applied, uncomment:
+// @include blueprint
+
+// If you are doing a lot of stylesheet concatenation, it is suggested
+// that you scope your blueprint styles, so that you can better control
+// what pages use blueprint when stylesheets are concatenated together.
+body.bp
+  @include blueprint-typography(true)
+  @include blueprint-utilities
+  @include blueprint-debug
+  @include blueprint-interaction
+  @include blueprint-scaffolding
+  // Remove the scaffolding when you're ready to start doing visual design.
+  // Or leave it in if you're happy with how blueprint looks out-of-the-box
+
+  background-color: $page-bg
+
+.orange
+  color: $orange
+
+.page-container
+  width: 650px
+  margin: 25px auto
+
+  .page-header, .page-footer
+    padding: 0 15px
+    color: white
+
+  .page-header
+    $header-fg: white
+    text-shadow: 2px 2px mix($header-fg, $page-bg, 25%)
+
+    a
+      text-decoration: none
+
+    h1.site-title
+      font-size: 40px
+      color: $header-fg
+
+    .page-nav
+      font-size: 18px
+
+      a
+        color: $header-fg
+        text-shadow: 1px 1px mix($header-fg, $page-bg, 25%)
+
+        &:hover
+          color: darken($header-fg, 25%)
+
+      ul
+        list-style: none
+        padding: 0
+        margin: 0
+
+        li
+          display: inline
+          color: $header-fg
+
+        li + li
+          padding-left: 5px
+
+  .page-content
+    background-color: white
+    padding: 15px
+    @include border-radius(10px)
