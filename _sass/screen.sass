@@ -83,7 +83,7 @@ $left-pct: 30%
   margin-left: $left-pct
   width: 100% - $left-pct
 
-.page-sidebar
+body.bp .page-sidebar
   font-family: Questrial, "Helvetica Neue", Arial, Helvetica, sans-serif
 
   float: right
@@ -92,27 +92,20 @@ $left-pct: 30%
 
   $zero-wind-bg: lighten($sidebar-bg, 30%)
 
-  .zero-wind
-    margin: 20px 15px
-    padding: 10px
-    border: 1px solid lighten($sidebar-bg, 45%)
+  h1
+    margin: 20px 15px 10px 0
     font-family: "Sansita One", "Helvetica Neue", Arial, Helvetica, sans-serif
 
-    +background(linear-gradient(top, lighten($zero-wind-bg, 5%), darken($zero-wind-bg, 5%)))
-    +border-radius(10px)
-    +box-shadow(darken($sidebar-bg, 10%) 0 3px 20px)
+    color: lighten($zero-wind-bg, 10%)
+    border: none
+    font-size: 48px
+    line-height: 42px
+    +text-shadow(darken($sidebar-bg, 10%) 2px 2px 1px)
+    text-align: right
+    text-decoration: none
 
-    h1
-      border: none
-      font-size: 36px
-      color: $sidebar-bg
-      +text-shadow(lighten($zero-wind-bg, 10%) 0 1px 2px, darken($zero-wind-bg, 10%) 0 -1px 2px)
-      text-align: center
-      text-decoration: none
-      margin: 0
-
-      &:hover
-        color: lighten($sidebar-bg, 10%)
+    &:hover
+      color: lighten($sidebar-bg, 10%)
 
   h2.my-name
     border: none
@@ -122,7 +115,6 @@ $left-pct: 30%
     +text-shadow(lighten($sidebar-bg, 10%) 0 1px 2px, darken($sidebar-bg, 5%) 0 -1px 2px)
 
   .short-bio
-    +text-shadow(lighten($sidebar-bg, 10%) 0 1px 1px, darken($sidebar-bg, 5%) 0 -1px 1px)
     color: $zero-wind-bg
     font-style: italic
     font-size: 12px

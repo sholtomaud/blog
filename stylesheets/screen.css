@@ -380,55 +380,34 @@ html, body {
   width: 70%;
 }
 
-.page-sidebar {
+body.bp .page-sidebar {
   font-family: Questrial, "Helvetica Neue", Arial, Helvetica, sans-serif;
   float: right;
   width: 150px;
   height: 100%;
 }
-.page-sidebar .zero-wind {
-  margin: 20px 15px;
-  padding: 10px;
-  border: 1px solid #b8b0a8;
+body.bp .page-sidebar h1 {
+  margin: 20px 15px 10px 0;
   font-family: "Sansita One", "Helvetica Neue", Arial, Helvetica, sans-serif;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #a1978c), color-stop(100%, #8a7e71));
-  background: -webkit-linear-gradient(top, #a1978c, #8a7e71);
-  background: -moz-linear-gradient(top, #a1978c, #8a7e71);
-  background: -o-linear-gradient(top, #a1978c, #8a7e71);
-  background: -ms-linear-gradient(top, #a1978c, #8a7e71);
-  background: linear-gradient(top, #a1978c, #8a7e71);
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -o-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -khtml-border-radius: 10px;
-  border-radius: 10px;
-  -moz-box-shadow: #282420 0 3px 20px;
-  -webkit-box-shadow: #282420 0 3px 20px;
-  -o-box-shadow: #282420 0 3px 20px;
-  box-shadow: #282420 0 3px 20px;
-}
-.page-sidebar .zero-wind h1 {
+  color: #ada49a;
   border: none;
-  font-size: 36px;
-  color: #443e37;
-  text-shadow: #ada49a 0 1px 2px, #7c7165 0 -1px 2px;
-  text-align: center;
+  font-size: 48px;
+  line-height: 42px;
+  text-shadow: #282420 2px 2px 1px;
+  text-align: right;
   text-decoration: none;
-  margin: 0;
 }
-.page-sidebar .zero-wind h1:hover {
+body.bp .page-sidebar h1:hover {
   color: #60574e;
 }
-.page-sidebar h2.my-name {
+body.bp .page-sidebar h2.my-name {
   border: none;
   font-size: 22px;
   text-align: center;
   color: #968a7e;
   text-shadow: #60574e 0 1px 2px, #36312c 0 -1px 2px;
 }
-.page-sidebar .short-bio {
-  text-shadow: #60574e 0 1px 1px, #36312c 0 -1px 1px;
+body.bp .page-sidebar .short-bio {
   color: #968a7e;
   font-style: italic;
   font-size: 12px;
@@ -436,34 +415,34 @@ html, body {
   margin: 0 0 5px 0;
   text-align: justify;
 }
-.page-sidebar .short-bio p {
+body.bp .page-sidebar .short-bio p {
   text-indent: 2em;
   margin: 0;
 }
-.page-sidebar .page-nav {
+body.bp .page-sidebar .page-nav {
   text-shadow: #60574e 0 1px 1px, #36312c 0 -1px 1px;
 }
-.page-sidebar .page-nav a {
+body.bp .page-sidebar .page-nav a {
   color: #968a7e;
   border: none;
 }
-.page-sidebar .page-nav a:visited {
+body.bp .page-sidebar .page-nav a:visited {
   color: #968a7e;
 }
-.page-sidebar .page-nav a:hover {
+body.bp .page-sidebar .page-nav a:hover {
   color: #cfcac4;
 }
-.page-sidebar .page-nav ul {
+body.bp .page-sidebar .page-nav ul {
   margin: 0;
   padding: 0 15px;
 }
-.page-sidebar .page-nav li {
+body.bp .page-sidebar .page-nav li {
   list-style: none;
   font-size: 16px;
   text-align: right;
   line-height: 30px;
 }
-.page-sidebar .page-nav li + li {
+body.bp .page-sidebar .page-nav li + li {
   border-top: 1px solid #60574e;
 }
 
