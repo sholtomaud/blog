@@ -17,8 +17,8 @@ email: jamie.lf.wong@gmail.com
 # feedburner:
 #   id: feedburnerid
 
-# google_analytics:
-#   account: UA-XXXXX-X
+google_analytics:
+  account: UA-11869199-1
 
 # github:
 #   username: ghusername
