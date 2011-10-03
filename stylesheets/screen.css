@@ -497,16 +497,17 @@ body.bp .page-content h1, body.bp .page-content h2, body.bp .page-content h3 {
 body.bp .page-content h1 {
   font-size: 175%;
   line-height: 175%;
-  border-bottom: 4px solid #d4d4d4;
+  border-bottom: 4px solid #6e6e6e;
 }
 body.bp .page-content h2 {
   font-size: 150%;
   line-height: 150%;
-  border-bottom: 2px solid #d4d4d4;
+  border-bottom: 2px solid #959595;
 }
 body.bp .page-content h3 {
-  font-size: 125%;
-  line-height: 125%;
+  font-size: 130%;
+  line-height: 130%;
+  border-bottom: 1px solid #d4d4d4;
 }
 body.bp .page-content code {
   font-size: 90%;

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Meet Doctor Jekyll - Zero Wind :: Jamie Wong</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href='http://fonts.googleapis.com/css?family=Questrial|Sansita+One' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
+    <link rel="stylesheet" media="screen" href="/stylesheets/prettify.css" type="text/css" />
+    <script type="text/javascript" src="/javascript/prettify.js"></script>
+
+  </head>
+
+  <body class="bp" onload="prettyPrint()">
+    <div class="page-container">
+      <div class="page-sidebar-container">
+        <div class="page-sidebar">
+
+          <a href="/"><h1 class="site-title">
+            Zerø Wind
+          </h1></a>
+
+          <h2 class='my-name'>Jamie Wong</h2>
+
+          <div class='short-bio'>
+            <p>
+              I'm a uWaterloo Software Engineering student from Ottawa.
+              I'm currently an intern at Facebook.
+            </p>
+          </div>
+
+          <div class="page-nav">
+            <ul>
+              <li><a href="/">blog</a></li>
+              <li><a href="/resume/">resume</a></li>
+              <li><a href="https://github.com/phleet">github</a></li>
+              <li><a href="http://www.linkedin.com/profile/view?id=71283243">linkedin</a></li>
+              <li><a href="http://stackoverflow.com/users/303911/jamie-wong">stack overflow</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-content-container">
+        <div class="page-content">
+          
+            <h1 class='page-title'>Meet Doctor Jekyll</h1>
+          
+
+          
+<div class="post-date">
+  Posted on November  3, 2011
+</div>
+
+
+<div class="post">
+<p>My wordpress blog has lasted longer than any site I've used before, but I
+finally got sick of it and switched. So now I'm on <a href="https://github.com/mojombo/jekyll">Jekyll</a>.</p>
+
+<p>Wordpress is an incredible blogging-platform-turned-CMS that provides many
+things I wouldn't want to do myself. It's been an incredible SEO asset and
+worked beautifully on shared hosting. I would still recommend it to anyone who
+wants to write a blog and doesn't want to spend much time customizing or setting
+things up. There are plenty of nice looking pre-made themes and plugins to do
+pretty much anything you want.</p>
+
+<h2>Wordpress to Jekyll - Why I switched</h2>
+
+<p><a href="https://github.com/mojombo/jekyll">Jekyll</a> is "a blog-aware static site generator in Ruby". Basically what this
+means is that all the pages you see on this blog are generated once - not
+generated on demand every time they're requested. There's no DB backend, no
+scripting language running on the server side. These are just plain HTML pages.</p>
+
+<p>I started off with a template I got off here: <a href="https://github.com/krisb/jekyll-template">krisb/jekyll-template</a>.</p>
+
+<p>So why did I switch?</p>
+
+<h3>Styling</h3>
+
+<p>While Wordpress is completely skinnable - it's a pain in the ass. I really just
+wanted to start from scratch and only build the things I absolutely needed.
+There is one unifying layout and only 2 types of page on this site: the posts
+list and posts. It means I can set my own structure for everything and keep it
+much, much simpler than it would have been on Wordpress.</p>
+
+<h3>Workflow</h3>
+
+<p>I love vim. I feel like I'm dragging a huge weight when I need to edit text -
+especially code - without vim. Since Jekyll just generates my site from code, it
+means I can edit everything including this post in vim. All I do is spawn up a
+local Jekyll server (WEBrick) and there's my preview. Once I'm done, all I have
+to do is commit the changes to git, and then I pull down the changes on my
+server - which is now hosted on EC2, with help from <a href="http://twitter.com/#!/amtinits">Andrew Tinits</a>.</p>
+
+<h3>Novelty</h3>
+
+<p>I'll be honest here - I feel cooler running Jekyll than Wordpress. And having
+the source for my blog on github just feels right. Seriously: <a href="https://github.com/phleet/blog">phleet/blog</a>.</p>
+
+<p>Plus there's nothing better to motivate you to write a blog post than redoing
+your entire blog. I promise I won't be another person who just writes a blog so
+they can write about how they set up their blog and then never write again (you
+know who you are.)</p>
+
+<h2>The Tech</h2>
+
+<p>Here's the part where I justify you spending the time reading this post by
+rambling about technology you might be interested in.</p>
+
+<h3>Markdown</h3>
+
+<p><a href="http://daringfireball.net/projects/markdown/">Markdown</a> is a content writing language for the web which compiles
+(primarily) down to HTML. The idea is that it enables you to write documents
+that are still readable in plaintext, but compile to useful HTML. This means
+having a nice syntax for headers, emphasis, links, images, lists and a couple of
+other things. It's definitely much nicer than raw HTML for writing up blog
+posts.</p>
+
+<p>As a quick example, it takes this:</p>
+
+<pre><code>### Markdown
+
+Markdown was written by John Gruber of [Daring Fireball][].
+
+As a quick example, it takes this:
+
+    Hello World
+    -----------
+
+    I am pretty awesome
+
+and produces this:
+
+    &lt;h2&gt;Hello World&lt;/h2&gt;
+
+    &lt;p&gt;I am pretty awesome&lt;/p&gt;
+
+[Daring Fireball]: http://daringfireball.net/
+</code></pre>
+
+<p>and produces this:</p>
+
+<pre><code>&lt;h3&gt;Markdown&lt;/h3&gt;
+
+&lt;p&gt;Markdown was written by John Gruber of &lt;a href="http://daringfireball.net/"&gt;Daring Fireball&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;As a quick example, it takes this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Hello World
+-----------
+
+I am pretty awesome
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and produces this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;h2&amp;gt;Hello World&amp;lt;/h2&amp;gt;
+
+&amp;lt;p&amp;gt;I am pretty awesome&amp;lt;/p&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+
+<h3>Sass</h3>
+
+<p><a href="http://sass-lang.com/">Sass</a> is awesome syntactic sugar for CSS. It deals with a bunch of things
+that are simply a giant pain in vanilla CSS. One of my favorite things it does
+is deal with nesting for you.</p>
+
+<pre><code>.container
+  h1
+    font-size: 20px
+  h2
+    font-size: 18px
+
+    &amp;:hover
+      text-decoration: underline
+</code></pre>
+
+<p>Turns into:</p>
+
+<pre><code>.container h1 {
+  font-size: 20px; }
+.container h2 {
+  font-size: 18px; }
+  .container h2:hover {
+    text-decoration: underline; }
+</code></pre>
+
+<p>Since it runs through a compiler before producing CSS, it lets you do some very
+useful things before producing the raw CSS. One of the most valuable things for
+me while working on this site was variables. It means you can do things like
+this:</p>
+
+<pre><code>$base-color: #281e17
+$content-width: 500px
+$sidebar-width: 150px
+
+.container
+  background-color: lighten($base-color, 50%)
+  $padding: 20px
+  padding: $padding
+  width: $content-width + $sidebar-width - 2 * $padding
+
+  .sidebar
+    width: $sidebar-width
+    background-color: lighten($base-color, 25%)
+
+  .content
+    width: $content-width
+    color: $base-color
+</code></pre>
+
+<p>And get back this:</p>
+
+<pre><code>.container {
+  background-color: #b99a85;
+  padding: 20px;
+  width: 610px; }
+  .container .sidebar {
+    width: 150px;
+    background-color: #795b46; }
+  .container .content {
+    width: 500px;
+    color: #281e17; }
+</code></pre>
+
+<p>The really cool thing about the color functions is that you can base your entire
+website off only a few colours, then make everything relative to those. This
+site (at time of writing) actually only has two colours specifically defined -
+the content font color and the body background. Everything else is relative to
+those.</p>
+
+<h3>Compass</h3>
+
+<p><a href="http://compass-style.org/">Compass</a> is a collection of mixins and utilities for sass. It's especially
+useful for CSS3 related tasks, since it does all the proprietary browser
+prefixes (<code>-O-, -moz-, -webkit-</code>) for you when you do things like <code>+box-radius</code>.</p>
+
+<p>It also comes with <a href="http://compass-style.org/reference/blueprint/">Blueprint</a>, which gives you a great starting point to have
+all the default styles for things (margins, typography, resets) look nice out of
+the box.</p>
+
+<h3>Prettify</h3>
+
+<p><a href="http://code.google.com/p/google-code-prettify/">Prettify</a> is a project by Google to do syntax highlighting clientside. It
+looks for various elements on the page and then applies syntax highlighting to
+them by wrapping the text inside those elements with tags which can then have
+CSS rules applied to them. I tried to make mine look very roughly like
+<a href="http://ethanschoonover.com/solarized">Solarized</a>.</p>
+
+<p>I had to make a minor tweak to make it just grab all <code>&lt;code&gt;</code> tags inside
+<code>&lt;pre&gt;</code> tags, since that's what markdown generates for code blocks. Prettify
+normally looks for things with the <code>prettify</code> class.</p>
+
+<p>Jekyll also ships with support for pygments, but that was giving me problems so
+I opted for prettify, which simply has a better name.</p>
+
+<h3>Google Web Fonts</h3>
+
+<p><a href="http://www.google.com/webfonts">Google Web Fonts</a> let you use a number of beautiful fonts that may not be
+available on your visitor's machine on your websites. I'm currently using it for
+my logo, sidebar and headers.</p>
+
+<p>Using it is beautifully simple. All you have to do is drop a link tag in the
+head like the one I'm using:</p>
+
+<pre><code>&lt;link href='http://fonts.googleapis.com/css?family=Questrial|Sansita+One' rel='stylesheet' type='text/css'&gt;
+</code></pre>
+
+<p>And then use it like normal in a CSS rule, like so:</p>
+
+<pre><code>font-family: Questrial, "Helvetica Neue", Arial, Helvetica, sans-serif
+</code></pre>
+
+<h3>Nginx</h3>
+
+<p>Since I had to set up my own web server to run this, I decided I'd try messing
+around with <a href="http://nginx.net/">nginx</a> since it looks much nicer to configure than apache. For
+the longest time, I thought it was pronounced "en-jinx". The actual
+pronounciation, "engine-ex" made a lot more sense once I heard it.</p>
+
+<p>Setting up this server was extremely simple. Since I'm only serving static
+files, all I really needed was the following:</p>
+
+<pre><code># Redirect any subdomain to the main domain
+server {
+  server_name *.jamie-wong.com;
+  rewrite ^ http://jamie-wong.com$request_uri? permanent;
+}
+
+server {
+  listen 80 default;
+  server_name jamie-wong.com;
+  server_name_in_redirect off;
+
+  access_log /var/log/nginx/jamie-wong.com.log;
+
+  index index.html index.php;
+
+  try_files $uri $uri/ /404/ =404;
+
+  # If it's in any of these folders I migrated from
+  # my shared hosting on dreamhost, load it directly
+  location ~ ^/(experiments|asciiconvert|life|Jobmine-Improved|V10|1yr)/ {
+    root /var/www/jamie-wong.com/;
+  }
+
+  # Otherwise, it's probably a blog page, so load it
+  # from Jekyll's generated _site directory
+  location ~ / {
+    root /var/www/jamie-wong.com/blog/_site/;
+  }
+
+  error_page  404  /404/;
+}
+</code></pre>
+
+<p>This got a lot longer than I expected it to. Time for sleep - will proofread
+tomorrow.</p>
+
+</div>
+
+<div class="related post-list">
+  <h2>Related Posts</h2>
+  <ul class="post-list-ul">
+    
+      <li>
+        <a href="/2011/06/25/complex-asynchronous-queries-in-javascript/">Complex Asynchronous Queries in JavaScript</a>
+        <span class='date'>25 June 2011</span>
+      </li>
+    
+      <li>
+        <a href="/2011/01/12/hacker-cup-qualification-round-solutions/">Hacker Cup Qualification Round - Solutions</a>
+        <span class='date'>12 January 2011</span>
+      </li>
+    
+      <li>
+        <a href="/2010/11/17/mechanize-and-uwace-downloader/">Mechanize and UWAce Downloader</a>
+        <span class='date'>17 November 2010</span>
+      </li>
+    
+      <li>
+        <a href="/2010/10/16/dfas-and-graphviz-dot/">DFAs and Graphviz DOT</a>
+        <span class='date'>16 October 2010</span>
+      </li>
+    
+      <li>
+        <a href="/2010/09/30/make-your-life-easier-with-gnu-make/">Make your life easier with GNU Make.</a>
+        <span class='date'>30 September 2010</span>
+      </li>
+    
+  </ul>
+</div>
+
+
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <!-- google analytics async -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(["_setAccount", "UA-11869199-1"]);
+      _gaq.push(["_trackPageview"]);
+      (function() {
+        var ga = document.createElement("script"); ga.type = "text/javascript"; ga.async = true;
+        ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
+        var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+  </body>
+</html>

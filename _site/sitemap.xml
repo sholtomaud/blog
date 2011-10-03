@@ -4,11 +4,18 @@
   <!--  Homepage -->
   <url>
     <loc>http://jamie-wong.com/</loc>
-    <lastmod>2011-10-02</lastmod>
+    <lastmod>2011-10-03</lastmod>
     <changefreq>daily</changefreq>
 		<priority>1.0</priority>
   </url>
 
+  
+  <url>
+    <loc>http://jamie-wong.com/2011/11/03/meet-doctor-jekyll/</loc>
+    
+    <lastmod>2011-11-03</lastmod>
+    
+  </url>
   
   <url>
     <loc>http://jamie-wong.com/2011/06/25/complex-asynchronous-queries-in-javascript/</loc>
@@ -183,7 +190,7 @@
   <url>
     <loc>http://jamie-wong.com/404/</loc>
     
-    <lastmod>2011-10-02</lastmod>
+    <lastmod>2011-10-03</lastmod>
     
     
     
@@ -192,7 +199,7 @@
   <url>
     <loc>http://jamie-wong.com/index.html</loc>
     
-    <lastmod>2011-10-02</lastmod>
+    <lastmod>2011-10-03</lastmod>
     
     
     
