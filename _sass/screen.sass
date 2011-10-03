@@ -26,7 +26,7 @@
 // that you scope your blueprint styles, so that you can better control
 // what pages use blueprint when stylesheets are concatenated together.
 
-$font-color: #503e2b
+$font-color: #281e17
 $link-color: lighten($font-color, 35%)
 $link-hover-color: darken($link-color, 25%)
 $link-active-color: lighten(adjust-hue($link-color, 75deg), 10%)
@@ -207,7 +207,7 @@ body.bp .page-content
 
   h1, h2, h3
     font-family: Questrial, "Helvetica Neue", Arial, Helvetica, sans-serif
-    color: #503e2b
+    color: $font-color
     +text-shadow(darken($body-bg, 45%) 0 -1px 1px, lighten($body-bg, 45%) 0 1px 1px)
 
   h1

@@ -52,7 +52,7 @@ a img {
 body.bp {
   line-height: 1.5;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-  color: #503e2b;
+  color: #281e17;
   font-size: 87.5%;
   width: 100%;
   min-height: 100%;
@@ -60,7 +60,7 @@ body.bp {
 }
 body.bp h1, body.bp h2, body.bp h3, body.bp h4, body.bp h5, body.bp h6 {
   font-weight: normal;
-  color: #503e2b;
+  color: #281e17;
 }
 body.bp h1 img, body.bp h2 img, body.bp h3 img, body.bp h4 img, body.bp h5 img, body.bp h6 img {
   margin: 0;
@@ -110,19 +110,19 @@ body.bp p .right {
 }
 body.bp a {
   text-decoration: underline;
-  color: #b69877;
+  color: #997358;
 }
 body.bp a:visited {
-  color: #826546;
+  color: #594233;
 }
 body.bp a:focus {
   color: #0099ff;
 }
 body.bp a:hover {
-  color: #71583d;
+  color: #48362a;
 }
 body.bp a:active {
-  color: #a4c899;
+  color: #89b075;
 }
 body.bp blockquote {
   margin: 1.5em;
@@ -353,7 +353,7 @@ body.bp form.inline p {
 }
 body.bp a {
   text-decoration: none;
-  border-bottom: 1px dotted #b69877;
+  border-bottom: 1px dotted #997358;
 }
 body.bp a:hover {
   border-bottom: none;
@@ -369,7 +369,7 @@ html, body {
 
 .page-sidebar-container {
   z-index: 9000;
-  background-color: #443e37;
+  background-color: #221f1d;
   position: fixed;
   width: 30%;
   height: 100%;
@@ -389,26 +389,26 @@ body.bp .page-sidebar {
 body.bp .page-sidebar h1 {
   margin: 20px 15px 10px 0;
   font-family: "Sansita One", "Helvetica Neue", Arial, Helvetica, sans-serif;
-  color: #ada49a;
+  color: #8e847d;
   border: none;
   font-size: 48px;
   line-height: 42px;
-  text-shadow: #282420 2px 2px 1px;
+  text-shadow: #060606 2px 2px 1px;
   text-align: right;
   text-decoration: none;
 }
 body.bp .page-sidebar h1:hover {
-  color: #60574e;
+  color: #3d3835;
 }
 body.bp .page-sidebar h2.my-name {
   border: none;
   font-size: 22px;
   text-align: center;
-  color: #968a7e;
-  text-shadow: #60574e 0 1px 2px, #36312c 0 -1px 2px;
+  color: #746b64;
+  text-shadow: #3d3835 0 1px 2px, #141311 0 -1px 2px;
 }
 body.bp .page-sidebar .short-bio {
-  color: #968a7e;
+  color: #746b64;
   font-style: italic;
   font-size: 12px;
   padding: 0 15px;
@@ -420,17 +420,17 @@ body.bp .page-sidebar .short-bio p {
   margin: 0;
 }
 body.bp .page-sidebar .page-nav {
-  text-shadow: #60574e 0 1px 1px, #36312c 0 -1px 1px;
+  text-shadow: #3d3835 0 1px 1px, #141311 0 -1px 1px;
 }
 body.bp .page-sidebar .page-nav a {
-  color: #968a7e;
+  color: #746b64;
   border: none;
 }
 body.bp .page-sidebar .page-nav a:visited {
-  color: #968a7e;
+  color: #746b64;
 }
 body.bp .page-sidebar .page-nav a:hover {
-  color: #cfcac4;
+  color: #b2aba6;
 }
 body.bp .page-sidebar .page-nav ul {
   margin: 0;
@@ -443,7 +443,7 @@ body.bp .page-sidebar .page-nav li {
   line-height: 30px;
 }
 body.bp .page-sidebar .page-nav li + li {
-  border-top: 1px solid #60574e;
+  border-top: 1px solid #3d3835;
 }
 
 body.bp .post-list ul.post-list-ul {
@@ -465,7 +465,7 @@ body.bp .post-list li a {
   border: none;
 }
 body.bp .post-list li span.date {
-  color: #c4bdb6;
+  color: #a69e98;
   font-style: italic;
   line-height: 30px;
   width: 150px;
@@ -485,13 +485,13 @@ body.bp .page-content h1.page-title {
 body.bp .page-content .post-date {
   font-style: italic;
   text-align: left;
-  color: #9f968c;
+  color: #8b8682;
   font-size: 80%;
   margin-bottom: 10px;
 }
 body.bp .page-content h1, body.bp .page-content h2, body.bp .page-content h3 {
   font-family: Questrial, "Helvetica Neue", Arial, Helvetica, sans-serif;
-  color: #503e2b;
+  color: #281e17;
   text-shadow: #7b7b7b 0 -1px 1px, white 0 1px 1px;
 }
 body.bp .page-content h1 {
@@ -510,13 +510,13 @@ body.bp .page-content h3 {
 }
 body.bp .page-content code {
   font-size: 90%;
-  color: #71583d;
+  color: #48362a;
 }
 body.bp .page-content pre code {
   padding: 10px;
   display: block;
   border: 0px solid #888888;
-  background: #282420;
+  background: #060606;
   font-size: 12px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
