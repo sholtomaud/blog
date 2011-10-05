@@ -7,9 +7,7 @@
 
     <link href='http://fonts.googleapis.com/css?family=Questrial|Sansita+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
-    <link rel="stylesheet" media="screen" href="/stylesheets/prettify.css" type="text/css" />
-    <script type="text/javascript" src="/javascript/prettify.js"></script>
-
+    <link rel="stylesheet" media="screen" href="/stylesheets/pygments.css" type="text/css" />
   </head>
 
   <body class="bp" onload="prettyPrint()">
@@ -55,6 +53,8 @@
 
 
 <div class="post">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
 <p>For a project I'm working on, I have a fairly complex dependency tree and was getting fed up with manually including every single one in my haml layout file. So I started looking up other solutions and eventually decided none met my needs, so, as usual, I wrote my own.</p>
 
 <p><a href="http://github.com/phleet/jquery.atreq">jquery.atreq @ github</a></p>
@@ -178,17 +178,18 @@ This means you won't get useful behaviour if one of the files you're including h
 
 <p>$.atreq:</p>
 
-<p><img src="/images/atreqfirebug.png" alt="$.atreq firebug" /></p>
+<p><img src="/images/atreqfirebug.png" alt="$.atreq firebug"></p>
 
 <p>$.require:</p>
 
-<p><img src="/images/dotreqfirebug.png" alt="$.require firebug" /></p>
+<p><img src="/images/dotreqfirebug.png" alt="$.require firebug"></p>
 
 <p>Note the difference in the load order - there's no reason why 1.js and 2.js shouldn't load at the same time.</p>
 
 <p>See: <a href="http://plugins.jquery.com/project/require">$.require @ plugins.jquery.com</a></p>
 
 <p><strong>WARNING</strong>: At time of writing, the script provided on that page does not work and makes some strange assumptions about the location of your javascript files on the server. Use with caution.</p>
+</body></html>
 
 </div>
 

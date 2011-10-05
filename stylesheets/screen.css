@@ -513,7 +513,7 @@ body.bp .page-content code {
   font-size: 90%;
   color: #48362a;
 }
-body.bp .page-content pre code {
+body.bp .page-content pre code, body.bp .page-content .highlight {
   padding: 10px;
   display: block;
   border: 0px solid #888888;
@@ -527,6 +527,11 @@ body.bp .page-content pre code {
   border-radius: 10px;
   overflow-y: hidden;
   overflow-x: auto;
+  color: #839496;
+  margin: 1.5em 0;
+}
+body.bp .page-content .highlight pre {
+  margin: 0;
 }
 
 img.inline {

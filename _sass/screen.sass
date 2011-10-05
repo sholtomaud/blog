@@ -42,6 +42,7 @@ body.bp
   @include blueprint-utilities
   @include blueprint-debug
   @include blueprint-interaction
+
   @include blueprint-scaffolding
   // Remove the scaffolding when you're ready to start doing visual design.
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
@@ -229,7 +230,7 @@ body.bp .page-content
     font-size: 90%
     color: lighten($font-color, 10%)
 
-  pre code
+  pre code, .highlight
     padding: 10px
     display: block
     border: 0px solid #888
@@ -238,6 +239,11 @@ body.bp .page-content
     +border-radius(10px)
     overflow-y: hidden
     overflow-x: auto
+    color: #839496
+    margin: 1.5em 0
+
+  .highlight pre
+    margin: 0
 
 img.inline
   float: left

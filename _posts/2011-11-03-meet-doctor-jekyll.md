@@ -21,7 +21,6 @@ wants to write a blog and doesn't want to spend much time customizing or setting
 things up. There are plenty of nice looking pre-made themes and plugins to do 
 pretty much anything you want.
 
-
 ## Wordpress to Jekyll - Why I switched
 
 [Jekyll][] is "a blog-aware static site generator in Ruby". Basically what this 
@@ -29,9 +28,13 @@ means is that all the pages you see on this blog are generated once - not
 generated on demand every time they're requested. There's no DB backend, no 
 scripting language running on the server side. These are just plain HTML pages.
 
-I started off with a template I got off here: [krisb/jekyll-template][].
+I started off with a template I got off here: 
+[github.com/krisb/jekyll-template][]. But if you're planning on starting a blog 
+similar to mine, don't start from scratch like I did - go check out 
+[Octopress][]. It provides a lot of niceties for blogging hackers that Jekyll 
+doesn't out of the box.
 
-[krisb/jekyll-template]: https://github.com/krisb/jekyll-template
+[github.com/krisb/jekyll-template]: https://github.com/krisb/jekyll-template
 
 So why did I switch?
 
@@ -56,7 +59,8 @@ server - which is now hosted on EC2, with help from [Andrew Tinits][].
 ### Novelty
 
 I'll be honest here - I feel cooler running Jekyll than Wordpress. And having 
-the source for my blog on github just feels right. Seriously: [phleet/blog][]. 
+the source for my blog on github just feels right. Seriously: 
+[github.com/phleet/blog][].
 
 Plus there's nothing better to motivate you to write a blog post than redoing 
 your entire blog. I promise I won't be another person who just writes a blog so 
@@ -100,6 +104,8 @@ As a quick example, it takes this:
 
 and produces this:
 
+    lang:html
+
     <h3>Markdown</h3>
 
     <p>Markdown was written by John Gruber of <a href="http://daringfireball.net/">Daring Fireball</a>.</p>
@@ -125,6 +131,8 @@ and produces this:
 that are simply a giant pain in vanilla CSS. One of my favorite things it does 
 is deal with nesting for you.
 
+    lang:sass
+
     .container
       h1
         font-size: 20px
@@ -135,6 +143,8 @@ is deal with nesting for you.
           text-decoration: underline
 
 Turns into:
+
+    lang:css
 
     .container h1 {
       font-size: 20px; }
@@ -148,6 +158,8 @@ Since it runs through a compiler before producing CSS, it lets you do some very
 useful things before producing the raw CSS. One of the most valuable things for 
 me while working on this site was variables. It means you can do things like 
 this:
+
+    lang:sass
 
     $base-color: #281e17
     $content-width: 500px
@@ -168,6 +180,8 @@ this:
         color: $base-color
 
 And get back this:
+
+    lang:css
 
     .container {
       background-color: #b99a85;
@@ -196,33 +210,33 @@ It also comes with [Blueprint][], which gives you a great starting point to have
 all the default styles for things (margins, typography, resets) look nice out of 
 the box.
 
-### Prettify
+### Pygments
 
-[Prettify][] is a project by Google to do syntax highlighting clientside. It 
-looks for various elements on the page and then applies syntax highlighting to 
-them by wrapping the text inside those elements with tags which can then have 
-CSS rules applied to them. I tried to make mine look very roughly like 
-[Solarized][].
+[Pygments][] is a syntax highlighter which produces HTML output which can then 
+be styled with CSS. Github uses a wrapper around it called [Albino][] to do all 
+the syntax highlighting you see on the site, and it's what I'm using to make 
+pygments work in Jekyll.
 
-I had to make a minor tweak to make it just grab all `<code>` tags inside 
-`<pre>` tags, since that's what markdown generates for code blocks. Prettify 
-normally looks for things with the `prettify` class.
-
-Jekyll also ships with support for pygments, but that was giving me problems so 
-I opted for prettify, which simply has a better name.
+I'm actually using a custom Jekyll plugin to deal with all of this because I 
+didn't want to have to stick liquid `{{% highlight %}}` tags in my posts. In 
+retrospect, this was probably really unnecessary, but it's done now.
 
 ### Google Web Fonts
 
 [Google Web Fonts][] let you use a number of beautiful fonts that may not be 
 available on your visitor's machine on your websites. I'm currently using it for 
-my logo, sidebar and headers. 
+my logo, sidebar and headers.
 
 Using it is beautifully simple. All you have to do is drop a link tag in the 
 head like the one I'm using:
 
+    lang:html
+
     <link href='http://fonts.googleapis.com/css?family=Questrial|Sansita+One' rel='stylesheet' type='text/css'>
 
 And then use it like normal in a CSS rule, like so:
+
+    lang:css
 
     font-family: Questrial, "Helvetica Neue", Arial, Helvetica, sans-serif
 
@@ -235,6 +249,8 @@ pronounciation, "engine-ex" made a lot more sense once I heard it.
 
 Setting up this server was extremely simple. Since I'm only serving static 
 files, all I really needed was the following:
+
+    lang:nginx
 
     # Redirect any subdomain to the main domain
     server {
@@ -273,12 +289,14 @@ tomorrow.
 
 [nginx]: http://nginx.net/
 [Google Web Fonts]: http://www.google.com/webfonts
-[Prettify]: http://code.google.com/p/google-code-prettify/
+[Pygments]: http://pygments.org/
+[Albino]: https://github.com/github/albino
 [Compass]: http://compass-style.org/
 [Blueprint]: http://compass-style.org/reference/blueprint/
 [Sass]: http://sass-lang.com/
 [Markdown]: http://daringfireball.net/projects/markdown/
-[phleet/blog]: https://github.com/phleet/blog
+[github.com/phleet/blog]: https://github.com/phleet/blog
 [Andrew Tinits]: http://twitter.com/#!/amtinits
 [Jekyll]: https://github.com/mojombo/jekyll
 [Solarized]: http://ethanschoonover.com/solarized
+[Octopress]: http://octopress.org/

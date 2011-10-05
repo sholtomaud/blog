@@ -7,9 +7,7 @@
 
     <link href='http://fonts.googleapis.com/css?family=Questrial|Sansita+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
-    <link rel="stylesheet" media="screen" href="/stylesheets/prettify.css" type="text/css" />
-    <script type="text/javascript" src="/javascript/prettify.js"></script>
-
+    <link rel="stylesheet" media="screen" href="/stylesheets/pygments.css" type="text/css" />
   </head>
 
   <body class="bp" onload="prettyPrint()">
@@ -55,6 +53,8 @@
 
 
 <div class="post">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
 <p>My wordpress blog has lasted longer than any site I've used before, but I
 finally got sick of it and switched. So now I'm on <a href="https://github.com/mojombo/jekyll">Jekyll</a>.</p>
 
@@ -72,7 +72,11 @@ means is that all the pages you see on this blog are generated once - not
 generated on demand every time they're requested. There's no DB backend, no
 scripting language running on the server side. These are just plain HTML pages.</p>
 
-<p>I started off with a template I got off here: <a href="https://github.com/krisb/jekyll-template">krisb/jekyll-template</a>.</p>
+<p>I started off with a template I got off here:
+<a href="https://github.com/krisb/jekyll-template">github.com/krisb/jekyll-template</a>. But if you're planning on starting a blog
+similar to mine, don't start from scratch like I did - go check out
+<a href="http://octopress.org/">Octopress</a>. It provides a lot of niceties for blogging hackers that Jekyll
+doesn't out of the box.</p>
 
 <p>So why did I switch?</p>
 
@@ -96,7 +100,8 @@ server - which is now hosted on EC2, with help from <a href="http://twitter.com/
 <h3>Novelty</h3>
 
 <p>I'll be honest here - I feel cooler running Jekyll than Wordpress. And having
-the source for my blog on github just feels right. Seriously: <a href="https://github.com/phleet/blog">phleet/blog</a>.</p>
+the source for my blog on github just feels right. Seriously:
+<a href="https://github.com/phleet/blog">github.com/phleet/blog</a>.</p>
 
 <p>Plus there's nothing better to motivate you to write a blog post than redoing
 your entire blog. I promise I won't be another person who just writes a blog so
@@ -141,25 +146,28 @@ and produces this:
 
 <p>and produces this:</p>
 
-<pre><code>&lt;h3&gt;Markdown&lt;/h3&gt;
+<div class="highlight">
+<pre><span class="nt">&lt;h3&gt;</span>Markdown<span class="nt">&lt;/h3&gt;</span>
 
-&lt;p&gt;Markdown was written by John Gruber of &lt;a href="http://daringfireball.net/"&gt;Daring Fireball&lt;/a&gt;.&lt;/p&gt;
+<span class="nt">&lt;p&gt;</span>Markdown was written by John Gruber of <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://daringfireball.net/"</span><span class="nt">&gt;</span>Daring Fireball<span class="nt">&lt;/a&gt;</span>.<span class="nt">&lt;/p&gt;</span>
 
-&lt;p&gt;As a quick example, it takes this:&lt;/p&gt;
+<span class="nt">&lt;p&gt;</span>As a quick example, it takes this:<span class="nt">&lt;/p&gt;</span>
 
-&lt;pre&gt;&lt;code&gt;Hello World
+<span class="nt">&lt;pre&gt;&lt;code&gt;</span>Hello World
 -----------
 
 I am pretty awesome
-&lt;/code&gt;&lt;/pre&gt;
+<span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
 
-&lt;p&gt;and produces this:&lt;/p&gt;
+<span class="nt">&lt;p&gt;</span>and produces this:<span class="nt">&lt;/p&gt;</span>
 
-&lt;pre&gt;&lt;code&gt;&amp;lt;h2&amp;gt;Hello World&amp;lt;/h2&amp;gt;
+<span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>h2<span class="ni">&amp;gt;</span>Hello World<span class="ni">&amp;lt;</span>/h2<span class="ni">&amp;gt;</span>
 
-&amp;lt;p&amp;gt;I am pretty awesome&amp;lt;/p&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-</code></pre>
+<span class="ni">&amp;lt;</span>p<span class="ni">&amp;gt;</span>I am pretty awesome<span class="ni">&amp;lt;</span>/p<span class="ni">&amp;gt;</span>
+<span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
+</pre>
+</div>
+
 
 <h3>Sass</h3>
 
@@ -167,63 +175,75 @@ I am pretty awesome
 that are simply a giant pain in vanilla CSS. One of my favorite things it does
 is deal with nesting for you.</p>
 
-<pre><code>.container
-  h1
-    font-size: 20px
-  h2
-    font-size: 18px
+<div class="highlight">
+<pre><span class="nc">.container</span>
+  <span class="nt">h1</span>
+    <span class="na">font-size</span><span class="o">:</span> <span class="mi">20</span><span class="kt">px</span>
+  <span class="nt">h2</span>
+    <span class="na">font-size</span><span class="o">:</span> <span class="mi">18</span><span class="kt">px</span>
 
-    &amp;:hover
-      text-decoration: underline
-</code></pre>
+    <span class="k">&amp;</span><span class="nd">:hover</span>
+      <span class="na">text-decoration</span><span class="o">:</span> <span class="no">underline</span>
+</pre>
+</div>
+
 
 <p>Turns into:</p>
 
-<pre><code>.container h1 {
-  font-size: 20px; }
-.container h2 {
-  font-size: 18px; }
-  .container h2:hover {
-    text-decoration: underline; }
-</code></pre>
+<div class="highlight">
+<pre><span class="nc">.container</span> <span class="nt">h1</span> <span class="p">{</span>
+  <span class="k">font-size</span><span class="o">:</span> <span class="m">20px</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.container</span> <span class="nt">h2</span> <span class="p">{</span>
+  <span class="k">font-size</span><span class="o">:</span> <span class="m">18px</span><span class="p">;</span> <span class="p">}</span>
+  <span class="nc">.container</span> <span class="nt">h2</span><span class="nd">:hover</span> <span class="p">{</span>
+    <span class="k">text-decoration</span><span class="o">:</span> <span class="k">underline</span><span class="p">;</span> <span class="p">}</span>
+</pre>
+</div>
+
 
 <p>Since it runs through a compiler before producing CSS, it lets you do some very
 useful things before producing the raw CSS. One of the most valuable things for
 me while working on this site was variables. It means you can do things like
 this:</p>
 
-<pre><code>$base-color: #281e17
-$content-width: 500px
-$sidebar-width: 150px
+<div class="highlight">
+<pre><span class="na">$base-color</span><span class="o">:</span> <span class="mh">#281e17</span>
+<span class="na">$content-width</span><span class="o">:</span> <span class="mi">500</span><span class="kt">px</span>
+<span class="na">$sidebar-width</span><span class="o">:</span> <span class="mi">150</span><span class="kt">px</span>
 
-.container
-  background-color: lighten($base-color, 50%)
-  $padding: 20px
-  padding: $padding
-  width: $content-width + $sidebar-width - 2 * $padding
+<span class="nc">.container</span>
+  <span class="na">background-color</span><span class="o">:</span> <span class="nf">lighten</span><span class="p">(</span><span class="nv">$base-color</span><span class="o">,</span> <span class="mi">50</span><span class="kt">%</span><span class="p">)</span>
+  <span class="nv">$padding</span><span class="o">:</span> <span class="mi">20</span><span class="kt">px</span>
+  <span class="na">padding</span><span class="o">:</span> <span class="nv">$padding</span>
+  <span class="na">width</span><span class="o">:</span> <span class="nv">$content-width</span> <span class="o">+</span> <span class="nv">$sidebar-width</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="nv">$padding</span>
 
-  .sidebar
-    width: $sidebar-width
-    background-color: lighten($base-color, 25%)
+  <span class="nc">.sidebar</span>
+    <span class="na">width</span><span class="o">:</span> <span class="nv">$sidebar-width</span>
+    <span class="na">background-color</span><span class="o">:</span> <span class="nf">lighten</span><span class="p">(</span><span class="nv">$base-color</span><span class="o">,</span> <span class="mi">25</span><span class="kt">%</span><span class="p">)</span>
 
-  .content
-    width: $content-width
-    color: $base-color
-</code></pre>
+  <span class="nc">.content</span>
+    <span class="na">width</span><span class="o">:</span> <span class="nv">$content-width</span>
+    <span class="na">color</span><span class="o">:</span> <span class="nv">$base-color</span>
+</pre>
+</div>
+
 
 <p>And get back this:</p>
 
-<pre><code>.container {
-  background-color: #b99a85;
-  padding: 20px;
-  width: 610px; }
-  .container .sidebar {
-    width: 150px;
-    background-color: #795b46; }
-  .container .content {
-    width: 500px;
-    color: #281e17; }
-</code></pre>
+<div class="highlight">
+<pre><span class="nc">.container</span> <span class="p">{</span>
+  <span class="k">background-color</span><span class="o">:</span> <span class="m">#b99a85</span><span class="p">;</span>
+  <span class="k">padding</span><span class="o">:</span> <span class="m">20px</span><span class="p">;</span>
+  <span class="k">width</span><span class="o">:</span> <span class="m">610px</span><span class="p">;</span> <span class="p">}</span>
+  <span class="nc">.container</span> <span class="nc">.sidebar</span> <span class="p">{</span>
+    <span class="k">width</span><span class="o">:</span> <span class="m">150px</span><span class="p">;</span>
+    <span class="k">background-color</span><span class="o">:</span> <span class="m">#795b46</span><span class="p">;</span> <span class="p">}</span>
+  <span class="nc">.container</span> <span class="nc">.content</span> <span class="p">{</span>
+    <span class="k">width</span><span class="o">:</span> <span class="m">500px</span><span class="p">;</span>
+    <span class="k">color</span><span class="o">:</span> <span class="m">#281e17</span><span class="p">;</span> <span class="p">}</span>
+</pre>
+</div>
+
 
 <p>The really cool thing about the color functions is that you can base your entire
 website off only a few colours, then make everything relative to those. This
@@ -241,20 +261,16 @@ prefixes (<code>-O-, -moz-, -webkit-</code>) for you when you do things like <co
 all the default styles for things (margins, typography, resets) look nice out of
 the box.</p>
 
-<h3>Prettify</h3>
+<h3>Pygments</h3>
 
-<p><a href="http://code.google.com/p/google-code-prettify/">Prettify</a> is a project by Google to do syntax highlighting clientside. It
-looks for various elements on the page and then applies syntax highlighting to
-them by wrapping the text inside those elements with tags which can then have
-CSS rules applied to them. I tried to make mine look very roughly like
-<a href="http://ethanschoonover.com/solarized">Solarized</a>.</p>
+<p><a href="http://pygments.org/">Pygments</a> is a syntax highlighter which produces HTML output which can then
+be styled with CSS. Github uses a wrapper around it called <a href="https://github.com/github/albino">Albino</a> to do all
+the syntax highlighting you see on the site, and it's what I'm using to make
+pygments work in Jekyll.</p>
 
-<p>I had to make a minor tweak to make it just grab all <code>&lt;code&gt;</code> tags inside
-<code>&lt;pre&gt;</code> tags, since that's what markdown generates for code blocks. Prettify
-normally looks for things with the <code>prettify</code> class.</p>
-
-<p>Jekyll also ships with support for pygments, but that was giving me problems so
-I opted for prettify, which simply has a better name.</p>
+<p>I'm actually using a custom Jekyll plugin to deal with all of this because I
+didn't want to have to stick liquid `` tags in my posts. In
+retrospect, this was probably really unnecessary, but it's done now.</p>
 
 <h3>Google Web Fonts</h3>
 
@@ -265,13 +281,19 @@ my logo, sidebar and headers.</p>
 <p>Using it is beautifully simple. All you have to do is drop a link tag in the
 head like the one I'm using:</p>
 
-<pre><code>&lt;link href='http://fonts.googleapis.com/css?family=Questrial|Sansita+One' rel='stylesheet' type='text/css'&gt;
-</code></pre>
+<div class="highlight">
+<pre><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">'http://fonts.googleapis.com/css?family=Questrial|Sansita+One'</span> <span class="na">rel=</span><span class="s">'stylesheet'</span> <span class="na">type=</span><span class="s">'text/css'</span><span class="nt">&gt;</span>
+</pre>
+</div>
+
 
 <p>And then use it like normal in a CSS rule, like so:</p>
 
-<pre><code>font-family: Questrial, "Helvetica Neue", Arial, Helvetica, sans-serif
-</code></pre>
+<div class="highlight">
+<pre><span class="nt">font-family</span><span class="o">:</span> <span class="nt">Questrial</span><span class="o">,</span> <span class="s2">"Helvetica Neue"</span><span class="o">,</span> <span class="nt">Arial</span><span class="o">,</span> <span class="nt">Helvetica</span><span class="o">,</span> <span class="nt">sans-serif</span>
+</pre>
+</div>
+
 
 <h3>Nginx</h3>
 
@@ -283,41 +305,45 @@ pronounciation, "engine-ex" made a lot more sense once I heard it.</p>
 <p>Setting up this server was extremely simple. Since I'm only serving static
 files, all I really needed was the following:</p>
 
-<pre><code># Redirect any subdomain to the main domain
-server {
-  server_name *.jamie-wong.com;
-  rewrite ^ http://jamie-wong.com$request_uri? permanent;
-}
+<div class="highlight">
+<pre><span class="c1"># Redirect any subdomain to the main domain</span>
+<span class="k">server</span> <span class="p">{</span>
+  <span class="kn">server_name</span> <span class="s">*.jamie-wong.com</span><span class="p">;</span>
+  <span class="kn">rewrite</span> <span class="s">^</span> <span class="s">http://jamie-wong.com</span><span class="nv">$request_uri?</span> <span class="s">permanent</span><span class="p">;</span>
+<span class="p">}</span>
 
-server {
-  listen 80 default;
-  server_name jamie-wong.com;
-  server_name_in_redirect off;
+<span class="k">server</span> <span class="p">{</span>
+  <span class="kn">listen</span> <span class="mi">80</span> <span class="s">default</span><span class="p">;</span>
+  <span class="kn">server_name</span> <span class="s">jamie-wong.com</span><span class="p">;</span>
+  <span class="kn">server_name_in_redirect</span> <span class="no">off</span><span class="p">;</span>
 
-  access_log /var/log/nginx/jamie-wong.com.log;
+  <span class="kn">access_log</span> <span class="s">/var/log/nginx/jamie-wong.com.log</span><span class="p">;</span>
 
-  index index.html index.php;
+  <span class="kn">index</span> <span class="s">index.html</span> <span class="s">index.php</span><span class="p">;</span>
 
-  try_files $uri $uri/ /404/ =404;
+  <span class="kn">try_files</span> <span class="nv">$uri</span> <span class="nv">$uri/</span> <span class="s">/404/</span> <span class="p">=</span><span class="mi">404</span><span class="p">;</span>
 
-  # If it's in any of these folders I migrated from
-  # my shared hosting on dreamhost, load it directly
-  location ~ ^/(experiments|asciiconvert|life|Jobmine-Improved|V10|1yr)/ {
-    root /var/www/jamie-wong.com/;
-  }
+  <span class="c1"># If it's in any of these folders I migrated from</span>
+  <span class="c1"># my shared hosting on dreamhost, load it directly</span>
+  <span class="kn">location</span> <span class="p">~</span> <span class="sr">^/(experiments|asciiconvert|life|Jobmine-Improved|V10|1yr)/</span> <span class="p">{</span>
+    <span class="kn">root</span> <span class="s">/var/www/jamie-wong.com/</span><span class="p">;</span>
+  <span class="p">}</span>
 
-  # Otherwise, it's probably a blog page, so load it
-  # from Jekyll's generated _site directory
-  location ~ / {
-    root /var/www/jamie-wong.com/blog/_site/;
-  }
+  <span class="c1"># Otherwise, it's probably a blog page, so load it</span>
+  <span class="c1"># from Jekyll's generated _site directory</span>
+  <span class="kn">location</span> <span class="p">~</span> <span class="sr">/</span> <span class="p">{</span>
+    <span class="kn">root</span> <span class="s">/var/www/jamie-wong.com/blog/_site/</span><span class="p">;</span>
+  <span class="p">}</span>
 
-  error_page  404  /404/;
-}
-</code></pre>
+  <span class="kn">error_page</span>  <span class="mi">404</span>  <span class="s">/404/</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+</div>
+
 
 <p>This got a lot longer than I expected it to. Time for sleep - will proofread
 tomorrow.</p>
+</body></html>
 
 </div>
 

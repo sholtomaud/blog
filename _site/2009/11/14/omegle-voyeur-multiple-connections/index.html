@@ -7,9 +7,7 @@
 
     <link href='http://fonts.googleapis.com/css?family=Questrial|Sansita+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
-    <link rel="stylesheet" media="screen" href="/stylesheets/prettify.css" type="text/css" />
-    <script type="text/javascript" src="/javascript/prettify.js"></script>
-
+    <link rel="stylesheet" media="screen" href="/stylesheets/pygments.css" type="text/css" />
   </head>
 
   <body class="bp" onload="prettyPrint()">
@@ -55,6 +53,8 @@
 
 
 <div class="post">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
 <p>In case you haven't read the post about all my projects, here's a description of what Omegle Voyeur is:</p>
 
 <blockquote>
@@ -62,14 +62,14 @@ Omegle is a website where you are connected to a stranger for a chat. It is domi
 </blockquote>
 
 
-<p>In terms of technology, Omegle Voyeur is primarily one big Javascript Prototype class. <a href='http://www.prototypejs.org/'>Prototype</a> is a Javascript Framework which makes the creation and maintenance of classes, conversion of data into JSON for transfer, and sending AJAX requests much, much easier.</p>
+<p>In terms of technology, Omegle Voyeur is primarily one big Javascript Prototype class. <a href="http://www.prototypejs.org/">Prototype</a> is a Javascript Framework which makes the creation and maintenance of classes, conversion of data into JSON for transfer, and sending AJAX requests much, much easier.</p>
 
 <p>There's also a very small bit of code in php which is able to be so short because it uses the incredible program cUrl. <a href="http://curl.haxx.se/">cUrl</a> is a command line utility for grabbing data from websites using their URL. libcurl facilititates the use of curl in php without having to write your own wrapper.</p>
 
 <p>Below is some php code I use to make curl even easier than it already is. simple_get($url) will return the HTTP GET result from the url specified. simple_post works similarly, but delivers data using the payload.</p>
 
-<pre lang='php' colla='-' file='simple_curl.php'>
-<?
+<pre lang="php" colla="-" file="simple_curl.php">
+
 // Simple cUrl
 // Simple get and post requests 
 function simple_get($url) {
@@ -91,7 +91,7 @@ function simple_post($url,$payload) {
     curl_close($c);
     return $result;
 }
-?>
+?&gt;
 </pre>
 
 
@@ -111,7 +111,8 @@ For the time being, you can view it here: <a href="http://petersobot.com/omegle/
 
 <p>A quick note on how I figured out the Omegle communication protocol.
 The entire code governing the process is conveniently kept here: <a href="http://omegle.com/static/omegle.js?27">http://omegle.com/static/omegle.js?27</a>
-Unless you enjoy reading 1000s of characters on a single line, you can use the <a href='http://jsbeautifier.org/'>JS Beautifier</a> to clean it up to a readable state.</p>
+Unless you enjoy reading 1000s of characters on a single line, you can use the <a href="http://jsbeautifier.org/">JS Beautifier</a> to clean it up to a readable state.</p>
+</body></html>
 
 </div>
 

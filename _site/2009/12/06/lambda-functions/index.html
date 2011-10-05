@@ -7,9 +7,7 @@
 
     <link href='http://fonts.googleapis.com/css?family=Questrial|Sansita+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
-    <link rel="stylesheet" media="screen" href="/stylesheets/prettify.css" type="text/css" />
-    <script type="text/javascript" src="/javascript/prettify.js"></script>
-
+    <link rel="stylesheet" media="screen" href="/stylesheets/pygments.css" type="text/css" />
   </head>
 
   <body class="bp" onload="prettyPrint()">
@@ -55,6 +53,8 @@
 
 
 <div class="post">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
 <p>One day, a friend of mine called me up asking for help with his CS assignment.
 It was about lambda functions in scheme. Lambda functions had always been
 something confusing both in theory and practice for me. Why do you need them?
@@ -147,14 +147,16 @@ print a
 
 <h1>map</h1>
 
-<blockquote><p>  map(function, sequence[, sequence, ...]) -> list</p>
+<blockquote>
+<p>  map(function, sequence[, sequence, ...]) -&gt; list</p>
 
 <p>  Return a list of the results of applying the function to the items of
   the argument sequence(s).  If more than one sequence is given, the
   function is called with an argument list consisting of the corresponding
   item of each sequence, substituting None for missing values when not all
   sequences have the same length.  If the function is None, return a list of
-  the items of the sequence (or a list of tuples if more than one sequence).</p></blockquote>
+  the items of the sequence (or a list of tuples if more than one sequence).</p>
+</blockquote>
 
 <p>More or less, what map does is apply a function on every element of an array
 then return an array of the corresponding return values.</p>
@@ -254,11 +256,13 @@ print "\n".join(formatted_rows)
 
 <h1>filter</h1>
 
-<blockquote><p>  filter(function or None, sequence) -> list, tuple, or string</p>
+<blockquote>
+<p>  filter(function or None, sequence) -&gt; list, tuple, or string</p>
 
 <p>  Return those items of sequence for which function(item) is true.  If
   function is None, return the items that are true.  If sequence is a tuple
-  or string, return the same type, else return a list.</p></blockquote>
+  or string, return the same type, else return a list.</p>
+</blockquote>
 
 <p>The filter function does just what it's name suggests: filters out items that
 don't meet certain requirements. Specifically, any element which does not
@@ -300,14 +304,16 @@ print filter(isprime,range(101))
 
 <h1>reduce</h1>
 
-<blockquote><p>  reduce(function, sequence[, initial]) -> value</p>
+<blockquote>
+<p>  reduce(function, sequence[, initial]) -&gt; value</p>
 
 <p>  Apply a function of two arguments cumulatively to the items of a sequence,
   from left to right, so as to reduce the sequence to a single value.
   For example, reduce(lambda x, y: x+y, [1, 2, 3, 4, 5]) calculates
   ((((1+2)+3)+4)+5).  If initial is present, it is placed before the items
   of the sequence in the calculation, and serves as a default when the
-  sequence is empty.</p></blockquote>
+  sequence is empty.</p>
+</blockquote>
 
 <p>Example: Calculate 30 factorial without using local variables</p>
 
@@ -324,6 +330,7 @@ print reduce(lambda x,y: y if len(y) &gt; len(x) else x, a)
 </code></pre>
 
 <p>And that's all for now. If you're in SE 2014 reading this and don't think you need to know how to use lambda functions - have fun with scheme.</p>
+</body></html>
 
 </div>
 

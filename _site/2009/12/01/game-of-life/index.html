@@ -7,9 +7,7 @@
 
     <link href='http://fonts.googleapis.com/css?family=Questrial|Sansita+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" media="screen" href="/stylesheets/screen.css" type="text/css" />
-    <link rel="stylesheet" media="screen" href="/stylesheets/prettify.css" type="text/css" />
-    <script type="text/javascript" src="/javascript/prettify.js"></script>
-
+    <link rel="stylesheet" media="screen" href="/stylesheets/pygments.css" type="text/css" />
   </head>
 
   <body class="bp" onload="prettyPrint()">
@@ -55,11 +53,13 @@
 
 
 <div class="post">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
 <p>For my latest project, I'm implementing Conway's Game of Life in python into animated GIFs.</p>
 
 <p>Before I even explain what Conway's Game of Life is, be amused by the below, generated animation:</p>
 
-<div style='text-align: center'>
+<div style="text-align: center">
   <img src="/images/queenbee.gif" alt="Queenbee">
 </div>
 
@@ -79,8 +79,7 @@ overcrowding.</li>
 <li>Any live cell with two or three live neighbours lives on to the next
 generation.</li>
 <li>Any dead cell with exactly three live neighbours becomes a live cell.</li>
-</ol>
-</blockquote>
+</ol></blockquote>
 
 <p>The colours you see in the above animation represent the alive status of each cell and also how many neighbours that cell has if it's alive.</p>
 
@@ -123,6 +122,7 @@ lines of header.</p>
 
 <p>I'm almost 100% sure that some combination of the command line flags of
 <code>lifeImage.py</code> don't work nicely together, and would like to know what they are.</p>
+</body></html>
 
 </div>
 
