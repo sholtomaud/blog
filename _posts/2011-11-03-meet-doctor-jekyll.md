@@ -221,6 +221,10 @@ I'm actually using a custom Jekyll plugin to deal with all of this because I
 didn't want to have to stick liquid `{{% highlight %}}` tags in my posts. In 
 retrospect, this was probably really unnecessary, but it's done now.
 
+You can see the plugin here: [markdown.rb][]
+
+[markdown.rb]: https://github.com/phleet/blog/blob/master/_plugins/markdown.rb
+
 ### Google Web Fonts
 
 [Google Web Fonts][] let you use a number of beautiful fonts that may not be 
