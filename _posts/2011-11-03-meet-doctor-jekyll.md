@@ -218,8 +218,8 @@ the syntax highlighting you see on the site, and it's what I'm using to make
 pygments work in Jekyll.
 
 I'm actually using a custom Jekyll plugin to deal with all of this because I 
-didn't want to have to stick liquid `{{% highlight %}}` tags in my posts. In 
-retrospect, this was probably really unnecessary, but it's done now.
+didn't want to have to stick liquid tags in my posts. In retrospect, this was 
+probably really unnecessary, but it's done now.
 
 You can see the plugin here: [markdown.rb][]
 

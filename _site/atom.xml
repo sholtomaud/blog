@@ -4,7 +4,7 @@
  <title>Zero Wind :: Jamie Wong</title>
  <link href="http://jamie-wong.com/atom.xml" rel="self"/>
  <link href="http://jamie-wong.com/"/>
- <updated>2011-10-05T03:23:24-07:00</updated>
+ <updated>2011-10-05T03:25:06-07:00</updated>
  <id>http://jamie-wong.com/</id>
  <author>
    <name>Jamie Wong</name>
@@ -233,8 +233,8 @@ the syntax highlighting you see on the site, and it's what I'm using to make
 pygments work in Jekyll.&lt;/p&gt;
 
 &lt;p&gt;I'm actually using a custom Jekyll plugin to deal with all of this because I
-didn't want to have to stick liquid `` tags in my posts. In
-retrospect, this was probably really unnecessary, but it's done now.&lt;/p&gt;
+didn't want to have to stick liquid tags in my posts. In retrospect, this was
+probably really unnecessary, but it's done now.&lt;/p&gt;
 
 &lt;p&gt;You can see the plugin here: &lt;a href=&quot;https://github.com/phleet/blog/blob/master/_plugins/markdown.rb&quot;&gt;markdown.rb&lt;/a&gt;&lt;/p&gt;
 
