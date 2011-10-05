@@ -20,6 +20,8 @@ Occasionally for Javascript projects, I found myself building a lot of HTML prog
 
 What's it do? This example should demonstrate my goal fairly well.
 
+    lang:js
+
     $(function() {
         $.mktag("#demo").jsonimal([
     		["h1", {text: "JSONimal!"}],

@@ -74,8 +74,10 @@
 <pre><code>sudo gem install uwace
 </code></pre>
 
-<p>Wait for it to finish installing, then run
-   uwace</p>
+<p>Wait for it to finish installing, then run</p>
+
+<pre><code>uwace
+</code></pre>
 
 <p>Which will prompt you for a username and password.
 Of course, I wouldn't release anything that asks for your password without releasing source, so here it is:</p>
@@ -93,27 +95,30 @@ Mechanize is a set of tools for automating webpage interactions and retrieving d
 
 <p>To demonstrate how simple form interaction is, here's the method for login:</p>
 
-<pre><code>def login
-  @username ||= ask("Username: ")
-  @password ||= ask("Password: ") {|q| q.echo = '*'}
+<div class="highlight">
+<pre><span class="k">def</span> <span class="nf">login</span>
+  <span class="vi">@username</span> <span class="o">||=</span> <span class="n">ask</span><span class="p">(</span><span class="s2">"Username: "</span><span class="p">)</span>
+  <span class="vi">@password</span> <span class="o">||=</span> <span class="n">ask</span><span class="p">(</span><span class="s2">"Password: "</span><span class="p">)</span> <span class="p">{</span><span class="o">|</span><span class="n">q</span><span class="o">|</span> <span class="n">q</span><span class="o">.</span><span class="n">echo</span> <span class="o">=</span> <span class="s1">'*'</span><span class="p">}</span>
 
-  say "Logging in ..."
+  <span class="n">say</span> <span class="s2">"Logging in ..."</span>
 
-  login_page = angel_get 'home.asp'
-  form = login_page.form_with(:name =&gt; "frmLogon")
-  form.username = @username
-  form.password = @password
+  <span class="n">login_page</span> <span class="o">=</span> <span class="n">angel_get</span> <span class="s1">'home.asp'</span>
+  <span class="n">form</span> <span class="o">=</span> <span class="n">login_page</span><span class="o">.</span><span class="n">form_with</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">"frmLogon"</span><span class="p">)</span>
+  <span class="n">form</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="vi">@username</span>
+  <span class="n">form</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="vi">@password</span>
 
-  login_submit_page = @agent.submit form
+  <span class="n">login_submit_page</span> <span class="o">=</span> <span class="vi">@agent</span><span class="o">.</span><span class="n">submit</span> <span class="n">form</span>
 
-  if login_submit_page.uri.to_s.include? 'authenticate.asp'
-    raise InvalidLogin
-  end
-rescue InvalidLogin
-  say 'Invalid Username/Password'
-  exit
-end
-</code></pre>
+  <span class="k">if</span> <span class="n">login_submit_page</span><span class="o">.</span><span class="n">uri</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">include?</span> <span class="s1">'authenticate.asp'</span>
+    <span class="k">raise</span> <span class="no">InvalidLogin</span>
+  <span class="k">end</span>
+<span class="k">rescue</span> <span class="no">InvalidLogin</span>
+  <span class="n">say</span> <span class="s1">'Invalid Username/Password'</span>
+  <span class="nb">exit</span>
+<span class="k">end</span>
+</pre>
+</div>
+
 
 <p>While I've only used the Mechanize bindings for ruby, there bindings for many other languages:</p>
 

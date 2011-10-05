@@ -59,10 +59,13 @@
 
 <p>As our CS assignments get more and more complex, it's starting to become time consuming to build, test, and submit each assignment. I could either do this every time I want to test:</p>
 
-<pre><code>java cs241.binasm &lt; a2p8.asm &gt; a2p8.mips
+<div class="highlight">
+<pre>java cs241.binasm &lt; a2p8.asm &gt; a2p8.mips
 java mips.array a2p8.mips &lt; a2p8.sample.in
 java mips.array a2p8.mips &lt; a2p8.onenode.in
-</code></pre>
+</pre>
+</div>
+
 
 <p>Or I could just run <code>make</code>.</p>
 
@@ -70,18 +73,24 @@ java mips.array a2p8.mips &lt; a2p8.onenode.in
 
 <p><a href="http://www.gnu.org/software/make/">GNU Make</a> is a system for constructing executables or other non-source code files from source code. It allows you to specify dependencies for files and define rules for constructing them from source. For example, the rule to build <code>a2p8.mips</code> would look like this:</p>
 
-<pre><code>a2p8.mips: a2p8.asm
+<div class="highlight">
+<pre><span class="nf">a2p8.mips</span><span class="o">:</span> <span class="m">a2p8.asm</span>
     java cs241.binasm &lt; a2p8.asm &gt; a2p8.mips
-</code></pre>
+</pre>
+</div>
+
 
 <p>This says, to make <code>a2p8.mips</code>, run <code>java cs241.binasm &lt; a2p.asm &gt; a2p8.mips</code>. To use <code>make</code>, stick your ruleset in a file called <code>Makefile</code> in the same directory as your source then run <code>make</code>. This command will only run if <code>a2p8.asm</code> has changed since the last time it was run. These dependencies stack as well. For instance, say I need to join two files together before I compile them. I can define a ruleset like this:</p>
 
-<pre><code>linked.mips: linked.asm
+<div class="highlight">
+<pre><span class="nf">linked.mips</span><span class="o">:</span> <span class="m">linked.asm</span>
     java cs241.binasm &lt; linked.asm &gt; linked.mips
 
-linked.asm: a2p7.asm print.asm
+<span class="nf">linked.asm</span><span class="o">:</span> <span class="m">a2p7.asm print.asm</span>
     cat a2p7.asm print.asm &gt; linked.asm
-</code></pre>
+</pre>
+</div>
+
 
 <p>This will link the files together before it tries to compile them. It'll also make sure it's up to date whenever you change either <code>a2p7.asm</code> or <code>print.asm</code>. The build rule at the top of the <code>Makefile</code> is called the default rule. This is the one that gets run when you just run <code>make</code> at the command line. You can also pass a parameter to tell <code>make</code> to construct something specific. For instance, I could run <code>make linked.asm</code> here to just build the linked file without actually compiling it to machine code.</p>
 
@@ -89,15 +98,21 @@ linked.asm: a2p7.asm print.asm
 
 <p>One of the principles of writing good code is DRY: Don't Repeat Yourself. Make provides various ways to support this through the use of automatic variables. Automatic variables are ones that are set for you with useful values. For instance, the following rule:</p>
 
-<pre><code>linked.asm: a2p7.asm print.asm
+<div class="highlight">
+<pre><span class="nf">linked.asm</span><span class="o">:</span> <span class="m">a2p7.asm print.asm</span>
     cat a2p7.asm print.asm &gt; linked.asm
-</code></pre>
+</pre>
+</div>
+
 
 <p>can be reduced to this:</p>
 
-<pre><code>linked.asm: a2p7.asm print.asm
-    cat $^ &gt; $@
-</code></pre>
+<div class="highlight">
+<pre><span class="nf">linked.asm</span><span class="o">:</span> <span class="m">a2p7.asm print.asm</span>
+    cat <span class="nv">$^</span> &gt; <span class="nv">$@</span>
+</pre>
+</div>
+
 
 <p>The variable <code>$^</code> is a space separated list of all the dependencies. <code>$@</code> is the target. See <a href="http://www.gnu.org/software/make/manual/make.html#Automatic-Variables">GNU make - Automatic Variables</a> for the full list and description of such variables.</p>
 
@@ -105,93 +120,114 @@ linked.asm: a2p7.asm print.asm
 
 <p>Another unnecessary piece of code duplication exists for compiling multiple files of the same type. For instance, the following is repetitive:</p>
 
-<pre><code>a2p8.mips: a2p8.asm
-    java cs241.binasm &lt; $&lt; &gt; $@
+<div class="highlight">
+<pre><span class="nf">a2p8.mips</span><span class="o">:</span> <span class="m">a2p8.asm</span>
+    java cs241.binasm &lt; <span class="nv">$&lt;</span> &gt; <span class="nv">$@</span>
 
-a2p7.mips: a2p7.asm
-    java cs241.binasm &lt; $&lt; &gt; $@
-</code></pre>
+<span class="nf">a2p7.mips</span><span class="o">:</span> <span class="m">a2p7.asm</span>
+    java cs241.binasm &lt; <span class="nv">$&lt;</span> &gt; <span class="nv">$@</span>
+</pre>
+</div>
+
 
 <p>Instead, I can define my own implicit rule for building all <code>*.mips</code> files like so:</p>
 
-<pre><code>%.mips: %.asm
-    java cs241.binasm &lt; $*.asm &gt; $*.mips
-</code></pre>
+<div class="highlight">
+<pre><span class="nf">%.mips</span><span class="o">:</span> <span class="m">%.asm</span>
+    java cs241.binasm &lt; <span class="nv">$*</span>.asm &gt; <span class="nv">$*</span>.mips
+</pre>
+</div>
+
 
 <h1>Testing Using Make</h1>
 
 <p>One of the things I took away from my co-op term at The Working Group was the benefits of test driven development. Untested code is broken code, and manual testing is tedious and annoying. As your code gets more and more complicated, there will be more and more edge cases to deal with. These cannot be dealt with a single test case. Normally, you would be forced to write multiple input files and pass them each individually to the executable to see if everything worked. I don't like having to do this. So instead, I defined my own ruleset:</p>
 
-<pre><code>ASSIGNMENT = a2p7
+<div class="highlight">
+<pre><span class="nv">ASSIGNMENT</span> <span class="o">=</span> a2p7
 
-test: linked.mips Empty.test All.test
+<span class="nb">test</span>: linked.mips Empty.test All.test
 
-%.test: $(ASSIGNMENT).%.in
-  @echo ----------- $* ------------------
-  java mips.array linked.mips &lt; $^
+%.test: <span class="k">$(</span>ASSIGNMENT<span class="k">)</span>.%.in
+  @echo ----------- <span class="nv">$*</span> ------------------
+  java mips.array linked.mips &lt; <span class="nv">$^</span>
 
 %.mips: %.asm
-  java cs241.binasm &lt; $*.asm &gt; $*.mips
+  java cs241.binasm &lt; <span class="nv">$*</span>.asm &gt; <span class="nv">$*</span>.mips
 
-linked.asm: $(ASSIGNMENT).asm print.asm
-  cat $^ &gt; $@
-</code></pre>
+linked.asm: <span class="k">$(</span>ASSIGNMENT<span class="k">)</span>.asm print.asm
+  cat <span class="nv">$^</span> &gt; <span class="nv">$@</span>
+</pre>
+</div>
+
 
 <p>This one merits a bit of explanation. The default task here is <code>test</code>, and it has no recipe associated with it. Instead, it just makes sure all of its dependencies are up to date. <code>Empty.test</code> and <code>All.test</code> here aren't actual files. They're simple methods of referring to another rule, in this case the <code>%.test</code> implicit rule.</p>
 
 <p>The <code>%.test</code> implicit rule depends on a corresponding input file. For example, <code>Empty.test</code> will rely on <code>a2p7.Empty.in</code>, which will then be passed in as input to the executable. The result from running looks like this:</p>
 
-<pre><code>  [P7]  make
+<div class="highlight">
+<pre><span class="nv">$ </span> make
 ----------- Empty ------------------
 java mips.array linked.mips &lt; a2p7.Empty.in
 Enter length of array: MIPS program completed normally.
-$01 = 0x000001c4   $02 = 0x00000000   $03 = 0x00000000   $04 = 0x00000000   
-$05 = 0x00000000   $06 = 0x00000000   $07 = 0x00000000   $08 = 0x00000000   
-$09 = 0x00000000   $10 = 0x00000000   $11 = 0x000001c4   $12 = 0x00000000   
-$13 = 0x00000000   $14 = 0x00000000   $15 = 0x00000000   $16 = 0x00000000   
-$17 = 0x00000000   $18 = 0x00000000   $19 = 0x00000000   $20 = 0x00000000   
-$21 = 0x00000000   $22 = 0x00000000   $23 = 0x00000000   $24 = 0x00000000   
-$25 = 0x00000000   $26 = 0x00000000   $27 = 0x00000000   $28 = 0x00000000   
-$29 = 0x00000000   $30 = 0x01000000   $31 = 0x8123456c   
+<span class="nv">$01</span> <span class="o">=</span> 0x000001c4   <span class="nv">$02</span> <span class="o">=</span> 0x00000000   <span class="nv">$03</span> <span class="o">=</span> 0x00000000   <span class="nv">$04</span> <span class="o">=</span> 0x00000000
+<span class="nv">$05</span> <span class="o">=</span> 0x00000000   <span class="nv">$06</span> <span class="o">=</span> 0x00000000   <span class="nv">$07</span> <span class="o">=</span> 0x00000000   <span class="nv">$08</span> <span class="o">=</span> 0x00000000
+<span class="nv">$09</span> <span class="o">=</span> 0x00000000   <span class="nv">$10</span> <span class="o">=</span> 0x00000000   <span class="nv">$11</span> <span class="o">=</span> 0x000001c4   <span class="nv">$12</span> <span class="o">=</span> 0x00000000
+<span class="nv">$13</span> <span class="o">=</span> 0x00000000   <span class="nv">$14</span> <span class="o">=</span> 0x00000000   <span class="nv">$15</span> <span class="o">=</span> 0x00000000   <span class="nv">$16</span> <span class="o">=</span> 0x00000000
+<span class="nv">$17</span> <span class="o">=</span> 0x00000000   <span class="nv">$18</span> <span class="o">=</span> 0x00000000   <span class="nv">$19</span> <span class="o">=</span> 0x00000000   <span class="nv">$20</span> <span class="o">=</span> 0x00000000
+<span class="nv">$21</span> <span class="o">=</span> 0x00000000   <span class="nv">$22</span> <span class="o">=</span> 0x00000000   <span class="nv">$23</span> <span class="o">=</span> 0x00000000   <span class="nv">$24</span> <span class="o">=</span> 0x00000000
+<span class="nv">$25</span> <span class="o">=</span> 0x00000000   <span class="nv">$26</span> <span class="o">=</span> 0x00000000   <span class="nv">$27</span> <span class="o">=</span> 0x00000000   <span class="nv">$28</span> <span class="o">=</span> 0x00000000
+<span class="nv">$29</span> <span class="o">=</span> 0x00000000   <span class="nv">$30</span> <span class="o">=</span> 0x01000000   <span class="nv">$31</span> <span class="o">=</span> 0x8123456c
 ----------- All ------------------
 java mips.array linked.mips &lt; a2p7.All.in
 Enter length of array: Enter array element 0: Enter array element 1: Enter array element 2: 123
 0
 -456
 MIPS program completed normally.
-$01 = 0xfffffe38   $02 = 0x00000003   $03 = 0x00000001   $04 = 0x00000000   
-$05 = 0x00000000   $06 = 0x00000000   $07 = 0x00000000   $08 = 0x00000000   
-$09 = 0x00000000   $10 = 0x00000000   $11 = 0x000001d0   $12 = 0x00000000   
-$13 = 0x00000000   $14 = 0x00000000   $15 = 0x00000000   $16 = 0x00000000   
-$17 = 0x00000000   $18 = 0x00000000   $19 = 0x00000000   $20 = 0x00000000   
-$21 = 0x00000000   $22 = 0x00000000   $23 = 0x00000000   $24 = 0x00000000   
-$25 = 0x00000000   $26 = 0x00000000   $27 = 0x00000000   $28 = 0x00000000   
-$29 = 0x00000000   $30 = 0x01000000   $31 = 0x8123456c   
-</code></pre>
+<span class="nv">$01</span> <span class="o">=</span> 0xfffffe38   <span class="nv">$02</span> <span class="o">=</span> 0x00000003   <span class="nv">$03</span> <span class="o">=</span> 0x00000001   <span class="nv">$04</span> <span class="o">=</span> 0x00000000
+<span class="nv">$05</span> <span class="o">=</span> 0x00000000   <span class="nv">$06</span> <span class="o">=</span> 0x00000000   <span class="nv">$07</span> <span class="o">=</span> 0x00000000   <span class="nv">$08</span> <span class="o">=</span> 0x00000000
+<span class="nv">$09</span> <span class="o">=</span> 0x00000000   <span class="nv">$10</span> <span class="o">=</span> 0x00000000   <span class="nv">$11</span> <span class="o">=</span> 0x000001d0   <span class="nv">$12</span> <span class="o">=</span> 0x00000000
+<span class="nv">$13</span> <span class="o">=</span> 0x00000000   <span class="nv">$14</span> <span class="o">=</span> 0x00000000   <span class="nv">$15</span> <span class="o">=</span> 0x00000000   <span class="nv">$16</span> <span class="o">=</span> 0x00000000
+<span class="nv">$17</span> <span class="o">=</span> 0x00000000   <span class="nv">$18</span> <span class="o">=</span> 0x00000000   <span class="nv">$19</span> <span class="o">=</span> 0x00000000   <span class="nv">$20</span> <span class="o">=</span> 0x00000000
+<span class="nv">$21</span> <span class="o">=</span> 0x00000000   <span class="nv">$22</span> <span class="o">=</span> 0x00000000   <span class="nv">$23</span> <span class="o">=</span> 0x00000000   <span class="nv">$24</span> <span class="o">=</span> 0x00000000
+<span class="nv">$25</span> <span class="o">=</span> 0x00000000   <span class="nv">$26</span> <span class="o">=</span> 0x00000000   <span class="nv">$27</span> <span class="o">=</span> 0x00000000   <span class="nv">$28</span> <span class="o">=</span> 0x00000000
+<span class="nv">$29</span> <span class="o">=</span> 0x00000000   <span class="nv">$30</span> <span class="o">=</span> 0x01000000   <span class="nv">$31</span> <span class="o">=</span> 0x8123456c
+</pre>
+</div>
+
 
 <p>The <code>echo</code> line above that simple outputs the name of the test before running it so it looks nicer on the console. The <code>@</code> before the echo prevents make from displaying the command, otherwise it would look like this:</p>
 
-<pre><code>[P7]  make
+<div class="highlight">
+<pre><span class="nv">$ </span> make
 cat a2p7.asm print.asm &gt; linked.asm
 java cs241.binasm &lt; linked.asm &gt; linked.mips
-echo ----------- Empty ------------------
+<span class="nb">echo</span> ----------- Empty ------------------
 ----------- Empty ------------------
-</code></pre>
+</pre>
+</div>
+
 
 <h1>Submitting to Marmoset from the Commandline</h1>
 
 <p>Just for kicks and because I wanted to mess around with <a href="http://github.com/tenderlove/mechanize">Mechanize</a>, I built a ruby script which will submit to Marmoset for me. You can try it out yourself if you have Ruby and <a href="https://rubygems.org/">Rubygems</a> by running</p>
 
-<pre><code>sudo gem install marmoset
-</code></pre>
+<div class="highlight">
+<pre>sudo gem install marmoset
+</pre>
+</div>
+
 
 <p>Or you can browse the code yourself here: <a href="">http://github.com/phleet/MarmosetSubmit</a></p>
 
 <p>Here's how you can integrate the submission process into your <code>Makefile</code>:</p>
 
-<pre><code>submit: $(ASSIGNMENT).asm
-    marmoset -u jlfwong -c cs241 -a $(ASSIGNMENT) -f $(ASSIGNMENT).asm
-</code></pre>
+<div class="highlight">
+<pre><span class="nf">submit</span><span class="o">:</span> <span class="m">$(ASSIGNMENT).asm</span>
+    marmoset -u jlfwong -c cs241 -a <span class="k">$(</span>ASSIGNMENT<span class="k">)</span> -f <span class="k">$(</span>ASSIGNMENT<span class="k">)</span>.asm
+</pre>
+</div>
+
 
 <p>For now, it only submits - there's no way of checking to see if it was successful or running the release tests. I can build that if people are really interested in that, or you can fork the github repo and do it yourself.</p>
 

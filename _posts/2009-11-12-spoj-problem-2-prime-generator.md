@@ -33,6 +33,8 @@ The idea behind every solution here (with some variation) is to generate all the
 
 <strong>C++</strong>
 
+    lang:cpp
+
     /// PRIME1 - C++ (g++)
     // AC Time: 2.52s
     // NOTE: I am aware that the use of vector and set actually
@@ -104,6 +106,8 @@ The idea behind every solution here (with some variation) is to generate all the
 
 <strong>C99</strong>
 
+    lang:c
+
     // PRIME1 - C99 (gcc)
     // AC Time: 0.07s
     #include <stdio.h>
@@ -171,6 +175,8 @@ The idea behind every solution here (with some variation) is to generate all the
 
 <strong>PHP</strong>
 
+    lang:php
+
     <?
     // PRIME1 - PHP
     // AC Time: 5.73
@@ -237,6 +243,8 @@ The idea behind every solution here (with some variation) is to generate all the
 
 <strong>Python</strong>
 
+    lang:python
+
     # PRIME1 - Python
     # AC Time: 3.10s
     from math import sqrt
@@ -299,6 +307,8 @@ The idea behind every solution here (with some variation) is to generate all the
 
 <strong>Bash</strong>
 
+    lang:bash
+
     # PRIME1 Incomplete - BASH
     # This is not a complete solution
     # The speed of bash parsing makes getting an
@@ -337,6 +347,8 @@ The idea behind every solution here (with some variation) is to generate all the
     </pre>
 
 <strong>Ruby</strong>
+
+    lang:ruby
 
     # PRIME1 - Ruby
     # AC Time: 4.65s
@@ -421,6 +433,8 @@ The idea behind every solution here (with some variation) is to generate all the
 
 <strong>Java</strong>
 
+    lang:java
+
     // PRIME1 - Java
     // AC Time: 2.20
 
@@ -489,6 +503,8 @@ The idea behind every solution here (with some variation) is to generate all the
 
 <strong>Perl</strong>
 
+    lang:perl
+
     # PRIME1 - Perl
     # AC Time: 4.28s
     @primes = (2);
@@ -556,6 +572,8 @@ The idea behind every solution here (with some variation) is to generate all the
 
 <strong>C#</strong>
 
+    lang:csharp
+
     // PRIME1 - C# (gmcs)
     // AC Time: 1.50s
 
@@ -618,6 +636,8 @@ The idea behind every solution here (with some variation) is to generate all the
     }
 
 <strong>GNU Pascal</strong>
+
+    lang:pascal
 
     {
         PRIME1 - GNU Pascal

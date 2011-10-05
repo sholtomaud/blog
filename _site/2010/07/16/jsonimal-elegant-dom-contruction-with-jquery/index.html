@@ -61,40 +61,43 @@
 
 <p>What's it do? This example should demonstrate my goal fairly well.</p>
 
-<pre><code>$(function() {
-    $.mktag("#demo").jsonimal([
-        ["h1", {text: "JSONimal!"}],
-        ["table",{style: 'border: 1px solid black'},[
-            ["thead",[
-                ["tr",{style: 'text-transform: uppercase'},[
-                    ["th", {text: "one"}],
-                    ["th", {text: "two"}],
-                    ["th", {text: "three"}]
-                ]]
-            ]],
-            ["tbody", [
-                ["tr",[
-                    ["td", {html: "&lt;u&gt;a&lt;/u&gt;"}],
-                    ["td", {text: "b"}],
-                    ["td", {text: "c"}]
-                ]],
-                ["tr",[
-                    ["td",[
-                        ["a", {href: "http://www.google.ca", text: "Google"}]
-                    ]],
-                    ["td", {text: "b"}],
-                    ["td", {text: "c"}]
-                ]],
-                ["tr",[
-                    ["td", {text: "a"}],
-                    ["td", {text: "b"}],
-                    ["td", {text: "c"}]
-                ]]
-            ]]
-        ]]
-    ]).appendTo("body");
-});
-</code></pre>
+<div class="highlight">
+<pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">mktag</span><span class="p">(</span><span class="s2">"#demo"</span><span class="p">).</span><span class="nx">jsonimal</span><span class="p">([</span>
+        <span class="p">[</span><span class="s2">"h1"</span><span class="p">,</span> <span class="p">{</span><span class="nx">text</span><span class="o">:</span> <span class="s2">"JSONimal!"</span><span class="p">}],</span>
+        <span class="p">[</span><span class="s2">"table"</span><span class="p">,{</span><span class="nx">style</span><span class="o">:</span> <span class="s1">'border: 1px solid black'</span><span class="p">},[</span>
+            <span class="p">[</span><span class="s2">"thead"</span><span class="p">,[</span>
+                <span class="p">[</span><span class="s2">"tr"</span><span class="p">,{</span><span class="nx">style</span><span class="o">:</span> <span class="s1">'text-transform: uppercase'</span><span class="p">},[</span>
+                    <span class="p">[</span><span class="s2">"th"</span><span class="p">,</span> <span class="p">{</span><span class="nx">text</span><span class="o">:</span> <span class="s2">"one"</span><span class="p">}],</span>
+                    <span class="p">[</span><span class="s2">"th"</span><span class="p">,</span> <span class="p">{</span><span class="nx">text</span><span class="o">:</span> <span class="s2">"two"</span><span class="p">}],</span>
+                    <span class="p">[</span><span class="s2">"th"</span><span class="p">,</span> <span class="p">{</span><span class="nx">text</span><span class="o">:</span> <span class="s2">"three"</span><span class="p">}]</span>
+                <span class="p">]]</span>
+            <span class="p">]],</span>
+            <span class="p">[</span><span class="s2">"tbody"</span><span class="p">,</span> <span class="p">[</span>
+                <span class="p">[</span><span class="s2">"tr"</span><span class="p">,[</span>
+                    <span class="p">[</span><span class="s2">"td"</span><span class="p">,</span> <span class="p">{</span><span class="nx">html</span><span class="o">:</span> <span class="s2">"&lt;u&gt;a&lt;/u&gt;"</span><span class="p">}],</span>
+                    <span class="p">[</span><span class="s2">"td"</span><span class="p">,</span> <span class="p">{</span><span class="nx">text</span><span class="o">:</span> <span class="s2">"b"</span><span class="p">}],</span>
+                    <span class="p">[</span><span class="s2">"td"</span><span class="p">,</span> <span class="p">{</span><span class="nx">text</span><span class="o">:</span> <span class="s2">"c"</span><span class="p">}]</span>
+                <span class="p">]],</span>
+                <span class="p">[</span><span class="s2">"tr"</span><span class="p">,[</span>
+                    <span class="p">[</span><span class="s2">"td"</span><span class="p">,[</span>
+                        <span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="p">{</span><span class="nx">href</span><span class="o">:</span> <span class="s2">"http://www.google.ca"</span><span class="p">,</span> <span class="nx">text</span><span class="o">:</span> <span class="s2">"Google"</span><span class="p">}]</span>
+                    <span class="p">]],</span>
+                    <span class="p">[</span><span class="s2">"td"</span><span class="p">,</span> <span class="p">{</span><span class="nx">text</span><span class="o">:</span> <span class="s2">"b"</span><span class="p">}],</span>
+                    <span class="p">[</span><span class="s2">"td"</span><span class="p">,</span> <span class="p">{</span><span class="nx">text</span><span class="o">:</span> <span class="s2">"c"</span><span class="p">}]</span>
+                <span class="p">]],</span>
+                <span class="p">[</span><span class="s2">"tr"</span><span class="p">,[</span>
+                    <span class="p">[</span><span class="s2">"td"</span><span class="p">,</span> <span class="p">{</span><span class="nx">text</span><span class="o">:</span> <span class="s2">"a"</span><span class="p">}],</span>
+                    <span class="p">[</span><span class="s2">"td"</span><span class="p">,</span> <span class="p">{</span><span class="nx">text</span><span class="o">:</span> <span class="s2">"b"</span><span class="p">}],</span>
+                    <span class="p">[</span><span class="s2">"td"</span><span class="p">,</span> <span class="p">{</span><span class="nx">text</span><span class="o">:</span> <span class="s2">"c"</span><span class="p">}]</span>
+                <span class="p">]]</span>
+            <span class="p">]]</span>
+        <span class="p">]]</span>
+    <span class="p">]).</span><span class="nx">appendTo</span><span class="p">(</span><span class="s2">"body"</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+</div>
+
 
 <p>Which will add this to the body:</p>
 

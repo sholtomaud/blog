@@ -32,35 +32,37 @@ I found a good starting point [here][base86], but the output of this wasn't exac
 
 [base86]: http://dev.base86.com/solo/47/actionscript_3_equivalent_of_phps_printr.html
 
+    lang:actionscript
+
     package learning {
       import org.flixel.*;
-    
+
       public class Debugger {
         public static function pr(obj:*, level:int = 0, output:String = ""):* {
           var objtype:String = typeof(obj);
           if (objtype == "boolean" || objtype == "string" || objtype == "number") {
             return obj;
           }
-    
+
           var tabs:String = "";
           for(var i:int = 0; i < level; i++) { 
             tabs += "\t"
           }
-         
+
           output += "{\n";
           for(var child:* in obj) {
             output += tabs +"\t["+ child +"] => ";
-           
+
             var childOutput:String = pr(obj[child], level+1);
             if(childOutput != '') output += childOutput
-           
+
             output += "\n";
           }
           output += tabs + "}\n";
-         
+
           return output;
         }
-    
+
         public static function log(obj:*):void {
           FlxG.log(pr(obj));
           // This is a flixel thing. If you're not using flixel
@@ -69,7 +71,7 @@ I found a good starting point [here][base86], but the output of this wasn't exac
       }
     }
 
-Example output 
+Example output
 
     {
     	[0] => {
@@ -90,10 +92,6 @@ Example output
     	}
     }
 
-**NOTE**: The colored output is from [Prettify][], not the script
-
-[Prettify]: http://code.google.com/p/google-code-prettify/
-
 trace output to console
 --------------------
 
@@ -107,13 +105,17 @@ Locate/create your `mm.cfg` file. For me this was in `~/mm.cfg`. See [reference]
 
 Stick this in it: `TraceOutputFileEnable=1`
 
-Or, in one command: `echo "TraceOutputFileEnable=1" > ~/mm.cfg`
+Or, in one command:
+
+    lang:bash
+
+    echo "TraceOutputFileEnable=1" > ~/mm.cfg`
 
 **Step 2**
 
-Locate the location of the log file. Mine is in 
+Locate the location of the log file. Mine is in
 
- `~/Library/Preferences/Macromedia/Flash Player/Logs/flashlog.txt`
+    ~/Library/Preferences/Macromedia/Flash Player/Logs/flashlog.txt`
 
 See [reference][Flex 3 Reference].
 
@@ -121,7 +123,9 @@ You don't want to type this in every time you want to view the log, so add a fun
 
 This is what I have:
 
-    flashlog() { 
+    lang:bash
+
+    flashlog() {
       tail -f $* ~/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.txt; 
     }
 
@@ -131,7 +135,9 @@ This is what I have:
 
 Start debugging!
 
-      [learning]  flashlog -100
+    lang:bash
+
+    $ flashlog -100
     Warning: 'flash' has no property 'prototype'
     Warning: 'flash' has no property 'prototype'
     flixel v2.35 [debug]
@@ -154,5 +160,3 @@ Start debugging!
     		}
     	}
     }
-
-

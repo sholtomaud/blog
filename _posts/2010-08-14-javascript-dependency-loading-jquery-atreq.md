@@ -7,7 +7,7 @@ tags:
 status: publish
 type: post
 published: true
-meta: 
+meta:
   _edit_last: "1"
   _edit_lock: "1287294623"
   _wp_old_slug: ""
@@ -28,13 +28,17 @@ How to use
 
 First, include your main application file with `$.atreq`
 
+    lang:html
+
     <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type='text/javascript' src="jquery.atreq.js"></script>
     <script type='text/javascript'>
     $.atreq('application.js');
     </script>
- 
+
 Then inside your application.js and any other required files, place a require statement in the comments. 
+
+    lang:js
 
     // application.js
     // @require 'lib/lib1.js'
@@ -44,6 +48,8 @@ Then inside your application.js and any other required files, place a require st
     Library2Function();
 
 **NOTE**: While `//@require` "blocks", `$.atreq` does not. This means the following will not work:
+
+    lang:js
 
     $.atreq('lib/lib1.js');
     Library1Function();
@@ -56,6 +62,8 @@ Unless the require paths begin with a `/`, they're assumed to be relative to the
 This means, since `lib1.js` is in `lib/`, the require statement below will load `lib/deb/lib1dep.js`. This makes your code portable across locations.
 
 Each of the library files can also have their own dependencies, and `$.atreq` will make sure they're run in the correct order.
+
+    lang:js
 
     // lib/lib1.js
     // @require `dep/libdep.js`
@@ -70,10 +78,14 @@ Redundant or Duplicate Requires
 Duplicate requires of the same file will neither request nor run the same file twice.
 This is true even if the relative path is different from files. This means that:
 
+    lang:js
+
     // lib/lib2.js
     // @require '../shared/shared.js'
 
 and
+
+    lang:js
 
     // lib/lib3.js
     // @require '../shared/shared.js'
@@ -89,6 +101,8 @@ Alternatives and How They're Different
 A jQuery plugin by Tobiasz Cudnik, this does load external files asynchronously, but these dependencies are non-blocking. He dodges this issue by delaying the document.ready event
 
 It even has the ability to load dependencies for included scripts like so (taken from his blog post):
+
+    lang:js
 
     $.include(
         // URL

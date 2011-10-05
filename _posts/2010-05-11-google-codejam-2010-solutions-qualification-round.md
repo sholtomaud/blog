@@ -62,6 +62,8 @@ settings, it will be powered. This means that ultimately, the power column above
 is irrelevant. All we need to know is that the N-1 least significant bits are 
 set. This is fairly trivial to check.
 
+    lang:cpp
+
     #include <iostream>
     using namespace std;
     int main() {
@@ -78,6 +80,8 @@ set. This is fairly trivial to check.
     }
 
 Time for the large case:
+
+    lang:bash
 
     $ time ./a.out < snapper.in > snapper.out
 
@@ -99,6 +103,8 @@ do) then typed in my answer.
 
 The only remaining problem here is dealing with the large numbers, which is 
 hardly a problem in python. Here's my solution:
+
+    lang:python
 
     def gcd(x,y):
         while x:
@@ -129,6 +135,8 @@ hardly a problem in python. Here's my solution:
 
 Time for large case:
 
+    lang:bash
+
     $ time python warning.py > warning.out
 
     real    0m0.250s
@@ -150,6 +158,8 @@ at the front before. While doing this, I record how many euros were made for a
 given start of the line, and who ends up at the front of the line while they're 
 on the roller coaster. After this, the O(R) loop is very simple. Just add the 
 number of euros for the run, then move on to the next front of the line.
+
+    lang:cpp
 
     #include <cmath>
     #include <algorithm>
@@ -228,6 +238,8 @@ number of euros for the run, then move on to the next front of the line.
     }
 
 Time for large test case:
+
+    lang:bash
 
     $ time ./a.out
 

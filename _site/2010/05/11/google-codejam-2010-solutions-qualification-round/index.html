@@ -106,30 +106,36 @@ settings, it will be powered. This means that ultimately, the power column above
 is irrelevant. All we need to know is that the N-1 least significant bits are
 set. This is fairly trivial to check.</p>
 
-<pre><code>#include &lt;iostream&gt;
-using namespace std;
-int main() {
-  int T,N,K;
-  cin &gt;&gt; T;
-  for(int t = 0; t &lt; T; t++) {
-    cin &gt;&gt; N &gt;&gt; K;
-    int mask = (1 &lt;&lt; N) - 1;
-    printf("Case #%d: ",t+1);
-    if ( (mask &amp; K) == mask) puts("ON");
-    else puts("OFF");
-  }
-  return 0;
-}
-</code></pre>
+<div class="highlight">
+<pre><span class="cp">#include &lt;iostream&gt;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="n">K</span><span class="p">;</span>
+  <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">T</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">T</span><span class="p">;</span> <span class="n">t</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">N</span> <span class="o">&gt;&gt;</span> <span class="n">K</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">N</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Case #%d: "</span><span class="p">,</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">mask</span> <span class="o">&amp;</span> <span class="n">K</span><span class="p">)</span> <span class="o">==</span> <span class="n">mask</span><span class="p">)</span> <span class="n">puts</span><span class="p">(</span><span class="s">"ON"</span><span class="p">);</span>
+    <span class="k">else</span> <span class="n">puts</span><span class="p">(</span><span class="s">"OFF"</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+</div>
+
 
 <p>Time for the large case:</p>
 
-<pre><code>$ time ./a.out &lt; snapper.in &gt; snapper.out
+<div class="highlight">
+<pre><span class="nv">$ </span><span class="nb">time</span> ./a.out &lt; snapper.in &gt; snapper.out
 
 real    0m0.071s
 user    0m0.026s
 sys     0m0.040s
-</code></pre>
+</pre>
+</div>
+
 
 <h1>Problem 2: Fair Warning</h1>
 
@@ -147,42 +153,48 @@ do) then typed in my answer.</p>
 <p>The only remaining problem here is dealing with the large numbers, which is
 hardly a problem in python. Here's my solution:</p>
 
-<pre><code>def gcd(x,y):
-    while x:
-        x, y = y % x, x
-    return y
+<div class="highlight">
+<pre><span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">while</span> <span class="n">x</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">%</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">y</span>
 
-testcases = open("warning.in").readlines()
-t = 1
-for tc in testcases[1:]:
-  tc = map(lambda x: int(x), tc.split(" ")[1:])
-  if len(tc) == 0:
-    break
-  tc.sort()
-  #print tc
+<span class="n">testcases</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"warning.in"</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="n">t</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">tc</span> <span class="ow">in</span> <span class="n">testcases</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+  <span class="n">tc</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">tc</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span>
+  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tc</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">break</span>
+  <span class="n">tc</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+  <span class="c">#print tc</span>
 
-  diff = []
-  for i in range(len(tc)-1):
-    diff += [tc[i+1] - tc[i]]
+  <span class="n">diff</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tc</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">diff</span> <span class="o">+=</span> <span class="p">[</span><span class="n">tc</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tc</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
 
-  T = diff[0]
-  for d in diff[1:]:
-    T = gcd(T,d)
+  <span class="n">T</span> <span class="o">=</span> <span class="n">diff</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">diff</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
 
-  #print T
-  print "Case #%d: %d" % (t, (-tc[0] % T))
+  <span class="c">#print T</span>
+  <span class="k">print</span> <span class="s">"Case #</span><span class="si">%d</span><span class="s">: </span><span class="si">%d</span><span class="s">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">tc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="n">T</span><span class="p">))</span>
 
-  t += 1
-</code></pre>
+  <span class="n">t</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre>
+</div>
+
 
 <p>Time for large case:</p>
 
-<pre><code>$ time python warning.py &gt; warning.out
+<div class="highlight">
+<pre><span class="nv">$ </span><span class="nb">time </span>python warning.py &gt; warning.out
 
 real    0m0.250s
 user    0m0.037s
 sys     0m0.021s
-</code></pre>
+</pre>
+</div>
+
 
 <h1>Problem 3: Theme Park</h1>
 
@@ -201,91 +213,97 @@ given start of the line, and who ends up at the front of the line while they're
 on the roller coaster. After this, the O(R) loop is very simple. Just add the
 number of euros for the run, then move on to the next front of the line.</p>
 
-<pre><code>#include &lt;cmath&gt;
-#include &lt;algorithm&gt;
-#include &lt;iostream&gt;
-#include &lt;fstream&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstdlib&gt;
-#include &lt;cstring&gt;
-#include &lt;queue&gt;
-#include &lt;set&gt;
-#include &lt;map&gt;
-#include &lt;sstream&gt;
-#include &lt;vector&gt;
-using namespace std;
+<div class="highlight">
+<pre><span class="cp">#include &lt;cmath&gt;</span>
+<span class="cp">#include &lt;algorithm&gt;</span>
+<span class="cp">#include &lt;iostream&gt;</span>
+<span class="cp">#include &lt;fstream&gt;</span>
+<span class="cp">#include &lt;cstdio&gt;</span>
+<span class="cp">#include &lt;cstdlib&gt;</span>
+<span class="cp">#include &lt;cstring&gt;</span>
+<span class="cp">#include &lt;queue&gt;</span>
+<span class="cp">#include &lt;set&gt;</span>
+<span class="cp">#include &lt;map&gt;</span>
+<span class="cp">#include &lt;sstream&gt;</span>
+<span class="cp">#include &lt;vector&gt;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
-#define FR(i,a,b) for(int i=(a);i&lt;(b);++i)
-#define FOR(i,n) FR(i,0,n)
-#define SETMIN(a,b) a = min(a,b)
-#define SETMAX(a,b) a = max(a,b)
-#define PB push_back
-#define FORALL(i,v) for(typeof((v).end())i=(v).begin();i!=(v).end();++i)
-#define CLR(x,a) memset(x,a,sizeof(x))
-#define BEND(v) v.begin(),v.end()
-#define MP make_pair
-#define A first
-#define B second
+<span class="cp">#define FR(i,a,b) for(int i=(a);i&lt;(b);++i)</span>
+<span class="cp">#define FOR(i,n) FR(i,0,n)</span>
+<span class="cp">#define SETMIN(a,b) a = min(a,b)</span>
+<span class="cp">#define SETMAX(a,b) a = max(a,b)</span>
+<span class="cp">#define PB push_back</span>
+<span class="cp">#define FORALL(i,v) for(typeof((v).end())i=(v).begin();i!=(v).end();++i)</span>
+<span class="cp">#define CLR(x,a) memset(x,a,sizeof(x))</span>
+<span class="cp">#define BEND(v) v.begin(),v.end()</span>
+<span class="cp">#define MP make_pair</span>
+<span class="cp">#define A first</span>
+<span class="cp">#define B second</span>
 
-typedef unsigned long long int ull;
-typedef long double ld;
+<span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="kt">int</span> <span class="n">ull</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="kt">long</span> <span class="kt">double</span> <span class="n">ld</span><span class="p">;</span>
 
-int main() {
-    freopen("themepark.in","r",stdin);
-    freopen("themepark.out","w",stdout);
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">freopen</span><span class="p">(</span><span class="s">"themepark.in"</span><span class="p">,</span><span class="s">"r"</span><span class="p">,</span><span class="n">stdin</span><span class="p">);</span>
+    <span class="n">freopen</span><span class="p">(</span><span class="s">"themepark.out"</span><span class="p">,</span><span class="s">"w"</span><span class="p">,</span><span class="n">stdout</span><span class="p">);</span>
 
-    int T;
-    cin &gt;&gt; T;
-    FOR(t,T) {
-        int R,k,N;
-        cin &gt;&gt; R &gt;&gt; k &gt;&gt; N;
-        int grps[1001], done[1001], pts[1001], next[1001];
-        CLR(done,0);
-        queue&lt;pair&lt;int,int&gt; &gt; q;
-        FOR(i,N) {
-            cin &gt;&gt; grps[i];
-            q.push(MP(i,grps[i]));
-        }
+    <span class="kt">int</span> <span class="n">T</span><span class="p">;</span>
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">T</span><span class="p">;</span>
+    <span class="n">FOR</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">R</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">N</span><span class="p">;</span>
+        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">R</span> <span class="o">&gt;&gt;</span> <span class="n">k</span> <span class="o">&gt;&gt;</span> <span class="n">N</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">grps</span><span class="p">[</span><span class="mi">1001</span><span class="p">],</span> <span class="n">done</span><span class="p">[</span><span class="mi">1001</span><span class="p">],</span> <span class="n">pts</span><span class="p">[</span><span class="mi">1001</span><span class="p">],</span> <span class="n">next</span><span class="p">[</span><span class="mi">1001</span><span class="p">];</span>
+        <span class="n">CLR</span><span class="p">(</span><span class="n">done</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+        <span class="n">FOR</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">N</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">grps</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">MP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">grps</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+        <span class="p">}</span>
 
-        while(!done[q.front().A]) {
-            int cur = 0;
-            int start = q.front().A;
-            done[start] = 1;
+        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">done</span><span class="p">[</span><span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">A</span><span class="p">])</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">A</span><span class="p">;</span>
+            <span class="n">done</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 
-            FOR(i,N) {
-                if (cur + q.front().B &gt; k) break;
+            <span class="n">FOR</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">N</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">cur</span> <span class="o">+</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">B</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
 
-                cur += q.front().B;
-                q.push(q.front());
-                q.pop();
-            }
-            next[start] = q.front().A;
-            pts[start] = cur;
-        }
+                <span class="n">cur</span> <span class="o">+=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">B</span><span class="p">;</span>
+                <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">());</span>
+                <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+            <span class="p">}</span>
+            <span class="n">next</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">A</span><span class="p">;</span>
+            <span class="n">pts</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span>
+        <span class="p">}</span>
 
-        while (!q.empty()) q.pop();
+        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
 
-        int curFront = 0;
-        ull ans = 0;
-        FOR(i,R) {
-            ans += pts[curFront];
-            curFront = next[curFront];
-        }
+        <span class="kt">int</span> <span class="n">curFront</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">ull</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">FOR</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">R</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">ans</span> <span class="o">+=</span> <span class="n">pts</span><span class="p">[</span><span class="n">curFront</span><span class="p">];</span>
+            <span class="n">curFront</span> <span class="o">=</span> <span class="n">next</span><span class="p">[</span><span class="n">curFront</span><span class="p">];</span>
+        <span class="p">}</span>
 
-        printf("Case #%d: %lld\n", t+1, ans);
-    }
-    return 0;
-}
-</code></pre>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Case #%d: %lld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">ans</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+</div>
+
 
 <p>Time for large test case:</p>
 
-<pre><code>$ time ./a.out
+<div class="highlight">
+<pre><span class="nv">$ </span><span class="nb">time</span> ./a.out
 
 real    0m11.606s
 user    0m11.542s
 sys     0m0.022s
-</code></pre>
+</pre>
+</div>
+
 
 <p>I might code up an O(N) solution later, which really isn't that difficult, but
 at this point in the contest, it simply didn't matter enough.</p>

@@ -104,31 +104,34 @@ You can get the script here: <a href="http://userscripts.org/scripts/show/67574"
 
 <p>jQuery is a javascript framework specifically designed for doing things involving the DOM tree absurdly quickly. Example: highlighting alternating rows of a table (zebra-striping).</p>
 
-<pre><code>// Standard Javascript method:
-var tables = document.getElementsByTagName("table");
-for (var i = 0; i &lt; tables.length; i++) {
-    var rows = tables[i].tBodies[0].rows;
-    for (var j = 0; j &lt; rows.length; j++) {
-        var rowColor;
-        if (j % 2 == 1) {
-            rowColor = "#eef";
-        } else {
-            rowColor = "#fff";
-        }
+<div class="highlight">
+<pre><span class="c1">// Standard Javascript method:</span>
+<span class="kd">var</span> <span class="nx">tables</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">"table"</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">tables</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">rows</span> <span class="o">=</span> <span class="nx">tables</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">tBodies</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">rows</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">rows</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">rowColor</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">j</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">rowColor</span> <span class="o">=</span> <span class="s2">"#eef"</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">rowColor</span> <span class="o">=</span> <span class="s2">"#fff"</span><span class="p">;</span>
+        <span class="p">}</span>
 
-        var cells = rows[j].cells;
-        for (var k = 0; k &lt; cells.length; k++) {
-            cells[k].style.backgroundColor = rowColor;
-            cells[k].style.borderBottom = "1px solid #ccc";
-        }
-    }
-}
+        <span class="kd">var</span> <span class="nx">cells</span> <span class="o">=</span> <span class="nx">rows</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">cells</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">k</span> <span class="o">&lt;</span> <span class="nx">cells</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">cells</span><span class="p">[</span><span class="nx">k</span><span class="p">].</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="nx">rowColor</span><span class="p">;</span>
+            <span class="nx">cells</span><span class="p">[</span><span class="nx">k</span><span class="p">].</span><span class="nx">style</span><span class="p">.</span><span class="nx">borderBottom</span> <span class="o">=</span> <span class="s2">"1px solid #ccc"</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-// jQuery way:
-$("td").css("border-bottom","1px solid #ccc");
-$("tr:even &gt; td").css("background-color","#fff");
-$("tr:odd &gt; td").css("background-color","#eef");
-</code></pre>
+<span class="c1">// jQuery way:</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"td"</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">"border-bottom"</span><span class="p">,</span><span class="s2">"1px solid #ccc"</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"tr:even &gt; td"</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">"background-color"</span><span class="p">,</span><span class="s2">"#fff"</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"tr:odd &gt; td"</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">"background-color"</span><span class="p">,</span><span class="s2">"#eef"</span><span class="p">);</span>
+</pre>
+</div>
+
 
 <p>Now before someone says it, I know usually you can set the background-color for the whole row, and the cells will inherit it. But since, for some crazy reason, each cell is assigned a background colour on Jobmine, each cell needs to be set individually. In any case, you can see that things are made substantially easier with jQuery. I figured out jQuery mostly just using the API and looking at other people's code, but this is a decent place to start: <a href="http://docs.jquery.com/Tutorials:Getting_Started_with_jQuery">Getting Started with jQuery</a>.</p>
 

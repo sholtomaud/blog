@@ -71,151 +71,181 @@ Your program is to use the brute-force approach in order to find the Answer to L
 
 <p><strong>C++</strong></p>
 
-<pre><code>//TEST AC - CPP (g++)
-#include &lt;iostream&gt;
-using namespace std;
+<div class="highlight">
+<pre><span class="cp">//TEST AC - CPP (g++)</span>
+<span class="cp">#include &lt;iostream&gt;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
-int main() {
-  int n;
-  while(1) {
-    cin &gt;&gt; n;
-    if (n == 42) break;
-    cout &lt;&lt; n &lt;&lt; endl;
-  }
-  return 0;
-}
-</code></pre>
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">42</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">n</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+</div>
+
 
 <p><strong>C99</strong></p>
 
-<pre><code>//TEST AC - (gcc C99)
-#include &lt;stdio.h&gt;
-int main() {
-  int n;
-  while(1) {
-    scanf("%d",&amp;n);
-    if (n == 42) break;
-    printf("%d\n",n);
-  }
-  return 0;
-}
-</code></pre>
+<div class="highlight">
+<pre><span class="cp">//TEST AC - (gcc C99)</span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">42</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+</div>
+
 
 <p><strong>php</strong></p>
 
-<pre><code>&lt;?
-//TEST AC - PHP
-while(1) {
-  fscanf(STDIN,"%d",$n);
-  if ($n == 42) break;
-  print "$n\n";
-}
-?&gt;
-</code></pre>
+<div class="highlight">
+<pre><span class="cp">&lt;?</span>
+<span class="c1">//TEST AC - PHP</span>
+<span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">fscanf</span><span class="p">(</span><span class="nx">STDIN</span><span class="p">,</span><span class="s2">"%d"</span><span class="p">,</span><span class="nv">$n</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nv">$n</span> <span class="o">==</span> <span class="mi">42</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+  <span class="k">print</span> <span class="s2">"</span><span class="si">$n</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre>
+</div>
+
 
 <p><strong>Python</strong></p>
 
-<pre><code>#TEST AC - Python
-while 1:
-  num = input()
-  if (num == 42):
-    break
-  print num
-</code></pre>
+<div class="highlight">
+<pre><span class="c">#TEST AC - Python</span>
+<span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+  <span class="n">num</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">==</span> <span class="mi">42</span><span class="p">):</span>
+    <span class="k">break</span>
+  <span class="k">print</span> <span class="n">num</span>
+</pre>
+</div>
+
 
 <p><strong>Bash</strong></p>
 
-<pre><code>#!/bin/bash
-# TEST AC - BASH
+<div class="highlight">
+<pre><span class="c">#!/bin/bash</span>
+<span class="c"># TEST AC - BASH</span>
 
-while true; do
-  read n
-  if [ $n -eq 42 ]; then
-    break
-  fi
-  echo "$n"
-done
-</code></pre>
+<span class="k">while </span><span class="nb">true</span>; <span class="k">do</span>
+<span class="k">  </span><span class="nb">read </span>n
+  <span class="k">if</span> <span class="o">[</span> <span class="nv">$n</span> -eq 42 <span class="o">]</span>; <span class="k">then</span>
+<span class="k">    </span><span class="nb">break</span>
+<span class="nb">  </span><span class="k">fi</span>
+<span class="k">  </span><span class="nb">echo</span> <span class="s2">"$n"</span>
+<span class="k">done</span>
+</pre>
+</div>
+
 
 <p><strong>Ruby</strong></p>
 
-<pre><code>#TEST AC - Ruby
-while 1
-  n = gets.to_i
-  if n == 42
-    break
-  end
-  puts n
-end
-</code></pre>
+<div class="highlight">
+<pre><span class="c1">#TEST AC - Ruby</span>
+<span class="k">while</span> <span class="mi">1</span>
+  <span class="n">n</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">to_i</span>
+  <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">42</span>
+    <span class="k">break</span>
+  <span class="k">end</span>
+  <span class="nb">puts</span> <span class="n">n</span>
+<span class="k">end</span>
+</pre>
+</div>
+
 
 <p><strong>Java</strong></p>
 
-<pre><code>//TEST AC - Java
-import java.io.*;
-import java.util.*;
+<div class="highlight">
+<pre><span class="c1">//TEST AC - Java</span>
+<span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
 
-public class Main {
-  public static void main(String[] args) {
-    Scanner in = new Scanner(System.in);
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Scanner</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
 
-    while(true) {
-      int n = in.nextInt();
-      if (n == 42) break;
-      System.out.println(n);
-    }
-  }
-}
-</code></pre>
+    <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+      <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">42</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre>
+</div>
+
 
 <p><strong>Perl</strong></p>
 
-<pre><code>#TEST AC - Perl
-while (1)
-{
-  $n = &lt;STDIN&gt;;
-  if ($n == 42) {
-    last;
-  }
-  print $n
-}
-</code></pre>
+<div class="highlight">
+<pre><span class="c1">#TEST AC - Perl</span>
+<span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nv">$n</span> <span class="o">=</span> <span class="sr">&lt;STDIN&gt;</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nv">$n</span> <span class="o">==</span> <span class="mi">42</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">last</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">print</span> <span class="nv">$n</span>
+<span class="p">}</span>
+</pre>
+</div>
+
 
 <p><strong>C#</strong></p>
 
-<pre><code>//TEST AC - C# (gmcs + Mono)
-using System;
-class WelcomeCSS {
-  static void Main() {
-    while(true) {
-      int n;
-      n = int.Parse(Console.ReadLine());
-      if (n == 42) break;
-      Console.WriteLine(n);
-    }
-  }
-}
-</code></pre>
+<div class="highlight">
+<pre><span class="c1">//TEST AC - C# (gmcs + Mono)</span>
+<span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">WelcomeCSS</span> <span class="p">{</span>
+  <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">while</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+      <span class="n">n</span> <span class="p">=</span> <span class="kt">int</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">());</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="p">==</span> <span class="m">42</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+      <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+</div>
+
 
 <p><strong>GNU Pascal</strong></p>
 
-<pre><code>{TEST AC - GPC Pascal}
+<div class="highlight">
+<pre><span class="cm">{TEST AC - GPC Pascal}</span>
 
-program TEST;
+<span class="k">program</span> <span class="n">TEST</span><span class="o">;</span>
 
-var n:integer;
+<span class="k">var</span> <span class="n">n</span><span class="o">:</span><span class="kt">integer</span><span class="o">;</span>
 
-begin
-  while true do
-    begin
-      readln(n);
-      if n = 42 then begin
-        break;
-      end;
-      writeln(n);
-    end;
-end.
-</code></pre>
+<span class="k">begin</span>
+  <span class="k">while</span> <span class="k">true</span> <span class="k">do</span>
+    <span class="k">begin</span>
+      <span class="nb">readln</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">;</span>
+      <span class="k">if</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">42</span> <span class="k">then</span> <span class="k">begin</span>
+        <span class="k">break</span><span class="o">;</span>
+      <span class="k">end</span><span class="o">;</span>
+      <span class="nb">writeln</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">;</span>
+    <span class="k">end</span><span class="o">;</span>
+<span class="k">end</span><span class="o">.</span>
+</pre>
+</div>
+
 
 <p>You can see Thor's Project Euler solutions here: <a href="http://www.thurn.ca/category/project-euler/">Derek Thurn's Website - Project Euler</a></p>
 </body></html>

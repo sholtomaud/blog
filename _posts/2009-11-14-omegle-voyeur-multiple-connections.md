@@ -26,31 +26,31 @@ There's also a very small bit of code in php which is able to be so short becaus
 
 Below is some php code I use to make curl even easier than it already is. simple_get($url) will return the HTTP GET result from the url specified. simple_post works similarly, but delivers data using the payload.
 
-<pre lang='php' colla='-' file='simple_curl.php'>
-<?
-// Simple cUrl
-// Simple get and post requests 
-function simple_get($url) {
-    $c = curl_init();
-    curl_setopt($c, CURLOPT_URL, $url);
-    curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-    $result = curl_exec($c);
-    curl_close($c);
-    return $result;
-}
+    lang:php
 
-function simple_post($url,$payload) {
-    $c = curl_init();
-    curl_setopt($c, CURLOPT_URL, $url);
-    curl_setopt($c, CURLOPT_POST, true);
-    curl_setopt($c, CURLOPT_POSTFIELDS, $payload);
-    curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-    $result = curl_exec($c);
-    curl_close($c);
-    return $result;
-}
-?>
-</pre>
+    <?
+    // Simple cUrl
+    // Simple get and post requests 
+    function simple_get($url) {
+        $c = curl_init();
+        curl_setopt($c, CURLOPT_URL, $url);
+        curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
+        $result = curl_exec($c);
+        curl_close($c);
+        return $result;
+    }
+
+    function simple_post($url,$payload) {
+        $c = curl_init();
+        curl_setopt($c, CURLOPT_URL, $url);
+        curl_setopt($c, CURLOPT_POST, true);
+        curl_setopt($c, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
+        $result = curl_exec($c);
+        curl_close($c);
+        return $result;
+    }
+    ?>
 
 When I started working on this project today (well, I suppose that would be last night now... wonder if I'll see the sunrise) I figured it would be a good time to get used to using git, so I made a repository using github.
 So far I'm enjoying git. Everything seems to act pretty much the way you'd expect to, and I already had to do a revert once I realized my logic was wrong for the way I was structuring my code.

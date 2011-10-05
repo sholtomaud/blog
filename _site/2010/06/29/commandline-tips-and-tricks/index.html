@@ -57,19 +57,12 @@
 <html><body>
 <p>Alas, I have been stricken with the plague of half-finished posts and projects. But, as I feel the need to have at least one post per month, here's some stuff you might find useful.</p>
 
-<p>I forget where I discovered this, but <a href="http://www.commandlinefu.com/commands/browse/sort-by-votes">commandlinefu.com</a> is an awesome site.</p>
+<p>I forget where I discovered this, but <a href="http://www.commandlinefu.com/commands/browse/sort-by-votes">commandlinefu.com</a>
+is an awesome site.</p>
 
 <p>It's so awesome in fact, that I think the productivity gains I've gotten from it <strong>almost</strong> outweigh the time I wasted looking through the site and testing it.</p>
 
 <p>Here are some of the more useful ones from the site and a few I learned at work and elsewhere.</p>
-
-<p>In all the examples below, the stuff inside [ ]'s is my current working directory. It's the result of my .bash_profile command</p>
-
-<pre><code>export PS1="\[\e]2;Jamie@Local \a\e[32;1m\] \033[1;32m  [\W]
-\033[1;34;40m\033[1;32;0m"
-</code></pre>
-
-<p>And yes, I have been spending a lot of time on <a href="http://stackoverflow.com/users/303911/jamie-wong">Stack Overflow</a>.</p>
 
 <h2>Change to previous working directory</h2>
 
@@ -78,101 +71,111 @@
 
 
 
-<pre><code>  [stackoverflow]  pwd
+<div class="highlight">
+<pre><span class="nv">$ </span><span class="nb">pwd</span>
 /Users/jamiewong/code/stackoverflow
 
-  [stackoverflow]  cd /usr/bin
+<span class="nv">$ </span><span class="nb">cd</span> /usr/bin
 
-  [bin]  pwd
+<span class="nv">$ </span><span class="nb">pwd</span>
 /usr/bin
 
-  [bin]  cd -
+<span class="nv">$ </span><span class="nb">cd</span> -
 /Users/jamiewong/code/stackoverflow
 
-  [stackoverflow]  pwd
+<span class="nv">$ </span><span class="nb">pwd</span>
 /Users/jamiewong/code/stackoverflow
-</code></pre>
+</pre>
+</div>
+
 
 <h2>Rerun the last command</h2>
 
 
 <p>From: <a href="http://www.commandlinefu.com/commands/view/1189/run-the-previous-command-with-sudo">Run the previous command with sudo @ commandlinefu.com</a></p>
 
-<pre><code>  [stackoverflow]  echo hello
+<div class="highlight">
+<pre><span class="nv">$ </span><span class="nb">echo </span>hello
 hello
 
-  [stackoverflow]  !!
-echo hello
+<span class="nv">$ </span>!!
+<span class="nb">echo </span>hello
 hello
 
-  [stackoverflow]  ln -s some_script.sh /usr/bin/some_script
+<span class="nv">$ </span>ln -s some_script.sh /usr/bin/some_script
 ln: /usr/bin/some_script: Permission denied
 
-  [stackoverflow]  sudo !!
+<span class="nv">$ </span>sudo !!
 sudo ln -s some_script.sh /usr/bin/some_script
 
-  [stackoverflow]  ls -l /usr/bin/some_script
+<span class="nv">$ </span>ls -l /usr/bin/some_script
 lrwxr-xr-x  1 root  wheel  14 30 Jun 00:44 /usr/bin/some_script -&gt; some_script.sh
 
-  [stackoverflow]  cat /etc/apache2/passenger_pane_vhosts/searchgraph*
+<span class="nv">$ </span>cat /etc/apache2/passenger_pane_vhosts/searchgraph*
 &lt;VirtualHost *:80&gt;
   ServerName searchgraph.local
-  DocumentRoot "/Users/jamiewong/Code/searchgraph/public"
+  DocumentRoot <span class="s2">"/Users/jamiewong/Code/searchgraph/public"</span>
   RailsEnv development
-  &lt;Directory "/Users/jamiewong/Code/searchgraph/public"&gt;
+  &lt;Directory <span class="s2">"/Users/jamiewong/Code/searchgraph/public"</span>&gt;
     Order allow,deny
     Allow from all
   &lt;/Directory&gt;
 &lt;/VirtualHost&gt;
 
-  [stackoverflow]  echo "!!"
-echo "cat /etc/apache2/passenger_pane_vhosts/searchgraph*";
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"!!"</span>
+<span class="nb">echo</span> <span class="s2">"cat /etc/apache2/passenger_pane_vhosts/searchgraph*"</span>;
 cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf
-</code></pre>
+</pre>
+</div>
+
 
 <h2>Modify the last command and run it</h2>
 
 
 <p>From: <a href="http://www.commandlinefu.com/commands/view/19/runs-previous-command-but-replacing">Runs the previous command but replacing @ commandlinefu.com</a></p>
 
-<pre><code>  [stackoverflow]  echo hello world
+<div class="highlight">
+<pre><span class="nv">$ </span><span class="nb">echo </span>hello world
 hello world
 
-  [stackoverflow]  ^world^friends
-echo hello friends
+<span class="nv">$ </span>^world^friends
+<span class="nb">echo </span>hello friends
 hello friends
 
-  [stackoverflow]  ls *.php
+<span class="nv">$ </span>ls *.php
 bolding.php shd.php     stream.php
 
-  [stackoverflow]  ^php^rb
+<span class="nv">$ </span>^php^rb
 ls *.rb
 hms.rb           split_orderby.rb
-&lt;/pre&gt;&lt;pre class="cmd"&gt;
-  [stackoverflow]  cds ..
--bash: cds: command not found
+&lt;/pre&gt;&lt;pre <span class="nv">class</span><span class="o">=</span><span class="s2">"cmd"</span>&gt;
+<span class="nv">$ </span>cds ..
+-bash: cds: <span class="nb">command </span>not found
 
-  [stackoverflow]  ^s
-cd ..
+<span class="nv">$ </span>^s
+<span class="nb">cd</span> ..
+</pre>
+</div>
 
-  [code]  
-</code></pre>
 
 <h2>List your last n commands</h2>
 
 
-<pre><code> [stackoverflow]  history 10
+<div class="highlight">
+<pre><span class="nv">$ </span><span class="nb">history </span>10
  522  locate mysqld
  523  sudo /Library/StartupItems/MySQLCOM/MySQLCOM start
  524  sudo /Library/PreferencePanes/MySQL.prefPane/Contents/MacOS/MySQL
  525  sudo mysqld_safe
  526  sudo /usr/local/mysql/bin/mysqld_safe
  527  mysql
- 528  history
- 529  history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head
- 530  history
- 531  history 10
-</code></pre>
+ 528  <span class="nb">history</span>
+<span class="nb"> </span>529  <span class="nb">history</span> | awk <span class="s1">'{a[$2]++}END{for(i in a){print a[i] " " i}}'</span> | sort -rn | head
+ 530  <span class="nb">history</span>
+<span class="nb"> </span>531  <span class="nb">history </span>10
+</pre>
+</div>
+
 
 <h2>Edit and run a previous command</h2>
 
@@ -184,35 +187,41 @@ your last command in the console editor you specify (emacs by default).<br>
 If you want it to be vim, stick this in your <code>.bash_profile</code> to just run
 it when you want to use it.</p>
 
-<pre><code>export EDITOR=vim
-</code></pre>
+<div class="highlight">
+<pre><span class="nb">export </span><span class="nv">EDITOR</span><span class="o">=</span>vim
+</pre>
+</div>
+
 
 <p>Then run <code>fc</code>, and it will open up your editor with your last command in it.
 Save and exit (<code>:wq</code>) to run that command.
 If you just want to execute it immediately, use <code>fc -s</code>.</p>
 
-<pre><code>  [stackoverflow]  history 5
-  86  cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf 
-  87  echo "cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf "
-  88  history 10
-  89  echo "cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf "
-  90  history 5
+<div class="highlight">
+<pre><span class="nv">$ </span><span class="nb">history </span>5
+  86  cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf
+  87  <span class="nb">echo</span> <span class="s2">"cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf "</span>
+  88  <span class="nb">history </span>10
+  89  <span class="nb">echo</span> <span class="s2">"cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf "</span>
+  90  <span class="nb">history </span>5
 
-  [stackoverflow]  fc -s 87
-echo "cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf "
-cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf 
-</code></pre>
+<span class="nv">$ </span><span class="nb">fc</span> -s 87
+<span class="nb">echo</span> <span class="s2">"cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf "</span>
+cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf
+</pre>
+</div>
+
 
 <p>If you don't care to look up the history number but happen to remember that it
 was the command you executed two lines ago, you can use negative history numbers</p>
 
-<pre><code>  [stackoverflow]  echo hello
+<pre><code>$ echo hello
 hello
 
-  [stackoverflow]  echo world
+$ echo world
 world
 
-  [stackoverflow]  fc -s -2
+$ fc -s -2
 echo hello
 hello
 </code></pre>
@@ -222,18 +231,21 @@ hello
 
 <p>This one comes from my coworkers</p>
 
-<pre><code>  [stackoverflow]  tail -f ~/code/searchgraph/log/development.log 
+<div class="highlight">
+<pre><span class="nv">$ </span>tail -f ~/code/searchgraph/log/development.log
 
 
-Processing HomeController#bp (for 127.0.0.1 at 2010-06-23 22:19:27) [GET]
+Processing HomeController#bp <span class="o">(</span><span class="k">for </span>127.0.0.1 at 2010-06-23 22:19:27<span class="o">)</span> <span class="o">[</span>GET<span class="o">]</span>
 Rendering home/bp
-Completed in 6ms (View: 5, DB: 0) | 200 OK [http://searchgraph.local/bp]
+Completed in 6ms <span class="o">(</span>View: 5, DB: 0<span class="o">)</span> | 200 OK <span class="o">[</span>http://searchgraph.local/bp<span class="o">]</span>
 
 
-Processing HomeController#bp (for 127.0.0.1 at 2010-06-23 22:20:46) [GET]
+Processing HomeController#bp <span class="o">(</span><span class="k">for </span>127.0.0.1 at 2010-06-23 22:20:46<span class="o">)</span> <span class="o">[</span>GET<span class="o">]</span>
 Rendering home/bp
-Completed in 9ms (View: 7, DB: 0) | 200 OK [http://searchgraph.local/bp]
-</code></pre>
+Completed in 9ms <span class="o">(</span>View: 7, DB: 0<span class="o">)</span> | 200 OK <span class="o">[</span>http://searchgraph.local/bp<span class="o">]</span>
+</pre>
+</div>
+
 
 <p>Then if I go open up searchgraph.local, my console window will get updated on
 its own</p>
@@ -243,19 +255,25 @@ its own</p>
 
 <p>The pbcopy and pbpaste commands copy and paste from your clipboard.</p>
 
-<pre><code>  [stackoverflow]  echo test &gt; test.txt
+<div class="highlight">
+<pre><span class="nv">$ </span><span class="nb">echo test</span> &gt; test.txt
 
-  [stackoverflow]  pbcopy &lt; test.txt
+<span class="nv">$ </span>pbcopy &lt; test.txt
 
-  [stackoverflow]  pbpaste
-test
-</code></pre>
+<span class="nv">$ </span>pbpaste
+<span class="nb">test</span>
+</pre>
+</div>
+
 
 <p>And if you want to paste content you have in your clipboard to a file, just
 redirect, with</p>
 
-<pre><code>pbpaste &gt; output.txt
-</code></pre>
+<div class="highlight">
+<pre><span class="nv">$ </span>pbpaste &gt; output.txt
+</pre>
+</div>
+
 
 <p>That's all for now - I'll write more down as I find them.</p>
 </body></html>

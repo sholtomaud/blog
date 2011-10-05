@@ -34,6 +34,8 @@ Solutions - In order of frequency that I use the language
 
 <strong>C++</strong>
 
+    lang:cpp
+
     //TEST AC - CPP (g++)
     #include <iostream>
     using namespace std;
@@ -50,6 +52,8 @@ Solutions - In order of frequency that I use the language
 
 <strong>C99</strong>
 
+    lang:c
+
     //TEST AC - (gcc C99)
     #include <stdio.h>
     int main() {
@@ -64,6 +68,8 @@ Solutions - In order of frequency that I use the language
 
 <strong>php</strong>
 
+    lang:php
+
     <?
     //TEST AC - PHP
     while(1) {
@@ -75,6 +81,8 @@ Solutions - In order of frequency that I use the language
 
 <strong>Python</strong>
 
+    lang:python
+
     #TEST AC - Python
     while 1:
       num = input()
@@ -83,6 +91,8 @@ Solutions - In order of frequency that I use the language
       print num
 
 <strong>Bash</strong>
+
+    lang:bash
 
     #!/bin/bash
     # TEST AC - BASH
@@ -97,6 +107,8 @@ Solutions - In order of frequency that I use the language
 
 <strong>Ruby</strong>
 
+    lang:ruby
+
     #TEST AC - Ruby
     while 1
       n = gets.to_i
@@ -107,6 +119,8 @@ Solutions - In order of frequency that I use the language
     end
 
 <strong>Java</strong>
+
+    lang:java
 
     //TEST AC - Java
     import java.io.*;
@@ -126,6 +140,8 @@ Solutions - In order of frequency that I use the language
 
 <strong>Perl</strong>
 
+    lang:perl
+
     #TEST AC - Perl
     while (1)
     {
@@ -137,6 +153,8 @@ Solutions - In order of frequency that I use the language
     }
 
 <strong>C#</strong>
+
+    lang:csharp
 
     //TEST AC - C# (gmcs + Mono)
     using System;
@@ -152,6 +170,8 @@ Solutions - In order of frequency that I use the language
     }
 
 <strong>GNU Pascal</strong>
+
+    lang:pascal
 
     {TEST AC - GPC Pascal}
 

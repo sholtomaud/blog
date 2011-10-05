@@ -69,19 +69,25 @@ scheme, but I'm sure the functionality exists in many, many other languages.</p>
 
 <p>Sorting in python is very straight forward. If I have a list of strings in python and want to sort them, I do this:</p>
 
-<pre><code>a = ["banana","apple","pear","elephant","zebra","mango"]
-a.sort()
-print a
-# OUT: ['apple', 'banana', 'elephant', 'mango', 'pear', 'zebra']
-</code></pre>
+<div class="highlight">
+<pre><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s">"banana"</span><span class="p">,</span><span class="s">"apple"</span><span class="p">,</span><span class="s">"pear"</span><span class="p">,</span><span class="s">"elephant"</span><span class="p">,</span><span class="s">"zebra"</span><span class="p">,</span><span class="s">"mango"</span><span class="p">]</span>
+<span class="n">a</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">a</span>
+<span class="c"># OUT: ['apple', 'banana', 'elephant', 'mango', 'pear', 'zebra']</span>
+</pre>
+</div>
+
 
 <p>But what happens when you try to sort a list of words containing capital letters?</p>
 
-<pre><code>a = ["pear","Police","apple","Airplane","banana","Bear"]
-a.sort()
-print a
-# OUT: ['Airplane', 'Bear', 'Police', 'apple', 'banana', 'pear']
-</code></pre>
+<div class="highlight">
+<pre><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s">"pear"</span><span class="p">,</span><span class="s">"Police"</span><span class="p">,</span><span class="s">"apple"</span><span class="p">,</span><span class="s">"Airplane"</span><span class="p">,</span><span class="s">"banana"</span><span class="p">,</span><span class="s">"Bear"</span><span class="p">]</span>
+<span class="n">a</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">a</span>
+<span class="c"># OUT: ['Airplane', 'Bear', 'Police', 'apple', 'banana', 'pear']</span>
+</pre>
+</div>
+
 
 <p>The sorting is done purely based on the byte values of the characters. Since 'P'
 (ASCII 80) &lt; 'a' (ASCII 97), "Police" is placed before "apple" in the list of
@@ -89,22 +95,28 @@ words. Normally when you're trying to sort a list of words, you want to do it
 alphabetically. So how do you fix this? You make a comparator function. Here's
 python's definition of the sort function.</p>
 
-<pre><code>L.sort(cmp=None, key=None, reverse=False) -- stable sort *IN PLACE*;
-cmp(x, y) -&gt; -1, 0, 1
-</code></pre>
+<div class="highlight">
+<pre><span class="n">L</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="nb">cmp</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="o">--</span> <span class="n">stable</span> <span class="n">sort</span> <span class="o">*</span><span class="n">IN</span> <span class="n">PLACE</span><span class="o">*</span><span class="p">;</span>
+<span class="nb">cmp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+</pre>
+</div>
+
 
 <p>For those of you who have used <code>qsort</code> in the standard C library, this isn't
 such an arcane concept. In python however, it is much easier (no <code>void*</code>
 madness).</p>
 
-<pre><code>def alphacmp(x,y):
-    return cmp(x.lower(),y.lower())
+<div class="highlight">
+<pre><span class="k">def</span> <span class="nf">alphacmp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">cmp</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span><span class="n">y</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
 
-a = ["pear","Police","apple","Airplane","banana","Bear"]
-a.sort(alphacmp)
-print a
-# OUT: ['Airplane', 'apple', 'banana', 'Bear', 'pear', 'Police']
-</code></pre>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s">"pear"</span><span class="p">,</span><span class="s">"Police"</span><span class="p">,</span><span class="s">"apple"</span><span class="p">,</span><span class="s">"Airplane"</span><span class="p">,</span><span class="s">"banana"</span><span class="p">,</span><span class="s">"Bear"</span><span class="p">]</span>
+<span class="n">a</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">alphacmp</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">a</span>
+<span class="c"># OUT: ['Airplane', 'apple', 'banana', 'Bear', 'pear', 'Police']</span>
+</pre>
+</div>
+
 
 <p>Okay, great! We now have our list sorted in the intuitive way. The lower()
 function will ensure that the lowercase version of the strings are being
@@ -122,11 +134,14 @@ without a declared name. Let's look at an example so you can see what I mean. In
 the above example, we can sort alphabetically without defining the <code>alphacmp</code>
 function like so:</p>
 
-<pre><code>a = ["pear","Police","apple","Airplane","banana","Bear"]
-a.sort(lambda x,y: cmp(x.lower(),y.lower()))
-print a
-# OUT: ['Airplane', 'apple', 'banana', 'Bear', 'pear', 'Police'] 
-</code></pre>
+<div class="highlight">
+<pre><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s">"pear"</span><span class="p">,</span><span class="s">"Police"</span><span class="p">,</span><span class="s">"apple"</span><span class="p">,</span><span class="s">"Airplane"</span><span class="p">,</span><span class="s">"banana"</span><span class="p">,</span><span class="s">"Bear"</span><span class="p">]</span>
+<span class="n">a</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="nb">cmp</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span><span class="n">y</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span>
+<span class="k">print</span> <span class="n">a</span>
+<span class="c"># OUT: ['Airplane', 'apple', 'banana', 'Bear', 'pear', 'Police']</span>
+</pre>
+</div>
+
 
 <p>So what does lambda x,y: cmp(x.lower(),y.lower()) mean? "lambda" says that the
 statements following define an anonymous function. "x,y:" defines the parameter
@@ -137,11 +152,14 @@ you'll see how valuable lambda really is.</p>
 
 <p>Another sorting example: what if I want to sort by length of the strings instead of alphabetically? Easily done with lambda.</p>
 
-<pre><code>a = ["pencil","pen","cap","zebra","Blizzard","0xB4DC0DE","!"]
-a.sort(lambda x,y: len(x) - len(y))
-print a
-# OUT: ['!', 'pen', 'cap', 'zebra', 'pencil', 'Blizzard', '0xB4DC0DE']
-</code></pre>
+<div class="highlight">
+<pre><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s">"pencil"</span><span class="p">,</span><span class="s">"pen"</span><span class="p">,</span><span class="s">"cap"</span><span class="p">,</span><span class="s">"zebra"</span><span class="p">,</span><span class="s">"Blizzard"</span><span class="p">,</span><span class="s">"0xB4DC0DE"</span><span class="p">,</span><span class="s">"!"</span><span class="p">]</span>
+<span class="n">a</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="k">print</span> <span class="n">a</span>
+<span class="c"># OUT: ['!', 'pen', 'cap', 'zebra', 'pencil', 'Blizzard', '0xB4DC0DE']</span>
+</pre>
+</div>
+
 
 <p>The use of lambda functions makes the use of many higher level functions much nicer. I'll be outlining a few of them here.</p>
 
@@ -163,38 +181,47 @@ then return an array of the corresponding return values.</p>
 
 <p>A very simple use for map would be making every word in a list upper case.</p>
 
-<pre><code>a = ["abc","cattle","not even if there's a FIRE","Jeymi!?"]
-b = map(lambda x: x.upper(),a)
-print b
-# OUT: ['ABC', 'CATTLE', "NOT EVEN IF THERE'S A FIRE", 'JEYMI!?']
-</code></pre>
+<div class="highlight">
+<pre><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s">"abc"</span><span class="p">,</span><span class="s">"cattle"</span><span class="p">,</span><span class="s">"not even if there's a FIRE"</span><span class="p">,</span><span class="s">"Jeymi!?"</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span><span class="n">a</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">b</span>
+<span class="c"># OUT: ['ABC', 'CATTLE', "NOT EVEN IF THERE'S A FIRE", 'JEYMI!?']</span>
+</pre>
+</div>
+
 
 <p>A more useful example involves printing out grids. Say I have a matrix of
 numbers, represented as a list of lists in python. The default output formatting
 for this in python is extremely difficult to look at.</p>
 
-<pre><code>a = [
-    [1,212,-13],
-    [41,5,614],
-    [7,8,91]
-]
-print a
-# OUT: [[1, 212, -13], [41, 5, 614], [7, 8, 91]]
-</code></pre>
+<div class="highlight">
+<pre><span class="n">a</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">212</span><span class="p">,</span><span class="o">-</span><span class="mi">13</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">41</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">614</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">91</span><span class="p">]</span>
+<span class="p">]</span>
+<span class="k">print</span> <span class="n">a</span>
+<span class="c"># OUT: [[1, 212, -13], [41, 5, 614], [7, 8, 91]]</span>
+</pre>
+</div>
+
 
 <p>What would be better is to output one row per line.</p>
 
-<pre><code>a = [
-    [1,212,-13],
-    [41,5,614],
-    [7,8,91]
-]
-print "\n".join(map(lambda x: str(x), a))
-#OUT:
-# [1, 212, -13]
-# [41, 5, 614]
-# [7, 8, 91]
-</code></pre>
+<div class="highlight">
+<pre><span class="n">a</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">212</span><span class="p">,</span><span class="o">-</span><span class="mi">13</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">41</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">614</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">91</span><span class="p">]</span>
+<span class="p">]</span>
+<span class="k">print</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">a</span><span class="p">))</span>
+<span class="c">#OUT:</span>
+<span class="c"># [1, 212, -13]</span>
+<span class="c"># [41, 5, 614]</span>
+<span class="c"># [7, 8, 91]</span>
+</pre>
+</div>
+
 
 <p><em>The join function concatenates a list of string, separating the elements with
 the separator character - in this case: "\n"</em></p>
@@ -202,26 +229,29 @@ the separator character - in this case: "\n"</em></p>
 <p>Much better! But what would be even better would be to print out the numbers in
 columns that line up nicely too.</p>
 
-<pre><code>a = [
-    [1,212,-13],
-    [41,5,614],
-    [7,8,91]
-]
-print "\n".join(
-    map(
-        lambda row:
-            " ".join(map(
-                lambda y: "%4d" % y,
-                row
-            )),
-        a
-    )
-)
-# OUT:
-#   1  212  -13
-#  41    5  614
-#   7    8   91
-</code></pre>
+<div class="highlight">
+<pre><span class="n">a</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">212</span><span class="p">,</span><span class="o">-</span><span class="mi">13</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">41</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">614</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">91</span><span class="p">]</span>
+<span class="p">]</span>
+<span class="k">print</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="nb">map</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">row</span><span class="p">:</span>
+            <span class="s">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="s">"</span><span class="si">%4d</span><span class="s">"</span> <span class="o">%</span> <span class="n">y</span><span class="p">,</span>
+                <span class="n">row</span>
+            <span class="p">)),</span>
+        <span class="n">a</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="c"># OUT:</span>
+<span class="c">#   1  212  -13</span>
+<span class="c">#  41    5  614</span>
+<span class="c">#   7    8   91</span>
+</pre>
+</div>
+
 
 <p><code>"%4d" % y</code> is applying the formatting string <code>%4d</code> to <code>y</code>, much the same way
 that <code>printf</code> in C and php do</p>
@@ -229,28 +259,31 @@ that <code>printf</code> in C and php do</p>
 <p>Now, using a lambda function inside of a lambda function is less than readable,
 so I'll write out what this function does first without the maps and lambdas.</p>
 
-<pre><code>a = [
-    [1,212,-13],
-    [41,5,614],
-    [7,8,91]
-]
+<div class="highlight">
+<pre><span class="n">a</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">212</span><span class="p">,</span><span class="o">-</span><span class="mi">13</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">41</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">614</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">91</span><span class="p">]</span>
+<span class="p">]</span>
 
-def rowformat(row):
-    formatted_cells = []
-    for element in row:
-        formatted_cells.append("%4d" % element)
-    return " ".join(formatted_cells)
+<span class="k">def</span> <span class="nf">rowformat</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+    <span class="n">formatted_cells</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+        <span class="n">formatted_cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">"</span><span class="si">%4d</span><span class="s">"</span> <span class="o">%</span> <span class="n">element</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">formatted_cells</span><span class="p">)</span>
 
-formatted_rows = []
-for row in a:
-    formatted_rows.append(rowformat(row))
+<span class="n">formatted_rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+    <span class="n">formatted_rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rowformat</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
 
-print "\n".join(formatted_rows)
-# OUT:
-#   1  212  -13
-#  41    5  614
-#   7    8   91
-</code></pre>
+<span class="k">print</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">formatted_rows</span><span class="p">)</span>
+<span class="c"># OUT:</span>
+<span class="c">#   1  212  -13</span>
+<span class="c">#  41    5  614</span>
+<span class="c">#   7    8   91</span>
+</pre>
+</div>
+
 
 <p>In this case, <code>rowformat(row)</code> plays the exact same roles as <code>lambda row:</code>.</p>
 
@@ -271,36 +304,45 @@ that this is <em>not</em> in place - it returns the filtered list.</p>
 
 <p>Example: remove all odd numbers from a list of numbers</p>
 
-<pre><code>a = [1,2,5,0,-15,100,1400,-1337,135]
-a = filter(lambda x: x % 2 == 0, a)
-print a
-# OUT: [2, 0, 100, 1400]
-</code></pre>
+<div class="highlight">
+<pre><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">1400</span><span class="p">,</span><span class="o">-</span><span class="mi">1337</span><span class="p">,</span><span class="mi">135</span><span class="p">]</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">a</span>
+<span class="c"># OUT: [2, 0, 100, 1400]</span>
+</pre>
+</div>
+
 
 <p>Example: remove all vowels from a string</p>
 
-<pre><code>a = "Hello there! My name is Jamie, not to be confused with Jeymi."
-a = "".join(filter(lambda x: "aeiou".find(x) == -1, list(a)))
-print a
-# OUT: Hll thr! My nm s Jm, nt t b cnfsd wth Jym.
-</code></pre>
+<div class="highlight">
+<pre><span class="n">a</span> <span class="o">=</span> <span class="s">"Hello there! My name is Jamie, not to be confused with Jeymi."</span>
+<span class="n">a</span> <span class="o">=</span> <span class="s">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s">"aeiou"</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span>
+<span class="k">print</span> <span class="n">a</span>
+<span class="c"># OUT: Hll thr! My nm s Jm, nt t b cnfsd wth Jym.</span>
+</pre>
+</div>
+
 
 <p>Example: build a list of all prime numbers between 0 and 100 inclusive</p>
 
-<pre><code># NOTE: This prime test is inefficient - used for readability)
-def isprime(x):
-    if (x &lt; 2):
-        return False
-    for i in range(2,x):
-        if (x % i == 0):
-            return False
-    return True
+<div class="highlight">
+<pre><span class="c"># NOTE: This prime test is inefficient - used for readability)</span>
+<span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">return</span> <span class="bp">True</span>
 
-print filter(isprime,range(101))
-# OUT (placed on multiple lines for readability)
-# [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 
-# 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
-</code></pre>
+<span class="k">print</span> <span class="nb">filter</span><span class="p">(</span><span class="n">isprime</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="mi">101</span><span class="p">))</span>
+<span class="c"># OUT (placed on multiple lines for readability)</span>
+<span class="c"># [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41,</span>
+<span class="c"># 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]</span>
+</pre>
+</div>
+
 
 <h1>reduce</h1>
 
@@ -317,17 +359,23 @@ print filter(isprime,range(101))
 
 <p>Example: Calculate 30 factorial without using local variables</p>
 
-<pre><code># Note that range(2,n) -&gt; [2,3,...,n-1]
-print reduce(lambda x,y: x*y, range(2,31))
-# OUT: 265252859812191058636308480000000
-</code></pre>
+<div class="highlight">
+<pre><span class="c"># Note that range(2,n) -&gt; [2,3,...,n-1]</span>
+<span class="k">print</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">31</span><span class="p">))</span>
+<span class="c"># OUT: 265252859812191058636308480000000</span>
+</pre>
+</div>
+
 
 <p>Example: Find the longest word in a list of words</p>
 
-<pre><code>a = ["pencil","pen","cap","zebra","Blizzard","0xB4DC0DE","!"]
-print reduce(lambda x,y: y if len(y) &gt; len(x) else x, a)
-# OUT: 0xB4DC0DE 
-</code></pre>
+<div class="highlight">
+<pre><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s">"pencil"</span><span class="p">,</span><span class="s">"pen"</span><span class="p">,</span><span class="s">"cap"</span><span class="p">,</span><span class="s">"zebra"</span><span class="p">,</span><span class="s">"Blizzard"</span><span class="p">,</span><span class="s">"0xB4DC0DE"</span><span class="p">,</span><span class="s">"!"</span><span class="p">]</span>
+<span class="k">print</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">y</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">else</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="c"># OUT: 0xB4DC0DE</span>
+</pre>
+</div>
+
 
 <p>And that's all for now. If you're in SE 2014 reading this and don't think you need to know how to use lambda functions - have fun with scheme.</p>
 </body></html>

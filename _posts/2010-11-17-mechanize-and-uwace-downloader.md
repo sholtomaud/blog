@@ -26,10 +26,12 @@ The new version looks like this:
 To get it running, you'll need a copy of RubyGems, which you can get here: [Download RubyGems][]. It's a simple package management and distribution system for ruby, which is used by more or less every ruby project you can think of.
 
 Once you have that set up, just run
+
     sudo gem install uwace
 
 Wait for it to finish installing, then run
-   uwace
+
+    uwace
 
 Which will prompt you for a username and password.
 Of course, I wouldn't release anything that asks for your password without releasing source, so here it is:
@@ -50,6 +52,8 @@ Mechanize is a set of tools for automating webpage interactions and retrieving d
 There's a simple guide on github here: [Getting Started with Mechanize][]
 
 To demonstrate how simple form interaction is, here's the method for login:
+
+    lang:ruby
 
     def login
       @username ||= ask("Username: ")

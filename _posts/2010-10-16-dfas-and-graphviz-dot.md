@@ -44,6 +44,8 @@ On the latest assignment we are required to describe DFAs (Deterministic Finite 
 
 I can do this in Ruby:
 
+    lang:ruby
+
     dfa = {
       :alphabet => %w(
         0
@@ -85,19 +87,21 @@ For those of you not familiar with ruby, `%w(one two three)` is equivalent to `[
 
 You can generate the DFA format required by Marmoset with the following function:
 
+    lang:ruby
+
     def dfa_output(dfa)
       lines = []
       lines << dfa[:alphabet].length.to_s
       dfa[:alphabet].each {|c| lines << c.to_s}
-    
+
       lines << dfa[:states].length.to_s
       dfa[:states].each {|s| lines << s.to_s}
-    
+
       lines << dfa[:initial].to_s
-    
+
       lines << dfa[:final].length.to_s
       dfa[:final].each {|f| lines << f.to_s}
-    
+
       transitions = []
       dfa[:transitions].each do |start,pair_array|
         pair_array.each do |(sym,targ)| 
@@ -110,18 +114,22 @@ You can generate the DFA format required by Marmoset with the following function
           end
         end
       end
-    
+
       lines << transitions.length.to_s
       lines += transitions
-    
+
       return lines.join("\n")
     end
 
 And then invoking with
 
+    lang:ruby
+
     puts dfa_output(dfa)
 
 I designed the function with ranges and multiple transition tokens in mind, so you can do stuff like this:
+
+    lang:ruby
 
     'start_state' => [
       [%w(one that other),'end_state'],
@@ -141,32 +149,34 @@ The syntax of DOT is very simple, and is better explained by [the DOT language w
 The DOT description of the above graph is as follows:
 
     digraph dfa {
-    	"" [shape=none]
-    	"start" [shape=circle]
-    	"zero" [shape=doublecircle]
-    	"0mod3" [shape=doublecircle]
-    	"1mod3" [shape=circle]
-    	"2mod3" [shape=circle]
-    
-    	"" -> "start"
-    	"1mod3" -> "2mod3" [label="0"]
-    	"1mod3" -> "0mod3" [label="1"]
-    	"0mod3" -> "0mod3" [label="0"]
-    	"0mod3" -> "1mod3" [label="1"]
-    	"2mod3" -> "1mod3" [label="0"]
-    	"2mod3" -> "2mod3" [label="1"]
-    	"start" -> "zero" [label="0"]
-    	"start" -> "1mod3" [label="1"]
-    } 
+      "" [shape=none]
+      "start" [shape=circle]
+      "zero" [shape=doublecircle]
+      "0mod3" [shape=doublecircle]
+      "1mod3" [shape=circle]
+      "2mod3" [shape=circle]
+
+      "" -> "start"
+      "1mod3" -> "2mod3" [label="0"]
+      "1mod3" -> "0mod3" [label="1"]
+      "0mod3" -> "0mod3" [label="0"]
+      "0mod3" -> "1mod3" [label="1"]
+      "2mod3" -> "1mod3" [label="0"]
+      "2mod3" -> "2mod3" [label="1"]
+      "start" -> "zero" [label="0"]
+      "start" -> "1mod3" [label="1"]
+    }
 
 And this is the ruby code to generate that output using the `dfa = { ... }` format at the beginning of the post.
+
+    lang:ruby
 
     def dot_output(dfa)
       lines = []
       lines << "digraph dfa {"
-    
+
       lines << %(\t"" [shape=none])
-    
+
       dfa[:states].each do |state|
         if (dfa[:final].include? state)
           lines << %(\t"#{state}" [shape=doublecircle])
@@ -174,10 +184,10 @@ And this is the ruby code to generate that output using the `dfa = { ... }` form
           lines << %(\t"#{state}" [shape=circle])
         end
       end
-    
+
       lines << ''
       lines << %(\t"" -> "#{dfa[:initial]}")
-    
+
       dfa[:transitions].each do |start,pair_array|
         pair_array.each do |(sym,targ)| 
           if sym.is_a? String
@@ -187,13 +197,15 @@ And this is the ruby code to generate that output using the `dfa = { ... }` form
           end
         end
       end
-    
+
       lines << "}"
-    
+
       return lines.join("\n")
     end
 
 Once you've installed Graphviz, you can generate a PNG of the graph by running 
+
+    lang:bash
 
     dot -Tpng < graph.dot > graph.png
 

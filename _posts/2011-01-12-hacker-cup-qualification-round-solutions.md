@@ -22,6 +22,8 @@ Squares
 
 **Implementation**:
 
+    lang:cpp
+
     #include <iostream>
     #include <set>
     #include <cmath>
@@ -67,6 +69,8 @@ Students
 
 **Implementation**:
 
+    lang:python
+
     from itertools import permutations
 
     def doit():
@@ -111,6 +115,7 @@ I'm sure I could have written a more elegant solution to this problem, but I jus
 
 **Implementation**:
 
+    lang:cpp
 
     #include <iostream>
     #include <set>

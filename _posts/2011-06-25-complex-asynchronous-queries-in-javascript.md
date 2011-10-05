@@ -35,6 +35,8 @@ JavaScript is, by nature, an asynchronous language. A few of the language's buil
 
 Here's a simple example:
 
+    lang:js
+
     window.setTimeout(function() {
       console.log("Three");
     }, 1000);
@@ -45,6 +47,8 @@ Here's a simple example:
 Run that with Firebug, Chrome Developer Tools or whatever other console logging tools you work with and you'll see that the numbers come out "One", "Two" and then finally "Three" after a one second delay.
 
 A more useful example is retrieving data in jQuery through AJAX from the server. AJAX (for those unfamiliar) allows you to retrieve information on a web page from the server without necessitating a full page reload. A query typically looks something like this:
+
+    lang:js
 
     $.ajax({
       url: '/records.php',
@@ -65,6 +69,8 @@ Sequential Requests with a Callback
 **Solution**: Make the call recursive, keeping track of the data retrieved, then run the final callback when the last request completes.
 
 For example, let's assume a page `records.php` returns the latest 10 records in a database as JSON, with a parameter `offset`, specifying how many records from the front to skip. We'll assume if it returns fewer than 10 results, there are no more. The coded solution will look something like this: 
+
+    lang:js
 
     function allRecords(callback, offset, data) {
       if (typeof offset === 'undefined') {
@@ -88,6 +94,8 @@ For example, let's assume a page `records.php` returns the latest 10 records in 
     }
 
 And since there's a check for the `undefined` state of the second two parameters, they can be omitted when the function is actually called, like so:
+
+    lang:js
 
     allRecords(function(allData) {
       console.log(allData);
@@ -114,6 +122,8 @@ While a simple modification of the above solution would work, it's inefficient. 
 
 Assuming the same general rules as above, let's say we want to retrieve the most recent n records.
 
+    lang:js
+
     function nRecords(n, callback) {
       var nCallsNeeded = Math.ceil(n / 10);
       var nCallsFinished = 0;
@@ -134,6 +144,8 @@ Assuming the same general rules as above, let's say we want to retrieve the most
     }
 
 So if I want the latest 23 records, I would get them like so:
+
+    lang:js
 
     nRecords(23, function(allData) {
       console.log(allData);

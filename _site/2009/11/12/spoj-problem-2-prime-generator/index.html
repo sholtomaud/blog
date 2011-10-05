@@ -69,692 +69,721 @@ The idea behind every solution here (with some variation) is to generate all the
 
 <p><strong>C++</strong></p>
 
-<pre><code>/// PRIME1 - C++ (g++)
-// AC Time: 2.52s
-// NOTE: I am aware that the use of vector and set actually
-//  makes this code run _slower_
-// I used vector and set simply as a way of practicing STL
-#include &lt;iostream&gt;
-#include &lt;cmath&gt;
-#include &lt;vector&gt;
-#include &lt;set&gt;
-using namespace std;
+<div class="highlight">
+<pre><span class="cp">/// PRIME1 - C++ (g++)</span>
+<span class="cp">// AC Time: 2.52s</span>
+<span class="cp">// NOTE: I am aware that the use of vector and set actually</span>
+<span class="cp">//  makes this code run _slower_</span>
+<span class="cp">// I used vector and set simply as a way of practicing STL</span>
+<span class="cp">#include &lt;iostream&gt;</span>
+<span class="cp">#include &lt;cmath&gt;</span>
+<span class="cp">#include &lt;vector&gt;</span>
+<span class="cp">#include &lt;set&gt;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
-int main() {
-    vector&lt;int&gt; primes;
-    primes.push_back(2);
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">primes</span><span class="p">;</span>
+    <span class="n">primes</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 
-    for (int i = 3; i &lt;= 32000; i+=2) {
-        bool isprime = true;
-        int cap = sqrt(i) + 1;
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">32000</span><span class="p">;</span> <span class="n">i</span><span class="o">+=</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">bool</span> <span class="n">isprime</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">cap</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 
-        vector&lt;int&gt;::iterator p;
-        for (p = primes.begin(); p != primes.end(); p++) {
-            if (*p &gt;= cap) break;
-            if (i % *p == 0) {
-                isprime = false;
-                break;
-            }
-        }
-        if (isprime) primes.push_back(i);
-    }
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">iterator</span> <span class="n">p</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="n">primes</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">p</span> <span class="o">!=</span> <span class="n">primes</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="n">p</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">p</span> <span class="o">&gt;=</span> <span class="n">cap</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="o">*</span><span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">isprime</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">isprime</span><span class="p">)</span> <span class="n">primes</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
 
-    int T,N,M;
+    <span class="kt">int</span> <span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="n">M</span><span class="p">;</span>
 
-    cin &gt;&gt; T;
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">T</span><span class="p">;</span>
 
-    for (int t = 0; t &lt; T; t++) {
-        if (t) cout &lt;&lt; endl;
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">T</span><span class="p">;</span> <span class="n">t</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 
-        cin &gt;&gt; M &gt;&gt; N;
-        if (M &lt; 2) M = 2;
+        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">M</span> <span class="o">&gt;&gt;</span> <span class="n">N</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">M</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="n">M</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 
-        int cap = sqrt(N) + 1;
+        <span class="kt">int</span> <span class="n">cap</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 
-        set&lt;int&gt; notprime;
-        notprime.clear();
+        <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">notprime</span><span class="p">;</span>
+        <span class="n">notprime</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
 
-        vector&lt;int&gt;::iterator p;
-        for (p = primes.begin(); p != primes.end(); p++) {
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">iterator</span> <span class="n">p</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="n">primes</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">p</span> <span class="o">!=</span> <span class="n">primes</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="n">p</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 
-            if (*p &gt;= cap) break;
-            int start;
+            <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">p</span> <span class="o">&gt;=</span> <span class="n">cap</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">start</span><span class="p">;</span>
 
-            if (*p &gt;= M) start = (*p)*2;
-            else start = M + ((*p - M % *p) % *p);
+            <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">p</span> <span class="o">&gt;=</span> <span class="n">M</span><span class="p">)</span> <span class="n">start</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">;</span>
+            <span class="k">else</span> <span class="n">start</span> <span class="o">=</span> <span class="n">M</span> <span class="o">+</span> <span class="p">((</span><span class="o">*</span><span class="n">p</span> <span class="o">-</span> <span class="n">M</span> <span class="o">%</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span> <span class="o">%</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>
 
-            for (int j = start; j &lt;= N; j += *p) {
-                notprime.insert(j);
-            }
-        }
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">N</span><span class="p">;</span> <span class="n">j</span> <span class="o">+=</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">notprime</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
 
-        for (int i = M; i &lt;= N; i++) {
-            if (notprime.count(i) == 0) {
-                cout &lt;&lt; i &lt;&lt; endl;
-            }
-        }
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">M</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">notprime</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
 
-    }
-    return 0;
-}
-</code></pre>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+</div>
+
 
 <p><strong>C99</strong></p>
 
-<pre><code>// PRIME1 - C99 (gcc)
-// AC Time: 0.07s
-#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-#include &lt;stdbool.h&gt;
-#include &lt;math.h&gt;
+<div class="highlight">
+<pre><span class="cp">// PRIME1 - C99 (gcc)</span>
+<span class="cp">// AC Time: 0.07s</span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;string.h&gt;</span>
+<span class="cp">#include &lt;stdbool.h&gt;</span>
+<span class="cp">#include &lt;math.h&gt;</span>
 
-int main() {
-    int primes[4000];
-    int numprimes = 0;
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">primes</span><span class="p">[</span><span class="mi">4000</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">numprimes</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-    primes[numprimes++] = 2;
-    for (int i = 3; i &lt;= 32000; i+=2) {
-        bool isprime = true;
-        int cap = sqrt(i)+1;
-        for (int j = 0; j &lt; numprimes; j++) {
-            if (primes[j] &gt;= cap) break;
-            if (i % primes[j] == 0) {
-                isprime = false;
-                break;
-            }
-        }
-        if (isprime) primes[numprimes++] = i;
-    }
+    <span class="n">primes</span><span class="p">[</span><span class="n">numprimes</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">32000</span><span class="p">;</span> <span class="n">i</span><span class="o">+=</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">bool</span> <span class="n">isprime</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">cap</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">numprimes</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">cap</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">isprime</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">isprime</span><span class="p">)</span> <span class="n">primes</span><span class="p">[</span><span class="n">numprimes</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    int T,N,M;
-    scanf("%d",&amp;T);
+    <span class="kt">int</span> <span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="n">M</span><span class="p">;</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">T</span><span class="p">);</span>
 
-    for (int t = 0; t &lt; T; t++) {
-        if (t) printf("\n");
-        scanf("%d %d",&amp;M,&amp;N);
-        if (M &lt; 2) M = 2;
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">T</span><span class="p">;</span> <span class="n">t</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">"%d %d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">M</span><span class="p">,</span><span class="o">&amp;</span><span class="n">N</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">M</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="n">M</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 
-        int cap = sqrt(N) + 1;
+        <span class="kt">int</span> <span class="n">cap</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 
-        bool isprime[100001];
-        memset(isprime,true,sizeof(isprime));
+        <span class="n">bool</span> <span class="n">isprime</span><span class="p">[</span><span class="mi">100001</span><span class="p">];</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">isprime</span><span class="p">,</span><span class="nb">true</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">isprime</span><span class="p">));</span>
 
-        for (int i = 0; i &lt; numprimes; i++) {
-            int p = primes[i];
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numprimes</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 
-            if(p &gt;= cap) break;
+            <span class="k">if</span><span class="p">(</span><span class="n">p</span> <span class="o">&gt;=</span> <span class="n">cap</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
 
-            int start;
+            <span class="kt">int</span> <span class="n">start</span><span class="p">;</span>
 
-            if (p &gt;= M) start = p*2;
-            else start = M + ((p - M % p) % p);
+            <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">&gt;=</span> <span class="n">M</span><span class="p">)</span> <span class="n">start</span> <span class="o">=</span> <span class="n">p</span><span class="o">*</span><span class="mi">2</span><span class="p">;</span>
+            <span class="k">else</span> <span class="n">start</span> <span class="o">=</span> <span class="n">M</span> <span class="o">+</span> <span class="p">((</span><span class="n">p</span> <span class="o">-</span> <span class="n">M</span> <span class="o">%</span> <span class="n">p</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span><span class="p">);</span>
 
-            for (int j = start; j &lt;= N; j += p) {
-                isprime[j - M] = false;
-            }
-        }
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">N</span><span class="p">;</span> <span class="n">j</span> <span class="o">+=</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">isprime</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">M</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
 
-        int start = (M % 2)?M:M+1;
+        <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span><span class="o">?</span><span class="n">M</span><span class="o">:</span><span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
 
-        if (M == 2) {
-            printf("2\n");
-        }
-        for (int i = start; i &lt;= N; i+=2) {
-            if (isprime[i-M]) printf("%d\n",i);
-        }
-    }
-    return 0;
-}
-</code></pre>
+        <span class="k">if</span> <span class="p">(</span><span class="n">M</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"2</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">+=</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">isprime</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">M</span><span class="p">])</span> <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+</div>
+
 
 <p><strong>PHP</strong></p>
 
-<pre><code>&lt;?
-// PRIME1 - PHP
-// AC Time: 5.73
+<div class="highlight">
+<pre><span class="cp">&lt;?</span>
+<span class="c1">// PRIME1 - PHP</span>
+<span class="c1">// AC Time: 5.73</span>
 
-$primes = array(2);
-$numprimes = 1;
+<span class="nv">$primes</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="nv">$numprimes</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 
-for ($i = 3; $i &lt;= 32000; $i+=2) {
-    $isprime = true;
-    $cap = sqrt($i)+1;
+<span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;=</span> <span class="mi">32000</span><span class="p">;</span> <span class="nv">$i</span><span class="o">+=</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$isprime</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+    <span class="nv">$cap</span> <span class="o">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="nv">$i</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
 
-    for ($j = 0; $j &lt; $numprimes; ++$j) {
-        if ($j &gt;= $cap) break;
-        if (!($i % $primes[$j])) {
-            $isprime = false;
-            break;
-        }
-    }
-    if ($isprime) $primes[$numprimes++] = $i;
-}
+    <span class="k">for</span> <span class="p">(</span><span class="nv">$j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$j</span> <span class="o">&lt;</span> <span class="nv">$numprimes</span><span class="p">;</span> <span class="o">++</span><span class="nv">$j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$j</span> <span class="o">&gt;=</span> <span class="nv">$cap</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nv">$i</span> <span class="o">%</span> <span class="nv">$primes</span><span class="p">[</span><span class="nv">$j</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="nv">$isprime</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$isprime</span><span class="p">)</span> <span class="nv">$primes</span><span class="p">[</span><span class="nv">$numprimes</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$i</span><span class="p">;</span>
+<span class="p">}</span>
 
-fscanf(STDIN,"%d",$T);
+<span class="nb">fscanf</span><span class="p">(</span><span class="nx">STDIN</span><span class="p">,</span><span class="s2">"%d"</span><span class="p">,</span><span class="nv">$T</span><span class="p">);</span>
 
-$output = "";
+<span class="nv">$output</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
 
-for ($t = 0; $t &lt; $T; $t++) {
-    if ($t) $output .= "\n";
+<span class="k">for</span> <span class="p">(</span><span class="nv">$t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$t</span> <span class="o">&lt;</span> <span class="nv">$T</span><span class="p">;</span> <span class="nv">$t</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$t</span><span class="p">)</span> <span class="nv">$output</span> <span class="o">.=</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
 
-    fscanf(STDIN,"%d %d",$M,$N);
-    if ($M &lt; 2) $M = 2;
+    <span class="nb">fscanf</span><span class="p">(</span><span class="nx">STDIN</span><span class="p">,</span><span class="s2">"%d %d"</span><span class="p">,</span><span class="nv">$M</span><span class="p">,</span><span class="nv">$N</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$M</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="nv">$M</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 
-    $isprime = array();
+    <span class="nv">$isprime</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
 
-    $cap = sqrt($N)+1;
+    <span class="nv">$cap</span> <span class="o">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="nv">$N</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
 
-    $i = 0;
-    while($i &lt; $numprimes) {
-        $p = $primes[$i];
+    <span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="nv">$i</span> <span class="o">&lt;</span> <span class="nv">$numprimes</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$p</span> <span class="o">=</span> <span class="nv">$primes</span><span class="p">[</span><span class="nv">$i</span><span class="p">];</span>
 
-        if ($p &gt;= $cap) break;
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$p</span> <span class="o">&gt;=</span> <span class="nv">$cap</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
 
-        if ($p &gt;= $M) {
-            $start = $p*2;
-        } else {
-            $start = $M + (($p - $M % $p) % $p);
-        }
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$p</span> <span class="o">&gt;=</span> <span class="nv">$M</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$start</span> <span class="o">=</span> <span class="nv">$p</span><span class="o">*</span><span class="mi">2</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$start</span> <span class="o">=</span> <span class="nv">$M</span> <span class="o">+</span> <span class="p">((</span><span class="nv">$p</span> <span class="o">-</span> <span class="nv">$M</span> <span class="o">%</span> <span class="nv">$p</span><span class="p">)</span> <span class="o">%</span> <span class="nv">$p</span><span class="p">);</span>
+        <span class="p">}</span>
 
-        for ($j = $start; $j &lt;= $N; $j += $p) {
-            $isprime[$j - $M] = false;
-        }
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$j</span> <span class="o">=</span> <span class="nv">$start</span><span class="p">;</span> <span class="nv">$j</span> <span class="o">&lt;=</span> <span class="nv">$N</span><span class="p">;</span> <span class="nv">$j</span> <span class="o">+=</span> <span class="nv">$p</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$isprime</span><span class="p">[</span><span class="nv">$j</span> <span class="o">-</span> <span class="nv">$M</span><span class="p">]</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+        <span class="p">}</span>
 
-        ++$i;
-    }
+        <span class="o">++</span><span class="nv">$i</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    for ($i = $M; $i &lt;= $N; ++$i) {
-        if (!isset($isprime[$i-$M])) {
-            $output .= "$i\n";
-        }
-    }
-}
+    <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="nv">$M</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;=</span> <span class="nv">$N</span><span class="p">;</span> <span class="o">++</span><span class="nv">$i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$isprime</span><span class="p">[</span><span class="nv">$i</span><span class="o">-</span><span class="nv">$M</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="nv">$output</span> <span class="o">.=</span> <span class="s2">"</span><span class="si">$i</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-echo $output;
-?&gt;
-</code></pre>
+<span class="k">echo</span> <span class="nv">$output</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre>
+</div>
+
 
 <p><strong>Python</strong></p>
 
-<pre><code># PRIME1 - Python
-# AC Time: 3.10s
-from math import sqrt
-primes = [2]
+<div class="highlight">
+<pre><span class="c"># PRIME1 - Python</span>
+<span class="c"># AC Time: 3.10s</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+<span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
-for i in range(3,32000,2):
-    isprime = True
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">32000</span><span class="p">,</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">isprime</span> <span class="o">=</span> <span class="bp">True</span>
 
-    cap = sqrt(i)+1
+    <span class="n">cap</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
 
-    for j in primes:
-        if (j &gt;= cap):
-            break
-        if (i % j == 0):
-            isprime = False
-            break
-    if (isprime):
-        primes.append(i)
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;=</span> <span class="n">cap</span><span class="p">):</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">isprime</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">break</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">isprime</span><span class="p">):</span>
+        <span class="n">primes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 
-T = input()
-output = ""
-for t in range(T):
+<span class="n">T</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+<span class="n">output</span> <span class="o">=</span> <span class="s">""</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
 
-    if (t &gt; 0):
-        output += "\n"
+    <span class="k">if</span> <span class="p">(</span><span class="n">t</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span>
 
-    M,N = raw_input().split(' ')
-    M = int(M)
-    N = int(N)
-    cap = sqrt(N)+1
+    <span class="n">M</span><span class="p">,</span><span class="n">N</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">)</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">cap</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
 
-    if (M &lt; 2):
-        M = 2
+    <span class="k">if</span> <span class="p">(</span><span class="n">M</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="mi">2</span>
 
-    isprime = [True]*100001
+    <span class="n">isprime</span> <span class="o">=</span> <span class="p">[</span><span class="bp">True</span><span class="p">]</span><span class="o">*</span><span class="mi">100001</span>
 
-    for i in primes:
-        if (i &gt;= cap):
-            break
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">cap</span><span class="p">):</span>
+            <span class="k">break</span>
 
-        if (i &gt;= M):
-            start = i*2
-        else:
-            start = M + ((i - M % i)%i)
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">M</span><span class="p">):</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="mi">2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">M</span> <span class="o">+</span> <span class="p">((</span><span class="n">i</span> <span class="o">-</span> <span class="n">M</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span><span class="o">%</span><span class="n">i</span><span class="p">)</span>
 
-        # The two below, obscure lines create a continuous
-        #  block of false elements in order to set all
-        #  elements correspnding to numbers divisible by i
-        #  in isprime to be false
-        # In turns out that this runs substantially faster
-        #  than setting the elements individually using loops
-        falseblock = [False] * len(isprime[start-M:N+1-M:i]);
-        isprime[start-M:N+1-M:i] = falseblock
+        <span class="c"># The two below, obscure lines create a continuous</span>
+        <span class="c">#  block of false elements in order to set all</span>
+        <span class="c">#  elements correspnding to numbers divisible by i</span>
+        <span class="c">#  in isprime to be false</span>
+        <span class="c"># In turns out that this runs substantially faster</span>
+        <span class="c">#  than setting the elements individually using loops</span>
+        <span class="n">falseblock</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">isprime</span><span class="p">[</span><span class="n">start</span><span class="o">-</span><span class="n">M</span><span class="p">:</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="o">-</span><span class="n">M</span><span class="p">:</span><span class="n">i</span><span class="p">]);</span>
+        <span class="n">isprime</span><span class="p">[</span><span class="n">start</span><span class="o">-</span><span class="n">M</span><span class="p">:</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="o">-</span><span class="n">M</span><span class="p">:</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">falseblock</span>
 
-    for i in range(M,N+1):
-        if (isprime[i-M] == True):
-            output += str(i) + "\n"
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">isprime</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">M</span><span class="p">]</span> <span class="o">==</span> <span class="bp">True</span><span class="p">):</span>
+            <span class="n">output</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span>
 
-print output[:-1]
-</code></pre>
+<span class="k">print</span> <span class="n">output</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre>
+</div>
+
 
 <p><strong>Bash</strong></p>
 
-<pre><code># PRIME1 Incomplete - BASH
-# This is not a complete solution
-# The speed of bash parsing makes getting an
-#  AC submission infeasible
+<div class="highlight">
+<pre><span class="c"># PRIME1 Incomplete - BASH</span>
+<span class="c"># This is not a complete solution</span>
+<span class="c"># The speed of bash parsing makes getting an</span>
+<span class="c">#  AC submission infeasible</span>
 
-# The following code is a working prime generator
-# Giving enough time, it will output all prime
-#  numbers from 0 to 32000
-# ..which is the first step in the solution to PRIME1
+<span class="c"># The following code is a working prime generator</span>
+<span class="c"># Giving enough time, it will output all prime</span>
+<span class="c">#  numbers from 0 to 32000</span>
+<span class="c"># ..which is the first step in the solution to PRIME1</span>
 
-let PRIMES[0]=2
-let NUMPRIMES=1
-for i in {3..32000}; do
-    let ISPRIME=1
+<span class="nb">let </span>PRIMES<span class="o">[</span>0<span class="o">]=</span>2
+<span class="nb">let </span><span class="nv">NUMPRIMES</span><span class="o">=</span>1
+<span class="k">for </span>i in <span class="o">{</span>3..32000<span class="o">}</span>; <span class="k">do</span>
+<span class="k">    </span><span class="nb">let </span><span class="nv">ISPRIME</span><span class="o">=</span>1
 
-    #for j in {0..$NUMPRIMES}; do
-    for (( j = 0;j&lt;$NUMPRIMES;j++ )); do
-        let CURPRIME=${PRIMES[$j]}
-        if [[ $CURPRIME*$CURPRIME -gt $i ]]; then
-            break
-        fi
+    <span class="c">#for j in {0..$NUMPRIMES}; do</span>
+    <span class="k">for</span> <span class="o">((</span> <span class="nv">j</span> <span class="o">=</span> 0;j&lt;<span class="nv">$NUMPRIMES</span>;j++ <span class="o">))</span>; <span class="k">do</span>
+<span class="k">        </span><span class="nb">let </span><span class="nv">CURPRIME</span><span class="o">=</span><span class="k">${</span><span class="nv">PRIMES</span><span class="p">[</span><span class="nv">$j</span><span class="p">]</span><span class="k">}</span>
+        <span class="k">if</span> <span class="o">[[</span> <span class="nv">$CURPRIME</span>*<span class="nv">$CURPRIME</span> -gt <span class="nv">$i</span> <span class="o">]]</span>; <span class="k">then</span>
+<span class="k">            </span><span class="nb">break</span>
+<span class="nb">        </span><span class="k">fi</span>
 
-        let MOD=$[$i % $CURPRIME]
-        if [ $MOD -eq 0 ]; then
-            let ISPRIME=0
-            break
-        fi
-    done
+<span class="k">        </span><span class="nb">let </span><span class="nv">MOD</span><span class="o">=</span><span class="nv">$[$i</span> % <span class="nv">$CURPRIME</span><span class="o">]</span>
+        <span class="k">if</span> <span class="o">[</span> <span class="nv">$MOD</span> -eq 0 <span class="o">]</span>; <span class="k">then</span>
+<span class="k">            </span><span class="nb">let </span><span class="nv">ISPRIME</span><span class="o">=</span>0
+            <span class="nb">break</span>
+<span class="nb">        </span><span class="k">fi</span>
+<span class="k">    done</span>
 
-    if [ $ISPRIME -eq 1 ]; then
-        echo $i
-        let PRIMES[NUMPRIMES]=$i
-        let NUMPRIMES=NUMPRIMES+1
-    fi
-done
+<span class="k">    if</span> <span class="o">[</span> <span class="nv">$ISPRIME</span> -eq 1 <span class="o">]</span>; <span class="k">then</span>
+<span class="k">        </span><span class="nb">echo</span> <span class="nv">$i</span>
+        <span class="nb">let </span>PRIMES<span class="o">[</span>NUMPRIMES<span class="o">]=</span><span class="nv">$i</span>
+        <span class="nb">let </span><span class="nv">NUMPRIMES</span><span class="o">=</span>NUMPRIMES+1
+    <span class="k">fi</span>
+<span class="k">done</span>
 &lt;/pre&gt;
-</code></pre>
+</pre>
+</div>
+
 
 <p><strong>Ruby</strong></p>
 
-<pre><code># PRIME1 - Ruby
-# AC Time: 4.65s
-#
-# While I would have liked to use more
-# Ruby idioms such as for p in primes
-# or primes.each do |p| (used once),
-# the difference in runtime between
-# the use of loops like these and while
-# loops was non-negligible
+<div class="highlight">
+<pre><span class="c1"># PRIME1 - Ruby</span>
+<span class="c1"># AC Time: 4.65s</span>
+<span class="c1">#</span>
+<span class="c1"># While I would have liked to use more</span>
+<span class="c1"># Ruby idioms such as for p in primes</span>
+<span class="c1"># or primes.each do |p| (used once),</span>
+<span class="c1"># the difference in runtime between</span>
+<span class="c1"># the use of loops like these and while</span>
+<span class="c1"># loops was non-negligible</span>
 
-primes = [2]
+<span class="n">primes</span> <span class="o">=</span> <span class="o">[</span><span class="mi">2</span><span class="o">]</span>
 
-3.step(32000,2) do |i|
-    isprime = true
-    cap = Math.sqrt(i) + 1
+<span class="mi">3</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="mi">32000</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+    <span class="n">isprime</span> <span class="o">=</span> <span class="kp">true</span>
+    <span class="n">cap</span> <span class="o">=</span> <span class="no">Math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 
-    primes.each do |p|
-        if (p &gt;= cap)
-            break
-        end
+    <span class="n">primes</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">p</span> <span class="o">&gt;=</span> <span class="n">cap</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="k">end</span>
 
-        if (i % p == 0)
-            isprime = false
-            break
-        end
-    end
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="nb">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">isprime</span> <span class="o">=</span> <span class="kp">false</span>
+            <span class="k">break</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
 
-    if isprime
-        primes &lt;&lt; i
-    end
-end
-numprimes = primes.length
+    <span class="k">if</span> <span class="n">isprime</span>
+        <span class="n">primes</span> <span class="o">&lt;&lt;</span> <span class="n">i</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+<span class="n">numprimes</span> <span class="o">=</span> <span class="n">primes</span><span class="o">.</span><span class="n">length</span>
 
-T = gets.to_i
+<span class="n">T</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">to_i</span>
 
 
-output = ""
-t = 0
-while t &lt; T
-    print "\n" if t &gt; 0
-    line = gets.split(" ")
-    m = line[0].to_i
-    n = line[1].to_i
+<span class="n">output</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">T</span>
+    <span class="nb">print</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="nb">gets</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">to_i</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">line</span><span class="o">[</span><span class="mi">1</span><span class="o">].</span><span class="n">to_i</span>
 
-    m = 2 if m &lt; 2
+    <span class="n">m</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">m</span> <span class="o">&lt;</span> <span class="mi">2</span>
 
-    cap = Math.sqrt(n) + 1
+    <span class="n">cap</span> <span class="o">=</span> <span class="no">Math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 
-    notprime = {}
+    <span class="n">notprime</span> <span class="o">=</span> <span class="p">{}</span>
 
-    i = 0
-    while i &lt; numprimes
-        p = primes[i]
-        i+=1
-        if (p &gt;= cap)
-            break
-        end
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numprimes</span>
+        <span class="nb">p</span> <span class="o">=</span> <span class="n">primes</span><span class="o">[</span><span class="n">i</span><span class="o">]</span>
+        <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">p</span> <span class="o">&gt;=</span> <span class="n">cap</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="k">end</span>
 
-        if (p &gt;= m)
-            start = p*2
-        else 
-            start = m + ((p - m % p)%p)
-        end
+        <span class="k">if</span> <span class="p">(</span><span class="nb">p</span> <span class="o">&gt;=</span> <span class="n">m</span><span class="p">)</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="nb">p</span><span class="o">*</span><span class="mi">2</span>
+        <span class="k">else</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="p">((</span><span class="nb">p</span> <span class="o">-</span> <span class="n">m</span> <span class="o">%</span> <span class="nb">p</span><span class="p">)</span><span class="o">%</span><span class="nb">p</span><span class="p">)</span>
+        <span class="k">end</span>
 
-        j = start
-        while j &lt;= n
-            notprime[j] = true
-            j += p
-        end
-    end
+        <span class="n">j</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">n</span>
+            <span class="n">notprime</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="kp">true</span>
+            <span class="n">j</span> <span class="o">+=</span> <span class="nb">p</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
 
-    i = m
-    while (i &lt;= n)
-        if (notprime[i] == nil)
-            print i,"\n"
-        end
-        i+=1
-    end
-    t += 1
-end
-</code></pre>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">m</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">notprime</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="kp">nil</span><span class="p">)</span>
+            <span class="nb">print</span> <span class="n">i</span><span class="p">,</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
+        <span class="k">end</span>
+        <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">end</span>
+    <span class="n">t</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="k">end</span>
+</pre>
+</div>
+
 
 <p><strong>Java</strong></p>
 
-<pre><code>// PRIME1 - Java
-// AC Time: 2.20
+<div class="highlight">
+<pre><span class="c1">// PRIME1 - Java</span>
+<span class="c1">// AC Time: 2.20</span>
 
-import java.io.*;
-import java.util.*;
-import java.lang.Math.*;
+<span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.Math.*</span><span class="o">;</span>
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Scanner</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
 
-        int[] primes = new int[4000];
-        int numprimes = 0;
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">primes</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">4000</span><span class="o">];</span>
+        <span class="kt">int</span> <span class="n">numprimes</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 
-        primes[numprimes++] = 2;
-        for (int i = 3; i &lt;= 32000; i+=2) {
-            boolean isprime = true;
-            double cap = Math.sqrt(i) + 1.0;
+        <span class="n">primes</span><span class="o">[</span><span class="n">numprimes</span><span class="o">++]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">32000</span><span class="o">;</span> <span class="n">i</span><span class="o">+=</span><span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">boolean</span> <span class="n">isprime</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="kt">double</span> <span class="n">cap</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">+</span> <span class="mf">1.0</span><span class="o">;</span>
 
-            for (int j = 0; j &lt; numprimes; j++) {
-                if (j &gt;= cap) break;
-                if (i % primes[j] == 0) {
-                    isprime = false;
-                    break;
-                }
-            }
-            if (isprime) primes[numprimes++] = i;
-        }
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">numprimes</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">&gt;=</span> <span class="n">cap</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">primes</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">isprime</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">isprime</span><span class="o">)</span> <span class="n">primes</span><span class="o">[</span><span class="n">numprimes</span><span class="o">++]</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+        <span class="o">}</span>
 
 
-        int T,N,M;
+        <span class="kt">int</span> <span class="n">T</span><span class="o">,</span><span class="n">N</span><span class="o">,</span><span class="n">M</span><span class="o">;</span>
 
-        T = in.nextInt();
+        <span class="n">T</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
 
-        for (int t = 0; t &lt; T; t++) {
-            if (t &gt; 0) System.out.println("");
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">T</span><span class="o">;</span> <span class="n">t</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">t</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">""</span><span class="o">);</span>
 
-            M = in.nextInt();
-            N = in.nextInt();
+            <span class="n">M</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+            <span class="n">N</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
 
-            if (M &lt; 2) M = 2;
+            <span class="k">if</span> <span class="o">(</span><span class="n">M</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">)</span> <span class="n">M</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
 
-            boolean[] isprime = new boolean[100001];
-            for (int j = 0; j &lt; 100001; j++) {
-                isprime[j] = true;
-            }
+            <span class="kt">boolean</span><span class="o">[]</span> <span class="n">isprime</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="mi">100001</span><span class="o">];</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">100001</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="n">isprime</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="o">}</span>
 
-            for (int i = 0; i &lt; numprimes; i++) {
-                int p = primes[i];
-                int start;
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numprimes</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">primes</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+                <span class="kt">int</span> <span class="n">start</span><span class="o">;</span>
 
-                if (p &gt;= M) start = p*2;
-                else start = M + ((p - M % p)%p);
+                <span class="k">if</span> <span class="o">(</span><span class="n">p</span> <span class="o">&gt;=</span> <span class="n">M</span><span class="o">)</span> <span class="n">start</span> <span class="o">=</span> <span class="n">p</span><span class="o">*</span><span class="mi">2</span><span class="o">;</span>
+                <span class="k">else</span> <span class="n">start</span> <span class="o">=</span> <span class="n">M</span> <span class="o">+</span> <span class="o">((</span><span class="n">p</span> <span class="o">-</span> <span class="n">M</span> <span class="o">%</span> <span class="n">p</span><span class="o">)%</span><span class="n">p</span><span class="o">);</span>
 
-                for (int j = start; j &lt;= N; j += p) {
-                    isprime[j - M] = false;
-                }
-            }
+                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">start</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">N</span><span class="o">;</span> <span class="n">j</span> <span class="o">+=</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">isprime</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">M</span><span class="o">]</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
 
-            for (int i = M; i &lt;= N; i++) {
-                if (isprime[i-M]) System.out.println(i);
-            }
-        }
-    }
-}
-</code></pre>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">M</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">N</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">isprime</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">M</span><span class="o">])</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre>
+</div>
+
 
 <p><strong>Perl</strong></p>
 
-<pre><code># PRIME1 - Perl
-# AC Time: 4.28s
-@primes = (2);
+<div class="highlight">
+<pre><span class="c1"># PRIME1 - Perl</span>
+<span class="c1"># AC Time: 4.28s</span>
+<span class="nv">@primes</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 
-for ($i = 3; $i &lt;= 32000; $i+=2) {
-    $isprime = 1;
-    $cap = sqrt($i) + 1;
-    foreach $p (@primes) {
-        if ($p &gt;= $cap) { 
-            last;
-        }
-        if ($i % $p == 0) {
-            $isprime = 0;
-            last;
-        }
-    }
-    if ($isprime == 1) {
-        push(@primes,$i)
-    }
-}
+<span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;=</span> <span class="mi">32000</span><span class="p">;</span> <span class="nv">$i</span><span class="o">+=</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$isprime</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="nv">$cap</span> <span class="o">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="nv">$i</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">foreach</span> <span class="nv">$p</span> <span class="p">(</span><span class="nv">@primes</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$p</span> <span class="o">&gt;=</span> <span class="nv">$cap</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">last</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$i</span> <span class="nv">%</span> <span class="err">$</span><span class="nv">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$isprime</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">last</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$isprime</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">push</span><span class="p">(</span><span class="nv">@primes</span><span class="p">,</span><span class="nv">$i</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
 
-$T = &lt;STDIN&gt;;
+<span class="nv">$T</span> <span class="o">=</span> <span class="sr">&lt;STDIN&gt;</span><span class="p">;</span>
 
-for ($t = 0; $t &lt; $T; $t++) {
-    if ($t &gt; 0) {
-        print "";
-    }
+<span class="k">for</span> <span class="p">(</span><span class="nv">$t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$t</span> <span class="o">&lt;</span> <span class="nv">$T</span><span class="p">;</span> <span class="nv">$t</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$t</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">print</span> <span class="s">""</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    $in = &lt;STDIN&gt;;
-    @line = split(/ /,$in);
-    $M = $line[0];
-    $N = $line[1];
+    <span class="nv">$in</span> <span class="o">=</span> <span class="sr">&lt;STDIN&gt;</span><span class="p">;</span>
+    <span class="nv">@line</span> <span class="o">=</span> <span class="nb">split</span><span class="p">(</span><span class="sr">/ /</span><span class="p">,</span><span class="nv">$in</span><span class="p">);</span>
+    <span class="nv">$M</span> <span class="o">=</span> <span class="nv">$line</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="nv">$N</span> <span class="o">=</span> <span class="nv">$line</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
 
-    if ($M &lt; 2) {
-        $M = 2;
-    }
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$M</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$M</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    $cap = sqrt($N) + 1;
+    <span class="nv">$cap</span> <span class="o">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="nv">$N</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 
-    @isprime = ((1) x 100001);
+    <span class="nv">@isprime</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span><span class="p">)</span> <span class="n">x</span> <span class="mi">100001</span><span class="p">);</span>
 
-    foreach $p (@primes) {
-        if ($p &gt;= $cap) {
-            last;
-        }
+    <span class="k">foreach</span> <span class="nv">$p</span> <span class="p">(</span><span class="nv">@primes</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$p</span> <span class="o">&gt;=</span> <span class="nv">$cap</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">last</span><span class="p">;</span>
+        <span class="p">}</span>
 
-        if ($p &gt;= $M) {
-            $start = $p*2;
-        } else {
-            $start = $M + (($p - $M % $p) % $p);
-        }
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$p</span> <span class="o">&gt;=</span> <span class="nv">$M</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$start</span> <span class="o">=</span> <span class="nv">$p</span><span class="o">*</span><span class="mi">2</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$start</span> <span class="o">=</span> <span class="nv">$M</span> <span class="o">+</span> <span class="p">((</span><span class="nv">$p</span> <span class="o">-</span> <span class="nv">$M</span> <span class="nv">%</span> <span class="err">$</span><span class="nv">p</span><span class="p">)</span> <span class="nv">%</span> <span class="err">$</span><span class="nv">p</span><span class="p">);</span>
+        <span class="p">}</span>
 
-        for ($j = $start; $j &lt;= $N; $j += $p) {
-            $isprime[$j-$M] = 0;
-        }
-    }
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$j</span> <span class="o">=</span> <span class="nv">$start</span><span class="p">;</span> <span class="nv">$j</span> <span class="o">&lt;=</span> <span class="nv">$N</span><span class="p">;</span> <span class="nv">$j</span> <span class="o">+=</span> <span class="nv">$p</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$isprime</span><span class="p">[</span><span class="nv">$j</span><span class="o">-</span><span class="nv">$M</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 
-    for ($i = $M; $i &lt;= $N; $i++) {
-        if ($isprime[$i-$M] == 1) {
-            print "$i\n";
-        }
-    }
-}
-</code></pre>
+    <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="nv">$M</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;=</span> <span class="nv">$N</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$isprime</span><span class="p">[</span><span class="nv">$i</span><span class="o">-</span><span class="nv">$M</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">print</span> <span class="s">"$i\n"</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+</div>
+
 
 <p><strong>C#</strong></p>
 
-<pre><code>// PRIME1 - C# (gmcs)
-// AC Time: 1.50s
+<div class="highlight">
+<pre><span class="c1">// PRIME1 - C# (gmcs)</span>
+<span class="c1">// AC Time: 1.50s</span>
 
-using System;
-class PRIME1 {
-    static void Main() {
+<span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">PRIME1</span> <span class="p">{</span>
+    <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">()</span> <span class="p">{</span>
 
-        int[] primes = new int[4000];
-        int numprimes = 0;
+        <span class="kt">int</span><span class="p">[]</span> <span class="n">primes</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="m">4000</span><span class="p">];</span>
+        <span class="kt">int</span> <span class="n">numprimes</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
 
-        primes[numprimes++] = 2;
-        for (int i = 3; i &lt;= 32000; i+=2) {
-            bool isprime = true;
-            double cap = Math.Sqrt(i) + 1.0;
-            for (int j = 0; j &lt; numprimes; j++) {
-                if (j &gt;= cap) break;
-                if (i % primes[j] == 0) {
-                    isprime = false;
-                    break;
-                }
-            }
-            if (isprime) primes[numprimes++] = i;
-        }
+        <span class="n">primes</span><span class="p">[</span><span class="n">numprimes</span><span class="p">++]</span> <span class="p">=</span> <span class="m">2</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">3</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;=</span> <span class="m">32000</span><span class="p">;</span> <span class="n">i</span><span class="p">+=</span><span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">bool</span> <span class="n">isprime</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+            <span class="kt">double</span> <span class="n">cap</span> <span class="p">=</span> <span class="n">Math</span><span class="p">.</span><span class="n">Sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="p">+</span> <span class="m">1.0</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">j</span> <span class="p">&lt;</span> <span class="n">numprimes</span><span class="p">;</span> <span class="n">j</span><span class="p">++)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="p">&gt;=</span> <span class="n">cap</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="p">%</span> <span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">isprime</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">isprime</span><span class="p">)</span> <span class="n">primes</span><span class="p">[</span><span class="n">numprimes</span><span class="p">++]</span> <span class="p">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="p">}</span>
 
-        int T,N,M;
-        T = int.Parse(Console.ReadLine());
+        <span class="kt">int</span> <span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="n">M</span><span class="p">;</span>
+        <span class="n">T</span> <span class="p">=</span> <span class="kt">int</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">());</span>
 
-        for (int t = 0; t &lt; T; t++) {
-            if (t &gt; 0) Console.WriteLine("");
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">t</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">t</span> <span class="p">&lt;</span> <span class="n">T</span><span class="p">;</span> <span class="n">t</span><span class="p">++)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">t</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">""</span><span class="p">);</span>
 
-            string[] parts = Console.ReadLine().Split(' ');
-            M = int.Parse(parts[0]);
-            N = int.Parse(parts[1]);
+            <span class="kt">string</span><span class="p">[]</span> <span class="n">parts</span> <span class="p">=</span> <span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">().</span><span class="n">Split</span><span class="p">(</span><span class="sc">' '</span><span class="p">);</span>
+            <span class="n">M</span> <span class="p">=</span> <span class="kt">int</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="m">0</span><span class="p">]);</span>
+            <span class="n">N</span> <span class="p">=</span> <span class="kt">int</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="m">1</span><span class="p">]);</span>
 
 
-            if (M &lt; 2) M = 2;
-            double cap = Math.Sqrt(N)+1;
+            <span class="k">if</span> <span class="p">(</span><span class="n">M</span> <span class="p">&lt;</span> <span class="m">2</span><span class="p">)</span> <span class="n">M</span> <span class="p">=</span> <span class="m">2</span><span class="p">;</span>
+            <span class="kt">double</span> <span class="n">cap</span> <span class="p">=</span> <span class="n">Math</span><span class="p">.</span><span class="n">Sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">)+</span><span class="m">1</span><span class="p">;</span>
 
-            bool[] isprime = new bool[100001];
-            for (int i = 0; i &lt; 100001; i++) isprime[i] = true;
+            <span class="kt">bool</span><span class="p">[]</span> <span class="n">isprime</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">bool</span><span class="p">[</span><span class="m">100001</span><span class="p">];</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="m">100001</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span> <span class="n">isprime</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
 
-            for (int i = 0; i &lt; numprimes; i++) {
-                int p = primes[i];
-                if (p &gt;= cap) break;
-                int start;
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">numprimes</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span> <span class="p">{</span>
+                <span class="kt">int</span> <span class="n">p</span> <span class="p">=</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="p">&gt;=</span> <span class="n">cap</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+                <span class="kt">int</span> <span class="n">start</span><span class="p">;</span>
 
-                if (p &gt;= M) start = p*2;
-                else start = M + ((p - M % p)%p);
+                <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="p">&gt;=</span> <span class="n">M</span><span class="p">)</span> <span class="n">start</span> <span class="p">=</span> <span class="n">p</span><span class="p">*</span><span class="m">2</span><span class="p">;</span>
+                <span class="k">else</span> <span class="n">start</span> <span class="p">=</span> <span class="n">M</span> <span class="p">+</span> <span class="p">((</span><span class="n">p</span> <span class="p">-</span> <span class="n">M</span> <span class="p">%</span> <span class="n">p</span><span class="p">)%</span><span class="n">p</span><span class="p">);</span>
 
-                for (int j = start; j &lt;= N; j+= p) {
-                    isprime[j - M] = false;
-                }
-            }
+                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="p">=</span> <span class="n">start</span><span class="p">;</span> <span class="n">j</span> <span class="p">&lt;=</span> <span class="n">N</span><span class="p">;</span> <span class="n">j</span><span class="p">+=</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">isprime</span><span class="p">[</span><span class="n">j</span> <span class="p">-</span> <span class="n">M</span><span class="p">]</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
 
-            for (int i = M; i &lt;= N; i++) {
-                if (isprime[i-M] == true) Console.WriteLine(i);
-            }
-        }
-    }
-}
-</code></pre>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="n">M</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;=</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">isprime</span><span class="p">[</span><span class="n">i</span><span class="p">-</span><span class="n">M</span><span class="p">]</span> <span class="p">==</span> <span class="k">true</span><span class="p">)</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+</div>
+
 
 <p><strong>GNU Pascal</strong></p>
 
-<pre><code>{
-    PRIME1 - GNU Pascal
-    AC Time: 0.54
-}
+<div class="highlight">
+<pre><span class="cm">{</span>
+<span class="cm">    PRIME1 - GNU Pascal</span>
+<span class="cm">    AC Time: 0.54</span>
+<span class="cm">}</span>
 
-program PRIME1;
-var
-    primes: array[1..4000] of integer;
-    numprimes: integer;
-    i,j: integer;
-    cap: double;
-    isprime: boolean;
-    T,N,M: integer;
-    isp: array[0..100001] of boolean;
-    p,start: integer;
-
-
-begin
-    primes[1] := 2;
-    numprimes := 1;
-    for i := 3 to 32000 do
-    begin
-        isprime := true;
-        cap := sqrt(i) + 1;
-        for j := 1 to numprimes do
-        begin
-            if primes[j] &gt;= cap then 
-                    break;
-
-            if (i MOD primes[j] = 0) then
-            begin
-                isprime := false;
-                break;
-            end
-        end;
-
-        if isprime = true then 
-        begin
-            numprimes := numprimes + 1;
-            primes[numprimes] := i
-        end
-    end;
-
-    read(T);
-
-    for t := 1 to T do
-    begin
-        if t &gt; 0 then
-            writeln('');
-
-        read(M);
-        read(N);
-
-        if M &lt; 2 then
-            M := 2;
-
-        cap := sqrt(N) + 1;
-
-        for i := 0 to 100001 do
-            isp[i] := true;
+<span class="k">program</span> <span class="n">PRIME1</span><span class="o">;</span>
+<span class="k">var</span>
+    <span class="n">primes</span><span class="o">:</span> <span class="k">array</span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">4000</span><span class="p">]</span> <span class="k">of</span> <span class="kt">integer</span><span class="o">;</span>
+    <span class="n">numprimes</span><span class="o">:</span> <span class="kt">integer</span><span class="o">;</span>
+    <span class="n">i</span><span class="o">,</span><span class="n">j</span><span class="o">:</span> <span class="kt">integer</span><span class="o">;</span>
+    <span class="n">cap</span><span class="o">:</span> <span class="kt">double</span><span class="o">;</span>
+    <span class="n">isprime</span><span class="o">:</span> <span class="kt">boolean</span><span class="o">;</span>
+    <span class="n">T</span><span class="o">,</span><span class="n">N</span><span class="o">,</span><span class="n">M</span><span class="o">:</span> <span class="kt">integer</span><span class="o">;</span>
+    <span class="n">isp</span><span class="o">:</span> <span class="k">array</span><span class="p">[</span><span class="mi">0</span><span class="o">..</span><span class="mi">100001</span><span class="p">]</span> <span class="k">of</span> <span class="kt">boolean</span><span class="o">;</span>
+    <span class="n">p</span><span class="o">,</span><span class="n">start</span><span class="o">:</span> <span class="kt">integer</span><span class="o">;</span>
 
 
-        for i := 1 to numprimes do
-        begin
-            p := primes[i];
-            if p &gt;= cap then
-                break;
+<span class="k">begin</span>
+    <span class="n">primes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">:=</span> <span class="mi">2</span><span class="o">;</span>
+    <span class="n">numprimes</span> <span class="o">:=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="mi">3</span> <span class="k">to</span> <span class="mi">32000</span> <span class="k">do</span>
+    <span class="k">begin</span>
+        <span class="n">isprime</span> <span class="o">:=</span> <span class="k">true</span><span class="o">;</span>
+        <span class="n">cap</span> <span class="o">:=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="o">:=</span> <span class="mi">1</span> <span class="k">to</span> <span class="n">numprimes</span> <span class="k">do</span>
+        <span class="k">begin</span>
+            <span class="k">if</span> <span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">cap</span> <span class="k">then</span>
+                    <span class="k">break</span><span class="o">;</span>
 
-            if p &gt;= M then
-                start := (p * 2);
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="k">MOD</span> <span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+            <span class="k">begin</span>
+                <span class="n">isprime</span> <span class="o">:=</span> <span class="k">false</span><span class="o">;</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">end</span>
+        <span class="k">end</span><span class="o">;</span>
 
-            if p &lt; M then
-                start := M + ((p - (M MOD p)) MOD p);
+        <span class="k">if</span> <span class="n">isprime</span> <span class="o">=</span> <span class="k">true</span> <span class="k">then</span>
+        <span class="k">begin</span>
+            <span class="n">numprimes</span> <span class="o">:=</span> <span class="n">numprimes</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="n">primes</span><span class="p">[</span><span class="n">numprimes</span><span class="p">]</span> <span class="o">:=</span> <span class="n">i</span>
+        <span class="k">end</span>
+    <span class="k">end</span><span class="o">;</span>
 
-            j := start;
+    <span class="nb">read</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">;</span>
 
-            while j &lt;= N do
-            begin
-                isp[j - M] := false;
-                j := j + p;
-            end;
-        end;
+    <span class="k">for</span> <span class="n">t</span> <span class="o">:=</span> <span class="mi">1</span> <span class="k">to</span> <span class="n">T</span> <span class="k">do</span>
+    <span class="k">begin</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">then</span>
+            <span class="nb">writeln</span><span class="p">(</span><span class="s">''</span><span class="p">)</span><span class="o">;</span>
 
-        for i := M to N do
-        begin
-            if isp[i-M] = true then
-                writeln(i);
-        end;
-    end;
-end.
-</code></pre>
+        <span class="nb">read</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="o">;</span>
+        <span class="nb">read</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="n">M</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">then</span>
+            <span class="n">M</span> <span class="o">:=</span> <span class="mi">2</span><span class="o">;</span>
+
+        <span class="n">cap</span> <span class="o">:=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="mi">0</span> <span class="k">to</span> <span class="mi">100001</span> <span class="k">do</span>
+            <span class="n">isp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">:=</span> <span class="k">true</span><span class="o">;</span>
+
+
+        <span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="mi">1</span> <span class="k">to</span> <span class="n">numprimes</span> <span class="k">do</span>
+        <span class="k">begin</span>
+            <span class="n">p</span> <span class="o">:=</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">;</span>
+            <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;=</span> <span class="n">cap</span> <span class="k">then</span>
+                <span class="k">break</span><span class="o">;</span>
+
+            <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;=</span> <span class="n">M</span> <span class="k">then</span>
+                <span class="n">start</span> <span class="o">:=</span> <span class="p">(</span><span class="n">p</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span><span class="o">;</span>
+
+            <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="n">M</span> <span class="k">then</span>
+                <span class="n">start</span> <span class="o">:=</span> <span class="n">M</span> <span class="o">+</span> <span class="p">((</span><span class="n">p</span> <span class="o">-</span> <span class="p">(</span><span class="n">M</span> <span class="k">MOD</span> <span class="n">p</span><span class="p">))</span> <span class="k">MOD</span> <span class="n">p</span><span class="p">)</span><span class="o">;</span>
+
+            <span class="n">j</span> <span class="o">:=</span> <span class="n">start</span><span class="o">;</span>
+
+            <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">N</span> <span class="k">do</span>
+            <span class="k">begin</span>
+                <span class="n">isp</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">M</span><span class="p">]</span> <span class="o">:=</span> <span class="k">false</span><span class="o">;</span>
+                <span class="n">j</span> <span class="o">:=</span> <span class="n">j</span> <span class="o">+</span> <span class="n">p</span><span class="o">;</span>
+            <span class="k">end</span><span class="o">;</span>
+        <span class="k">end</span><span class="o">;</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="n">M</span> <span class="k">to</span> <span class="n">N</span> <span class="k">do</span>
+        <span class="k">begin</span>
+            <span class="k">if</span> <span class="n">isp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">M</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span> <span class="k">then</span>
+                <span class="nb">writeln</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">;</span>
+        <span class="k">end</span><span class="o">;</span>
+    <span class="k">end</span><span class="o">;</span>
+<span class="k">end</span><span class="o">.</span>
+</pre>
+</div>
 </body></html>
 
 </div>

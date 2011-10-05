@@ -71,25 +71,31 @@
 
 <p>Here's a simple example:</p>
 
-<pre><code>window.setTimeout(function() {
-  console.log("Three");
-}, 1000);
+<div class="highlight">
+<pre><span class="nb">window</span><span class="p">.</span><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Three"</span><span class="p">);</span>
+<span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
 
-console.log("One");
-console.log("Two");
-</code></pre>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"One"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Two"</span><span class="p">);</span>
+</pre>
+</div>
+
 
 <p>Run that with Firebug, Chrome Developer Tools or whatever other console logging tools you work with and you'll see that the numbers come out "One", "Two" and then finally "Three" after a one second delay.</p>
 
 <p>A more useful example is retrieving data in jQuery through AJAX from the server. AJAX (for those unfamiliar) allows you to retrieve information on a web page from the server without necessitating a full page reload. A query typically looks something like this:</p>
 
-<pre><code>$.ajax({
-  url: '/records.php',
-  success: function(data) {
-    console.log(data);
-  }
-});
-</code></pre>
+<div class="highlight">
+<pre><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+  <span class="nx">url</span><span class="o">:</span> <span class="s1">'/records.php'</span><span class="p">,</span>
+  <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre>
+</div>
+
 
 <p>Which says roughly: <strong>Send an HTTP GET request to the path <code>/date</code>. When the server responds, log the response body to the console.</strong></p>
 
@@ -103,34 +109,40 @@ console.log("Two");
 
 <p>For example, let's assume a page <code>records.php</code> returns the latest 10 records in a database as JSON, with a parameter <code>offset</code>, specifying how many records from the front to skip. We'll assume if it returns fewer than 10 results, there are no more. The coded solution will look something like this:</p>
 
-<pre><code>function allRecords(callback, offset, data) {
-  if (typeof offset === 'undefined') {
-    offset = 0;
-  }
-  if (typeof data === 'undefined') {
-    data = [];
-  }
-  $.ajax({
-    url: 'records.php',
-    data: {offset: offset},
-    success: function(dataChunk) {
-      data = data.concat(dataChunk);
-      if (dataChunk.length &lt; 10) {
-        callback(data);
-      } else {
-        allRecords(callback, offset + 10, data);
-      }
-    }
-  });
-}
-</code></pre>
+<div class="highlight">
+<pre><span class="kd">function</span> <span class="nx">allRecords</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">offset</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">offset</span> <span class="o">===</span> <span class="s1">'undefined'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">data</span> <span class="o">===</span> <span class="s1">'undefined'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">data</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="p">}</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+    <span class="nx">url</span><span class="o">:</span> <span class="s1">'records.php'</span><span class="p">,</span>
+    <span class="nx">data</span><span class="o">:</span> <span class="p">{</span><span class="nx">offset</span><span class="o">:</span> <span class="nx">offset</span><span class="p">},</span>
+    <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dataChunk</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">dataChunk</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">dataChunk</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">callback</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">allRecords</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">offset</span> <span class="o">+</span> <span class="mi">10</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</pre>
+</div>
+
 
 <p>And since there's a check for the <code>undefined</code> state of the second two parameters, they can be omitted when the function is actually called, like so:</p>
 
-<pre><code>allRecords(function(allData) {
-  console.log(allData);
-});
-</code></pre>
+<div class="highlight">
+<pre><span class="nx">allRecords</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">allData</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">allData</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+</div>
+
 
 <p>And this callback will be called only after the last request finishes. Assuming there are 47 records, it would make the following requests in series, then run the callback with the concatenated arrays of data.</p>
 
@@ -153,32 +165,38 @@ records.php?offset=40
 
 <p>Assuming the same general rules as above, let's say we want to retrieve the most recent n records.</p>
 
-<pre><code>function nRecords(n, callback) {
-  var nCallsNeeded = Math.ceil(n / 10);
-  var nCallsFinished = 0;
-  var data = [];
-  for (var i = 0; i &lt; nCallsNeeded; i++) {
-    $.ajax({
-      url: 'records.php',
-      data: {offset : i * 10},
-      success: function(dataChunk) {
-        data = data.concat(dataChunk);
-        nCallsFinished += 1;
-        if (nCallsFinished == nCallsNeeded) {
-          callback(data.slice(0,n));
-        }
-      }
-    });
-  }
-}
-</code></pre>
+<div class="highlight">
+<pre><span class="kd">function</span> <span class="nx">nRecords</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">nCallsNeeded</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nx">n</span> <span class="o">/</span> <span class="mi">10</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">nCallsFinished</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">nCallsNeeded</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+      <span class="nx">url</span><span class="o">:</span> <span class="s1">'records.php'</span><span class="p">,</span>
+      <span class="nx">data</span><span class="o">:</span> <span class="p">{</span><span class="nx">offset</span> <span class="o">:</span> <span class="nx">i</span> <span class="o">*</span> <span class="mi">10</span><span class="p">},</span>
+      <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dataChunk</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">dataChunk</span><span class="p">);</span>
+        <span class="nx">nCallsFinished</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">nCallsFinished</span> <span class="o">==</span> <span class="nx">nCallsNeeded</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">callback</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nx">n</span><span class="p">));</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+</div>
+
 
 <p>So if I want the latest 23 records, I would get them like so:</p>
 
-<pre><code>nRecords(23, function(allData) {
-  console.log(allData);
-});
-</code></pre>
+<div class="highlight">
+<pre><span class="nx">nRecords</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">allData</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">allData</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+</div>
+
 
 <p>If you have suggestions on ways to improve these solutions, I'm all ears.</p>
 

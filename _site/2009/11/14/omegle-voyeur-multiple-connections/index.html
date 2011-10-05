@@ -68,31 +68,32 @@ Omegle is a website where you are connected to a stranger for a chat. It is domi
 
 <p>Below is some php code I use to make curl even easier than it already is. simple_get($url) will return the HTTP GET result from the url specified. simple_post works similarly, but delivers data using the payload.</p>
 
-<pre lang="php" colla="-" file="simple_curl.php">
+<div class="highlight">
+<pre><span class="cp">&lt;?</span>
+<span class="c1">// Simple cUrl</span>
+<span class="c1">// Simple get and post requests</span>
+<span class="k">function</span> <span class="nf">simple_get</span><span class="p">(</span><span class="nv">$url</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$c</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+    <span class="nb">curl_close</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+<span class="p">}</span>
 
-// Simple cUrl
-// Simple get and post requests 
-function simple_get($url) {
-    $c = curl_init();
-    curl_setopt($c, CURLOPT_URL, $url);
-    curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-    $result = curl_exec($c);
-    curl_close($c);
-    return $result;
-}
-
-function simple_post($url,$payload) {
-    $c = curl_init();
-    curl_setopt($c, CURLOPT_URL, $url);
-    curl_setopt($c, CURLOPT_POST, true);
-    curl_setopt($c, CURLOPT_POSTFIELDS, $payload);
-    curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-    $result = curl_exec($c);
-    curl_close($c);
-    return $result;
-}
-?&gt;
+<span class="k">function</span> <span class="nf">simple_post</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span><span class="nv">$payload</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$c</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_POST</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_POSTFIELDS</span><span class="p">,</span> <span class="nv">$payload</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+    <span class="nb">curl_close</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
 </pre>
+</div>
 
 
 <p>When I started working on this project today (well, I suppose that would be last night now... wonder if I'll see the sunrise) I figured it would be a good time to get used to using git, so I made a repository using github.

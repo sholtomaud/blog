@@ -44,6 +44,8 @@ CLI Colour in PHP
 `cli_colours.php` included in the UWAngel-CLI source is just a collection of 
 constants which allow you to print out colours in your CLI scripts.
 
+    lang:php
+
     <?
     $COLOR_BLACK = "\033[0;30m";
     $COLOR_DARKGRAY = "\033[1;30m";
@@ -88,6 +90,9 @@ what you type. The command for this is `stty -echo` and can be re-enabled using
 `stty echo`. Below is how I implemented as part of the AngelAccess class to meet 
 my needs.
 
+    lang:php
+
+    <?
     function Prompt($prompt_text,$hide = false) {
         echo $prompt_text;
         $input = "";
@@ -99,6 +104,7 @@ my needs.
         }
         return $input;
     }
+    ?>
 
 As a complete side note, thanks to a boot-camped installation of Windows 7 (or 
 at least I'm fairly sure that's the culprit,) my Macbook Pro is now stuck on 

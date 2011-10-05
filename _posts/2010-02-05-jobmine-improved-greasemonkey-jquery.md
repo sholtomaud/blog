@@ -52,6 +52,8 @@ Greasemonkey is a tool for customizing the way a web page displays and interacts
 <h1>jQuery</h1>
 jQuery is a javascript framework specifically designed for doing things involving the DOM tree absurdly quickly. Example: highlighting alternating rows of a table (zebra-striping).
 
+    lang:js
+
     // Standard Javascript method:
     var tables = document.getElementsByTagName("table");
     for (var i = 0; i < tables.length; i++) {

@@ -82,33 +82,36 @@ universally useful, I'll do that here too.</p>
 <p><code>cli_colours.php</code> included in the UWAngel-CLI source is just a collection of
 constants which allow you to print out colours in your CLI scripts.</p>
 
-<pre><code>&lt;?
-$COLOR_BLACK = "\033[0;30m";
-$COLOR_DARKGRAY = "\033[1;30m";
-$COLOR_BLUE = "\033[0;34m";
-$COLOR_LIGHTBLUE = "\033[1;34m";
-$COLOR_GREEN = "\033[0;32m";
-$COLOR_LIGHTGREEN = "\033[1;32m";
-$COLOR_CYAN = "\033[0;36m";
-$COLOR_LIGHTCYAN = "\033[1;36m";
-$COLOR_RED = "\033[0;31m";
-$COLOR_LIGHTRED = "\033[1;31m";
-$COLOR_PURPLE = "\033[0;35m";
-$COLOR_LIGHTPURPLE = "\033[1;35m";
-$COLOR_BROWN = "\033[0;33m";
-$COLOR_YELLOW = "\033[1;33m";
-$COLOR_LIGHTGRAY = "\033[0;37m";
-$COLOR_WHITE = "\033[1;37m";
-$COLOR_DEFAULT = "\033[0;37m";
+<div class="highlight">
+<pre><span class="cp">&lt;?</span>
+<span class="nv">$COLOR_BLACK</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\033</span><span class="s2">[0;30m"</span><span class="p">;</span>
+<span class="nv">$COLOR_DARKGRAY</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\033</span><span class="s2">[1;30m"</span><span class="p">;</span>
+<span class="nv">$COLOR_BLUE</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\033</span><span class="s2">[0;34m"</span><span class="p">;</span>
+<span class="nv">$COLOR_LIGHTBLUE</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\033</span><span class="s2">[1;34m"</span><span class="p">;</span>
+<span class="nv">$COLOR_GREEN</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\033</span><span class="s2">[0;32m"</span><span class="p">;</span>
+<span class="nv">$COLOR_LIGHTGREEN</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\033</span><span class="s2">[1;32m"</span><span class="p">;</span>
+<span class="nv">$COLOR_CYAN</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\033</span><span class="s2">[0;36m"</span><span class="p">;</span>
+<span class="nv">$COLOR_LIGHTCYAN</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\033</span><span class="s2">[1;36m"</span><span class="p">;</span>
+<span class="nv">$COLOR_RED</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\033</span><span class="s2">[0;31m"</span><span class="p">;</span>
+<span class="nv">$COLOR_LIGHTRED</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\033</span><span class="s2">[1;31m"</span><span class="p">;</span>
+<span class="nv">$COLOR_PURPLE</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\033</span><span class="s2">[0;35m"</span><span class="p">;</span>
+<span class="nv">$COLOR_LIGHTPURPLE</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\033</span><span class="s2">[1;35m"</span><span class="p">;</span>
+<span class="nv">$COLOR_BROWN</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\033</span><span class="s2">[0;33m"</span><span class="p">;</span>
+<span class="nv">$COLOR_YELLOW</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\033</span><span class="s2">[1;33m"</span><span class="p">;</span>
+<span class="nv">$COLOR_LIGHTGRAY</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\033</span><span class="s2">[0;37m"</span><span class="p">;</span>
+<span class="nv">$COLOR_WHITE</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\033</span><span class="s2">[1;37m"</span><span class="p">;</span>
+<span class="nv">$COLOR_DEFAULT</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\033</span><span class="s2">[0;37m"</span><span class="p">;</span>
 
-echo &lt;&lt;&lt; EOT
-One fish,
-two fish,
-{$COLOR_RED}red{$COLOR_DEFAULT} fish,
-{$COLOR_BLUE}blue{$COLOR_DEFAULT} fish.
+<span class="k">echo</span> <span class="o">&lt;&lt;&lt;</span> <span class="nx">EOT</span>
+<span class="nx">One</span> <span class="nx">fish</span><span class="p">,</span>
+<span class="nx">two</span> <span class="nx">fish</span><span class="p">,</span>
+<span class="p">{</span><span class="nv">$COLOR_RED</span><span class="p">}</span><span class="nx">red</span><span class="p">{</span><span class="nv">$COLOR_DEFAULT</span><span class="p">}</span> <span class="nx">fish</span><span class="p">,</span>
+<span class="p">{</span><span class="nv">$COLOR_BLUE</span><span class="p">}</span><span class="nx">blue</span><span class="p">{</span><span class="nv">$COLOR_DEFAULT</span><span class="p">}</span> <span class="nx">fish</span><span class="o">.</span>
 
-EOT;
-</code></pre>
+<span class="nx">EOT</span><span class="p">;</span>
+</pre>
+</div>
+
 
 <p>The only gripe I have about this is that <code>COLOR_DEFAULT</code> it's the same colour as
 I have on by default in iTerm. Anyone know the escape code to make it actually
@@ -126,18 +129,23 @@ what you type. The command for this is <code>stty -echo</code> and can be re-ena
 <code>stty echo</code>. Below is how I implemented as part of the AngelAccess class to meet
 my needs.</p>
 
-<pre><code>function Prompt($prompt_text,$hide = false) {
-    echo $prompt_text;
-    $input = "";
-    if ($hide) {
-        $input = trim(`stty -echo;head -n1;stty echo`);
-        echo "\n";
-    } else {
-        $input = trim(fgets(STDIN));
-    }
-    return $input;
-}
-</code></pre>
+<div class="highlight">
+<pre><span class="cp">&lt;?</span>
+<span class="k">function</span> <span class="nf">Prompt</span><span class="p">(</span><span class="nv">$prompt_text</span><span class="p">,</span><span class="nv">$hide</span> <span class="o">=</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$prompt_text</span><span class="p">;</span>
+    <span class="nv">$input</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$hide</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$input</span> <span class="o">=</span> <span class="nb">trim</span><span class="p">(</span><span class="sb">`stty -echo;head -n1;stty echo`</span><span class="p">);</span>
+        <span class="k">echo</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nv">$input</span> <span class="o">=</span> <span class="nb">trim</span><span class="p">(</span><span class="nb">fgets</span><span class="p">(</span><span class="nx">STDIN</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nv">$input</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre>
+</div>
+
 
 <p>As a complete side note, thanks to a boot-camped installation of Windows 7 (or
 at least I'm fairly sure that's the culprit,) my Macbook Pro is now stuck on
