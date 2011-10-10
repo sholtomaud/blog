@@ -3,7 +3,7 @@ layout: post
 title: Meet Doctor Jekyll
 tags:
 - jekyll
-- prettify
+- pygments
 - sass
 - compass
 status: publish
