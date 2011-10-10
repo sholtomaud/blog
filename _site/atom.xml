@@ -4,7 +4,7 @@
  <title>Zero Wind :: Jamie Wong</title>
  <link href="http://jamie-wong.com/atom.xml" rel="self"/>
  <link href="http://jamie-wong.com/"/>
- <updated>2011-10-05T03:30:29-07:00</updated>
+ <updated>2011-10-09T18:29:40-07:00</updated>
  <id>http://jamie-wong.com/</id>
  <author>
    <name>Jamie Wong</name>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Meet Doctor Jekyll</title>
-   <link href="http://jamie-wong.com/2011/11/03/meet-doctor-jekyll/"/>
-   <updated>2011-11-03T00:00:00-07:00</updated>
-   <id>http://jamie-wong.com/2011/11/03/meet-doctor-jekyll</id>
+   <link href="http://jamie-wong.com/2011/10/03/meet-doctor-jekyll/"/>
+   <updated>2011-10-03T00:00:00-07:00</updated>
+   <id>http://jamie-wong.com/2011/10/03/meet-doctor-jekyll</id>
    <content type="html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/REC-html40/loose.dtd&quot;&gt;
 &lt;html&gt;&lt;body&gt;
 &lt;p&gt;My wordpress blog has lasted longer than any site I've used before, but I
