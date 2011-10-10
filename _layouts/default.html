@@ -2,6 +2,11 @@
 <html>
   <head>
     <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+    <meta property="og:image" content="http://jamie-wong.com/images/logo.png" />
+    <meta property="og:site_name" content="{{ site.title }}" />
+
+    <link rel="icon" href="/favicon.ico" />
+
     {% if page.description %}
     <meta name="description" content="{{ page.description }}" />
     {% endif %}
@@ -12,7 +17,7 @@
     <link rel="stylesheet" media="screen" href="/stylesheets/pygments.css" type="text/css" />
   </head>
 
-  <body class="bp" onload="prettyPrint()">
+  <body class="bp">
     <div class="page-container">
       <div class="page-sidebar-container">
         <div class="page-sidebar">
