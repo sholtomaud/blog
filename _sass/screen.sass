@@ -255,6 +255,15 @@ body.bp .page-content
   .highlight pre
     margin: 0
 
+.post
+  img
+    -webkit-background-clip: padding-box
+    +border-radius(10px)
+    margin: 0 auto
+    display: block
+    +single-box-shadow(darken($body-bg, 50%), 0, 0, 0, 1px)
+
 img.inline
   float: left
   margin-right: 10px
+  display: inline
