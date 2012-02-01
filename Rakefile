@@ -17,8 +17,8 @@ task :server => :clean do
   jekyll('--server --auto')
 end
 
-desc 'Build and deploy'
-task :deploy => :build do
+desc 'Deploy'
+task :deploy do
   sh 'rsync -rtzh --progress --delete _site/ ec2:/var/www/jamie-wong.com/blog/'
 end
 
