@@ -14,14 +14,14 @@ email: jamie.lf.wong@gmail.com
 
 # configuration for ehancements, uncomment to enable
 
-# feedburner:
-#   id: feedburnerid
+feedburner:
+  id: jamiewong
 
 google_analytics:
   account: UA-11869199-1
 
-# github:
-#   username: ghusername
+github:
+  username: phleet
 
-# disqus:
-#   id: disqusid
+disqus:
+  id: jamiewong
