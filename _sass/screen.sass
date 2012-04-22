@@ -267,3 +267,39 @@ img.inline
   float: left
   margin-right: 10px
   display: inline
+
+// TODO: Change to some reasonable max-width
+@media screen and (max-device-width: 800px), screen and (max-width: 800px)
+  body.bp .page-sidebar-container
+    position: static
+    height: 75px
+    width: 100%
+
+    .page-sidebar
+      height: auto
+      width: 100%
+      float: none
+
+      h1
+        float: left
+        text-align: left
+        margin-left: 15px
+
+      h2.my-name
+        float: left
+        margin-top: 32px
+
+    // TODO: Incorporate nav somehow?
+    .short-bio, .page-nav, .my-picture
+      display: none
+
+  body.bp .page-content-container
+    margin-left: 0%
+    width: 100%
+
+    .page-content
+      max-width: 100%
+
+  body.bp .post-list
+    ul.post-list-ul
+      max-width: 100%
