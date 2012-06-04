@@ -21,6 +21,12 @@ intentionally difficult in mercurial because it's really easy to shoot yourself
 in the foot and make your entire team's life difficult if you don't know what 
 you're doing. But there are some excellent use cases for it.
 
+**EDIT**: The above paragraph is a little misinformed. After a conversation with 
+the very helpful people in #mercurial on IRC (thanks kiilerix), it seems that 
+there are direct equivalents of amend and rebase. If you're running mercurial 
+2.2, there is literally a `--amend` flag on commit, and there's literally an `hg 
+rebase` command if you turn on the [rebase extension][].
+
 Keeping the Logs Clean - Amending Commits
 =========================================
 
@@ -268,9 +274,10 @@ definitely not as supported as it is in git.
 hg, you're doing it wrong for a whole bunch of reasons, but that's a rant for 
 another time.
 
-6. If you're stuck using subversion for whatever reason, *please* using 
-[git-svn][].
+6. If you're stuck using subversion for whatever reason, *please* use 
+   [git-svn][].
 
+[rebase extension]: http://mercurial.selenic.com/wiki/RebaseExtension
 [Pro Git]: http://git-scm.com/book
 [Khan Academy]: http://www.khanacademy.org/
 [revsets]: http://www.selenic.com/hg/help/revsets
