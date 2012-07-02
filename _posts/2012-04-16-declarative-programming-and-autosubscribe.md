@@ -40,7 +40,7 @@ amazing". This is a perfect example of how incredible working with declarative
 programming can be. Meteor itself focuses on reactive programming, but it 
 facilitates declarative style in its live templates.
 
-From working on my own libraries and frameworks, I thought "Wow. How they hell 
+From working on my own libraries and frameworks, I thought "Wow. How the hell 
 did they get that to work?" More on this later.
 
 [Meteor screencast]: http://meteor.com/screencast
