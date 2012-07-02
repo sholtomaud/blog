@@ -94,13 +94,13 @@ something that some friends will thoroughly enjoy enforcing.
 
 ### Schadenfreude
 
-[Schadenfreude][] is a most excellent German word that [@AonTech][] pointed out 
-to me meaning "pleasure derived from the misfortune of others". While serious 
-misfortune yields sympathy from our friends &mdash; there are some undesired 
-outcomes that are just downright funny. Whether it be someone attempting an 
-acrobatic stunt and failing spectacularly or coming to the realization that 
-they've just landed on Park Place and Board Walk with hotels in the same turn 
-&mdash;
+[Schadenfreude][] is a most excellent German word that [@ampersandy][] pointed 
+out to me meaning "pleasure derived from the misfortune of others". While 
+serious misfortune yields sympathy from our friends &mdash; there are some 
+undesired outcomes that are just downright funny. Whether it be someone 
+attempting an acrobatic stunt and failing spectacularly or coming to the 
+realization that they've just landed on Park Place and Board Walk with hotels in 
+the same turn &mdash;
 sometimes it's just funny.
 
 The Plan
@@ -193,4 +193,4 @@ allowed to do so. **
 [Hacker News]: http://news.ycombinator.com/
 
 [Schadenfreude]: http://en.wikipedia.org/wiki/Schadenfreude
-[@AonTech]: http://twitter.com/AonTech
+[@ampersandy]: http://twitter.com/ampersandy
