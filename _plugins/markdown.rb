@@ -17,7 +17,22 @@ module Jekyll
     end
 
     def convert(content)
-      html = RDiscount.new(content).to_html
+      rdiscount_extensions = @config['rdiscount']['extensions'].map { |e| e.to_sym }
+      rd = RDiscount.new(content, *rdiscount_extensions)
+      html = rd.to_html
+      toc_token = @config['rdiscount']['toc_token']
+
+      if html.include? "Table of Contents"
+        puts "\n\n"
+        puts "TOC TOKEN: #{toc_token}"
+        puts "INCLUDED?: #{html.include?(toc_token)}"
+        puts "HTML: #{html}"
+      end
+
+      if rd.generate_toc and html.include?(toc_token)
+        html.gsub!(@config['rdiscount']['toc_token'], rd.toc_content)
+      end
+
       doc = Nokogiri::HTML(html)
       doc.css('pre > code').each do |code_node|
         code_content = code_node.children[0].content

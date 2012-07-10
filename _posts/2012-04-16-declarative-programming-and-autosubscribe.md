@@ -19,7 +19,7 @@ something like the following:
 
 along with a [handlebars][] template kind of like this:
 
-{% literal %}
+{% raw %}
 
     lang:html
 
@@ -33,7 +33,7 @@ along with a [handlebars][] template kind of like this:
       {{/each}}
     </template>
 
-{% endliteral %}
+{% endraw %}
 
 From an application developer's perspective, I thought "Wow. That is really 
 amazing". This is a perfect example of how incredible working with declarative 
@@ -98,7 +98,7 @@ Here's the same example written in Meteor style declarative programming.
 
 The template code:
 
-{% literal %}
+{% raw %}
 
     lang:html
 
@@ -106,7 +106,7 @@ The template code:
       <h1>Salutations, {{ name }}!</h1>
     </template>
 
-{% endliteral %}
+{% endraw %}
 
 And the JavaScript:
 
