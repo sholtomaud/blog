@@ -30,7 +30,12 @@ module Jekyll
       end
 
       if rd.generate_toc and html.include?(toc_token)
-        html.gsub!(@config['rdiscount']['toc_token'], rd.toc_content)
+        toc_html = %(
+          <section class="table-of-contents">
+            #{rd.toc_content}
+          </section>
+        )
+        html.gsub!(@config['rdiscount']['toc_token'], toc_html)
       end
 
       doc = Nokogiri::HTML(html)
