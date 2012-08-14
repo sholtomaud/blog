@@ -65,6 +65,11 @@ There's a whole bunch of stuff to be excited about with the introduction of
 Computer Science, but I'll just focus on how we facilitated the two aspects I 
 mentioned before.
 
+For more depth, John Resig wrote an eloquent post explaining the motivation for 
+the new platform: [Redefining the Introduction to Computer Science][12].
+There's also an official announcement on the Khan Academy blog: [Khan Academy 
+Computer Science][13].
+
 Instant Gratification
 =====================
 
@@ -157,3 +162,5 @@ working on creating free, world-class education for the world, check out
 [9]: http://www.khanacademy.org/cs/birds-flock-together/940061217
 [10]: http://khanacademy.org/cs/new
 [11]: http://www.khanacademy.org/careers
+[12]: http://ejohn.org/blog/introducing-khan-cs/
+[13]: http://www.khanacademy.org/about/blog/post/29417655743/computer-science
