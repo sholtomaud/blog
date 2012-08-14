@@ -327,15 +327,18 @@ Configuration
 
 By default, arcanist does not amend commits for mercurial. I wanted this 
 ability, so I submitted a patch to support this. To make arcanist amend commits, 
-add the following to your `~/.arcrc`.
+add the following to your `~/.arcrc` (or to your project `.arcconfig`).
 
     lang:json
 
     {
       "config": {
-        "immutable_history": false
+        "history.immutable": false
       }
     }
+
+**EDIT**: The setting was originally `"immutable_history": false`, but it's been 
+changed to "history.immutable".
 
 ### project .hg/.hgrc
 
