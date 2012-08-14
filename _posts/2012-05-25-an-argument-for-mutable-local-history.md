@@ -5,6 +5,7 @@ tags:
 - mercurial
 - git
 - svn
+- khan-academy
 ---
 
 In my past co-op jobs, I've been using predominately git with an (unfortunate) 

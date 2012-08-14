@@ -4,6 +4,7 @@ title: My Mercurial Setup and Workflow at Khan Academy
 tags:
 - mercurial
 - git
+- khan-academy
 ---
 
 I've been using mercurial full time during my internship at [Khan Academy][] now 
