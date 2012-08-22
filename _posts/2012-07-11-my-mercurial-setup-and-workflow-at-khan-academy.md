@@ -610,6 +610,8 @@ with the repository. Two of my absolute favorites are `:GDiff` and `:GBlame`.
 I won't talk about it much here, but if you're using vim and work in git 
 repositories, you should seriously check it out.
 
+**EDIT**: I *sort* of made it: [vim-mercenary][].
+
 [Khan Academy]: http://www.khanacademy.org
 [phleet/dotfiles]: https://github.com/phleet/dotfiles/
 [David Hu]: http://david-hu.com/
@@ -631,3 +633,4 @@ repositories, you should seriously check it out.
 [ack]: http://betterthangrep.com/
 [fugitive]: https://github.com/tpope/vim-fugitive/
 [Tim Pope]: https://twitter.com/tpope
+[vim-mercenary]: https://github.com/phleet/vim-mercenary
