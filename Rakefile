@@ -14,7 +14,7 @@ end
 desc 'Start server with --auto'
 task :server => :clean do
   compass
-  jekyll('--server --auto')
+  jekyll('serve -w')
 end
 
 desc 'Deploy'
