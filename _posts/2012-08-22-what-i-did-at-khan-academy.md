@@ -168,7 +168,7 @@ that show up on under [All Programs][32] on Khan Academy.
 * [Circle Splitter](http://www.khanacademy.org/cs/circle-splitter/938934557)
 * [Star Creator](http://www.khanacademy.org/cs/star-creator/823072130)
 * [Super Spiral](http://www.khanacademy.org/cs/super-spiral/823021393)
-* [Spinning Galaxy](http://www.khanacademy.org/cs/spinning-galaxy/846913979)
+* [Maze Generator](https://www.khanacademy.org/cs/maze-generator/939110892)
 
 Production Import
 -----------------

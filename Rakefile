@@ -8,7 +8,7 @@ end
 desc 'Build site with Jekyll'
 task :build => :clean do
   compass
-  jekyll
+  jekyll('build')
 end
 
 desc 'Start server with --auto'
