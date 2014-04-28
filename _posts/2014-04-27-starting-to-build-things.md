@@ -52,7 +52,7 @@ reading through one of those “Learn X in 24 hours” books.
 - After learning how to install linux on an old tower desktop with the help of 
 my friend [Eric][], I learned how to get a static IP address, a free domain 
 name, and set up [Apache][]. After that, I could access static files served by 
-that desktop sitting in my basement from at school!
+the desktop in my basement while I was at school!
 - Equipped with my own dinky server that I’d have to go home to reboot when it 
 crashed, I wrote my own simple blog system in php. I wrote a little calendar 
 widget for it, and it was black and bright green. Looking back, it was hideous, 
@@ -165,7 +165,7 @@ satisfying once I saw them work. I would get terribly stuck some times, but
 after enough googling for, honestly, usually the wrong thing, I was able to 
 figure out what I needed to do to make it work.
 
-I had the good fortunate of being able to start working on these kind of things 
+I had the good fortune of being able to start working on these kind of things 
 while still in high school, but if you didn’t, no need to distress. Many of the 
 best programmers in the community started in their twenties or later. [DHH][], 
 the creator of [Ruby on Rails][] started in his twenties, and so did [Yehuda 
