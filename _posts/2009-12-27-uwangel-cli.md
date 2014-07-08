@@ -33,7 +33,7 @@ in on my Macbook Pro in Snow Leopard, but it should work just fine on any *nix
 machine, and possibly in Cygwin or other emulators. 
 
 As always, source is available on github: <a 
-href="http://github.com/phleet/UWAngel-CLI">UWAngel-CLI @ Github</a>.
+href="http://github.com/jlfwong/UWAngel-CLI">UWAngel-CLI @ Github</a>.
 
 Since I always like to post snippets of code from my projects that may be 
 universally useful, I'll do that here too.

@@ -18,7 +18,7 @@ published: true
 
 *This is the background and tech teardown of making my [Travel Map][1], which 
 you should check out before reading this post. You can find the full source on 
-github at [phleet/travelmap][14].*
+github at [jlfwong/travelmap][14].*
 
 {:toc}
 
@@ -501,14 +501,14 @@ locally, but is definitely a more sensible solution in general.
 [10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/arguments
 [11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
 [12]: https://github.com/es-shims/es5-shim
-[13]: https://github.com/phleet/travelmap/blob/master/app/data.js
-[14]: https://github.com/phleet/travelmap
+[13]: https://github.com/jlfwong/travelmap/blob/master/app/data.js
+[14]: https://github.com/jlfwong/travelmap
 [15]: http://bl.ocks.org/mbostock/3711652
 [16]: http://bl.ocks.org/mbostock/4180634
 [17]: https://github.com/mbostock/d3/wiki/Geo-Projections
-[19]: https://github.com/phleet/travelmap/blob/master/app/aggregate.js
+[19]: https://github.com/jlfwong/travelmap/blob/master/app/aggregate.js
 [20]: http://xkcd.com/977/
-[21]: https://github.com/phleet/travelmap/blob/master/app/projections.js
+[21]: https://github.com/jlfwong/travelmap/blob/master/app/projections.js
 [22]: https://github.com/mbostock/d3/wiki/Ordinal-Scales#wiki-category10
 [23]: https://github.com/mbostock/d3/wiki/SVG-Shapes#wiki-arc
 [24]: http://chimera.labs.oreilly.com/books/1230000000345/ch09.html#_please_do_not_delay
@@ -524,7 +524,7 @@ locally, but is definitely a more sensible solution in general.
 [34]: http://underscorejs.org/
 [35]: http://lodash.com/docs#memoize
 [36]: https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Storage#localStorage
-[37]: https://github.com/phleet/travelmap/blob/master/app/lib/localstorage_memoize.js#L28
+[37]: https://github.com/jlfwong/travelmap/blob/master/app/lib/localstorage_memoize.js#L28
 [38]: http://bgrins.github.io/devtools-snippets/#console-save
 [39]: http://domenic.me/2012/10/14/youre-missing-the-point-of-promises/
 [40]: http://api.jquery.com/category/deferred-object/

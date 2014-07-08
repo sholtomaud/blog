@@ -39,7 +39,7 @@ version you see above is actually throttled so it doesn't freeze your browser or
 use hundreds of MB of memory.
 
 As always, you can see source for the above:
-[github.com/phleet/fifteen-puzzle][].
+[github.com/jlfwong/fifteen-puzzle][].
 
 Background
 ==========
@@ -170,8 +170,8 @@ twitter [@jlfwong][twitter].
 [underscore.js]: http://documentcloud.github.com/underscore/
 [Las Vegas algorithm]: http://en.wikipedia.org/wiki/Las_vegas_algorithm
 [Monte Carlo algorithm]: http://en.wikipedia.org/wiki/Monte_Carlo_algorithm
-[github.com/phleet/fifteen-puzzle]: https://github.com/phleet/fifteen-puzzle
+[github.com/jlfwong/fifteen-puzzle]: https://github.com/jlfwong/fifteen-puzzle
 [min-heap]: http://en.wikipedia.org/wiki/Binary_heap
-[solver.coffee]: https://github.com/phleet/fifteen-puzzle/blob/5ec9ffad6eab8309027e9fe19013b02c4b4f872a/src/solver.coffee
-[lowerSolutionBound]: https://github.com/phleet/fifteen-puzzle/commit/c6057dc1956cfbe89a119aa26ba0a65f50bc3824
+[solver.coffee]: https://github.com/jlfwong/fifteen-puzzle/blob/5ec9ffad6eab8309027e9fe19013b02c4b4f872a/src/solver.coffee
+[lowerSolutionBound]: https://github.com/jlfwong/fifteen-puzzle/commit/c6057dc1956cfbe89a119aa26ba0a65f50bc3824
 [twitter]: http://twitter.com/jlfwong

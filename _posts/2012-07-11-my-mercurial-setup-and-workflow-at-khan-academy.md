@@ -18,7 +18,7 @@ mercurial, or you'll run into issues following this. At the time of this post,
 I'm using 2.2.2. You can check what version you have with `hg --version`.
 
 If you just want to read code, and not words, I have my dotfiles hosted on 
-github, which you can see here: [phleet/dotfiles][]. Fellow Khan Academy intern 
+github, which you can see here: [jlfwong/dotfiles][]. Fellow Khan Academy intern 
 [David Hu][] created a stripped down set of dotfiles specifically for KA that 
 will be much easier to follow, which you can see here: [khan/khan-dotfiles][].
 
@@ -613,18 +613,18 @@ repositories, you should seriously check it out.
 **EDIT**: I *sort* of made it: [vim-mercenary][].
 
 [Khan Academy]: http://www.khanacademy.org
-[phleet/dotfiles]: https://github.com/phleet/dotfiles/
+[jlfwong/dotfiles]: https://github.com/jlfwong/dotfiles/
 [David Hu]: http://david-hu.com/
 [khan/khan-dotfiles]: https://github.com/khan/khan-dotfiles/
 [hg book]: http://hgbook.red-bean.com/
 [Mercurial Theming]: http://mercurial.selenic.com/wiki/Theming
 [Mercurial Phases]: http://mercurial.selenic.com/wiki/Phases
 [git prompt]: http://en.newinstance.it/2010/05/23/git-autocompletion-and-enhanced-bash-prompt/
-[prompt-shelves]: https://github.com/phleet/dotfiles/commit/16ff9758a03a1a06574b8909d9a9cd0ea8302b70
-[git-completion.bash]: https://github.com/phleet/dotfiles/blob/master/git-completion.bash
-[prompt.py]: https://github.com/phleet/dotfiles/blob/master/hg-prompt/prompt.py
+[prompt-shelves]: https://github.com/jlfwong/dotfiles/commit/16ff9758a03a1a06574b8909d9a9cd0ea8302b70
+[git-completion.bash]: https://github.com/jlfwong/dotfiles/blob/master/git-completion.bash
+[prompt.py]: https://github.com/jlfwong/dotfiles/blob/master/hg-prompt/prompt.py
 [hg prompt]: http://sjl.bitbucket.org/hg-prompt/
-[hg-completion.bash]: https://github.com/phleet/dotfiles/blob/master/hg-completion.bash
+[hg-completion.bash]: https://github.com/jlfwong/dotfiles/blob/master/hg-completion.bash
 [Phabricator]: http://phabricator.org/
 [Kiln]: http://www.fogcreek.com/Kiln/
 [arcanist]: http://www.phabricator.com/docs/phabricator/article/Arcanist_User_Guide.html
@@ -633,4 +633,4 @@ repositories, you should seriously check it out.
 [ack]: http://betterthangrep.com/
 [fugitive]: https://github.com/tpope/vim-fugitive/
 [Tim Pope]: https://twitter.com/tpope
-[vim-mercenary]: https://github.com/phleet/vim-mercenary
+[vim-mercenary]: https://github.com/jlfwong/vim-mercenary

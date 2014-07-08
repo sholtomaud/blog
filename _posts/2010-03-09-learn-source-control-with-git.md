@@ -48,4 +48,4 @@ href="http://zameermanji.com/">Zameer Manji</a> has recommended the following
 guide: <a href="http://hginit.com/index.html">Hg Init: a Mercurial tutorial by 
 Joel Spolsky</a>.
 
-I would recommend you go grab an account of GitHub to help yourself learning. If you're in need of something to fool around with, fork one of my projects: <a href="http://github.com/phleet">phleet @ github</a>.
+I would recommend you go grab an account of GitHub to help yourself learning. If you're in need of something to fool around with, fork one of my projects: <a href="http://github.com/jlfwong">jlfwong @ github</a>.

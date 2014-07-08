@@ -55,7 +55,7 @@ Below is some php code I use to make curl even easier than it already is. simple
 When I started working on this project today (well, I suppose that would be last night now... wonder if I'll see the sunrise) I figured it would be a good time to get used to using git, so I made a repository using github.
 So far I'm enjoying git. Everything seems to act pretty much the way you'd expect to, and I already had to do a revert once I realized my logic was wrong for the way I was structuring my code.
 
-You can see the github for Omegle Voyeur here: <a href="http://github.com/phleet/Omegle-Voyeur">http://github.com/phleet/Omegle-Voyeur</a>
+You can see the github for Omegle Voyeur here: <a href="http://github.com/jlfwong/Omegle-Voyeur">http://github.com/jlfwong/Omegle-Voyeur</a>
 Feel free to design your own stuff with the all the code there - just be sure to link back here, or to the github page.
 
 In any case, the thing the majority of the people reading this are probably interested in are the result.

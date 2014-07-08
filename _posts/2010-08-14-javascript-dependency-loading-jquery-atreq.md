@@ -14,7 +14,7 @@ meta:
 ---
 For a project I'm working on, I have a fairly complex dependency tree and was getting fed up with manually including every single one in my haml layout file. So I started looking up other solutions and eventually decided none met my needs, so, as usual, I wrote my own. 
 
-[jquery.atreq @ github](http://github.com/phleet/jquery.atreq)
+[jquery.atreq @ github](http://github.com/jlfwong/jquery.atreq)
 
 Because there's not much to say beyond what I have in the readme, and because this blog is conveniently set up to format with markdown, I'm just going to display the current state of that here.
 

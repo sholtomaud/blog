@@ -36,7 +36,7 @@ isn't an issue at all.
 For now, you can see the latest version here: <a 
 href="http://jamie-wong.com/omegle/">Omegle Voyeur</a>. 
 Don't be surprised if it's down, and please go grab your own copy: <a 
-href="http://github.com/phleet/Omegle-Voyeur">Omegle-Voyeur @ github</a>.
+href="http://github.com/jlfwong/Omegle-Voyeur">Omegle-Voyeur @ github</a>.
 
 Now on to the customary technical concept to go along with my own self promotion.
 

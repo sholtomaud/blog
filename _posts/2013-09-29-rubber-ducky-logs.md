@@ -266,6 +266,6 @@ trying to deliver a free world class education to the world, go ahead and
 [8]: /images/13-09-30-raytracer.png
 [9]: https://www.khanacademy.org/careers/interns
 [10]: http://thraxil.org/users/anders/posts/2008/03/13/Subprocess-Hanging-PIPE-is-your-enemy/
-[11]: https://gist.github.com/phleet/6755667
+[11]: https://gist.github.com/jlfwong/6755667
 [12]: http://en.wikipedia.org/wiki/Rubber_duck_debugging
 [13]: http://web.archive.org/web/20051027173148/http://www.68k.org/~jrc/old-blog/archives/000198.html

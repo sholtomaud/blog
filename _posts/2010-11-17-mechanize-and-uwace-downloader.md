@@ -21,7 +21,7 @@ UWAce Downloader
 ============
 The new version looks like this:
 
-![uwace gem screenshot](http://phleet.github.com/images/uwacegem.png)
+![uwace gem screenshot](http://jlfwong.github.com/images/uwacegem.png)
 
 To get it running, you'll need a copy of RubyGems, which you can get here: [Download RubyGems][]. It's a simple package management and distribution system for ruby, which is used by more or less every ruby project you can think of.
 
@@ -39,7 +39,7 @@ Of course, I wouldn't release anything that asks for your password without relea
 * [uwace gem @ github][]
 * [uwace gem @ RubyGems][]
 
-[uwace gem @ github]: https://github.com/phleet/UWAngel-CLI
+[uwace gem @ github]: https://github.com/jlfwong/UWAngel-CLI
 [uwace gem @ RubyGems]: https://rubygems.org/gems/uwace
 [Download RubyGems]: http://rubygems.org/pages/download
 

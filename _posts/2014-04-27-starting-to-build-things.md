@@ -202,7 +202,7 @@ cool projects you did to get started. Leave a comment!
 [Handlebars.js]: http://handlebarsjs.com/
 [Yehuda Katz]: http://yehudakatz.com/
 [Ember]: http://emberjs.com/
-[Omegle Voyeur]: https://github.com/phleet/Omegle-Voyeur
+[Omegle Voyeur]: https://github.com/jlfwong/Omegle-Voyeur
 [mailinator]: http://mailinator.com/
 [Travian]: http://playgame.travian.us/landingpages?ad=10782_1111191000
 [Wireshark]: http://www.wireshark.org/

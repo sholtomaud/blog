@@ -64,5 +64,5 @@ For more information and examples, check out the github page: [JSONimal @ github
 
 I also posted it as on the jQuery plugins page - but that just points to the github page anyway. [JSONimal @ plugins.jquery.com][plugin]
 
-[github]: http://github.com/phleet/JSONimal
+[github]: http://github.com/jlfwong/JSONimal
 [plugin]: http://plugins.jquery.com/project/jsonimal

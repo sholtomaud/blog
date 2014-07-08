@@ -24,7 +24,7 @@ Before I even explain what Conway's Game of Life is, be amused by the below, gen
   <img src="/images/queenbee.gif" alt="Queenbee">
 </div>
 
-As always, the code I'm using here is open source: <a href="http://www.github.com/phleet/GameOfLife/">Game Of Life @ Github</a>.
+As always, the code I'm using here is open source: <a href="http://www.github.com/jlfwong/GameOfLife/">Game Of Life @ Github</a>.
 In addition to the source code, there's also a few animation demos such as the one above.
 
 Conway's Game of Life is a cellular automaton following very simple rules, as outlined in the Wikipedia article. It is a zero player game played on a 2 dimensional grid of squares, each holding either a state of dead or alive. The state of any cell is dependent on the state of the 8 cells neighbouring it in the previous generation. There are only 4 rules.

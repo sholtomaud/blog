@@ -155,7 +155,7 @@ Just for kicks and because I wanted to mess around with [Mechanize](http://githu
 
     sudo gem install marmoset
 
-Or you can browse the code yourself here: [http://github.com/phleet/MarmosetSubmit]()
+Or you can browse the code yourself here: [http://github.com/jlfwong/MarmosetSubmit]()
 
 Here's how you can integrate the submission process into your `Makefile`:
 

@@ -60,7 +60,7 @@ server - which is now hosted on EC2, with help from [Andrew Tinits][].
 
 I'll be honest here - I feel cooler running Jekyll than Wordpress. And having 
 the source for my blog on github just feels right. Seriously: 
-[github.com/phleet/blog][].
+[github.com/jlfwong/blog][].
 
 Plus there's nothing better to motivate you to write a blog post than redoing 
 your entire blog. I promise I won't be another person who just writes a blog so 
@@ -223,7 +223,7 @@ probably really unnecessary, but it's done now.
 
 You can see the plugin here: [markdown.rb][]
 
-[markdown.rb]: https://github.com/phleet/blog/blob/master/_plugins/markdown.rb
+[markdown.rb]: https://github.com/jlfwong/blog/blob/master/_plugins/markdown.rb
 
 ### Google Web Fonts
 
@@ -299,7 +299,7 @@ tomorrow.
 [Blueprint]: http://compass-style.org/reference/blueprint/
 [Sass]: http://sass-lang.com/
 [Markdown]: http://daringfireball.net/projects/markdown/
-[github.com/phleet/blog]: https://github.com/phleet/blog
+[github.com/jlfwong/blog]: https://github.com/jlfwong/blog
 [Andrew Tinits]: http://twitter.com/#!/amtinits
 [Jekyll]: https://github.com/mojombo/jekyll
 [Solarized]: http://ethanschoonover.com/solarized

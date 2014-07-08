@@ -430,7 +430,7 @@ available in git. This should eventually lead to near parity with Phabricator's
 git support.  The only major component still missing is the ability to use `arc 
 land`.
 
-You can see my contributions to the project on github: [phleet's commits on 
+You can see my contributions to the project on github: [jlfwong's commits on 
 facebook/arcanist][27].
 
 vim-arcanist
@@ -508,9 +508,9 @@ vim-mercenary.
 [24]: /2012/07/11/my-mercurial-setup-and-workflow-at-khan-academy/
 [25]: /2012/08/14/khan-academy-computer-science/
 [26]: http://phabricator.org/
-[27]: https://github.com/facebook/arcanist/commits?author=phleet
+[27]: https://github.com/facebook/arcanist/commits?author=jlfwong
 [28]: https://github.com/facebook/arcanist
-[29]: https://github.com/phleet/vim-arcanist
-[30]: https://github.com/phleet/vim-mercenary
+[29]: https://github.com/jlfwong/vim-arcanist
+[30]: https://github.com/jlfwong/vim-mercenary
 [31]: https://github.com/tpope/vim-fugitive
 [32]: http://www.khanacademy.org/cs/browse/all-programs
