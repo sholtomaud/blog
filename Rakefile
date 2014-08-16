@@ -1,4 +1,4 @@
-task :default => :server
+task :default => :fastserver
 
 desc 'Clean up generated site'
 task :clean do
@@ -8,17 +8,22 @@ end
 desc 'Build site with Jekyll'
 task :build => :clean do
   compass
-  jekyll('build')
+  sh 'jekyll build'
 end
 
 desc 'Start server with --auto'
+task :fastserver => :clean do
+  compass
+  sh 'DISABLE_SYNTAX_HIGHLIGHTING=1 jekyll serve -w'
+end
+
 task :server => :clean do
   compass
-  jekyll('serve -w')
+  sh 'jekyll serve -w'
 end
 
 desc 'Deploy'
-task :deploy do
+task :deploy => :build do
   sh 'rsync -rtzh --progress --delete _site/ ec2:/var/www/jamie-wong.com/blog/'
 end
 
@@ -59,10 +64,6 @@ end
 
 def cleanup
   sh 'rm -rf _site'
-end
-
-def jekyll(opts = '')
-  sh 'jekyll ' + opts
 end
 
 def compass(opts = '')

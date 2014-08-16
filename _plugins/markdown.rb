@@ -38,23 +38,27 @@ module Jekyll
         html.gsub!(@config['rdiscount']['toc_token'], toc_html)
       end
 
-      doc = Nokogiri::HTML(html)
-      doc.css('pre > code').each do |code_node|
-        code_content = code_node.children[0].content
+      if ENV['DISABLE_SYNTAX_HIGHLIGHTING'] == '1'
+        html
+      else
+        doc = Nokogiri::HTML(html)
+        doc.css('pre > code').each do |code_node|
+          code_content = code_node.children[0].content
 
-        lines = code_content.lines.to_a.collect(&:rstrip)
+          lines = code_content.lines.to_a.collect(&:rstrip)
 
-        if lines[0].start_with? 'lang:'
-          lang = lines[0].split(':')[1].to_sym
-          code = lines[2..-1].join "\n"
-          colorized_html = Albino.colorize(code, lang)
-          if colorized_html.length > 0
-            code_node.parent.replace(colorized_html)
+          if lines[0].start_with? 'lang:'
+            lang = lines[0].split(':')[1].to_sym
+            code = lines[2..-1].join "\n"
+            colorized_html = Albino.colorize(code, lang)
+            if colorized_html.length > 0
+              code_node.parent.replace(colorized_html)
+            end
           end
         end
-      end
 
-      doc.to_html
+        doc.to_html
+      end
     end
   end
 end
