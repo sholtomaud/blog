@@ -15,7 +15,7 @@ email: jamie.lf.wong@gmail.com
 # configuration for ehancements, uncomment to enable
 
 rdiscount:
-  extensions: ['smart', 'generate_toc']
+  extensions: ['smart', 'generate_toc', 'footnotes']
   toc_token: "{:toc}"
 
 feedburner:
