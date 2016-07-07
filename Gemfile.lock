@@ -39,6 +39,7 @@ GEM
     parslet (1.5.0)
       blankslate (~> 2.0)
     posix-spawn (0.3.8)
+    pygmentize (0.0.3)
     pygments.rb (0.5.4)
       posix-spawn (~> 0.3.6)
       yajl-ruby (~> 1.1.0)
@@ -63,6 +64,7 @@ DEPENDENCIES
   compass
   jekyll
   nokogiri
+  pygmentize
   rdiscount
 
 RUBY VERSION

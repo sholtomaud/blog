@@ -24,7 +24,7 @@ end
 
 desc 'Deploy'
 task :deploy => :build do
-  sh 'rsync -rtzh --progress --delete _site/ ec2:/var/www/jamie-wong.com/blog/'
+  sh 'rsync -rtzh --progress --delete _site/ ubuntu@jamie-wong.com:/var/www/jamie-wong.com/blog/'
 end
 
 desc 'Check links for site already running on localhost:4000'
