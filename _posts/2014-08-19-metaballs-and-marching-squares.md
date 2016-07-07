@@ -172,7 +172,7 @@ animateOnScroll(blockyThreshold);
 </script>
 
 You might be thinking that this still looks a little blocky. We sampled in a 
-grid, so why didn't e just sample every pixel instead to make it look smoother? 
+grid, so why didn't we just sample every pixel instead to make it look smoother?  
 Well, for 40 bouncing circles, on a 700x500 grid, that would be on the order of 
 14 million operations. If we want to have a nice smooth 60fps animation, that 
 would be 840 million operations per second. JavaScript engines may be fast 
