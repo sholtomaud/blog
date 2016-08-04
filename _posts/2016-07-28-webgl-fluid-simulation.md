@@ -6,8 +6,6 @@ type: post
 published: true
 ---
 
-TODO(jlfwong): Get rid of es6 features from fluid-sim.js
-
 <link rel="stylesheet" 
 href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
 

@@ -76,43 +76,43 @@ window.FluidSim = function(canvasId, options) {
     ]
   });
 
-  var standardVertexShaderSrc = `
-  varying vec2 textureCoord;
-  void main() {
-    textureCoord = gl_TexCoord.xy;
-    gl_Position = gl_Vertex;
-  }`;
+  var standardVertexShaderSrc = '\
+    varying vec2 textureCoord;\
+    void main() {\
+      textureCoord = gl_TexCoord.xy;\
+      gl_Position = gl_Vertex;\
+    }';
 
   // Given a texture holding a 2D velocity field, draw arrows
   // showing the direction of the fluid flow.
   var drawVectorFieldArrows = (function() {
-    var shader = new gl.Shader(`
-      mat2 rot(float angle) {
-        float c = cos(angle);
-        float s = sin(angle);
-
-        return mat2(
-          vec2(c, -s),
-          vec2(s, c)
-        );
-      }
-
-      attribute vec2 position;
-      uniform sampler2D velocity;
-      void main() {
-        vec2 v = texture2D(velocity, (position + 1.0) / 2.0).xy;
-        float scale = length(v);
-        float angle = atan(v.y, v.x);
-        mat2 rotation = rot(-angle);
-        gl_Position = vec4(
-          (rotation * (scale * gl_Vertex.xy)) + position,
-          0.0, 1.0);
-      }
-    `, `
-      void main() {
-        gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-      }
-    `);
+    var shader = new gl.Shader('\
+      mat2 rot(float angle) { \
+        float c = cos(angle); \
+        float s = sin(angle); \
+        \
+        return mat2( \
+          vec2(c, -s), \
+          vec2(s, c) \
+        ); \
+      } \
+      \
+      attribute vec2 position; \
+      uniform sampler2D velocity; \
+      void main() { \
+        vec2 v = texture2D(velocity, (position + 1.0) / 2.0).xy; \
+        float scale = length(v); \
+        float angle = atan(v.y, v.x); \
+        mat2 rotation = rot(-angle); \
+        gl_Position = vec4( \
+          (rotation * (scale * gl_Vertex.xy)) + position, \
+          0.0, 1.0); \
+      } \
+    ', '\
+      void main() { \
+        gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); \
+      } \
+    ');
     
     // Triangle pointing towards positive x axis
     // with baseline on the y axis
@@ -157,14 +157,14 @@ window.FluidSim = function(canvasId, options) {
     b = b || '0.0';
     a = a || '0.0';
 
-    var shader = new gl.Shader(standardVertexShaderSrc, `
-      varying vec2 textureCoord;
-      void main() {
-        float x = 2.0 * textureCoord.x - 1.0;
-        float y = 2.0 * textureCoord.y - 1.0;
-        gl_FragColor = vec4(${r}, ${g}, ${b}, ${a});
-      }
-    `);
+    var shader = new gl.Shader(standardVertexShaderSrc, '\
+      varying vec2 textureCoord; \
+      void main() { \
+        float x = 2.0 * textureCoord.x - 1.0; \
+        float y = 2.0 * textureCoord.y - 1.0; \
+        gl_FragColor = vec4(' + [r, g, b, a].join(',') +'); \
+      } \
+    ');
 
     return function() {
       shader.draw(standardMesh, gl.TRIANGLE_STRIP);
@@ -177,13 +177,13 @@ window.FluidSim = function(canvasId, options) {
   // Will stretch to fit, but in practice the texture and the framebuffer should be
   // the same size.
   var drawTexture = (function() {
-    var shader = new gl.Shader(standardVertexShaderSrc, `
-      varying vec2 textureCoord;
-      uniform sampler2D inputTexture;
-      void main() {
-        gl_FragColor = texture2D(inputTexture, textureCoord);
-      }
-    `);
+    var shader = new gl.Shader(standardVertexShaderSrc, '\
+      varying vec2 textureCoord; \
+      uniform sampler2D inputTexture; \
+      void main() { \
+        gl_FragColor = texture2D(inputTexture, textureCoord); \
+      } \
+    ');
     
     return function(inputTexture) {
       inputTexture.bind(0);
@@ -196,14 +196,14 @@ window.FluidSim = function(canvasId, options) {
 
   // Draw a texture to the framebuffer, thresholding at 0.5
   var drawTextureThreshold = (function() {
-    var shader = new gl.Shader(standardVertexShaderSrc, `
-      varying vec2 textureCoord;
-      uniform sampler2D inputTexture;
-      void main() {
-        gl_FragColor = step(0.5, texture2D(inputTexture, textureCoord));
-      }
-    `);
-    
+    var shader = new gl.Shader(standardVertexShaderSrc, '\
+      varying vec2 textureCoord; \
+      uniform sampler2D inputTexture; \
+      void main() { \
+        gl_FragColor = step(0.5, texture2D(inputTexture, textureCoord)); \
+      } \
+    ');
+
     return function(inputTexture) {
       inputTexture.bind(0);
       shader.uniforms({
@@ -216,27 +216,28 @@ window.FluidSim = function(canvasId, options) {
   // Given an velocity texture and a time delta, advect the
   // quantities in the input texture into the output texture
   var advect = (function() {
-    var shader = new gl.Shader(standardVertexShaderSrc, `
-      uniform float deltaT;
-      uniform sampler2D inputTexture;
-      uniform sampler2D velocity;
-      varying vec2 textureCoord;
-
-      void main() {
-        vec2 u = texture2D(velocity, textureCoord).xy;
-
-        // The 0.5 multiplier below is because the velocities are specified on
-        // the domain ([-1, 1], [-1, 1]), but texture coordinates operate on the
-        // range ([0, 0], [1, 1]).
-        //
-        // TODO(jlfwong): For reasons unclear to me, using a multiplier of 0.5
-        // instead of 2.0 causes lookups on the left-hand side to not wrap
-        // around when looking at the right-moving grid under the "Advection"
-        // header. My guess would be the filtering bias is wrong.
-        vec2 pastCoord = fract(textureCoord - (2.0 * deltaT * u));
-        gl_FragColor = texture2D(inputTexture, pastCoord);
-      }
-    `);
+    var shader = new gl.Shader(standardVertexShaderSrc, '\
+      uniform float deltaT; \
+      uniform sampler2D inputTexture; \
+      uniform sampler2D velocity; \
+      varying vec2 textureCoord; \
+      \
+      void main() { \
+        vec2 u = texture2D(velocity, textureCoord).xy; \
+        \
+        /* The 0.5 multiplier below is because the velocities are specified on \
+         * the domain ([-1, 1], [-1, 1]), but texture coordinates operate on the \
+         * range ([0, 0], [1, 1]). \
+         * \
+         * TODO(jlfwong): For reasons unclear to me, using a multiplier of 0.5 \
+         * instead of 2.0 causes lookups on the left-hand side to not wrap \
+         * around when looking at the right-moving grid under the "Advection" \
+         * header. My guess would be the filtering bias is wrong. \
+         */ \
+        vec2 pastCoord = fract(textureCoord - (2.0 * deltaT * u)); \
+        gl_FragColor = texture2D(inputTexture, pastCoord); \
+      } \
+    ');
 
     return function(inputTexture, velocityTexture) {
       inputTexture.bind(0);
@@ -254,21 +255,21 @@ window.FluidSim = function(canvasId, options) {
   // Apply a "splat" of change to a given place with a given
   // blob radius. The effect of the splat has an exponential falloff.
   var addSplat = (function() {
-    var shader = new gl.Shader(standardVertexShaderSrc, `
-      uniform vec4 change;
-      uniform vec2 center;
-      uniform float radius;
-      uniform sampler2D inputTex;
-
-      varying vec2 textureCoord;
-
-      void main() {
-        float dx = center.x - textureCoord.x;
-        float dy = center.y - textureCoord.y;
-        vec4 cur = texture2D(inputTex, textureCoord);
-        gl_FragColor = cur + change * exp(-(dx * dx + dy * dy) / radius);
-      }
-    `);
+    var shader = new gl.Shader(standardVertexShaderSrc, '\
+      uniform vec4 change; \
+      uniform vec2 center; \
+      uniform float radius; \
+      uniform sampler2D inputTex; \
+      \
+      varying vec2 textureCoord; \
+      \
+      void main() { \
+        float dx = center.x - textureCoord.x; \
+        float dy = center.y - textureCoord.y; \
+        vec4 cur = texture2D(inputTex, textureCoord); \
+        gl_FragColor = cur + change * exp(-(dx * dx + dy * dy) / radius); \
+      } \
+    ');
 
     return function(inputTexture, change, center, radius) {
       inputTexture.bind(0);
@@ -284,14 +285,14 @@ window.FluidSim = function(canvasId, options) {
 
   // Make sure all the color components are between 0 and 1
   var clampColors = (function() {
-    var shader = new gl.Shader(standardVertexShaderSrc, `
-      uniform sampler2D inputTex;
-      varying vec2 textureCoord;
-
-      void main() {
-        gl_FragColor = clamp(texture2D(inputTex, textureCoord), 0.0, 1.0);
-      }
-    `);
+    var shader = new gl.Shader(standardVertexShaderSrc, '\
+      uniform sampler2D inputTex; \
+      varying vec2 textureCoord; \
+      \
+      void main() { \
+        gl_FragColor = clamp(texture2D(inputTex, textureCoord), 0.0, 1.0); \
+      } \
+    ');
 
     return function(inputTexture) {
       inputTexture.bind(0);
@@ -305,28 +306,28 @@ window.FluidSim = function(canvasId, options) {
   // Calculate the divergence of the advected velocity field, and multiply by
   // (2 * epsilon * rho / deltaT).
   var calcDivergence = (function() {
-    var shader = new gl.Shader(standardVertexShaderSrc, `
-      uniform float deltaT;         // Time between steps
-      uniform float rho;            // Density
-      uniform float epsilon;        // Distance between grid units
-      uniform sampler2D velocity;   // Advected velocity field, u_a
-
-      varying vec2 textureCoord;
-
-      vec2 u(vec2 coord) {
-        return texture2D(velocity, fract(coord)).xy;
-      }
-
-      void main() {
-        gl_FragColor = vec4((-2.0 * epsilon * rho / deltaT) * (
-          (u(textureCoord + vec2(epsilon, 0)).x -
-           u(textureCoord - vec2(epsilon, 0)).x)
-          +
-          (u(textureCoord + vec2(0, epsilon)).y -
-           u(textureCoord - vec2(0, epsilon)).y)
-        ), 0.0, 0.0, 1.0);
-      }
-    `);
+    var shader = new gl.Shader(standardVertexShaderSrc, '\
+      uniform float deltaT;         // Time between steps \n\
+      uniform float rho;            // Density \n\
+      uniform float epsilon;        // Distance between grid units \n\
+      uniform sampler2D velocity;   // Advected velocity field, u_a \n\
+      \
+      varying vec2 textureCoord; \
+      \
+      vec2 u(vec2 coord) { \
+        return texture2D(velocity, fract(coord)).xy; \
+      } \
+      \
+      void main() { \
+        gl_FragColor = vec4((-2.0 * epsilon * rho / deltaT) * ( \
+          (u(textureCoord + vec2(epsilon, 0)).x - \
+           u(textureCoord - vec2(epsilon, 0)).x) \
+          + \
+          (u(textureCoord + vec2(0, epsilon)).y - \
+           u(textureCoord - vec2(0, epsilon)).y) \
+        ), 0.0, 0.0, 1.0); \
+      } \
+    ');
 
     return function(velocityTexture) {
       velocityTexture.bind(0);
@@ -343,31 +344,31 @@ window.FluidSim = function(canvasId, options) {
   // Perform a single iteration of the Jacobi method in order to solve for
   // pressure.
   var jacobiIterationForPressure = (function() {
-    var shader = new gl.Shader(standardVertexShaderSrc, `
-      uniform float epsilon;        // Distance between grid units
-      uniform sampler2D divergence; // Divergence field of advected velocity, d
-      uniform sampler2D pressure;   // Pressure field from previous iteration, p^(k-1)
-
-      varying vec2 textureCoord;
-
-      float d(vec2 coord) {
-        return texture2D(divergence, fract(coord)).x;
-      }
-
-      float p(vec2 coord) {
-        return texture2D(pressure, fract(coord)).x;
-      }
-
-      void main() {
-        gl_FragColor = vec4(0.25 * (
-          d(textureCoord)
-          + p(textureCoord + vec2(2.0 * epsilon, 0.0))
-          + p(textureCoord - vec2(2.0 * epsilon, 0.0))
-          + p(textureCoord + vec2(0.0, 2.0 * epsilon))
-          + p(textureCoord - vec2(0.0, 2.0 * epsilon))
-        ), 0.0, 0.0, 1.0);
-      }
-    `);
+    var shader = new gl.Shader(standardVertexShaderSrc, '\
+      uniform float epsilon;        // Distance between grid units \n\
+      uniform sampler2D divergence; // Divergence field of advected velocity, d \n\
+      uniform sampler2D pressure;   // Pressure field from previous iteration, p^(k-1) \n\
+      \
+      varying vec2 textureCoord; \
+      \
+      float d(vec2 coord) { \
+        return texture2D(divergence, fract(coord)).x; \
+      } \
+      \
+      float p(vec2 coord) { \
+        return texture2D(pressure, fract(coord)).x; \
+      } \
+      \
+      void main() { \
+        gl_FragColor = vec4(0.25 * ( \
+          d(textureCoord) \
+          + p(textureCoord + vec2(2.0 * epsilon, 0.0)) \
+          + p(textureCoord - vec2(2.0 * epsilon, 0.0)) \
+          + p(textureCoord + vec2(0.0, 2.0 * epsilon)) \
+          + p(textureCoord - vec2(0.0, 2.0 * epsilon)) \
+        ), 0.0, 0.0, 1.0); \
+      } \
+    ');
 
     return function(divergenceTexture, pressureTexture) {
       divergenceTexture.bind(0);
@@ -384,33 +385,33 @@ window.FluidSim = function(canvasId, options) {
   // Subtract the pressure gradient times a constant from the advected velocity
   // field.
   var subtractPressureGradient = (function() {
-    var shader = new gl.Shader(standardVertexShaderSrc, `
-      uniform float deltaT;         // Time between steps
-      uniform float rho;            // Density
-      uniform float epsilon;        // Distance between grid units
-      uniform sampler2D velocity;   // Advected velocity field, u_a
-      uniform sampler2D pressure;   // Solved pressure field
-
-      varying vec2 textureCoord;
-
-      float p(vec2 coord) {
-        return texture2D(pressure, fract(coord)).x;
-      }
-
-      void main() {
-        vec2 u_a = texture2D(velocity, textureCoord).xy;
-
-        float diff_p_x = (p(textureCoord + vec2(epsilon, 0.0)) -
-                          p(textureCoord - vec2(epsilon, 0.0)));
-        float u_x = u_a.x - deltaT/(2.0 * rho * epsilon) * diff_p_x;
-
-        float diff_p_y = (p(textureCoord + vec2(0.0, epsilon)) -
-                          p(textureCoord - vec2(0.0, epsilon)));
-        float u_y = u_a.y - deltaT/(2.0 * rho * epsilon) * diff_p_y;
-
-        gl_FragColor = vec4(u_x, u_y, 0.0, 0.0);
-      }
-    `);
+    var shader = new gl.Shader(standardVertexShaderSrc, '\
+      uniform float deltaT;         // Time between steps \n\
+      uniform float rho;            // Density \n\
+      uniform float epsilon;        // Distance between grid units \n\
+      uniform sampler2D velocity;   // Advected velocity field, u_a \n\
+      uniform sampler2D pressure;   // Solved pressure field \n\
+      \
+      varying vec2 textureCoord; \
+      \
+      float p(vec2 coord) { \
+        return texture2D(pressure, fract(coord)).x; \
+      } \
+      \
+      void main() { \
+        vec2 u_a = texture2D(velocity, textureCoord).xy; \
+        \
+        float diff_p_x = (p(textureCoord + vec2(epsilon, 0.0)) - \
+                          p(textureCoord - vec2(epsilon, 0.0))); \
+        float u_x = u_a.x - deltaT/(2.0 * rho * epsilon) * diff_p_x; \
+        \
+        float diff_p_y = (p(textureCoord + vec2(0.0, epsilon)) - \
+                          p(textureCoord - vec2(0.0, epsilon))); \
+        float u_y = u_a.y - deltaT/(2.0 * rho * epsilon) * diff_p_y; \
+        \
+        gl_FragColor = vec4(u_x, u_y, 0.0, 0.0); \
+      } \
+    ');
 
     return function(velocityTexture, pressureTexture) {
       velocityTexture.bind(0);
