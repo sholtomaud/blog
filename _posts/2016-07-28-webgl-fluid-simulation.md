@@ -6,10 +6,14 @@ type: post
 published: true
 ---
 
-TODO(jlfwong): Pass fluid-sim.js through babel.
+TODO(jlfwong): Get rid of es6 features from fluid-sim.js
 
 <link rel="stylesheet" 
 href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+
+<canvas id="demo" width="400" height="400"></canvas>
+<div class="caption">Click and drag to change the fluid flow. Double click to 
+reset.</div>
 
 About a year and a half ago, I had a passing interest in trying to figure out 
 how to make a fluid simulation. At the time, it felt just a bit out of my reach, 
@@ -74,14 +78,12 @@ Advection is the transfer of a property from one place to another due to the
 motion of the fluid. If you've got some black dye in some water, and the water 
 is moving to the right, then surprise surprise, the black dye moves right!
 
-<canvas id="advection1" width="500" height="400"></canvas>
-<div class="caption">Click and drag to change the fluid flow. Double click to 
-reset.</div>
+<canvas id="advection1" width="400" height="400"></canvas>
 
 If the fluid is moving in a more complex manner, that black dye will get pulled 
 through the liquid in a more complex manner.
 
-<canvas id="advection2" width="500" height="400"></canvas>
+<canvas id="advection2" width="400" height="400"></canvas>
 
 Before we dive into how advection works, we need to talk a bit about the format 
 of the data underlying these simulations.
@@ -154,7 +156,7 @@ the exact same routine to advect velocity through itself. Below, wa tch the
 velocity change over time, with an initial velocity field of \\( \vec u = (0.05, 
 0.05 \sin(2 \pi y)) \\).
 
-<canvas id="advectV1" width="500" height="400"></canvas>
+<canvas id="advectV1" width="400" height="400"></canvas>
 <div class="caption">See how the changes you make by dragging propagate through 
 space via advection.</div>
 
@@ -168,11 +170,11 @@ solution, let's take a closer look at the problem.
 Something about the velocity field below makes this intuitively not feel like a 
 fluid.  Fluids just don't *behave* like this.
 
-<canvas id="divergent1" width="500" height="400"></canvas>
+<canvas id="divergent1" width="400" height="400"></canvas>
 
 Same problem with this one...
 
-<canvas id="divergent2" width="500" height="400"></canvas>
+<canvas id="divergent2" width="400" height="400"></canvas>
 
 If you look at where the arrows are pointing in each of the above 2 simulations, 
 you'll see that there are spots where the all the arrows point away from that 
@@ -231,7 +233,7 @@ field isn't enough to guarantee that the field will continue to be
 divergence-free. For example, if we take our swirly simulation and start 
 advecting the velocity field through itself, we end up with something divergent:
 
-<canvas id="divergent3" width="500" height="400"></canvas>
+<canvas id="divergent3" width="400" height="400"></canvas>
 
 So we need a way of taking a divergent field and *making* it divergence-free. To 
 understand what force makes that happen in the real world, we need to talk about 
@@ -688,7 +690,28 @@ $$</div>
 
 # Implementation
 
-<canvas id="implementation1" width="500" height="400"></canvas>
+<canvas id="implementation1" width="400" height="400"></canvas>
+
+Pulling all those steps together, you can make something like this! Woohoo! When 
+I got this working for the first time, I was pretty ecstatic.
+
+I won't delve too far into the implementation, but you can have a look at it 
+yourself: [fluid-sim.js][7]. It relies upon the elegant [lightgl.js][8], which 
+is an abstraction layer on top of WebGL that makes it much nicer to work with, 
+without making any assumptions about you wanting to any concept of a camera or a 
+scene or whatnot.
+
+The key technique for running the simulation efficiently is doing all the hard 
+work on the GPU. To meet this need, all of the computations are done via the 
+[render to texture][9] technique, ping-ponging which texture is being rendered 
+to facilitate reading and writing to the same conceptual texture (e.g. reading 
+from the velocity field and writing to the velocity field representing the next 
+time step).
+
+Each one of the major components of the algorithm is implemented in a separate 
+shader. There's a shader for advection, a shader for calculating the divergence, 
+one for a single iteration of the Jacobi method, and another for subtracting the 
+pressure gradient from the advected velocity.
 
 # References
 
@@ -716,10 +739,18 @@ renderMathInElement(document.body);
 <script src="/javascripts/fluid-sim.js"></script>
 <script>
 
-new FluidSim("advection1", {
+new FluidSim("demo", {
     threshold: false,
-    initVFn: ['0.05', '0.0'],
-    advectV: false,
+    advectV: true,
+    applyPressure: true,
+    showArrows: false,
+    initCFn: [
+        'step(1.0, mod(floor((x + 1.0) / 0.2) + floor((y + 1.0) / 0.2), 2.0))',
+        'step(1.0, mod(floor((x + 1.0) / 0.3) + floor((y + 1.0) / 0.3), 2.0))',
+        'step(1.0, mod(floor((x + 1.0) / 0.4) + floor((y + 1.0) / 0.4), 2.0))'
+    ],
+    dyeSpots: true,
+    size: 600,
 });
 
 new FluidSim("advection2", {
@@ -765,3 +796,6 @@ new FluidSim("implementation1", {
 [4]: https://en.wikipedia.org/wiki/Finite_difference#Forward.2C_backward.2C_and_central_differences
 [5]: http://college.cengage.com/mathematics/larson/elementary_linear/5e/students/ch08-10/chap_10_2.pdf
 [6]: http://math.stackexchange.com/questions/1255790/what-is-the-intuition-behind-matrix-splitting-methods-jacobi-gauss-seidel/1255821#1255821
+[7]: https://github.com/jlfwong/blog/blob/master/javascripts/fluid-sim.js
+[8]: https://github.com/evanw/lightgl.js
+[9]: http://webglfundamentals.org/webgl/lessons/webgl-image-processing-continued.html

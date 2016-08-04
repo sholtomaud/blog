@@ -6,6 +6,12 @@ window.FluidSim = function(canvasId, options) {
     '0.05 * sin(2.0 * 3.1415 * x)'
   ];
 
+  options.initCFn = options.initCFn || [
+    'step(1.0, mod(floor((x + 1.0) / 0.2) + floor((y + 1.0) / 0.2), 2.0))',
+    'step(1.0, mod(floor((x + 1.0) / 0.2) + floor((y + 1.0) / 0.2), 2.0))',
+    'step(1.0, mod(floor((x + 1.0) / 0.2) + floor((y + 1.0) / 0.2), 2.0))'
+  ];
+
   if (options.threshold === undefined) {
     options.threshold = true;
   }
@@ -22,12 +28,16 @@ window.FluidSim = function(canvasId, options) {
     options.showArrows = true;
   }
 
+  if (options.dyeSpots === undefined) {
+    options.dyeSpots = false;
+  }
+
   // For silly reasons, these have to be equal for now.
   // This is because I assumed grid spacing was equal along
   // each axis, so if you want to change these to not be equal, you'd have to
   // carefully go through the code and decide which values of EPSILON should be
   // 1/WIDTH, and which should be 1/HEIGHT.
-  var WIDTH = 400;
+  var WIDTH = options.size || 400;
   var HEIGHT = WIDTH;
   var EPSILON = 1/WIDTH;
 
@@ -241,33 +251,52 @@ window.FluidSim = function(canvasId, options) {
     };
   })();
 
-  // Apply a "splat" of velocity change to a given place with a given
+  // Apply a "splat" of change to a given place with a given
   // blob radius. The effect of the splat has an exponential falloff.
-  var addVelocitySplat = (function() {
+  var addSplat = (function() {
     var shader = new gl.Shader(standardVertexShaderSrc, `
-      uniform vec2 velocityChange;
+      uniform vec4 change;
       uniform vec2 center;
       uniform float radius;
-      uniform sampler2D velocity;
+      uniform sampler2D inputTex;
 
       varying vec2 textureCoord;
 
       void main() {
         float dx = center.x - textureCoord.x;
         float dy = center.y - textureCoord.y;
-        vec2 v = texture2D(velocity, textureCoord).xy;
-        vec2 newV = v + velocityChange * exp(-(dx * dx + dy * dy) / radius);
-        gl_FragColor = vec4(newV, 0.0, 1.0);
+        vec4 cur = texture2D(inputTex, textureCoord);
+        gl_FragColor = cur + change * exp(-(dx * dx + dy * dy) / radius);
       }
     `);
 
-    return function(velocityTexture, velocityChange, center, radius) {
-      velocityTexture.bind(0);
+    return function(inputTexture, change, center, radius) {
+      inputTexture.bind(0);
       shader.uniforms({
-        velocityChange: velocityChange,
+        change: change,
         center: center,
         radius: radius,
-        velocity: 0
+        inputTex: 0
+      });
+      shader.draw(standardMesh, gl.TRIANGLE_STRIP);
+    };
+  })();
+
+  // Make sure all the color components are between 0 and 1
+  var clampColors = (function() {
+    var shader = new gl.Shader(standardVertexShaderSrc, `
+      uniform sampler2D inputTex;
+      varying vec2 textureCoord;
+
+      void main() {
+        gl_FragColor = clamp(texture2D(inputTex, textureCoord), 0.0, 1.0);
+      }
+    `);
+
+    return function(inputTexture) {
+      inputTexture.bind(0);
+      shader.uniforms({
+        inputTex: 0
       });
       shader.draw(standardMesh, gl.TRIANGLE_STRIP);
     };
@@ -422,28 +451,24 @@ window.FluidSim = function(canvasId, options) {
     'pressure1'
   ]);
 
-  var initVFNPainter = makeFunctionPainter(options.initVFn[0],
+  var initVFnPainter = makeFunctionPainter(options.initVFn[0],
                                            options.initVFn[1]);
-  var gridPainter = makeFunctionPainter(
-    'step(1.0, mod(floor((x + 1.0) / 0.2) + floor((y + 1.0) / 0.2), 2.0))',
-    'step(1.0, mod(floor((x + 1.0) / 0.2) + floor((y + 1.0) / 0.2), 2.0))',
-    'step(1.0, mod(floor((x + 1.0) / 0.2) + floor((y + 1.0) / 0.2), 2.0))'
-  );
+  var initCFnPainter = makeFunctionPainter(options.initCFn[0],
+                                           options.initCFn[1],
+                                           options.initCFn[2]);
 
-  textures.velocity0.drawTo(initVFNPainter);
-  textures.color0.drawTo(gridPainter);
-  textures.pressure0.drawTo(drawBlack);
+  var reset = function() {
+    textures.velocity0.drawTo(initVFnPainter);
+    textures.color0.drawTo(initCFnPainter);
+    textures.pressure0.drawTo(drawBlack);
+  };
+
+  reset();
 
   // Reset the simulation on double click
-  canvas.addEventListener('dblclick', function() {
-    textures.velocity0.drawTo(initVFNPainter);
+  canvas.addEventListener('dblclick', reset);
 
-    textures.color0 = new gl.Texture(WIDTH, HEIGHT, {
-      type: gl.FLOAT,
-      data: inkData
-    });
-  });
-
+  // Returns true if the canvas is on the screen
   var onScreen = function() {
     var container = canvas.offsetParent;
     return (container.scrollTop < canvas.offsetTop + canvas.height &&
@@ -451,7 +476,9 @@ window.FluidSim = function(canvasId, options) {
   };
 
   gl.ondraw = function() {
+    // If the canvas isn't visible, don't draw it
     if (!onScreen()) return;
+
     gl.clearColor(1.0, 1.0, 1.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     if (options.threshold) {
@@ -466,6 +493,7 @@ window.FluidSim = function(canvasId, options) {
   };
 
   gl.onupdate = function() {
+    // If the canvas isn't visible, don't run the simulation
     if (!onScreen()) return;
 
     if (options.advectV) {
@@ -506,14 +534,39 @@ window.FluidSim = function(canvasId, options) {
       advect(textures.color0, textures.velocity0);
     });
     textures.swap('color0', 'color1');
+
+    if (options.dyeSpots) {
+      // Add a few spots slowly emitting dye to prevent the color from
+      // eventually converging to the grey-ish average color of the whole fluid
+      var addDyeSource = function(color, location) {
+        textures.color1.drawTo(function() {
+          addSplat(
+            textures.color0,
+            color.concat([0.0]),
+            location,
+            0.01
+          );
+        });
+        textures.swap('color0', 'color1');
+      };
+
+      // Add red to bottom left
+      addDyeSource([0.004, -0.002, -0.002], [0.2, 0.2]);
+
+      // Add blue to the top middle
+      addDyeSource([-0.002, -0.002, 0.004], [0.5, 0.9]);
+
+      // Add green to the bottom right
+      addDyeSource([-0.002, 0.004, -0.002], [0.8, 0.2]);
+    }
   };
 
   gl.onmousemove = function(ev) {
     if (ev.dragging) {
       textures.velocity1.drawTo(function() {
-        addVelocitySplat(
+        addSplat(
           textures.velocity0,
-          [ev.deltaX / WIDTH, -ev.deltaY / HEIGHT],
+          [ev.deltaX / WIDTH, -ev.deltaY / HEIGHT, 0.0, 0.0],
           [ev.offsetX / WIDTH, 1.0 - ev.offsetY / HEIGHT],
           0.01
         );
