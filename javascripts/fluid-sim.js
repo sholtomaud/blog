@@ -397,13 +397,30 @@ window.FluidSim = function(canvasId, options) {
     };
   })();
 
-  var velocityTexture0 = new gl.Texture(WIDTH, HEIGHT, {type: gl.FLOAT});
-  var velocityTexture1 = new gl.Texture(WIDTH, HEIGHT, {type: gl.FLOAT});
-  var colorTexture0 = new gl.Texture(WIDTH, HEIGHT, {type: gl.FLOAT});
-  var colorTexture1 = new gl.Texture(WIDTH, HEIGHT, {type: gl.FLOAT});
-  var divergenceTexture = new gl.Texture(WIDTH, HEIGHT, {type: gl.FLOAT});
-  var pressureTexture0 = new gl.Texture(WIDTH, HEIGHT, {type: gl.FLOAT});
-  var pressureTexture1 = new gl.Texture(WIDTH, HEIGHT, {type: gl.FLOAT});
+  var makeTextures = function(names) {
+    var ret = {};
+    names.forEach(function(name) {
+      ret[name] = new gl.Texture(WIDTH, HEIGHT, {type: gl.FLOAT});
+    });
+
+    ret.swap = function(a, b) {
+      var temp = ret[a];
+      ret[a] = ret[b];
+      ret[b] = temp;
+    };
+
+    return ret;
+  };
+
+  var textures = makeTextures([
+    'velocity0',
+    'velocity1',
+    'color0',
+    'color1',
+    'divergence',
+    'pressure0',
+    'pressure1'
+  ]);
 
   var initVFNPainter = makeFunctionPainter(options.initVFn[0],
                                            options.initVFn[1]);
@@ -413,15 +430,15 @@ window.FluidSim = function(canvasId, options) {
     'step(1.0, mod(floor((x + 1.0) / 0.2) + floor((y + 1.0) / 0.2), 2.0))'
   );
 
-  velocityTexture0.drawTo(initVFNPainter);
-  colorTexture0.drawTo(gridPainter);
-  pressureTexture0.drawTo(drawBlack);
+  textures.velocity0.drawTo(initVFNPainter);
+  textures.color0.drawTo(gridPainter);
+  textures.pressure0.drawTo(drawBlack);
 
   // Reset the simulation on double click
   canvas.addEventListener('dblclick', function() {
-    velocityTexture0.drawTo(initVFNPainter);
+    textures.velocity0.drawTo(initVFNPainter);
 
-    colorTexture0 = new gl.Texture(WIDTH, HEIGHT, {
+    textures.color0 = new gl.Texture(WIDTH, HEIGHT, {
       type: gl.FLOAT,
       data: inkData
     });
@@ -438,13 +455,13 @@ window.FluidSim = function(canvasId, options) {
     gl.clearColor(1.0, 1.0, 1.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     if (options.threshold) {
-      drawTextureThreshold(colorTexture0);
+      drawTextureThreshold(textures.color0);
     } else {
-      drawTexture(colorTexture0);
+      drawTexture(textures.color0);
     }
 
     if (options.showArrows) {
-      drawVectorFieldArrows(velocityTexture0);
+      drawVectorFieldArrows(textures.velocity0);
     }
   };
 
@@ -453,64 +470,55 @@ window.FluidSim = function(canvasId, options) {
 
     if (options.advectV) {
       // Advect the velocity texture through itself, leaving the result in
-      // velocityTexture0
-      velocityTexture1.drawTo(function() {
-        advect(velocityTexture0, velocityTexture0);
+      // textures.velocity0
+      textures.velocity1.drawTo(function() {
+        advect(textures.velocity0, textures.velocity0);
       });
-      [velocityTexture0, velocityTexture1] = [velocityTexture1, velocityTexture0];
+      textures.swap('velocity0', 'velocity1');
     }
 
     if (options.applyPressure) {
-      // Calculate the divergence, leaving the result in divergenceTexture
-      divergenceTexture.drawTo(function() {
-        calcDivergence(velocityTexture0);
+      // Calculate the divergence, leaving the result in textures.divergence
+      textures.divergence.drawTo(function() {
+        calcDivergence(textures.velocity0);
       });
 
-      // Calculate the pressure, leaving the result in pressureTexture0
+      // Calculate the pressure, leaving the result in textures.pressure0
       var JACOBI_ITERATIONS = 10;
 
-      // Clear the pressure texture for our first guess:
-      // TODO(jlfwong): It might be better to leave this alone -- the previous
-      // contents of the texture might be a very good estimate of the current
-      // solution.
-      /*
-      pressureTexture0.drawTo(function() {
-        drawBlack();
-      });
-      */
       for (var i = 0; i < JACOBI_ITERATIONS; i++) {
-        pressureTexture1.drawTo(function() {
-          jacobiIterationForPressure(divergenceTexture, pressureTexture0);
+        textures.pressure1.drawTo(function() {
+          jacobiIterationForPressure(textures.divergence, textures.pressure0);
         });
-        [pressureTexture0, pressureTexture1] = [pressureTexture1, pressureTexture0];
+        textures.swap('pressure0', 'pressure1');
       }
 
       // Subtract the pressure gradient from the advected velocity texture,
-      // leaving the result in velocityTexture0
-      velocityTexture1.drawTo(function() {
-        subtractPressureGradient(velocityTexture0, pressureTexture0);
+      // leaving the result in textures.velocity0
+      textures.velocity1.drawTo(function() {
+        subtractPressureGradient(textures.velocity0, textures.pressure0);
       });
-      [velocityTexture0, velocityTexture1] = [velocityTexture1, velocityTexture0];
+      textures.swap('velocity0', 'velocity1');
     }
 
-    // Advect the color field, leaving the result in colorTexture0
-    colorTexture1.drawTo(function() {
-      advect(colorTexture0, velocityTexture0);
+    // Advect the color field, leaving the result in textures.color0
+    textures.color1.drawTo(function() {
+      advect(textures.color0, textures.velocity0);
     });
-    [colorTexture0, colorTexture1] = [colorTexture1, colorTexture0];
+    textures.swap('color0', 'color1');
   };
 
   gl.onmousemove = function(ev) {
     if (ev.dragging) {
-      velocityTexture1.drawTo(function() {
+      textures.velocity1.drawTo(function() {
         addVelocitySplat(
-          velocityTexture0,
+          textures.velocity0,
           [ev.deltaX / WIDTH, -ev.deltaY / HEIGHT],
           [ev.offsetX / WIDTH, 1.0 - ev.offsetY / HEIGHT],
           0.01
         );
       });
-      [velocityTexture0, velocityTexture1] = [velocityTexture1, velocityTexture0];
+      textures.swap('velocity0', 'velocity1');
     }
   };
 
