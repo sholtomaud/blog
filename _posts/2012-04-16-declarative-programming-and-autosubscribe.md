@@ -6,7 +6,7 @@ tags:
 - api
 ---
 
-While I was watching the [Meteor screencast]() (if you haven't already seen it, 
+While I was watching the [Meteor screencast][] (if you haven't already seen it, 
 go watch it), I paused around 1:35. They had just said "There's no callbacks, no 
 bindings, and no controllers. It just works." after showing off the code 
 something like the following:

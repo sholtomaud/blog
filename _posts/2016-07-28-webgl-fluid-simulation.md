@@ -6,6 +6,8 @@ type: post
 published: true
 ---
 
+TODO(jlfwong): Pass fluid-sim.js through babel.
+
 <link rel="stylesheet" 
 href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
 
@@ -17,8 +19,9 @@ were all just a little bit past my grasp. At the time, I was working through the
 the math. Now armed with a bit more knowledge and a lot more time, and with the 
 help of other less dense resources like [GPU Gems Chapter 38.  Fast Fluid 
 Dynamics Simulation on the GPU][0], I was finally able to figure out enough to 
-get something working. Hopefully I can help leapfrog you past where I got stuck.  
-This post is going to be light on math, but hopefully heavy on intuition.
+get something working. I am still a beginner at simulations like this, and I'm 
+going to brazenly ignore things like numerical stability, but hopefully I can 
+help leapfrog you past a few places I got stuck.
 
 We're going to work with the simplest 2D fluid simulation, where the entire area 
 is full of fluid, and we're going to ignore viscosity.
@@ -106,7 +109,6 @@ will be, one time step in the future.
 \vec c(\vec p + u(\vec p, t) \Delta t, t + \Delta t) := \vec c(\vec p, t)
 $$</div>
 
-TODO: fix diagram to use uppercase delta
 <img src="/images/16-08-01/advection1.png">
 
 But this winds up being difficult to implement on the GPU. First, the position 
@@ -124,7 +126,6 @@ the next time step.
 \vec c(\vec p, t + \Delta t) := \vec c(\vec p - \vec u(\vec p) \Delta t, t)
 $$</div>
 
-TODO: fix diagram to use uppercase delta
 <img src="/images/16-08-01/advection2.png">
 
 With this scheme, we only need to write to a single grid point, and we don't 
@@ -405,7 +406,7 @@ differences again:
 \\
 \\
 \frac{
-    u_x(x, y + \epsilon, t + \Delta t) - u_x(x, y - \epsilon, t + \Delta t)
+    u_y(x, y + \epsilon, t + \Delta t) - u_y(x, y - \epsilon, t + \Delta t)
 }{
     2 \epsilon
 } & = 0
@@ -416,7 +417,7 @@ Here, we can substitute our equations for \\( \vec u \\) expressed in terms of
 \\( \vec u ^ a \\) and \\( p \\) to get this monster:
 
 <div>$$\begin{aligned}
-\frac{1}{2 \epsilon} \left(
+0 = \frac{1}{2 \epsilon} \left(
 
     \left(
     u^a_x(x + \epsilon, y, t)
@@ -437,7 +438,7 @@ Here, we can substitute our equations for \\( \vec u \\) expressed in terms of
 
     +
     \left(
-    u^a_x(x, y + \epsilon, t)
+    u^a_y(x, y + \epsilon, t)
     -\frac{1}{\rho} \Delta t
         \frac{p(x, y + 2\epsilon, t) - p(x, y, t)}{2 \epsilon}
     \right)
@@ -446,15 +447,254 @@ Here, we can substitute our equations for \\( \vec u \\) expressed in terms of
 
     -
     \left(
-    u^a_x(x, y + \epsilon, t)
+    u^a_y(x, y - \epsilon, t)
     -\frac{1}{\rho} \Delta t
         \frac{p(x, y, t) - p(x, y - 2\epsilon, t)}{2 \epsilon}
     \right)
-
-    \right. \\ \left.
-
-\right) = 0
+\right)
 \end{aligned}$$</div>
+
+Rearranging to have all of the \\( p \\) terms on the left and all the \\( \vec 
+u ^ a \\) terms on the right, and multiply both sides by \\( 2 \epsilon \\), we 
+have:
+
+<div>$$
+-\frac{\Delta t}{2 \epsilon \rho}
+\left(
+
+\begin{matrix}
+ 4 p(x, y, t) \\
+-p(x + 2 \epsilon, y, t) \\
+-p(x - 2 \epsilon, y, t) \\
+-p(x, y + 2 \epsilon, t) \\
+-p(x, y - 2 \epsilon, t)
+\end{matrix}
+
+\right)
+=
+
+\begin{matrix}
+ u^a_x(x + \epsilon, y, t) \\
+-u^a_x(x - \epsilon, y, t) \\
++u^a_y(x, y + \epsilon, t) \\
+-u^a_y(x, y - \epsilon, t)
+\end{matrix}
+
+$$</div>
+
+*Note: the above expression is a scalar expression, despite being laid out in a 
+somewhat vector-y form.*
+
+At this point, it's helpful to remember that, for the purposes of the 
+simulation, we're not interested in knowing the value of \\( p \\) everywhere: 
+we only care about knowing its value at enough places to calculate the value of 
+the velocities at the grid points. To meet that end, we can similarly calculate 
+\\( p \\) on the grid. To accomplish this, we can make \\( \epsilon \\) the 
+distance between adjacent grid cells.
+
+The above equation yields a new equation for every \\( (x, y) \\) of a grid 
+point we substitute. For the purposes of discussion, let's assume that the gap 
+between adjacent cells is 0.1 units, so \\( \epsilon = 0.1 \\). Let's examine 
+what the equation yields for \\( (x, y) = (0.3, 0.7) \\).
+
+<div>$$\begin{aligned}
+-\frac{\Delta t}{2 \epsilon \rho}
+\left(
+
+\begin{matrix}
+ 4 p(0.3, 0.7, t) \\
+-p(0.3 + 2(0.1), 0.7, t) \\
+-p(0.3 - 2(0.1), 0.7, t) \\
+-p(0.3, 0.7 + 2(0.1), t) \\
+-p(0.3, 0.7 - 2(0.1), t)
+\end{matrix}
+
+\right)
+& =
+
+\begin{matrix}
+ u^a_x(0.3 + 0.1, 0.7, t) \\
+-u^a_x(0.3 - 0.1, 0.7, t) \\
++u^a_y(0.3, 0.7 + 0.1, t) \\
+-u^a_y(0.3, 0.7 - 0.1, t)
+\end{matrix}
+
+\\
+
+\frac{\Delta t}{2 \epsilon \rho}
+\left(
+
+\begin{matrix}
+ 4 p(0.3, 0.7, t) \\
+-p(0.5, 0.7, t) \\
+-p(0.1, 0.7, t) \\
+-p(0.3, 0.9, t) \\
+-p(0.3, 0.5, t)
+\end{matrix}
+
+\right)
+& =
+
+\begin{matrix}
+ u^a_x(0.4, 0.7, t) \\
+-u^a_x(0.2, 0.7, t) \\
++u^a_y(0.3, 0.8, t) \\
+-u^a_y(0.3, 0.6, t)
+\end{matrix}
+
+\end{aligned}$$</div>
+
+All the values on the right hand side of this equation are known, and on the 
+left we have 5 unknowns: the value of \\( p \\) at 5 different grid locations.
+
+If we repeat this process and evaluate \\( (x, y) \\) at every grid point, we 
+get one equation with 5 unknowns for each grid location. If our grid has \\( n 
+\times m \\) grid locations in it, then we have \\( n \times m \\) equations, 
+each with 5 unknowns. Each unknown will occur in exactly 5 equations, though 
+it's important to note that those 5 equations will 
+
+If you're wondering about what's happening at the edges, we're going to lazily 
+side-step that question by making our grid wrap around: if you ask for the 
+velocity past the bottom edge, you'll get a value near the top edge.
+
+Before we move on, our notation is getting a bit clunky, so let's clean it up a 
+tad since we know we're working on a grid. For the next part, we'll say \\( 
+p_{i,j} = p(i \epsilon, j \epsilon, t) \\), and we'll stick all the known values 
+together into a value \\( d \\) (for **d**ivergence), like so:
+
+<div>$$
+d_{i,j} = -\frac{2 \epsilon \rho}{\Delta t}
+\begin{pmatrix}
+ u^a_x((i + 1) \epsilon, j \epsilon, t) \\
+-u^a_x((i - 1) \epsilon, j \epsilon, t) \\
++u^a_y(i \epsilon, (j + 1) \epsilon, t) \\
+-u^a_y(i \epsilon, (j - 1) \epsilon, t)
+\end{pmatrix}
+$$</div>
+
+With this nicer notation, we can express the system of equations on pressure 
+that we're trying to solve like so:
+
+<div>$$
+4p_{i, j} - p_{i+2,j} - p_{i-2,j} - p_{i,j+2} - p_{i,j-2} = d_{i, j}
+$$</div>
+
+# Iteratively Solving the Pressure Equation
+
+Solving for \\( p_{i, j} \\) for every grid point analytically would be an 
+enormous mess. Instead, we're going to use an *iterative* method of solving this 
+system of equations, where each iteration provides values closer and closer to a 
+real solution. We're going to use the [Jacobi Method][5].
+
+In the Jacobi method, we first rearrange our equation to isolate one term, like 
+so:
+
+<div>$$
+p_{i, j} = \frac{
+    d_{i, j} + p_{i+2,j} + p_{i-2,j} + p_{i,j+2} + p_{i,j-2}
+}{4}
+$$</div>
+
+Next, we make an initial guess for all of our unknowns. We'll call this initial 
+guess \\( p_{i,j}^{(0)} \\).
+
+Here's where the iteration comes in: our next guess, \\( p_{i, j}^{(1)} \\) is 
+obtained by plugging in our initial guess into the above formula for \\( p_{i, 
+j} \\):
+
+<div>$$
+p_{i, j}^{(1)} = \frac{
+    d_{i, j} + p_{i+2,j}^{(0)} + p_{i-2,j}^{(0)} + p_{i,j+2}^{(0)} + p_{i,j-2}^{(0)}
+}{4}
+$$</div>
+
+And, more generally, each iteration relies upon the previous one:
+
+<div>$$
+p_{i, j}^{(k)} = \frac{
+    d_{i, j} + p_{i+2,j}^{(k-1)} + p_{i-2,j}^{(k-1)} + p_{i,j+2}^{(k-1)} + p_{i,j-2}^{(k-1)}
+}{4}
+$$</div>
+
+You would usually run this until the values of one iteration are equal to the 
+values from the previous iteration, rounded to a certain accuracy. For our 
+purposes, we're more interested in this running in a consistent period of time, 
+so we'll arbitrarily run this for 16 iterations, and hope the result is accurate 
+enough to look realistic.
+
+For a bit of intuition on *why* this converges to a solution, check out 
+[Algebraic Pavel's answer on Math Exchange][6].
+
+# All Together Now!
+
+Phew! That was a lot to get through. Now let's put it all together. Roughly, as 
+pseudo-code, here's our whole simulation:
+
+    initialize color field, c
+    initialize velocity field, u
+
+    while(true):
+        u_a := advect field u through itself
+        d := calculate divergence of u_a
+        p := calculate pressure based on d, using jacobi iteration
+        u := u_a - gradient of p
+        c := advect field c through velocity field u
+
+Here are the key formulas for those steps on grid coordinates \\( (i, j) \\), 
+uncluttered by derivations:
+
+Advecting field \\( u \\) through itself:
+
+<div>$$
+\vec u^a_{i,j} = \vec u^a(x:=i \epsilon, y:= j \epsilon, t + \Delta t) := \vec 
+u(x - u_x(x, y) \Delta t, y - u_y(x, y) \Delta t)
+$$</div>
+
+Divergence of \\( \vec u_a \\) (multiplied by constant terms):
+
+<div>$$
+d_{i,j} = -\frac{2 \epsilon \rho}{\Delta t} (
+    u^a_{x_{i+1, j}} - u^a_{x_{i-1, j}} +
+    u^a_{y_{i, j+1}} - u^a_{y_{i,j-1}}
+)
+$$</div>
+
+Pressure calculation Jacobi iteration step, with \\( p_{i, j}^{(0)} = 0 \\):
+
+<div>$$
+p_{i, j}^{(k)} = \frac{
+    d_{i, j} + p_{i+2,j}^{(k-1)} + p_{i-2,j}^{(k-1)} + p_{i,j+2}^{(k-1)} + p_{i,j-2}^{(k-1)}
+}{4}
+$$</div>
+
+Subtracting the pressure gradient from the advected velocity field:
+
+<div>$$
+\begin{aligned}
+u_{x_{i, j}} &:= u^a_{x_{i,j}}
+    -\frac{\Delta t}{2 \rho \epsilon} (p_{i + 1, j} - p_{i - 1, j})
+\\
+u_{y_{i, j}} &:= u^a_{y_{i, j}}
+    -\frac{\Delta t}{2 \rho \epsilon} (p_{i, j + 1} - p_{i, j - 1})
+\end{aligned}
+$$</div>
+
+Advecting the color field through the final velocity field:
+
+<div>$$
+\vec {c^a} = \vec{c^a}(x:=i \epsilon, y:= j \epsilon, t + \Delta t) := \vec c(x 
+- u_x(x, y) \Delta t, y - u_y(x, y) \Delta t)
+$$</div>
+
+# Implementation
+
+<canvas id="implementation1" width="500" height="400"></canvas>
+
+# References
+
+- Jacobi method: 
+http://college.cengage.com/mathematics/larson/elementary_linear/5e/students/ch08-10/chap_10_2.p
+- Jacobi intuition: http://math.stackexchange.com/a/1255821/355071
 
 # Future Work
 
@@ -518,12 +758,18 @@ new FluidSim("divergent3", {
     advectV: true
 });
 
+new FluidSim("implementation1", {
+    threshold: false,
+    advectV: true,
+    applyPressure: true,
+    showArrows: false
+});
 
-// TODO(jlfwong): Add control to reset, hide vector field arrows
 </script>
-
 [0]: http://http.developer.nvidia.com/GPUGems/gpugems_ch38.html
 [1]: https://www.cs.ubc.ca/~rbridson/fluidsimulation/fluids_notes.pd://www.cs.ubc.ca/~rbridson/fluidsimulation/fluids_notes.pdf 
 [2]: https://www.khanacademy.org/math/multivariable-calculus/thinking-about-multivariable-function/visualizing-vector-valued-functions/v/vector-fields-introduction
 [3]: https://en.wikipedia.org/wiki/Bilinear_interpolation
 [4]: https://en.wikipedia.org/wiki/Finite_difference#Forward.2C_backward.2C_and_central_differences
+[5]: http://college.cengage.com/mathematics/larson/elementary_linear/5e/students/ch08-10/chap_10_2.pdf
+[6]: http://math.stackexchange.com/questions/1255790/what-is-the-intuition-behind-matrix-splitting-methods-jacobi-gauss-seidel/1255821#1255821
