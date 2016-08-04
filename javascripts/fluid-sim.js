@@ -1,9 +1,10 @@
 window.FluidSim = function(canvasId, options) {
   options = options || {};
 
-  options.initVFn = options.initVFn || function(x, y) {
-    return [0.05 * Math.sin(2 * Math.PI * y), 0.05 * Math.sin(2 * Math.PI * x)];
-  };
+  options.initVFn = options.initVFn || [
+    '0.05 * sin(2.0 * 3.1415 * y)',
+    '0.05 * sin(2.0 * 3.1415 * x)'
+  ];
 
   if (options.threshold === undefined) {
     options.threshold = true;
@@ -149,6 +150,8 @@ window.FluidSim = function(canvasId, options) {
     var shader = new gl.Shader(standardVertexShaderSrc, `
       varying vec2 textureCoord;
       void main() {
+        float x = 2.0 * textureCoord.x - 1.0;
+        float y = 2.0 * textureCoord.y - 1.0;
         gl_FragColor = vec4(${r}, ${g}, ${b}, ${a});
       }
     `);
@@ -394,73 +397,29 @@ window.FluidSim = function(canvasId, options) {
     };
   })();
 
-  var velocityData = new Float32Array(WIDTH * HEIGHT * 4);
-  var inkData = new Float32Array(WIDTH * HEIGHT * 4);
+  var velocityTexture0 = new gl.Texture(WIDTH, HEIGHT, {type: gl.FLOAT});
+  var velocityTexture1 = new gl.Texture(WIDTH, HEIGHT, {type: gl.FLOAT});
+  var colorTexture0 = new gl.Texture(WIDTH, HEIGHT, {type: gl.FLOAT});
+  var colorTexture1 = new gl.Texture(WIDTH, HEIGHT, {type: gl.FLOAT});
+  var divergenceTexture = new gl.Texture(WIDTH, HEIGHT, {type: gl.FLOAT});
+  var pressureTexture0 = new gl.Texture(WIDTH, HEIGHT, {type: gl.FLOAT});
+  var pressureTexture1 = new gl.Texture(WIDTH, HEIGHT, {type: gl.FLOAT});
 
-  var gridSize = Math.floor(WIDTH / 12);
+  var initVFNPainter = makeFunctionPainter(options.initVFn[0],
+                                           options.initVFn[1]);
+  var gridPainter = makeFunctionPainter(
+    'step(1.0, mod(floor((x + 1.0) / 0.2) + floor((y + 1.0) / 0.2), 2.0))',
+    'step(1.0, mod(floor((x + 1.0) / 0.2) + floor((y + 1.0) / 0.2), 2.0))',
+    'step(1.0, mod(floor((x + 1.0) / 0.2) + floor((y + 1.0) / 0.2), 2.0))'
+  );
 
-  for (var i = 0; i < HEIGHT; i++) {
-    var y = -((i / HEIGHT) * 2 - 1);
-    for (var j = 0; j < WIDTH; j++) {
-      var x = (j / WIDTH) * 2 - 1;
-      
-      var offset = (i * WIDTH + j) * 4;
-
-      var initVal = options.initVFn(x, y);
-      velocityData[offset + 0] = initVal[0];
-      velocityData[offset + 1] = initVal[1];
-
-      var brightness = (Math.floor(i / gridSize) + Math.floor(j / gridSize)) % 2;
-      
-      inkData[offset + 0] = brightness;
-      inkData[offset + 1] = brightness;
-      inkData[offset + 2] = brightness;
-      inkData[offset + 3] = 1;
-    }
-  }
-
-  var velocityTexture0 = new gl.Texture(WIDTH, HEIGHT, {
-    type: gl.FLOAT,
-    data: velocityData
-  });
-
-  var velocityTexture1 = new gl.Texture(WIDTH, HEIGHT, {
-    type: gl.FLOAT
-  });
-
-  var colorTexture0 = new gl.Texture(WIDTH, HEIGHT, {
-    type: gl.FLOAT,
-    data: inkData
-  });
-
-  var colorTexture1 = new gl.Texture(WIDTH, HEIGHT, {
-    type: gl.FLOAT
-  });
-
-  var divergenceTexture = new gl.Texture(WIDTH, HEIGHT, {
-    type: gl.FLOAT
-  });
-
-  var pressureTexture0 = new gl.Texture(WIDTH, HEIGHT, {
-    type: gl.FLOAT
-  });
-
-  var pressureTexture1 = new gl.Texture(WIDTH, HEIGHT, {
-    type: gl.FLOAT
-  });
-
-  pressureTexture0.drawTo(function() {
-    drawBlack();
-  });
+  velocityTexture0.drawTo(initVFNPainter);
+  colorTexture0.drawTo(gridPainter);
+  pressureTexture0.drawTo(drawBlack);
 
   // Reset the simulation on double click
   canvas.addEventListener('dblclick', function() {
-    // TODO(jlfwong): Stop allocating these textures, and just draw the initial
-    // states in shaders instead.
-    velocityTexture0 = new gl.Texture(WIDTH, HEIGHT, {
-      type: gl.FLOAT,
-      data: velocityData
-    });
+    velocityTexture0.drawTo(initVFNPainter);
 
     colorTexture0 = new gl.Texture(WIDTH, HEIGHT, {
       type: gl.FLOAT,

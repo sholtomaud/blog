@@ -718,9 +718,7 @@ renderMathInElement(document.body);
 
 new FluidSim("advection1", {
     threshold: false,
-    initVFn: function(x, y) {
-        return [0.05, 0];
-    },
+    initVFn: ['0.05', '0.0'],
     advectV: false,
 });
 
@@ -732,25 +730,19 @@ new FluidSim("advection2", {
 new FluidSim("advectV1", {
     threshold: false,
     advectV: true,
-    initVFn: function(x, y) {
-        return [0.05, 0.05 * Math.sin(2 * Math.PI * x)];
-    },
+    initVFn: ['0.05', '0.05 * sin(2.0 * 3.1415 * x)']
 });
 
 new FluidSim("divergent1", {
     threshold: false,
     advectV: false,
-    initVFn: function(x, y) {
-        return [0.05 * x, 0.05 * y];
-    },
+    initVFn: ['0.05 * x', '0.05 * y']
 });
 
 new FluidSim("divergent2", {
     threshold: false,
     advectV: false,
-    initVFn: function(x, y) {
-        return [0.05 * Math.sin(2 * Math.PI * x), 0];
-    },
+    initVFn: ['0.05 * sin(2.0 * 3.1415 * x)', '0.0']
 });
 
 new FluidSim("divergent3", {
