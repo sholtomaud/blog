@@ -1,9 +1,13 @@
+/**
+ * 2D fluid simulation code for
+ * http://jamie-wong.com/2016/08/04/webgl-fluid-simulation/
+ */
 window.FluidSim = function(canvasId, options) {
   options = options || {};
 
   options.initVFn = options.initVFn || [
-    '0.05 * sin(2.0 * 3.1415 * y)',
-    '0.05 * sin(2.0 * 3.1415 * x)'
+    'sin(2.0 * 3.1415 * y)',
+    'sin(2.0 * 3.1415 * x)'
   ];
 
   options.initCFn = options.initCFn || [
@@ -41,11 +45,10 @@ window.FluidSim = function(canvasId, options) {
   var HEIGHT = WIDTH;
   var EPSILON = 1/WIDTH;
 
-  // We assume every time step will be a 60th of a second.
-  // In practice, this won't be real-time, but we'd rather our simulation run
-  // behind than need to run a very large time step, since it would cause
-  // instability in the simulation.
-  var DELTA_T = 1/60.0;
+  // We assume every time step will be a 120th of a second.
+  // The animation loop runs at 60 fps (hopefully), so we're simulating 2x
+  // slow-mo.
+  var DELTA_T = 1/120.0;
 
   // We arbitrarily set our fluid's density to 1 (this is rho in equations)
   var DENSITY = 1.0;
@@ -101,7 +104,7 @@ window.FluidSim = function(canvasId, options) {
       uniform sampler2D velocity; \
       void main() { \
         vec2 v = texture2D(velocity, (position + 1.0) / 2.0).xy; \
-        float scale = length(v); \
+        float scale = 0.05 * length(v); \
         float angle = atan(v.y, v.x); \
         mat2 rotation = rot(-angle); \
         gl_Position = vec4( \
@@ -225,16 +228,7 @@ window.FluidSim = function(canvasId, options) {
       void main() { \
         vec2 u = texture2D(velocity, textureCoord).xy; \
         \
-        /* The 0.5 multiplier below is because the velocities are specified on \
-         * the domain ([-1, 1], [-1, 1]), but texture coordinates operate on the \
-         * range ([0, 0], [1, 1]). \
-         * \
-         * TODO(jlfwong): For reasons unclear to me, using a multiplier of 0.5 \
-         * instead of 2.0 causes lookups on the left-hand side to not wrap \
-         * around when looking at the right-moving grid under the "Advection" \
-         * header. My guess would be the filtering bias is wrong. \
-         */ \
-        vec2 pastCoord = fract(textureCoord - (2.0 * deltaT * u)); \
+        vec2 pastCoord = fract(textureCoord - (0.5 * deltaT * u)); \
         gl_FragColor = texture2D(inputTexture, pastCoord); \
       } \
     ');
@@ -567,7 +561,7 @@ window.FluidSim = function(canvasId, options) {
       textures.velocity1.drawTo(function() {
         addSplat(
           textures.velocity0,
-          [ev.deltaX / WIDTH, -ev.deltaY / HEIGHT, 0.0, 0.0],
+          [10.0 * ev.deltaX / WIDTH, -10.0 * ev.deltaY / HEIGHT, 0.0, 0.0],
           [ev.offsetX / WIDTH, 1.0 - ev.offsetY / HEIGHT],
           0.01
         );

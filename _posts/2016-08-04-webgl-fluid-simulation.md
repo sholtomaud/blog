@@ -9,7 +9,7 @@ published: true
 <link rel="stylesheet" 
 href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
 
-<canvas id="demo" width="400" height="400"></canvas>
+<canvas id="demo" width="600" height="600"></canvas>
 <div class="caption">Click and drag to change the fluid flow. Double click to 
 reset.</div>
 
@@ -46,20 +46,21 @@ size and orientation are dictated by the value of the function at that point.
 For the purposes of this post, we're always going to be working over the domain 
 \\( x \in [-1, 1] \\), \\( y \in [-1, 1] \\).
 
-For instance, here's a very simple field \\( \vec u(x, y) = (0.05, 0) \\) 
+For instance, here's a very simple field \\( \vec u(x, y) = (1.0, 0) \\) 
 representing everything moving at a constant speed to the right.
 
 <img src="/images/16-08-01/vecfield1.png">
 
-And here's a more interesting one \\( \vec u(x, y) = (0.05x, 0.05y) \\) where 
-things move away from the origin, increasing in speed the farther away from the 
-origin they are.
+And here's a more interesting one \\( \vec u(x, y) = (x, y) \\) where things 
+move away from the origin, increasing in speed the farther away from the origin 
+they are.
 
 <img src="/images/16-08-01/vecfield2.png">
 
-We're going to play with this one, \\( \vec u(x, y) = \left( 0.05 \sin (2 \pi 
-y), 0.05 \sin (2 \pi x) \right) \\), since it creates some interesting visual 
-results once we start making the fluid move accordingly.
+We're going to play with this one, 
+\\( \vec u(x, y) = \left( \sin (2 \pi y), \sin (2 \pi x) \right) \\), since it 
+creates some interesting visual results once we start making the fluid move 
+accordingly.
 
 <img src="/images/16-08-01/vecfield3.png">
 
@@ -151,8 +152,8 @@ direction will continue moving in that direction, even after it's moved.
 
 Since we're storing velocity in a grid just like we did with color, we can use 
 the exact same routine to advect velocity through itself. Below, wa tch the 
-velocity change over time, with an initial velocity field of \\( \vec u = (0.05, 
-0.05 \sin(2 \pi y)) \\).
+velocity change over time, with an initial velocity field of \\( \vec u = (1.0,
+\sin(2 \pi y)) \\).
 
 <canvas id="advectV1" width="400" height="400"></canvas>
 <div class="caption">See how the changes you make by dragging propagate through 
@@ -198,28 +199,28 @@ velocity field, it's defined like this:
 \end{aligned}$$</div>
 
 The first of the two not-very-fluidy fields above has an equation \\( \vec u(x, 
-y) = (0.05x, 0.05y) \\). Taking the divergence, we find:
+y) = (x, y) \\). Taking the divergence, we find:
 
 <div>$$\begin{aligned}
 \nabla \cdot \vec u &=
-    \frac{\partial}{\partial x}(0.05x) + \frac{\partial}{\partial y}(0.05y) \\
-&= 0.05 + 0.05 \\
-&= 0.1
+    \frac{\partial}{\partial x}(x) + \frac{\partial}{\partial y}(y) \\
+&= 1.0 + 1.0 \\
+&= 2.0
 \end{aligned}$$</div>
 
 This positive value tells us that, in all places, more stuff is leaving that 
 point than entering it.
 
 Working through the math for the other non-very-fluidy field, we get \\( \nabla 
-\cdot \vec u = 0.1 \pi x \cos(2 \pi x) \\).
+\cdot \vec u = 2 \pi x \cos(2 \pi x) \\).
 
 Which tells us that in some places, more stuff is entering than leaving (where 
 the divergence is negative), and in others, more stuff is leaving than entering 
 (where the divergence is positive).
 
 Doing the same operation on the more fluidy looking swirly velocity field \\( 
-\vec u = (0.05 \sin ( 2 \pi y), 0.05 \sin ( 2 \pi x ) \\) that you saw in the 
-section about advection, we discover \\( \nabla \cdot \vec u = 0 \\).
+\vec u = (\sin ( 2 \pi y), \sin ( 2 \pi x ) \\) that you saw in the section 
+about advection, we discover \\( \nabla \cdot \vec u = 0 \\).
 
 An incompressible fluid will have a divergence of zero everywhere. So, if we 
 want our simulated fluid to look kind of like a real fluid, we better make sure 
@@ -596,11 +597,10 @@ p_{i, j} = \frac{
 $$</div>
 
 Next, we make an initial guess for all of our unknowns. We'll call this initial 
-guess \\( p_{i,j}^{(0)} \\).
+guess \\( p_{i,j}^{(0)} \\), and just set it to 0 everywhere.
 
 Here's where the iteration comes in: our next guess, \\( p_{i, j}^{(1)} \\) is 
-obtained by plugging in our initial guess into the above formula for \\( p_{i, 
-j} \\):
+obtained by plugging in our initial guess into the above formula:
 
 <div>$$
 p_{i, j}^{(1)} = \frac{
@@ -619,7 +619,7 @@ $$</div>
 You would usually run this until the values of one iteration are equal to the 
 values from the previous iteration, rounded to a certain accuracy. For our 
 purposes, we're more interested in this running in a consistent period of time, 
-so we'll arbitrarily run this for 16 iterations, and hope the result is accurate 
+so we'll arbitrarily run this for 10 iterations, and hope the result is accurate 
 enough to look realistic.
 
 For a bit of intuition on *why* this converges to a solution, check out 
@@ -695,9 +695,9 @@ I got this working for the first time, I was pretty ecstatic.
 
 I won't delve too far into the implementation, but you can have a look at it 
 yourself: [fluid-sim.js][7]. It relies upon the elegant [lightgl.js][8], which 
-is an abstraction layer on top of WebGL that makes it much nicer to work with, 
-without making any assumptions about you wanting to any concept of a camera or a 
-scene or whatnot.
+is an abstraction layer on top of WebGL that makes it much nicer to work with.  
+Unlike THREE.js, it doesn't make any assumptions about you wanting any concept 
+of a camera or lighting or that you're working in 3D at all.
 
 The key technique for running the simulation efficiently is doing all the hard 
 work on the GPU. To meet this need, all of the computations are done via the 
@@ -751,6 +751,12 @@ new FluidSim("demo", {
     size: 600,
 });
 
+new FluidSim("advection1", {
+    threshold: false,
+    advectV: false,
+    initVFn: ['1.0', '0.0']
+});
+
 new FluidSim("advection2", {
     threshold: false,
     advectV: false
@@ -759,19 +765,19 @@ new FluidSim("advection2", {
 new FluidSim("advectV1", {
     threshold: false,
     advectV: true,
-    initVFn: ['0.05', '0.05 * sin(2.0 * 3.1415 * x)']
+    initVFn: ['1.0', '1.0 * sin(2.0 * 3.1415 * x)']
 });
 
 new FluidSim("divergent1", {
     threshold: false,
     advectV: false,
-    initVFn: ['0.05 * x', '0.05 * y']
+    initVFn: ['1.0 * x', '1.0 * y']
 });
 
 new FluidSim("divergent2", {
     threshold: false,
     advectV: false,
-    initVFn: ['0.05 * sin(2.0 * 3.1415 * x)', '0.0']
+    initVFn: ['1.0 * sin(2.0 * 3.1415 * x)', '0.0']
 });
 
 new FluidSim("divergent3", {
