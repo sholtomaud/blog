@@ -13,6 +13,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
 <div class="caption">Click and drag to change the fluid flow. Double click to 
 reset.</div>
 
+*Note: The demos in this post rely on WebGL features that might not be 
+implemented in mobile browsers.*
+
 About a year and a half ago, I had a passing interest in trying to figure out 
 how to make a fluid simulation. At the time, it felt just a bit out of my reach, 
 requiring knowledge of shaders, vector calculus, and numerical computation, that 

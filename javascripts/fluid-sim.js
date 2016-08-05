@@ -464,20 +464,20 @@ window.FluidSim = function(canvasId, options) {
   canvas.addEventListener('dblclick', reset);
 
   // Returns true if the canvas is on the screen
-  // If "bottomHalf" is true, then will only return true if the entire bottom
-  // half is within the scroll window.
-  var onScreen = function(bottomHalf) {
+  // If "middleIn" is true, then will only return true if the middle of the
+  // canvas is within the scroll window.
+  var onScreen = function(middleIn) {
     var container = canvas.offsetParent;
 
     var canvasBottom = canvas.offsetTop + canvas.height;
     var canvasTop = canvas.offsetTop;
 
-    var containerTop = container.scrollTop;
-    var containerBottom = container.scrollTop + container.offsetHeight;
+    var containerTop = window.scrollY;
+    var containerBottom = window.scrollY + container.offsetHeight;
 
-    if (bottomHalf) {
+    if (middleIn) {
       return (containerTop < (canvasTop + canvasBottom) / 2 &&
-              canvasBottom < containerBottom);
+              (canvasTop + canvasBottom) / 2 < containerBottom);
     } else {
       return (containerTop < canvasBottom && containerBottom > canvasTop);
     }

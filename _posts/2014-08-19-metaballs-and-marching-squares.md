@@ -37,9 +37,9 @@ var animateOnScroll = function(simulation) {
     var tick = function() {
         if (!paused
             &&
-            container.scrollTop < canvas.offsetTop + canvas.height
+            window.scrollY < canvas.offsetTop + canvas.height
             &&
-            container.scrollTop + container.offsetHeight > canvas.offsetTop
+            window.scrollY + container.offsetHeight > canvas.offsetTop
         ) {
             // Only recalculate and draw while the canvas is on the screen.
             simulation.recalculate();
