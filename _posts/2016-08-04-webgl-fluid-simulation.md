@@ -18,7 +18,7 @@ implemented in mobile browsers.*
 
 About a year and a half ago, I had a passing interest in trying to figure out 
 how to make a fluid simulation. At the time, it felt just a bit out of my reach, 
-requiring knowledge of shaders, vector calculus, and numerical computation, that 
+requiring knowledge of shaders, vector calculus, and numerical computation that 
 were all just a little bit past my grasp. At the time, I was working through the
 [Fluid Simulation Course Notes from SIGGRAPH 2007][1], and was struggling with 
 the math. Now armed with a bit more knowledge and a lot more time, and with the 
@@ -45,9 +45,10 @@ $$
 \vec u(x, y) = (u_x, u_y)
 $$
 
-A nice way to get an intuition about what a given field like is to sample the 
-function in a grid of points, then draw arrows starting at each grid point whose 
-size and orientation are dictated by the value of the function at that point.
+A nice way to get an intuition about what a given field looks like is to sample 
+the function in a grid of points, then draw arrows starting at each grid point 
+whose size and orientation are dictated by the value of the function at that 
+point.
 For the purposes of this post, we're always going to be working over the domain 
 \\( x \in [-1, 1] \\), \\( y \in [-1, 1] \\).
 
@@ -72,7 +73,7 @@ accordingly.
 For a more thorough introduction to vector fields, check out the [Introduction 
 to Vector Fields][2] video on Khan Academy. The rest of the videos on 
 multivariate calculus might prove useful for understanding concepts in fluid 
-flow too!
+flow too.
 
 Now then, let's get things moving.
 
@@ -80,7 +81,7 @@ Now then, let's get things moving.
 
 Advection is the transfer of a property from one place to another due to the 
 motion of the fluid. If you've got some black dye in some water, and the water 
-is moving to the right, then surprise surprise, the black dye moves right!
+is moving to the right, then surprise surprise, the black dye moves right.
 
 <canvas id="advection1" width="400" height="400"></canvas>
 
@@ -112,7 +113,7 @@ fluid, then one approach is to update the color of the fluid where that particle
 will be, one time step in the future.
 
 <div>$$
-\vec c(\vec p + u(\vec p, t) \Delta t, t + \Delta t) := \vec c(\vec p, t)
+\vec c(\vec p + \vec u(\vec p, t) \Delta t, t + \Delta t) := \vec c(\vec p, t)
 $$</div>
 
 <img src="/images/16-08-01/advection1.png">
@@ -217,14 +218,22 @@ y) = (x, y) \\). Taking the divergence, we find:
 \end{aligned}$$</div>
 
 This positive value tells us that, in all places, more stuff is leaving that 
-point than entering it.
+point than entering it. In physical terms, this means that the density is 
+decreasing uniformly everywhere.
 
-Working through the math for the other non-very-fluidy field, we get \\( \nabla 
-\cdot \vec u = 2 \pi x \cos(2 \pi x) \\).
+The other not-very-fluidy field has an equation \\( \vec u(x, y) = \sin(2 \pi 
+x), 0) \\). If we look at its divergence, we see:
 
-Which tells us that in some places, more stuff is entering than leaving (where 
-the divergence is negative), and in others, more stuff is leaving than entering 
-(where the divergence is positive).
+<div>$$\begin{aligned}
+\nabla \cdot \vec u &=
+    \frac{\partial}{\partial x}(\sin(2 \pi x)) + \frac{\partial}{\partial y}(0) 
+\\
+&= 2 \pi \cos (2 \pi x)
+\end{aligned}$$</div>
+
+Which tells us that in some places, density is increasing (where \\( \nabla 
+\cdot \vec u < 0 \\)), and in others, density is decreasing (where \\( \nabla 
+\cdot \vec u > 0 \\)).
 
 Doing the same operation on the more fluidy looking swirly velocity field \\( 
 \vec u = (\sin ( 2 \pi y), \sin ( 2 \pi x ) \\) that you saw in the section 
@@ -232,7 +241,7 @@ about advection, we discover \\( \nabla \cdot \vec u = 0 \\).
 
 An incompressible fluid will have a divergence of zero everywhere. So, if we 
 want our simulated fluid to look kind of like a real fluid, we better make sure 
-it too is divergence-free.
+it's divergence-free.
 
 Since our velocity field undergoes advection and can be influenced by clicking 
 and dragging around the fluid, having an initially divergence-free velocity 
@@ -261,8 +270,8 @@ Navier-Stokes equations for incompressible fluid flow:
 
 Where \\( \vec u \\) is the velocity field, \\( \rho \\) is density, \\( p \\) 
 is pressure,
-\\( \nu \\) is the kinematic viscosity, \\( \vec F \\) is external forces acting 
-upon the fluid
+\\( \nu \\) is the kinematic viscosity, and \\( \vec F \\) is external forces 
+acting upon the fluid.
 
 Since we're pretending the viscosity of our fluid is zero, we can drop the \\( 
 \nu \\) term in the first equation. In our simple simulation, external forces 
@@ -322,9 +331,17 @@ to leave us with only scalar variables.
 \end{aligned}$$</div>
 
 Remembering that these fields are all functions on \\( (x, y, t) \\), we can 
-approximate the partial derivatives with [finite differences][4]. Because the 
-procedure ends up being the same for both components, we'll focus on only the 
-\\( x \\) component here.
+approximate the partial derivatives with [finite differences][4]. For instance, 
+we can approximate the partial derivative of \\( u_x \\) with respect to \\( t 
+\\) like so:
+
+<div>$$
+\frac{\partial u_x}{\partial t} \approx \frac{u_x(x, y, t + \Delta t) - u_x(x, 
+y, t)}{\Delta t} $$</div>
+
+Because the procedure ends up being the same for both components, we'll focus on 
+only the \\( x \\) component here. Applying finite differences to all of the 
+partial derivatives, we have this:
 
 <div>$$
 \begin{aligned}
@@ -464,8 +481,8 @@ Here, we can substitute our equations for \\( \vec u \\) expressed in terms of
 \end{aligned}$$</div>
 
 Rearranging to have all of the \\( p \\) terms on the left and all the \\( \vec 
-u ^ a \\) terms on the right, and multiply both sides by \\( 2 \epsilon \\), we 
-have:
+u ^ a \\) terms on the right, and multiplying both sides by \\( 2 \epsilon \\), 
+we have:
 
 <div>$$
 -\frac{\Delta t}{2 \epsilon \rho}
@@ -559,8 +576,7 @@ left we have 5 unknowns: the value of \\( p \\) at 5 different grid locations.
 If we repeat this process and evaluate \\( (x, y) \\) at every grid point, we 
 get one equation with 5 unknowns for each grid location. If our grid has \\( n 
 \times m \\) grid locations in it, then we have \\( n \times m \\) equations, 
-each with 5 unknowns. Each unknown will occur in exactly 5 equations, though 
-it's important to note that those 5 equations will 
+each with 5 unknowns.
 
 If you're wondering about what's happening at the edges, we're going to lazily 
 side-step that question by making our grid wrap around: if you ask for the 
@@ -647,11 +663,13 @@ pseudo-code, here's our whole simulation:
         p := calculate pressure based on d, using jacobi iteration
         u := u_a - gradient of p
         c := advect field c through velocity field u
+        draw c
+        wait a bit
 
 Here are the key formulas for those steps on grid coordinates \\( (i, j) \\), 
 uncluttered by derivations:
 
-Advecting field \\( u \\) through itself:
+Advecting field \\( vec u \\) through itself:
 
 <div>$$
 \vec u^a_{i,j} = \vec u^a(x:=i \epsilon, y:= j \epsilon, t + \Delta t) := \vec 
@@ -722,7 +740,7 @@ pressure gradient from the advected velocity.
 # References
 
 To make this, I had to draw from a lot of difference references, many of which 
-are linked inline in the post. I'll relist them here with some annotation.
+are linked inline in the post.
 
 - *[Fluid Simulation Course Notes from SIGGRAPH 2007][1]*: Now a textbook, this 
 is a pretty mathematically dense tutorial. It took me 4 or 5 times reading 
@@ -748,13 +766,13 @@ since \\( \nabla \cdot \vec u = 0 \\) in the second equation.
 for Solving Linear Systems][11]. This had a much clearer explanation of the 
 Jacobi method than the GPU Gems chapter that allowed me to derive the pressure 
 solve iteration myself. The full textbook can be found here: ["Elementary Linear 
-Algebra" on amazon.com][12]
+Algebra" on amazon.com][12].
 
 - [Jonas Wagner's fluid simulation on `canvas`][13], and particularly the source 
 for it ([fluid.js][14]) were helpful for understanding what a full solution 
 actually looks like. It's also how I found the GPU Gems article in the first 
 place. Jonas went on later to reimplement his solution in WebGL: [WebGL Fluid 
-Simulation][15]
+Simulation][15].
 
 <script 
 src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
@@ -795,19 +813,19 @@ new FluidSim("advection2", {
 new FluidSim("advectV1", {
     threshold: false,
     advectV: true,
-    initVFn: ['1.0', '1.0 * sin(2.0 * 3.1415 * x)']
+    initVFn: ['1.0', 'sin(2.0 * 3.1415 * x)']
 });
 
 new FluidSim("divergent1", {
     threshold: false,
     advectV: false,
-    initVFn: ['1.0 * x', '1.0 * y']
+    initVFn: ['x', 'y']
 });
 
 new FluidSim("divergent2", {
     threshold: false,
     advectV: false,
-    initVFn: ['1.0 * sin(2.0 * 3.1415 * x)', '0.0']
+    initVFn: ['sin(2.0 * 3.1415 * x)', '0.0']
 });
 
 new FluidSim("divergent3", {
