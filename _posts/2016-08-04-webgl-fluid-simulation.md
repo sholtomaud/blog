@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Fluid Simulation (in WebGL)
+title: Fluid Simulation (with WebGL demo)
 status: publish
 type: post
 published: true
@@ -28,6 +28,8 @@ help leapfrog you past a few places I got stuck.
 We're going to work with the simplest 2D fluid simulation, where the entire area 
 is full of fluid, and we're going to ignore viscosity.
 
+{:toc}
+
 # The Velocity Field
 
 As compared to a rigid, unrotating solid, where every bit of the thing has to be 
@@ -46,7 +48,7 @@ size and orientation are dictated by the value of the function at that point.
 For the purposes of this post, we're always going to be working over the domain 
 \\( x \in [-1, 1] \\), \\( y \in [-1, 1] \\).
 
-For instance, here's a very simple field \\( \vec u(x, y) = (1.0, 0) \\) 
+For instance, here's a very simple field \\( \vec u(x, y) = (1, 0) \\) 
 representing everything moving at a constant speed to the right.
 
 <img src="/images/16-08-01/vecfield1.png">
@@ -112,16 +114,19 @@ $$</div>
 
 <img src="/images/16-08-01/advection1.png">
 
-But this winds up being difficult to implement on the GPU. First, the position 
-we want to write, \\( \vec p + v(\vec p, t) \Delta t) \\) might not lie on a 
-grid point, so we'd have to distribute the impact of the write across the 
-surrounding grid points. Second, many of our imaginary particles might end up in 
-the same place, meaning we need to analyze the entire grid before we decide what 
-the new values of each grid point might be.
+In order to run these simulations in real-time at high resolution, we want to 
+implement them on the GPU. It turns out that this method of updating the value 
+at the new location of the particle is difficult to implement on the GPU.
 
-So instead, instead of figuring out what our imaginary particles at the grid 
-points *go to*, we'll figure out where they *came from* in order to calculate 
-the next time step.
+First, the position we want to write, \\( \vec p + \vec u(\vec p, t) \Delta t 
+\\) might not lie on a grid point, so we'd have to distribute the impact of the 
+write across the surrounding grid points. Second, many of our imaginary 
+particles might end up in the same place, meaning we need to analyze the entire 
+grid before we decide what the new values of each grid point might be.
+
+So, instead of figuring out where our imaginary particles at the grid points *go 
+to*, we'll figure out where they *came from* in order to calculate the next time 
+step.
 
 <div>$$
 \vec c(\vec p, t + \Delta t) := \vec c(\vec p - \vec u(\vec p) \Delta t, t)
@@ -141,7 +146,7 @@ above).
 
 # Advecting the Velocity Field
 
-Barring bizarre sequence of perfectly aligned fans underneath the liquid, 
+Barring a bizarre sequence of perfectly aligned fans underneath the liquid, 
 there's no reason why the velocity field wouldn't change over time. Just as 
 black ink would move through the fluid, so too will the velocity field itself!
 Just as we can *advect* \\( \vec c \\) through \\( \vec u \\), we can also 
@@ -151,8 +156,8 @@ Intuitively you can think of it this way: a particle moving in a certain
 direction will continue moving in that direction, even after it's moved.
 
 Since we're storing velocity in a grid just like we did with color, we can use 
-the exact same routine to advect velocity through itself. Below, wa tch the 
-velocity change over time, with an initial velocity field of \\( \vec u = (1.0,
+the exact same routine to advect velocity through itself. Below, watch the 
+velocity change over time, with an initial velocity field of \\( \vec u = (1,
 \sin(2 \pi y)) \\).
 
 <canvas id="advectV1" width="400" height="400"></canvas>
@@ -204,8 +209,8 @@ y) = (x, y) \\). Taking the divergence, we find:
 <div>$$\begin{aligned}
 \nabla \cdot \vec u &=
     \frac{\partial}{\partial x}(x) + \frac{\partial}{\partial y}(y) \\
-&= 1.0 + 1.0 \\
-&= 2.0
+&= 1 + 1 \\
+&= 2
 \end{aligned}$$</div>
 
 This positive value tells us that, in all places, more stuff is leaving that 
@@ -647,7 +652,7 @@ Advecting field \\( u \\) through itself:
 
 <div>$$
 \vec u^a_{i,j} = \vec u^a(x:=i \epsilon, y:= j \epsilon, t + \Delta t) := \vec 
-u(x - u_x(x, y) \Delta t, y - u_y(x, y) \Delta t)
+u(x - u_x(x, y) \Delta t, y - u_y(x, y) \Delta t, t)
 $$</div>
 
 Divergence of \\( \vec u_a \\) (multiplied by constant terms):
@@ -695,7 +700,7 @@ I got this working for the first time, I was pretty ecstatic.
 
 I won't delve too far into the implementation, but you can have a look at it 
 yourself: [fluid-sim.js][7]. It relies upon the elegant [lightgl.js][8], which 
-is an abstraction layer on top of WebGL that makes it much nicer to work with.  
+is an abstraction layer on top of WebGL that makes it much nicer to work with. 
 Unlike THREE.js, it doesn't make any assumptions about you wanting any concept 
 of a camera or lighting or that you're working in 3D at all.
 
@@ -713,18 +718,40 @@ pressure gradient from the advected velocity.
 
 # References
 
-- Jacobi method: 
-http://college.cengage.com/mathematics/larson/elementary_linear/5e/students/ch08-10/chap_10_2.p
-- Jacobi intuition: http://math.stackexchange.com/a/1255821/355071
+To make this, I had to draw from a lot of difference references, many of which 
+are linked inline in the post. I'll relist them here with some annotation.
 
-# Future Work
+- *[Fluid Simulation Course Notes from SIGGRAPH 2007][1]*: Now a textbook, this 
+is a pretty mathematically dense tutorial. It took me 4 or 5 times reading 
+through most sections to make sense of it, and ultimately I only understood 
+parts of it after I did the derivations myself. It uses the more complex 
+[conjugate gradient method][10] instead of the Jacobi method to solve the system 
+of pressure equations, which I got completely lost in, and abandoned. It delves 
+into a lot of arguments about numerical accuracy and uses a more complex grid 
+layout than I did, which I still don't follow fully. It also has resources for 
+other kinds of fluid simulations, like heightfield simulation, and smoothed 
+particle hydrodynamics.
 
-- Fluid-fluid interactions
-- Solid-fluid interactions
-- Smoke
-- Fluid sources and drains
-- Fluid simulations with particles
-- Heightfield simulations
+- *[GPU Gems Chapter 38.  Fast Fluid Dynamics Simulation on the GPU][0]*: This 
+was the single most useful reference I found, and describes something very 
+similar to this post.  It walks through specific implementation ideas, and gave 
+me a much better intuition for advection. Some of the math (or at least the 
+notation) seems shaky here. I think the Gaussian "splat" formula is missing a 
+negative sign inside of the \\( exp() \\), and I'm not sure what the notation 
+\\( (\vec u \cdot \nabla) u_x \\) means in the first Navier-Stokes equation, 
+since \\( \nabla \cdot \vec u = 0 \\) in the second equation.
+
+- ["Elementary Linear Algebra" by Ron Larson, Section 10.2: Iterative Methods 
+for Solving Linear Systems][11]. This had a much clearer explanation of the 
+Jacobi method than the GPU Gems chapter that allowed me to derive the pressure 
+solve iteration myself. The full textbook can be found here: ["Elementary Linear 
+Algebra" on amazon.com][12]
+
+- [Jonas Wagner's fluid simulation on `canvas`][13], and particularly the source 
+for it ([fluid.js][14]) were helpful for understanding what a full solution 
+actually looks like. It's also how I found the GPU Gems article in the first 
+place. Jonas went on later to reimplement his solution in WebGL: [WebGL Fluid 
+Simulation][15]
 
 <script 
 src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
@@ -803,3 +830,9 @@ new FluidSim("implementation1", {
 [7]: https://github.com/jlfwong/blog/blob/master/javascripts/fluid-sim.js
 [8]: https://github.com/evanw/lightgl.js
 [9]: http://webglfundamentals.org/webgl/lessons/webgl-image-processing-continued.html
+[10]: https://en.wikipedia.org/wiki/Conjugate_gradient_method
+[11]: http://college.cengage.com/mathematics/larson/elementary_linear/5e/students/ch08-10/chap_10_2.pdf
+[12]: https://www.amazon.com/Elementary-Linear-Algebra-Ron-Larson/dp/1133110878
+[13]: https://29a.ch/sandbox/2012/fluidcanvas/
+[14]: https://29a.ch/sandbox/2012/fluidcanvas/fluid.js
+[15]: https://29a.ch/2012/12/16/webgl-fluid-simulation
