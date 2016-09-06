@@ -314,7 +314,7 @@ If you set up a scene like this:
 
 	float sceneSDF(vec3 samplePoint) {
         float sphereDist = sphereSDF(samplePoint / 1.2) * 1.2;
-        float cubeDist = cubeSDF(samplePoint)1.2
+        float cubeDist = cubeSDF(samplePoint) * 1.2;
 		return intersectSDF(cubeDist, sphereDist);
 	}
 
@@ -443,6 +443,8 @@ For instance, if I wanted to apply a rotation matrix, I could do this:
 ...but if you're using WebGL here, there's no built in matrix inversion routine 
 in GLSL  for now, but you can just do the opposite transform. So the above scene 
 function changes to the equivalent:
+
+    lang:glsl
 
     float sceneSDF(vec3 samplePoint) {
         float sphereDist = sphereSDF(samplePoint / 1.2) * 1.2;

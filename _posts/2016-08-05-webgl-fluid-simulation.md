@@ -842,7 +842,7 @@ new FluidSim("implementation1", {
 
 </script>
 [0]: http://http.developer.nvidia.com/GPUGems/gpugems_ch38.html
-[1]: https://www.cs.ubc.ca/~rbridson/fluidsimulation/fluids_notes.pd://www.cs.ubc.ca/~rbridson/fluidsimulation/fluids_notes.pdf 
+[1]: https://www.cs.ubc.ca/~rbridson/fluidsimulation/fluids_notes.pdf
 [2]: https://www.khanacademy.org/math/multivariable-calculus/thinking-about-multivariable-function/visualizing-vector-valued-functions/v/vector-fields-introduction
 [3]: https://en.wikipedia.org/wiki/Bilinear_interpolation
 [4]: https://en.wikipedia.org/wiki/Finite_difference#Forward.2C_backward.2C_and_central_differences
