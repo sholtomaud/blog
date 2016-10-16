@@ -362,7 +362,7 @@ And this is totally fine -- no security problem. The problem comes around when
 you inject `</script>` because it ends the script immediately, even though it 
 might be in the middle of a string. So if 
 
-```json
+```javascript
 {"body": "</script><script>alert('pwned - greetz to KA');</script>"}
 ```
 

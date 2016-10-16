@@ -47,3 +47,73 @@ table {
 }
 
 /* Typography */
+html {
+  font-family: "Roboto Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Gloria Hallelujah", "Noteworthy", "Times New Roman", sans-serif;
+  line-height: 150%;
+}
+
+h1.title {
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 22px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #4f4f4f;
+}
+
+h3 {
+  font-size: 20px;
+  margin-bottom: 14px;
+  color: #828282;
+}
+
+p {
+  line-height: 150%;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+strong {
+  font-weight: bold;
+}
+
+a {
+  color: #ff6d6d;
+  text-decoration: none;
+}
+
+a:hover {
+  border-bottom: 1px solid #ff6d6d;
+}
+
+pre, code {
+  font-family: "Source Code Pro", "Courier", monospace;
+  color: #4f4f4f;
+}
+
+p > code {
+  font-size: 95%;
+}
+
+/* syntax highlighted code block */
+.highlight > pre {
+  margin-bottom: 20px;
+}
+
+/* Structure */
+article {
+  max-width: 750px;
+  margin: 30px auto 0 auto;
+}

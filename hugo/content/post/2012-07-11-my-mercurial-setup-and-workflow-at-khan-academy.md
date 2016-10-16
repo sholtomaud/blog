@@ -330,7 +330,7 @@ By default, arcanist does not amend commits for mercurial. I wanted this
 ability, so I submitted a patch to support this. To make arcanist amend commits, 
 add the following to your `~/.arcrc` (or to your project `.arcconfig`).
 
-```json
+```javascript
 {
   "config": {
     "history.immutable": false
