@@ -191,14 +191,17 @@ header a, header a:hover {
   border-bottom: none;
 }
 
-.trace-of-me {
-  height: 130px;
-  width: 130px;
-}
-
 .trace-of-me > a {
   display: block;
+  width: 130px;
+  height: 130px;
 }
+
+.trace-of-me img.regular { display: block; }
+.trace-of-me img.eyebrow { display: none; }
+
+.trace-of-me:hover img.regular { display: none; }
+.trace-of-me:hover img.eyebrow { display: block; }
 
 .site-title {
   font-size: 30px;

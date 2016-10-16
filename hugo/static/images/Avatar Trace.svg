@@ -1,41 +1,41 @@
-<svg width="130" height="131" viewBox="0 0 130 131" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:figma="http://www.figma.com/figma/ns">
+<svg width="130" height="130" viewBox="0 0 130 130" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:figma="http://www.figma.com/figma/ns">
 <title>Avatar Trace</title>
 <desc>Created using Figma</desc>
 <g id="Canvas" transform="translate(928 2141)" figma:type="canvas">
 <g id="Avatar Trace" style="mix-blend-mode:normal;" figma:type="frame">
 <mask id="mask0_alpha" mask-type="alpha">
 <g id="Rectangle 3" style="mix-blend-mode:normal;" figma:type="rounded-rectangle">
-<use xlink:href="#path0_fill" transform="translate(-928 -2140.5)" fill="#C4C4C4" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path0_fill" transform="translate(-928 -2141)" fill="#C4C4C4" style="mix-blend-mode:normal;"/>
 <mask id="mask1_outline_ins">
-<use xlink:href="#path0_fill" fill="white" transform="translate(-928 -2140.5)"/>
+<use xlink:href="#path0_fill" fill="white" transform="translate(-928 -2141)"/>
 </mask>
 <g mask="url(#mask1_outline_ins)">
-<use xlink:href="#path1_stroke_2x" transform="translate(-928 -2140.5)" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path1_stroke_2x" transform="translate(-928 -2141)" style="mix-blend-mode:normal;"/>
 </g>
 </g>
 </mask>
 <g id="Rectangle 3" style="mix-blend-mode:normal;" mask="url(#mask0_alpha)" figma:type="rounded-rectangle">
 <mask id="mask2_outline_ins">
-<use xlink:href="#path0_fill" fill="white" transform="translate(-928 -2140.5)"/>
+<use xlink:href="#path0_fill" fill="white" transform="translate(-928 -2141)"/>
 </mask>
 <g mask="url(#mask2_outline_ins)">
-<use xlink:href="#path1_stroke_2x" transform="translate(-928 -2140.5)" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path1_stroke_2x" transform="translate(-928 -2141)" style="mix-blend-mode:normal;"/>
 </g>
 </g>
 <g id="Face Trace" style="mix-blend-mode:normal;" mask="url(#mask0_alpha)" figma:type="vector">
-<use xlink:href="#path2_fill" transform="translate(-898.984 -2119.93)" style="mix-blend-mode:normal;"/>
-<use xlink:href="#path3_fill" transform="translate(-898.984 -2119.93)" style="mix-blend-mode:normal;"/>
-<use xlink:href="#path4_fill" transform="translate(-898.984 -2119.93)" style="mix-blend-mode:normal;"/>
-<use xlink:href="#path5_stroke" transform="translate(-898.984 -2119.93)" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path2_fill" transform="translate(-898.984 -2120.43)" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path3_fill" transform="translate(-898.984 -2120.43)" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path4_fill" transform="translate(-898.984 -2120.43)" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path5_stroke" transform="translate(-898.984 -2120.43)" style="mix-blend-mode:normal;"/>
 </g>
 <g id="Headphones" style="mix-blend-mode:normal;" mask="url(#mask0_alpha)" figma:type="vector">
-<use xlink:href="#path6_stroke" transform="translate(-888.973 -2051.95)" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path6_stroke" transform="translate(-888.973 -2052.45)" style="mix-blend-mode:normal;"/>
 </g>
 <g id="Vector" style="mix-blend-mode:normal;" mask="url(#mask0_alpha)" figma:type="vector">
-<use xlink:href="#path7_stroke" transform="translate(-843.756 -2041.05)" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path7_stroke" transform="translate(-843.756 -2041.55)" style="mix-blend-mode:normal;"/>
 </g>
 <g id="Vector" style="mix-blend-mode:normal;" mask="url(#mask0_alpha)" figma:type="vector">
-<use xlink:href="#path8_stroke" transform="matrix(0.955444 -0.295172 0.295172 0.955444 -932.397 -2029.84)" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path8_stroke" transform="matrix(0.955444 -0.295172 0.295172 0.955444 -932.397 -2030.34)" style="mix-blend-mode:normal;"/>
 </g>
 </g>
 </g>
