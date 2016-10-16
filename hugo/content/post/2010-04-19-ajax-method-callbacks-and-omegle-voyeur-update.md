@@ -47,26 +47,26 @@ Now on to the customary technical concept to go along with my own self promotion
  all languages, attempting to pass methods of specific instances as arguments in 
  JavaScript presents an interesting problem. Consider the following:
 
-    lang:js
+```js
+function car(price) {
+    this.price = price;
 
-    function car(price) {
+    this.setPrice = function(price) {
         this.price = price;
+    };
+}
 
-        this.setPrice = function(price) {
-            this.price = price;
-        };
-    }
+function pass666(func) {
+    func(666);
+}
 
-    function pass666(func) {
-        func(666);
-    }
-
-    var redcar = new car(2000);
-    alert(redcar.price);
-    redcar.setPrice(123);
-    alert(redcar.price);
-    pass666(redcar.setPrice);
-    alert(redcar.price);
+var redcar = new car(2000);
+alert(redcar.price);
+redcar.setPrice(123);
+alert(redcar.price);
+pass666(redcar.setPrice);
+alert(redcar.price);
+```
 
 As you might expect, the first two alerts will say 2000 and 123 respectively. 
 But the last one also says 123. Why?
@@ -81,40 +81,39 @@ to modify the properties of the car because it isn't told anything about
 One way to fix this is to use a placeholder variable. I used "self". Change the 
 definition of car to the following yields the desired result.
 
-    lang:js
+```js
+function car(price) {
+    this.price = price;
 
-    function car(price) {
-      this.price = price;
-
-      var self = this;
-      this.setPrice = function(price) {
+    var self = this;
+    this.setPrice = function(price) {
         self.price = price;
-      };
-    }
+    };
+}
+```
 
 In this example, it's difficult to see why you would ever want to use this in 
 the first place. The reason I encountered this problem is my need to use 
 instance methods as callback functions for AJAX calls. Here's an excerpt of the 
 jQuery version of Omegle Voyeur to see what I'm talking about.
 
-    lang:js
-
-    sendQuery: function(target,respFunc) {
-      // Send a query to the omegle server
-      //log('sending');
-      var self = this;
-      if (respFunc == null) {
-        respFunc = function(self,data) {}
-      }
-      $.ajax({
-        url: 'omegle.php?'+target,
-        type: 'GET',
-        dataType: 'json',
-        success: function(data) {
-          respFunc(self,data);
-        }
-      });
-    },
+```js
+sendQuery: function(target,respFunc) {
+  // Send a query to the omegle server
+  var self = this;
+  if (respFunc == null) {
+    respFunc = function(self,data) {}
+  }
+  $.ajax({
+    url: 'omegle.php?'+target,
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+      respFunc(self,data);
+    }
+  });
+},
+```
 
 Sending a request to the Omegle server is a very common task in Omegle Voyeur, 
 so I wanted all the AJAX requests leaving from the same method. This means I 
@@ -133,29 +132,28 @@ something completely different,) which solves this problem elegantly.
 To fix the redcar problem with the aid of Prototype without having to use a 
 placeholder variable, you can use bind like so:
 
-    lang:js
+```js
+function car(price) {
+    this.price = price;
 
-    function car(price) {
+    this.setPrice = function(price) {
         this.price = price;
+    };
+}
 
-        this.setPrice = function(price) {
-            this.price = price;
-        };
-    }
+function pass666(func) {
+    func(666);
+}
 
-    function pass666(func) {
-        func(666);
-    }
+var redcar = new car(2000);
+alert(redcar.price);
+redcar.setPrice(123);
+alert(redcar.price);
 
-    var redcar = new car(2000);
-    alert(redcar.price);
-    redcar.setPrice(123);
-    alert(redcar.price);
+pass666(redcar.setPrice.bind(redcar));
 
-    pass666(redcar.setPrice.bind(redcar));
-
-    alert(redcar.price);
-
+alert(redcar.price);
+```
 
 The line `pass666(redcar.setPrice.bind(redcar));` is what makes this work out. 
 We're explicitly saying that we want `setPrice` executed from the scope of the 

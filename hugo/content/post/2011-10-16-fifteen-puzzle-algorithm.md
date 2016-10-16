@@ -60,25 +60,25 @@ Algorithm
 The algorithm I used is pretty much exactly what's described in the video. My 
 solution in coffeescript is an optimized and throttled version of the following:
 
-    lang:coffeescript
+```coffeescript
+solve = (startGrid) ->
+  frontier = new PriorityQueue
+  frontier.enqueue(new SolverState(startGrid, []))
 
-    solve = (startGrid) ->
-      frontier = new PriorityQueue
-      frontier.enqueue(new SolverState(startGrid, []))
+  while not frontier.empty()
+    curState = frontier.dequeue()
 
-      while not frontier.empty()
-        curState = frontier.dequeue()
+    if curState.solved
+      return curState.steps
 
-        if curState.solved
-          return curState.steps
+    candidateMoves = grid.validMoves()
 
-        candidateMoves = grid.validMoves()
-
-        for move in candidateMoves
-          nextGrid = grid.applyMove(move)
-          nextSteps = curState.steps.concat([move])
-          nextState = new SolverState(nextGrid, nextSteps)
-          frontier.enqueue(nextState)
+    for move in candidateMoves
+      nextGrid = grid.applyMove(move)
+      nextSteps = curState.steps.concat([move])
+      nextState = new SolverState(nextGrid, nextSteps)
+      frontier.enqueue(nextState)
+```
 
 `SolverState` stores the current position of all the numbers in the grid and the 
 list of steps to get there from the starting grid.
@@ -106,12 +106,12 @@ When looking at the search tree, there are some branches we can guarantee will
 not yield an optimal solution. The most obvious one here is to never go 
 backwards. In the above algorithm, we can prevent going backwards like so:
 
-    lang:coffeescript
-
-    lastStep = _.last(steps)
-    if lastStep?
-      candidates = _(candidates).filter (x) ->
-        not directionsAreOpposites x, lastStep
+```coffeescript
+lastStep = _.last(steps)
+if lastStep?
+  candidates = _(candidates).filter (x) ->
+    not directionsAreOpposites x, lastStep
+```
 
 I'm using [underscore.js][] for its functional goodness, so that's where 
 `_.last` and `_.filter` come from.
@@ -124,9 +124,9 @@ algorithm will make a disproportionate number of moves in the same direction.
 To fix this, we shuffle the list of valid moves before we start adding states to 
 the priority queue. To do this, we change the `candidates = ...` line to be:
 
-    lang:coffeescript
-
-    candidates = _.shuffle(grid.validMoves())
+```coffeescript
+candidates = _.shuffle(grid.validMoves())
+```
 
 A [Las Vegas algorithm][] is always right and sometimes fast. This is in 
 contrast to a [Monte Carlo algorithm][], which is always fast and sometimes 

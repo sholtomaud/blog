@@ -24,11 +24,11 @@ After reading and writing code full-time, I've come to appreciate the quote that
 starts this article. I'll explain why I support that sentiment so strongly with 
 an example. Let's look at a very common function in JavaScript.
 
-    lang:javascript
-
-    element.addEventListener('click', function() {
-      console.log('Just got clicked!');
-    }, true);
+```javascript
+element.addEventListener('click', function() {
+  console.log('Just got clicked!');
+}, true);
+```
 
 So let's break down this code into components.
 
@@ -58,12 +58,12 @@ a second that it didn't have to be - how can we make this more readable?
 
 **Option 1: Helpful variable names**
 
-    lang:javascript
-
-    var useCapture = true;
-    element.addEventListener('click', function() {
-      console.log('Just got clicked!');
-    }, useCapture);
+```javascript
+var useCapture = true;
+element.addEventListener('click', function() {
+  console.log('Just got clicked!');
+}, useCapture);
+```
 
 By using a variable, we've at least indicated what the flag pertains to. This is 
 more readable, but having a one-time use variable like that is crufty. Let's 
@@ -72,11 +72,11 @@ we do then?
 
 **Option 2: Namespaced constants**
 
-    lang:javascript
-
-    element.addEventListener('click', function() {
-      console.log('Just got clicked!');
-    }, element.addEventListener.USE_CAPTURE);
+```javascript
+element.addEventListener('click', function() {
+  console.log('Just got clicked!');
+}, element.addEventListener.USE_CAPTURE);
+```
 
 This approach is better because it means that flag will be the same everywhere 
 `addEventListener` is used, but it means duplicating the 
@@ -88,11 +88,11 @@ If you ever have a function signature in a public API that takes a single
 boolean argument, you can hide it by just having two methods - one where that 
 argument is true and another where the argument is false.
 
-    lang:javascript
-
-    element.addCaptureEventListener('click', function() {
-      console.log('Just got clicked!');
-    });
+```javascript
+element.addCaptureEventListener('click', function() {
+  console.log('Just got clicked!');
+});
+```
 
 In the implementation, you would still have that boolean argument internally, 
 (you weren't thinking of copy-pasting, right?) but at least the API user doesn't 
@@ -102,11 +102,11 @@ API size.
 
 **Option 4: "Named" arguments**
 
-    lang:javascript
-
-    element.addEventListener('click', function() {
-      console.log('Just got clicked!');
-    }, {inCapturePhase: true});
+```javascript
+element.addEventListener('click', function() {
+  console.log('Just got clicked!');
+}, {inCapturePhase: true});
+```
 
 Ah, there we go. Now I now what the `true` means! Now, there's still the matter 
 of understanding what the "capture phase" is, but at least that's looking up 
@@ -128,29 +128,29 @@ arguments.  Writing functions that take them in JavaScript is pretty kludgy, but
 it makes using the APIs much nicer. Take for instance, jQuery's [`$.ajax`][] 
 method.
 
-    lang:javascript
-
-    $.ajax({
-      url: "test.html",
-      timeout: 1000,
-      success: function(data) {
-        console.log(data);
-      },
-      error: function(jqXHR, textStatus) {
-        console.log(jxXHR);
-      }
-    });
+```javascript
+$.ajax({
+  url: "test.html",
+  timeout: 1000,
+  success: function(data) {
+    console.log(data);
+  },
+  error: function(jqXHR, textStatus) {
+    console.log(jxXHR);
+  }
+});
+```
 
 And compare that to another API with the same functionality but without using 
 these named arguments:
 
-    lang:javascript
-
-    $.ajax("test.html", 1000, function(data) {
-      console.log(data);
-    }, function(jqXHR, textStatus) {
-      console.log(jqXHR);
-    });
+```javascript
+$.ajax("test.html", 1000, function(data) {
+  console.log(data);
+}, function(jqXHR, textStatus) {
+  console.log(jqXHR);
+});
+```
 
 And watch the communication break down again. What's the `1000`? Is the first 
 callback the `success` callback or the `error` one? These are all questions you 
@@ -162,20 +162,20 @@ Implementing APIs like this is unreasonable in some languages, and it's frankly
 somewhat of a pain in JavaScript. If you want to take options like this, you 
 have to do silly things like this:
 
-    lang:javascript
+```javascript
+function fancyPrint(message, options) {
+  options = options || {};
 
-    function fancyPrint(message, options) {
-      options = options || {};
+  var color = options.color;
+  var bold = options.bold;
+  var underline = options.underline;
 
-      var color = options.color;
-      var bold = options.bold;
-      var underline = options.underline;
+  // ... implementation ...
+}
 
-      // ... implementation ...
-    }
-
-    fancyPrint('Hello', {color: 'red', bold: true});
-    fancyPrint('World', {underline: true, bold: false, color: 'blue'})
+fancyPrint('Hello', {color: 'red', bold: true});
+fancyPrint('World', {underline: true, bold: false, color: 'blue'})
+```
 
 Still, if you're writing a library, _please_ do this. I assure you the 
 developers will appreciate it.
@@ -187,21 +187,21 @@ CoffeeScript provides an extremely nice syntax for this style exactly because
 it's such a pain in raw JavaScript. A translation of the above would look like 
 this:
 
-    lang:coffeescript
+```coffeescript
+fancyPrint = (message, {color, bold, underline}) ->
+  # ... implementation ...
 
-    fancyPrint = (message, {color, bold, underline}) ->
-      # ... implementation ...
-
-    print 'Hello', {color: 'red', bold: true}
-    print 'World', {underline: true, bold: false, color:'blue'}
+print 'Hello', {color: 'red', bold: true}
+print 'World', {underline: true, bold: false, color:'blue'}
+```
 
 Unfortunately, you lose the ability to have default arguments in CoffeeScript 
 when using named arguments like this. Sadly, this doesn't work:
 
-    lang:coffeescript
-
-    print = (message, {color='black', bold=false, underline=false}) ->
-    # Error: Parse error on line 2: Unexpected '='
+```coffeescript
+print = (message, {color='black', bold=false, underline=false}) ->
+# Error: Parse error on line 2: Unexpected '='
+```
 
 Python
 ------
@@ -209,28 +209,28 @@ Python
 The argument system is Python is beautiful. All arguments are optionally named 
 arguments, and you can define defaults just fine!
 
-    lang:python
+```python
+def fancyPrint(message, color='black', bold=True, underline=True):
+  # ... implementation ...
 
-    def fancyPrint(message, color='black', bold=True, underline=True):
-      # ... implementation ...
+fancyPrint('Hello', color='red', bold=True)
+fancyPrint('World', underline=true, bold=false)
+fancyPrint(color='black', message='!')
 
-    fancyPrint('Hello', color='red', bold=True)
-    fancyPrint('World', underline=true, bold=false)
-    fancyPrint(color='black', message='!')
-
-    # You can even do this (please don't)
-    fancyPrint('Eugh', 'yellow', True, True)
+# You can even do this (please don't)
+fancyPrint('Eugh', 'yellow', True, True)
+```
 
 An additional nicety of Python's argument system is that it will complain if you  
 pass it arguments it doesn't understand. (JavaScript just ignores them if you do
 this)
 
-    lang:python
-
-    >>> fancyPrint('Hello', monkeys='cool')
-    Traceback (most recent call last):
-      File "<stdin>", line 1, in <module>
-    TypeError: fancyPrint() got an unexpected keyword argument 'monkeys'
+```python
+>>> fancyPrint('Hello', monkeys='cool')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: fancyPrint() got an unexpected keyword argument 'monkeys'
+```
 
 Objective C
 -----------
@@ -238,13 +238,13 @@ Objective C
 Objective C takes a different approach here - the parameter names are part of 
 the function signature itself. For example:
 
-    lang:objc
+```objc
+// A function invoked like this:
+BOOL result = [myData writeToFile:@"/tmp/log.txt" atomically:NO];
 
-    // A function invoked like this:
-    BOOL result = [myData writeToFile:@"/tmp/log.txt" atomically:NO];
-
-    // Will have signature like this
-    -(BOOL)writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile;
+// Will have signature like this
+-(BOOL)writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile;
+```
 
  From Cocoa Dev Central's [Learn Objective-C][],
 
@@ -258,14 +258,14 @@ In addition to the object literal solution I showed in the JavaScript and
 CoffeeScript sections above, there's another solution for C-like languages such 
 as JavaScript, and it looks like this:
 
-    lang:javascript
+```javascript
+function fancyPrint(message, color, bold) {
+  // ... implementation ...
+}
 
-    function fancyPrint(message, color, bold) {
-      // ... implementation ...
-    }
-
-    var color, bold;
-    fancyPrint('Hello', color='red', bold=true);
+var color, bold;
+fancyPrint('Hello', color='red', bold=true);
+```
 
 Looks exactly like python - great, right? Well, not exactly. This is just 
 abusing the fact that assignments return the value assigned in C-like languages.
@@ -273,14 +273,14 @@ abusing the fact that assignments return the value assigned in C-like languages.
 While this does make the code more readable, it also makes it more fragile, and 
 confusingly so. For instance, let's say we change the function signature:
 
-    lang:javascript
+```javascript
+function fancyPrint(message, color, underline, bold) {
+  // ... implementation ...
+}
 
-    function fancyPrint(message, color, underline, bold) {
-      // ... implementation ...
-    }
-
-    var color, bold;
-    fancyPrint('Hello', color='red', bold=true);
+var color, bold;
+fancyPrint('Hello', color='red', bold=true);
+```
 
 Now you have the result of `bold=true` actually being assigned to the 
 `underline` argument. So I'm not a fan of this solution for one reason:
@@ -298,9 +298,9 @@ think that the assignment like this *does* act like Python's named arguments.
 
 You get the same problem from commenting like this:
 
-    lang:javascript
-
-    fancyPrint('Hello', /*color*/ 'red', /*bold*/ true);
+```javascript
+fancyPrint('Hello', /*color*/ 'red', /*bold*/ true);
+```
 
 For stable APIs, like `addEventListener`, these techniques are probably fine, 
 but for your own projects' internal workings, it's probably a good idea to avoid 

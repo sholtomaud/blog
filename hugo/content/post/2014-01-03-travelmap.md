@@ -48,17 +48,17 @@ to opt for something simple. The data file is a JavaScript file which exports a
 mapping from the person's name to the list of places they've been in order. So a 
 (very) reduced version would look like this:
 
-    lang:javascript
+```javascript
+module.exports = {
+  "Jamie": ["Ottawa", "Waterloo", "Toronto", "San Francisco", "Ottawa"]
+  "Tammy": ["Ottawa", "Toronto", "Ottawa"],
+  "Becky": ["Ottawa", "Winnipeg", "Ottawa", "Saskatoon"],
+  "Emma": ["Ottawa", "Kingston", "Ottawa", "Vancouver"],
+  "Susan": ["Sheffield, England", "Calgary", "Ottawa"],
+  "Ging": ["Hong Kong", "Calgary", "Ottawa"]
+}
 
-    module.exports = {
-      "Jamie": ["Ottawa", "Waterloo", "Toronto", "San Francisco", "Ottawa"]
-      "Tammy": ["Ottawa", "Toronto", "Ottawa"],
-      "Becky": ["Ottawa", "Winnipeg", "Ottawa", "Saskatoon"],
-      "Emma": ["Ottawa", "Kingston", "Ottawa", "Vancouver"],
-      "Susan": ["Sheffield, England", "Calgary", "Ottawa"],
-      "Ging": ["Hong Kong", "Calgary", "Ottawa"]
-    }
-
+```
 The places listed are just strings containing human readable place names 
 (usually cities).
 
@@ -70,26 +70,26 @@ each of these family trips an array, then just flatten each person's list before
 it got processed. So to add a shared trip which I went on with my parents and 
 one of my sisters, it would look like this:
 
-    lang:javascript
+```javascript
+var ROADTRIP = [
+  "Kalamazoo, Michigan",
+  "Chicago, Illinois",
+  "Mt Rushmore, South Dakota",
+  "Calgary",
+  "Windermere, Canada",
+  "Waterton, Alberta",
+  "Ottawa"
+];
 
-    var ROADTRIP = [
-      "Kalamazoo, Michigan",
-      "Chicago, Illinois",
-      "Mt Rushmore, South Dakota",
-      "Calgary",
-      "Windermere, Canada",
-      "Waterton, Alberta",
-      "Ottawa"
-    ];
-
-    module.exports = {
-      "Jamie": ["Ottawa", ROADTRIP, "Waterloo", "Toronto", "San Francisco", "Ottawa"]
-      "Tammy": ["Ottawa", ROADTRIP, "Toronto", "Ottawa"],
-      "Becky": ["Ottawa", "Winnipeg", "Ottawa", "Saskatoon"],
-      "Emma": ["Ottawa", "Kingston", "Ottawa", "Vancouver"],
-      "Susan": ["Sheffield, England", "Calgary", "Ottawa", ROADTRIP],
-      "Ging": ["Hong Kong", "Calgary", "Ottawa", ROADTRIP]
-    };
+module.exports = {
+  "Jamie": ["Ottawa", ROADTRIP, "Waterloo", "Toronto", "San Francisco", "Ottawa"]
+  "Tammy": ["Ottawa", ROADTRIP, "Toronto", "Ottawa"],
+  "Becky": ["Ottawa", "Winnipeg", "Ottawa", "Saskatoon"],
+  "Emma": ["Ottawa", "Kingston", "Ottawa", "Vancouver"],
+  "Susan": ["Sheffield, England", "Calgary", "Ottawa", ROADTRIP],
+  "Ging": ["Hong Kong", "Calgary", "Ottawa", ROADTRIP]
+};
+```
 
 You can see what the full dataset looks like in [`app/data.js`][13].
 
@@ -140,53 +140,52 @@ The first is to perform data transformations on the result of an asynchronous
 request, as is used in the `geocode` function. If a `then` callback returns a 
 value, then the resulting promise will be immediately resolved with the result.
 
-    lang:javascript
-
-    var geocode = function (q) {
-      return $.ajax("http://nominatim.openstreetmap.org/search/", {
-        data: {
-          q: q,
-          format: "json"
-        }
-      }).then(function(data) {
-        if (!data || !data[0]) {
-          throw new Error("Geocoding '" + q + "' failed.");
-        }
-        return {
-          lat: parseFloat(data[0].lat, 10),
-          lon: parseFloat(data[0].lon, 10)
-        };
-      });
+```javascript
+var geocode = function (q) {
+  return $.ajax("http://nominatim.openstreetmap.org/search/", {
+    data: {
+      q: q,
+      format: "json"
+    }
+  }).then(function(data) {
+    if (!data || !data[0]) {
+      throw new Error("Geocoding '" + q + "' failed.");
+    }
+    return {
+      lat: parseFloat(data[0].lat, 10),
+      lon: parseFloat(data[0].lon, 10)
     };
-
+  });
+};
+```
 This allows a usage pattern like this:
 
-    lang:javascript
-
-    geocode("paris").then(function(coords) { console.log(coords) });
-    // Object {lat: 48.8565056, lon: 2.3521334}
+```javascript
+geocode("paris").then(function(coords) { console.log(coords) });
+// Object {lat: 48.8565056, lon: 2.3521334}
+```
 
 Without promises, this would look like this:
 
-    lang:javascript
-
-    var geocode = function(q, cb) {
-      return $.ajax("http://nominatim.openstreetmap.org/search/", {
-        data: {
-          q: q,
-          format: "json"
-        },
-        success: function(data) {
-          if (!data || !data[0]) {
-            throw new Error("Geocoding '" + q + "' failed.");
-          }
-          cb({
-            lat: parseFloat(data[0].lat, 10),
-            lon: parseFloat(data[0].lon, 10)
-          });
-        }
+```javascript
+var geocode = function(q, cb) {
+  return $.ajax("http://nominatim.openstreetmap.org/search/", {
+    data: {
+      q: q,
+      format: "json"
+    },
+    success: function(data) {
+      if (!data || !data[0]) {
+        throw new Error("Geocoding '" + q + "' failed.");
+      }
+      cb({
+        lat: parseFloat(data[0].lat, 10),
+        lon: parseFloat(data[0].lon, 10)
       });
-    };
+    }
+  });
+};
+```
 
 ## Serial Requests
 
@@ -196,47 +195,47 @@ retrieved from one request as parameters to the next.
 Let's say you wanted to geocode a place name, then use the resulting coordinates 
 to perform a reverse geocode.
 
-    lang:javascript
-
-    var biGeocode = function(q) {
-      var data = {};
-      return geocode(q).then(function(coords) {
-        data.forward = coords;
-        return geocode.reverse(coords);
-      }).then(function(description) {
-        data.reverse = description;
-        return data;
-      });
-    };
+```javascript
+var biGeocode = function(q) {
+  var data = {};
+  return geocode(q).then(function(coords) {
+    data.forward = coords;
+    return geocode.reverse(coords);
+  }).then(function(description) {
+    data.reverse = description;
+    return data;
+  });
+};
+```
 
 This would then be usable like this:
 
-    lang:javascript
-
-    biGeocode("paris").then(function(data) {
-      var fwd = data.forward;
-      var rev = data.reverse;
-      console.log(
-        "paris (" + fwd.lat + "," + fwd.lon + ") is in " +
-        rev.address.country
-      );
-    });
-    // paris (48.8565056,2.3521334) is in France 
+```javascript
+biGeocode("paris").then(function(data) {
+  var fwd = data.forward;
+  var rev = data.reverse;
+  console.log(
+    "paris (" + fwd.lat + "," + fwd.lon + ") is in " +
+    rev.address.country
+  );
+});
+// paris (48.8565056,2.3521334) is in France
+```
 
 The callback version for comparison:
 
-    lang:javascript
-
-    var biGeocode = function(q, cb) {
-      geocode(q, function(coords) {
-        geocode.reverse(coords, function(description) {
-          cb({
-            forward: coords,
-            reverse: description
-          });
-        ));
+```javascript
+var biGeocode = function(q, cb) {
+  geocode(q, function(coords) {
+    geocode.reverse(coords, function(description) {
+      cb({
+        forward: coords,
+        reverse: description
       });
-    };
+    ));
+  });
+};
+```
 
 ## Parallel Requests
 
@@ -248,77 +247,77 @@ jQuery's handy [`$.when`][7].
 For a simple first example, let's say I just wanted to do this once off, with a 
 known list of places.
 
-    lang:javascript
-
-    $.when(
-      geocode("Paris, France"),
-      geocode("Toronto, Canada"),
-      geocode("Waterloo, Canada")
-    ).then(function(parisCoords, torontoCoords, waterlooCoords) {
-      console.table({
-        "paris": parisCoords,
-        "toronto": torontoCoords,
-        "waterloo": waterlooCoords
-      });
-    });
+```javascript
+$.when(
+  geocode("Paris, France"),
+  geocode("Toronto, Canada"),
+  geocode("Waterloo, Canada")
+).then(function(parisCoords, torontoCoords, waterlooCoords) {
+  console.table({
+    "paris": parisCoords,
+    "toronto": torontoCoords,
+    "waterloo": waterlooCoords
+  });
+});
+```
 
 And the callback version:
 
-    lang:javascript
-
-    var pendingRequests = 3;
-    var results = {};
-    var parisCoords, torontoCoords, waterlooCoords;
-    var done = function() {
-      if (pendingRequests-- == 0) {
-        console.table({
-          "paris": parisCoords,
-          "toronto": torontoCoords,
-          "waterloo": waterlooCoords
-        });
-      }
-    };
-
-    geocode("Paris, France", function(coords) {
-      parisCoords = coords;
-      done();
+```javascript
+var pendingRequests = 3;
+var results = {};
+var parisCoords, torontoCoords, waterlooCoords;
+var done = function() {
+  if (pendingRequests-- == 0) {
+    console.table({
+      "paris": parisCoords,
+      "toronto": torontoCoords,
+      "waterloo": waterlooCoords
     });
+  }
+};
 
-    geocode("Toronto, Canada", function(coords) {
-      torontoCoords = coords;
-      done();
-    });
+geocode("Paris, France", function(coords) {
+  parisCoords = coords;
+  done();
+});
 
-    geocode("Waterloo, Canada", function(coords) {
-      waterlooCoords = coords;
-      done();
-    });
+geocode("Toronto, Canada", function(coords) {
+  torontoCoords = coords;
+  done();
+});
+
+geocode("Waterloo, Canada", function(coords) {
+  waterlooCoords = coords;
+  done();
+});
+```
 
 Now let's look at a more general case: geocoding an arbitrary list of places.
 
-    lang:javascript
-
-    var batchGeocode = function(places) {
-      return $.when.apply($.when, places.map(geocode)).then(function() {
-        return Array.prototype.slice.apply(arguments);
-      });
-    };
+```javascript
+var batchGeocode = function(places) {
+  return $.when.apply($.when, places.map(geocode)).then(function() {
+    return Array.prototype.slice.apply(arguments);
+  });
+};
+```
 
 Which could then be used like this:
 
-    lang:javascript
-
-    batchGeocode([
-      "Paris, France",
-      "Toronto, Canada",
-      "Waterloo, Canada"
-    ]).then(function(coords) {
-      console.table({
-        "paris": coords[0],
-        "toronto": coords[1],
-        "waterloo": coords[2]
-      });
-    });
+```javascript
+batchGeocode([
+  "Paris, France",
+  "Toronto, Canada",
+  "Waterloo, Canada"
+]).then(function(coords) {
+  console.table({
+    "paris": coords[0],
+    "toronto": coords[1],
+    "waterloo": coords[2]
+  });
+});
+```
 
 If the above looks arcane to you, you may wish to read about [`.apply`][8], 
 [`.prototype`][9], and [`arguments`][10]. The `Array.prototype.slice.apply` call 
@@ -328,20 +327,20 @@ assumes either your browser natively supports [`.map`][11] or you have
 
 The equivalent code using callbacks:
 
-    lang:javascript
-
-    var batchGeocode = function(places, cb) {
-      var pendingRequests = places.length;
-      var result = places.map(function() { return null; });
-      places.forEach(function(place, i) {
-        geocode(place, function(coords) {
-          result[i] = coords;
-          if (pendingRequests-- == 0) {
-            cb(result);
-          }
-        });
-      });
-    };
+```javascript
+var batchGeocode = function(places, cb) {
+  var pendingRequests = places.length;
+  var result = places.map(function() { return null; });
+  places.forEach(function(place, i) {
+    geocode(place, function(coords) {
+      result[i] = coords;
+      if (pendingRequests-- == 0) {
+        cb(result);
+      }
+    });
+  });
+};
+```
 
 
 # Rendering
@@ -461,10 +460,10 @@ Given the promise-based `geocode` function discussed above, a cached version of
 this looks like so:
 
 
-    lang:javascript
-
-    var cachedGeocode = localStorageMemoize.promise("geocoder", geocode);
-    cachedGeocode("paris").then(function(coords) { console.log(coords); });
+```javascript
+var cachedGeocode = localStorageMemoize.promise("geocoder", geocode);
+cachedGeocode("paris").then(function(coords) { console.log(coords); });
+```
 
 On the first page load, the above will make the AJAX request, but on subsequent 
 page loads it'll use the value cached in `localStorage`.

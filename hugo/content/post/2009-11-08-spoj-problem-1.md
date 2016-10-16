@@ -36,160 +36,160 @@ Solutions - In order of frequency that I use the language
 
 <strong>C++</strong>
 
-    lang:cpp
+```cpp
+//TEST AC - CPP (g++)
+#include <iostream>
+using namespace std;
 
-    //TEST AC - CPP (g++)
-    #include <iostream>
-    using namespace std;
-
-    int main() {
-      int n;
-      while(1) {
-        cin >> n;
-        if (n == 42) break;
-        cout << n << endl;
-      }
-      return 0;
-    }
+int main() {
+  int n;
+  while(1) {
+    cin >> n;
+    if (n == 42) break;
+    cout << n << endl;
+  }
+  return 0;
+}
+```
 
 <strong>C99</strong>
 
-    lang:c
-
-    //TEST AC - (gcc C99)
-    #include <stdio.h>
-    int main() {
-      int n;
-      while(1) {
-        scanf("%d",&n);
-        if (n == 42) break;
-        printf("%d\n",n);
-      }
-      return 0;
-    }
+```c
+//TEST AC - (gcc C99)
+#include <stdio.h>
+int main() {
+  int n;
+  while(1) {
+    scanf("%d",&n);
+    if (n == 42) break;
+    printf("%d\n",n);
+  }
+  return 0;
+}
+```
 
 <strong>php</strong>
 
-    lang:php
-
-    <?
-    //TEST AC - PHP
-    while(1) {
-      fscanf(STDIN,"%d",$n);
-      if ($n == 42) break;
-      print "$n\n";
-    }
-    ?>
+```php
+<?
+//TEST AC - PHP
+while(1) {
+  fscanf(STDIN,"%d",$n);
+  if ($n == 42) break;
+  print "$n\n";
+}
+?>
+```
 
 <strong>Python</strong>
 
-    lang:python
-
-    #TEST AC - Python
-    while 1:
-      num = input()
-      if (num == 42):
-        break
-      print num
+```python
+#TEST AC - Python
+while 1:
+  num = input()
+  if (num == 42):
+    break
+  print num
+```
 
 <strong>Bash</strong>
 
-    lang:bash
+```bash
+#!/bin/bash
+# TEST AC - BASH
 
-    #!/bin/bash
-    # TEST AC - BASH
-
-    while true; do
-      read n
-      if [ $n -eq 42 ]; then
-        break
-      fi
-      echo "$n"
-    done
+while true; do
+  read n
+  if [ $n -eq 42 ]; then
+    break
+  fi
+  echo "$n"
+done
+```
 
 <strong>Ruby</strong>
 
-    lang:ruby
-
-    #TEST AC - Ruby
-    while 1
-      n = gets.to_i
-      if n == 42
-        break
-      end
-      puts n
-    end
+```ruby
+#TEST AC - Ruby
+while 1
+  n = gets.to_i
+  if n == 42
+    break
+  end
+  puts n
+end
+```
 
 <strong>Java</strong>
 
-    lang:java
+```java
+//TEST AC - Java
+import java.io.*;
+import java.util.*;
 
-    //TEST AC - Java
-    import java.io.*;
-    import java.util.*;
+public class Main {
+  public static void main(String[] args) {
+    Scanner in = new Scanner(System.in);
 
-    public class Main {
-      public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-
-        while(true) {
-          int n = in.nextInt();
-          if (n == 42) break;
-          System.out.println(n);
-        }
-      }
+    while(true) {
+      int n = in.nextInt();
+      if (n == 42) break;
+      System.out.println(n);
     }
+  }
+}
+```
 
 <strong>Perl</strong>
 
-    lang:perl
-
-    #TEST AC - Perl
-    while (1)
-    {
-      $n = <STDIN>;
-      if ($n == 42) {
-        last;
-      }
-      print $n
-    }
+```perl
+#TEST AC - Perl
+while (1)
+{
+  $n = <STDIN>;
+  if ($n == 42) {
+    last;
+  }
+  print $n
+}
+```
 
 <strong>C#</strong>
 
-    lang:csharp
-
-    //TEST AC - C# (gmcs + Mono)
-    using System;
-    class WelcomeCSS {
-      static void Main() {
-        while(true) {
-          int n;
-          n = int.Parse(Console.ReadLine());
-          if (n == 42) break;
-          Console.WriteLine(n);
-        }
-      }
+```csharp
+//TEST AC - C# (gmcs + Mono)
+using System;
+class WelcomeCSS {
+  static void Main() {
+    while(true) {
+      int n;
+      n = int.Parse(Console.ReadLine());
+      if (n == 42) break;
+      Console.WriteLine(n);
     }
+  }
+}
+```
 
 <strong>GNU Pascal</strong>
 
-    lang:pascal
+```pascal
+{TEST AC - GPC Pascal}
 
-    {TEST AC - GPC Pascal}
+program TEST;
 
-    program TEST;
+var n:integer;
 
-    var n:integer;
-
+begin
+  while true do
     begin
-      while true do
-        begin
-          readln(n);
-          if n = 42 then begin
-            break;
-          end;
-          writeln(n);
-        end;
-    end.
+      readln(n);
+      if n = 42 then begin
+        break;
+      end;
+      writeln(n);
+    end;
+end.
+```
 
 You can see Thor's Project Euler solutions here: <a href="http://www.thurn.ca/category/project-euler/">Derek Thurn's Website - Project Euler</a>

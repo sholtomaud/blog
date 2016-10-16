@@ -54,32 +54,32 @@ Greasemonkey is a tool for customizing the way a web page displays and interacts
 <h1>jQuery</h1>
 jQuery is a javascript framework specifically designed for doing things involving the DOM tree absurdly quickly. Example: highlighting alternating rows of a table (zebra-striping).
 
-    lang:js
+```js
+// Standard Javascript method:
+var tables = document.getElementsByTagName("table");
+for (var i = 0; i < tables.length; i++) {
+    var rows = tables[i].tBodies[0].rows;
+    for (var j = 0; j < rows.length; j++) {
+        var rowColor;
+        if (j % 2 == 1) {
+            rowColor = "#eef";
+        } else {
+            rowColor = "#fff";
+        }
 
-    // Standard Javascript method:
-    var tables = document.getElementsByTagName("table");
-    for (var i = 0; i < tables.length; i++) {
-        var rows = tables[i].tBodies[0].rows;
-        for (var j = 0; j < rows.length; j++) {
-            var rowColor;
-            if (j % 2 == 1) {
-                rowColor = "#eef";
-            } else {
-                rowColor = "#fff";
-            }
-
-            var cells = rows[j].cells;
-            for (var k = 0; k < cells.length; k++) {
-                cells[k].style.backgroundColor = rowColor;
-                cells[k].style.borderBottom = "1px solid #ccc";
-            }
+        var cells = rows[j].cells;
+        for (var k = 0; k < cells.length; k++) {
+            cells[k].style.backgroundColor = rowColor;
+            cells[k].style.borderBottom = "1px solid #ccc";
         }
     }
+}
 
-    // jQuery way:
-    $("td").css("border-bottom","1px solid #ccc");
-    $("tr:even > td").css("background-color","#fff");
-    $("tr:odd > td").css("background-color","#eef");
+// jQuery way:
+$("td").css("border-bottom","1px solid #ccc");
+$("tr:even > td").css("background-color","#fff");
+$("tr:odd > td").css("background-color","#eef");
+```
 
 Now before someone says it, I know usually you can set the background-color for the whole row, and the cells will inherit it. But since, for some crazy reason, each cell is assigned a background colour on Jobmine, each cell needs to be set individually. In any case, you can see that things are made substantially easier with jQuery. I figured out jQuery mostly just using the API and looking at other people's code, but this is a decent place to start: <a href="http://docs.jquery.com/Tutorials:Getting_Started_with_jQuery">Getting Started with jQuery</a>.
 

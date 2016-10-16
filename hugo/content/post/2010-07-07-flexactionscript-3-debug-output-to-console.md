@@ -34,44 +34,44 @@ I found a good starting point [here][base86], but the output of this wasn't exac
 
 [base86]: http://dev.base86.com/solo/47/actionscript_3_equivalent_of_phps_printr.html
 
-    lang:actionscript
+```actionscript
+package learning {
+  import org.flixel.*;
 
-    package learning {
-      import org.flixel.*;
-
-      public class Debugger {
-        public static function pr(obj:*, level:int = 0, output:String = ""):* {
-          var objtype:String = typeof(obj);
-          if (objtype == "boolean" || objtype == "string" || objtype == "number") {
-            return obj;
-          }
-
-          var tabs:String = "";
-          for(var i:int = 0; i < level; i++) { 
-            tabs += "\t"
-          }
-
-          output += "{\n";
-          for(var child:* in obj) {
-            output += tabs +"\t["+ child +"] => ";
-
-            var childOutput:String = pr(obj[child], level+1);
-            if(childOutput != '') output += childOutput
-
-            output += "\n";
-          }
-          output += tabs + "}\n";
-
-          return output;
-        }
-
-        public static function log(obj:*):void {
-          FlxG.log(pr(obj));
-          // This is a flixel thing. If you're not using flixel
-          // Just use trace(pr(obj));
-        }
+  public class Debugger {
+    public static function pr(obj:*, level:int = 0, output:String = ""):* {
+      var objtype:String = typeof(obj);
+      if (objtype == "boolean" || objtype == "string" || objtype == "number") {
+        return obj;
       }
+
+      var tabs:String = "";
+      for(var i:int = 0; i < level; i++) { 
+        tabs += "\t"
+      }
+
+      output += "{\n";
+      for(var child:* in obj) {
+        output += tabs +"\t["+ child +"] => ";
+
+        var childOutput:String = pr(obj[child], level+1);
+        if(childOutput != '') output += childOutput
+
+        output += "\n";
+      }
+      output += tabs + "}\n";
+
+      return output;
     }
+
+    public static function log(obj:*):void {
+      FlxG.log(pr(obj));
+      // This is a flixel thing. If you're not using flixel
+      // Just use trace(pr(obj));
+    }
+  }
+}
+```
 
 Example output
 
@@ -109,9 +109,9 @@ Stick this in it: `TraceOutputFileEnable=1`
 
 Or, in one command:
 
-    lang:bash
-
-    echo "TraceOutputFileEnable=1" > ~/mm.cfg`
+```bash
+echo "TraceOutputFileEnable=1" > ~/mm.cfg`
+```
 
 **Step 2**
 
@@ -125,11 +125,11 @@ You don't want to type this in every time you want to view the log, so add a fun
 
 This is what I have:
 
-    lang:bash
-
-    flashlog() {
-      tail -f $* ~/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.txt; 
-    }
+```bash
+flashlog() {
+  tail -f $* ~/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.txt; 
+}
+```
 
 [Flex 3 Reference]: http://livedocs.adobe.com/flex/3/html/help.html?content=logging_04.html
 
@@ -137,28 +137,28 @@ This is what I have:
 
 Start debugging!
 
-    lang:bash
-
-    $ flashlog -100
-    Warning: 'flash' has no property 'prototype'
-    Warning: 'flash' has no property 'prototype'
-    flixel v2.35 [debug]
-    ----------------------------------------------------
-    {
-    	[0] => {
-    		[tile] => 4
-    		[rule] => {
-    			[0] => xxx
-    			[1] => x1x
-    			[2] => x1x
-    		}
-    	}
-    	[1] => {
-    		[tile] => 8
-    		[rule] => {
-    			[0] => x1x
-    			[1] => x1x
-    			[2] => xxx
-    		}
-    	}
+```bash
+$ flashlog -100
+Warning: 'flash' has no property 'prototype'
+Warning: 'flash' has no property 'prototype'
+flixel v2.35 [debug]
+----------------------------------------------------
+{
+  [0] => {
+    [tile] => 4
+    [rule] => {
+      [0] => xxx
+      [1] => x1x
+      [2] => x1x
     }
+  }
+  [1] => {
+    [tile] => 8
+    [rule] => {
+      [0] => x1x
+      [1] => x1x
+      [2] => xxx
+    }
+  }
+}
+  ```

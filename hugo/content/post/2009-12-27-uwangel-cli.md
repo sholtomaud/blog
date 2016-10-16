@@ -46,34 +46,34 @@ CLI Colour in PHP
 `cli_colours.php` included in the UWAngel-CLI source is just a collection of 
 constants which allow you to print out colours in your CLI scripts.
 
-    lang:php
+```php
+<?
+$COLOR_BLACK = "\033[0;30m";
+$COLOR_DARKGRAY = "\033[1;30m";
+$COLOR_BLUE = "\033[0;34m";
+$COLOR_LIGHTBLUE = "\033[1;34m";
+$COLOR_GREEN = "\033[0;32m";
+$COLOR_LIGHTGREEN = "\033[1;32m";
+$COLOR_CYAN = "\033[0;36m";
+$COLOR_LIGHTCYAN = "\033[1;36m";
+$COLOR_RED = "\033[0;31m";
+$COLOR_LIGHTRED = "\033[1;31m";
+$COLOR_PURPLE = "\033[0;35m";
+$COLOR_LIGHTPURPLE = "\033[1;35m";
+$COLOR_BROWN = "\033[0;33m";
+$COLOR_YELLOW = "\033[1;33m";
+$COLOR_LIGHTGRAY = "\033[0;37m";
+$COLOR_WHITE = "\033[1;37m";
+$COLOR_DEFAULT = "\033[0;37m";
 
-    <?
-    $COLOR_BLACK = "\033[0;30m";
-    $COLOR_DARKGRAY = "\033[1;30m";
-    $COLOR_BLUE = "\033[0;34m";
-    $COLOR_LIGHTBLUE = "\033[1;34m";
-    $COLOR_GREEN = "\033[0;32m";
-    $COLOR_LIGHTGREEN = "\033[1;32m";
-    $COLOR_CYAN = "\033[0;36m";
-    $COLOR_LIGHTCYAN = "\033[1;36m";
-    $COLOR_RED = "\033[0;31m";
-    $COLOR_LIGHTRED = "\033[1;31m";
-    $COLOR_PURPLE = "\033[0;35m";
-    $COLOR_LIGHTPURPLE = "\033[1;35m";
-    $COLOR_BROWN = "\033[0;33m";
-    $COLOR_YELLOW = "\033[1;33m";
-    $COLOR_LIGHTGRAY = "\033[0;37m";
-    $COLOR_WHITE = "\033[1;37m";
-    $COLOR_DEFAULT = "\033[0;37m";
+echo <<< EOT
+One fish,
+two fish,
+{$COLOR_RED}red{$COLOR_DEFAULT} fish,
+{$COLOR_BLUE}blue{$COLOR_DEFAULT} fish.
 
-    echo <<< EOT
-    One fish,
-    two fish,
-    {$COLOR_RED}red{$COLOR_DEFAULT} fish,
-    {$COLOR_BLUE}blue{$COLOR_DEFAULT} fish.
-
-    EOT;
+EOT;
+```
 
 The only gripe I have about this is that `COLOR_DEFAULT` it's the same colour as 
 I have on by default in iTerm. Anyone know the escape code to make it actually 
@@ -92,21 +92,21 @@ what you type. The command for this is `stty -echo` and can be re-enabled using
 `stty echo`. Below is how I implemented as part of the AngelAccess class to meet 
 my needs.
 
-    lang:php
-
-    <?
-    function Prompt($prompt_text,$hide = false) {
-        echo $prompt_text;
-        $input = "";
-        if ($hide) {
-            $input = trim(`stty -echo;head -n1;stty echo`);
-            echo "\n";
-        } else {
-            $input = trim(fgets(STDIN));
-        }
-        return $input;
+```php
+<?
+function Prompt($prompt_text,$hide = false) {
+    echo $prompt_text;
+    $input = "";
+    if ($hide) {
+        $input = trim(`stty -echo;head -n1;stty echo`);
+        echo "\n";
+    } else {
+        $input = trim(fgets(STDIN));
     }
-    ?>
+    return $input;
+}
+?>
+```
 
 As a complete side note, thanks to a boot-camped installation of Windows 7 (or 
 at least I'm fairly sure that's the culprit,) my Macbook Pro is now stuck on 

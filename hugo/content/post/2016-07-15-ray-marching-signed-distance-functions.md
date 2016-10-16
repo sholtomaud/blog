@@ -69,11 +69,11 @@ Using the [Euclidean norm][0], the above SDF looks like this:
 
 Which, in GLSL, translates to this:
 
-    lang:glsl
-
-    float sphereSDF(vec3 p) {
-        return length(p) - 1.0;
-    }
+```glsl
+float sphereSDF(vec3 p) {
+return length(p) - 1.0;
+}
+```
 
 For a bunch of other handy SDFs, check out [Modeling with Distance 
 Functions][2].
@@ -127,24 +127,24 @@ stepping until we eventually get to the surface, at \\( p_4 \\).
 
 Implemented in GLSL, this ray marching algorithm looks like this:
 
-    lang:glsl
+```glsl
+float depth = start;
+for (int i = 0; i < MAX_MARCHING_STEPS; i++) {
+float dist = sceneSDF(eye + depth * viewRayDirection);
+if (dist < EPSILON) {
+    // We're inside the scene surface!
+    return depth;
+}
+// Move along the view ray
+depth += dist;
 
-    float depth = start;
-    for (int i = 0; i < MAX_MARCHING_STEPS; i++) {
-        float dist = sceneSDF(eye + depth * viewRayDirection);
-        if (dist < EPSILON) {
-            // We're inside the scene surface!
-			return depth;
-        }
-        // Move along the view ray
-        depth += dist;
-
-        if (depth >= end) {
-            // Gone too far; give up
-            return end;
-        }
-    }
+if (depth >= end) {
+    // Gone too far; give up
     return end;
+}
+}
+return end;
+```
 
 Combining that with a bit of code to select the view ray direction 
 appropriately, the sphere SDF, and making any part of the surface that gets hit 
@@ -209,18 +209,18 @@ function as over rise-over-run before you learned how to do derivatives.
 \end{bmatrix}
 $$</div>
 
-	lang:glsl
-
-	/**
-	 * Using the gradient of the SDF, estimate the normal on the surface at point p.
-	 */
-	vec3 estimateNormal(vec3 p) {
-		return normalize(vec3(
-			sceneSDF(vec3(p.x + EPSILON, p.y, p.z)) - sceneSDF(vec3(p.x - EPSILON, p.y, p.z)),
-			sceneSDF(vec3(p.x, p.y + EPSILON, p.z)) - sceneSDF(vec3(p.x, p.y - EPSILON, p.z)),
-			sceneSDF(vec3(p.x, p.y, p.z  + EPSILON)) - sceneSDF(vec3(p.x, p.y, p.z - EPSILON))
-		));
-	}
+```glsl
+/**
+* Using the gradient of the SDF, estimate the normal on the surface at point p.
+*/
+vec3 estimateNormal(vec3 p) {
+return normalize(vec3(
+    sceneSDF(vec3(p.x + EPSILON, p.y, p.z)) - sceneSDF(vec3(p.x - EPSILON, p.y, p.z)),
+    sceneSDF(vec3(p.x, p.y + EPSILON, p.z)) - sceneSDF(vec3(p.x, p.y - EPSILON, p.z)),
+    sceneSDF(vec3(p.x, p.y, p.z  + EPSILON)) - sceneSDF(vec3(p.x, p.y, p.z - EPSILON))
+));
+}
+```
 
 Armed with this knowledge, we can calculate the normal at any point on the
 surface, and use that to apply lighting with the [Phong reflection model][4]
@@ -252,26 +252,26 @@ Inside a shader, we can't use that function, but we can look at the `man` page
 by running `man gluLookAt`, take a peek at how it calculates its own
 transformation matrix, and then make our own in GLSL.
 
-	lang:glsl
-
-	/**
-     * Return a transformation matrix that will transform a ray from view space
-	 * to world coordinates, given the eye point, the camera target, and an up vector.
-	 *
-	 * This assumes that the center of the camera is aligned with the negative z axis in
-	 * view space when calculating the ray marching direction.
-	 */
-	mat4 viewMatrix(vec3 eye, vec3 center, vec3 up) {
-		vec3 f = normalize(center - eye);
-		vec3 s = cross(f, up);
-		vec3 u = cross(s, f);
-		return mat4(
-			vec4(s, 0.0),
-			vec4(u, 0.0),
-			vec4(-f, 0.0),
-			vec4(0.0, 0.0, 0.0, 1)
-		);
-	}
+```glsl
+/**
+ * Return a transformation matrix that will transform a ray from view space
+ * to world coordinates, given the eye point, the camera target, and an up vector.
+ *
+ * This assumes that the center of the camera is aligned with the negative z axis in
+ * view space when calculating the ray marching direction.
+ */
+mat4 viewMatrix(vec3 eye, vec3 center, vec3 up) {
+	vec3 f = normalize(center - eye);
+	vec3 s = cross(f, up);
+	vec3 u = cross(s, f);
+	return mat4(
+		vec4(s, 0.0),
+		vec4(u, 0.0),
+		vec4(-f, 0.0),
+		vec4(0.0, 0.0, 0.0, 1)
+	);
+}
+```
 
 Since spheres look the same from all angles, I'm switching to a cube here.
 Placing the camera at \\( (8, 5, 7) \\) and pointing it at the origin using our
@@ -295,29 +295,29 @@ CSG is built on 3 primitive operations: intersection ( \\( \cap \\) ), union (
 It turns out these operations are all concisely expressible when combining two 
 surfaces expressed as SDFs.
 
-	lang:glsl
+```glsl
+float intersectSDF(float distA, float distB) {
+    return max(distA, distB);
+}
 
-	float intersectSDF(float distA, float distB) {
-		return max(distA, distB);
-	}
+float unionSDF(float distA, float distB) {
+    return min(distA, distB);
+}
 
-	float unionSDF(float distA, float distB) {
-		return min(distA, distB);
-	}
-
-	float differenceSDF(float distA, float distB) {
-		return max(distA, -distB);
-	}
+float differenceSDF(float distA, float distB) {
+    return max(distA, -distB);
+}
+```
 
 If you set up a scene like this:
 
-	lang:glsl
-
-	float sceneSDF(vec3 samplePoint) {
-        float sphereDist = sphereSDF(samplePoint / 1.2) * 1.2;
-        float cubeDist = cubeSDF(samplePoint) * 1.2;
-		return intersectSDF(cubeDist, sphereDist);
-	}
+```glsl
+float sceneSDF(vec3 samplePoint) {
+    float sphereDist = sphereSDF(samplePoint / 1.2) * 1.2;
+    float cubeDist = cubeSDF(samplePoint) * 1.2;
+    return intersectSDF(cubeDist, sphereDist);
+}
+```
 
 Then you get something like this (see section below about scaling to see where 
 the division and multiplication by 1.2 comes from).
@@ -393,13 +393,13 @@ the transformed ray to the part of the SDF you're interested in. For instance,
 to make the cube bob up and down, leaving the sphere in place, but still taking 
 the intersection, you can do this:
 
-    lang:glsl
-
-	float sceneSDF(vec3 samplePoint) {
-        float sphereDist = sphereSDF(samplePoint / 1.2) * 1.2;
-        float cubeDist = cubeSDF(samplePoint + vec3(0.0, sin(iGlobalTime), 0.0));
-		return intersectSDF(cubeDist, sphereDist);
-	}
+```glsl
+float sceneSDF(vec3 samplePoint) {
+    float sphereDist = sphereSDF(samplePoint / 1.2) * 1.2;
+    float cubeDist = cubeSDF(samplePoint + vec3(0.0, sin(iGlobalTime), 0.0));
+    return intersectSDF(cubeDist, sphereDist);
+}
+```
 
 *Shadertoy reference note: iGlobalTime is a uniform variable set by Shadertoy 
 that
@@ -418,43 +418,43 @@ sampled point by the inverse of your transformation matrix.
 
 For instance, if I wanted to apply a rotation matrix, I could do this:
 
-    lang:glsl
+```glsl
+mat4 rotateY(float theta) {
+    float c = cos(theta);
+    float s = sin(theta);
 
-    mat4 rotateY(float theta) {
-        float c = cos(theta);
-        float s = sin(theta);
+    return mat4(
+        vec4(c, 0, s, 0),
+        vec4(0, 1, 0, 0),
+        vec4(-s, 0, c, 0),
+        vec4(0, 0, 0, 1)
+    );
+}
 
-        return mat4(
-            vec4(c, 0, s, 0),
-            vec4(0, 1, 0, 0),
-            vec4(-s, 0, c, 0),
-            vec4(0, 0, 0, 1)
-        );
-    }
+float sceneSDF(vec3 samplePoint) {
+    float sphereDist = sphereSDF(samplePoint / 1.2) * 1.2;
 
-    float sceneSDF(vec3 samplePoint) {
-        float sphereDist = sphereSDF(samplePoint / 1.2) * 1.2;
+    vec3 cubePoint = (invert(rotateY(iGlobalTime)) * vec4(samplePoint, 1.0)).xyz;
 
-        vec3 cubePoint = (invert(rotateY(iGlobalTime)) * vec4(samplePoint, 1.0)).xyz;
-
-        float cubeDist = cubeSDF(cubePoint);
-		return intersectSDF(cubeDist, sphereDist);
-    }
+    float cubeDist = cubeSDF(cubePoint);
+    return intersectSDF(cubeDist, sphereDist);
+}
+```
 
 ...but if you're using WebGL here, there's no built in matrix inversion routine 
 in GLSL  for now, but you can just do the opposite transform. So the above scene 
 function changes to the equivalent:
 
-    lang:glsl
+```glsl
+float sceneSDF(vec3 samplePoint) {
+    float sphereDist = sphereSDF(samplePoint / 1.2) * 1.2;
 
-    float sceneSDF(vec3 samplePoint) {
-        float sphereDist = sphereSDF(samplePoint / 1.2) * 1.2;
+    vec3 cubePoint = (rotateY(-iGlobalTime) * vec4(samplePoint, 1.0)).xyz;
 
-        vec3 cubePoint = (rotateY(-iGlobalTime) * vec4(samplePoint, 1.0)).xyz;
-
-        float cubeDist = cubeSDF(cubePoint);
-		return intersectSDF(cubeDist, sphereDist);
-	}
+    float cubeDist = cubeSDF(cubePoint);
+    return intersectSDF(cubeDist, sphereDist);
+}
+```
 
 For more transformation matrices, refer to any intro to graphics textbook, or 
 check out these slides: [3D Affine transforms][10].
@@ -463,18 +463,18 @@ check out these slides: [3D Affine transforms][10].
 
 Okay, let's get back to this weird scaling trick we glossed over before:
 
-    lang:glsl
-
-    float sphereDist = sphereSDF(samplePoint / 1.2) * 1.2;
+```glsl
+float sphereDist = sphereSDF(samplePoint / 1.2) * 1.2;
+```
 
 The division by 1.2 is scaling the sphere up by 1.2x (remember that we apply the 
 *inverse* transform to the point before sending it to the SDF). But why do we 
 multiply by the scaling factor afterwards? Let's examine doubling the size for 
 the sake of simplicity.
 
-    lang:glsl
-
-    float sphereDist = sphereSDF(samplePoint / 2) * 2;
+```glsl
+float sphereDist = sphereSDF(samplePoint / 2) * 2;
+```
 
 Scaling is not a rigid body transformation -- it doesn't preserve the distance 
 between points. If we transform \\( (0, 0, 1) \\) and \\( (0, 0, 2) \\) by 
@@ -493,12 +493,12 @@ sphere.  The multiplication at the end is to compensate for this distortion.
 Interestingly, if we try this out in a shader, and use no scale correction, or a 
 smaller value for scale correction, the exact same thing is rendered. Why?
 
-    lang:glsl
-
-    // All of the following result in an equivalent image
-    float sphereDist = sphereSDF(samplePoint / 2) * 2;
-    float sphereDist = sphereSDF(samplePoint / 2);
-    float sphereDist = sphereSDF(samplePoint / 2) * 0.5;
+```glsl
+// All of the following result in an equivalent image
+float sphereDist = sphereSDF(samplePoint / 2) * 2;
+float sphereDist = sphereSDF(samplePoint / 2);
+float sphereDist = sphereSDF(samplePoint / 2) * 0.5;
+```
 
 Notice that regardless of how we scale the SDF, the *sign* of the distance 
 returned stays the same. The *sign* part of "signed distance field" is still 
@@ -518,18 +518,18 @@ algorithm still *works*, it just requires more iterations.
 But if we *overestimate* distance, we have a real problem. If we try to scale 
 down the model without correction, like this:
 
-    lang:glsl
-
-    float sphereDist = sphereSDF(samplePoint / 0.5);
+```glsl
+float sphereDist = sphereSDF(samplePoint / 0.5);
+```
 
 Then the sphere disappears completely. If we overestimate the distance, our 
 raymarching algorithm might step *past* the surface, never finding it.
 
 For any SDF, we can safely scale it uniformly like so:
 
-    lang:glsl
-
-    float dist = someSDF(samplePoint / scalingFactor) * scalingFactor;
+```glsl
+float dist = someSDF(samplePoint / scalingFactor) * scalingFactor;
+```
 
 ## Non-uniform scaling and beyond
 
@@ -565,9 +565,9 @@ factor varies depending on where the point is and where the surface is.
 Since it's usually okay to underestimate the distance, we can just multiply by 
 the smallest scaling factor, like so:
 
-    lang:glsl
-
-    float dist = someSDF(samplePoint / vec3(s_x, s_y, s_z)) * min(s_x, min(s_y, s_z));
+```glsl
+float dist = someSDF(samplePoint / vec3(s_x, s_y, s_z)) * min(s_x, min(s_y, s_z));
+```
 
 The principle for other non-rigid transformations is the same: as long as the 
 sign is preserved by the transformation, you just need to figure out some 

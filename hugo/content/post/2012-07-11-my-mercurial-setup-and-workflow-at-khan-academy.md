@@ -122,38 +122,37 @@ Information provided left to right:
 To get your log to look like this, install the graphlog extension, then create a 
 file called `map-cmdline.lg`, and put this in it:
 
-    lang:python
+```python
+changeset = '\033[0;31m{rev}:{phase} \033[0;34m{author|person}\033[0m 
+{desc|firstline|strip} \033[0;32m({date|age}) {branches}{bookmarks}{tags}\n\n'
+changeset_verbose = '\033[0;31m{rev}:{node|short}:{phase} \033[0;34m{author|person}\033[0m {desc|firstline|strip} \033[0;32m({date|age}) {branches}{bookmarks}{tags}\n\n'
 
-    changeset = '\033[0;31m{rev}:{phase} \033[0;34m{author|person}\033[0m 
-    {desc|firstline|strip} \033[0;32m({date|age}) 
-    {branches}{bookmarks}{tags}\n\n'
-    changeset_verbose = '\033[0;31m{rev}:{node|short}:{phase} \033[0;34m{author|person}\033[0m {desc|firstline|strip} \033[0;32m({date|age}) {branches}{bookmarks}{tags}\n\n'
+start_branches = ' '
+branch = '\033[0;31m{branch}\033[0m'
 
-    start_branches = ' '
-    branch = '\033[0;31m{branch}\033[0m'
+start_bookmarks = ' '
+bookmark = '\033[0;31m[{bookmark}]\033[0m '
+last_bookmark = '\033[0;31m[{bookmark}]\033[0m'
 
-    start_bookmarks = ' '
-    bookmark = '\033[0;31m[{bookmark}]\033[0m '
-    last_bookmark = '\033[0;31m[{bookmark}]\033[0m'
-
-    start_tags = ' '
-    tag = '\033[0;31m{tag}\033[0m, '
-    last_tag = '\033[0;31m{tag}\033[0m'
+start_tags = ' '
+tag = '\033[0;31m{tag}\033[0m, '
+last_tag = '\033[0;31m{tag}\033[0m'
+```
 
 then add this alias to your `~/.hgrc`, correcting the path to `map-cmdline.lg`.
 
-    lang:ini
-
-    [alias]
-    lga = glog --style=your/path/to/map-cmdline.lg
+```ini
+[alias]
+lga = glog --style=your/path/to/map-cmdline.lg
+```
 
 If you want a similar log for git, add this to your `~/.gitconfig`.
 
-    lang:ini
-
-    [alias]
-      lg = log --graph --pretty=format:'%Cred%h%Creset %Creset%Cblue%an%Creset 
-    %s %Cgreen(%cr)%Cred%d%Creset' --abbrev-commit --date=relative
+```ini
+[alias]
+lg = log --graph --pretty=format:'%Cred%h%Creset %Creset%Cblue%an%Creset 
+%s %Cgreen(%cr)%Cred%d%Creset' --abbrev-commit --date=relative
+```
 
 pager
 -----
@@ -167,11 +166,11 @@ The pager extension fixes this by piping the output of selected commands through
 a pager of your choice. After enabling the plugin in your `.hgrc`, add the 
 following pager configuration section:
 
-    lang:ini
-
-    [pager]
-    pager = LESS='FSRX' less
-    attend = cat, diff, glog, log, incoming, outgoing, lg, show, lga
+```ini
+[pager]
+pager = LESS='FSRX' less
+attend = cat, diff, glog, log, incoming, outgoing, lg, show, lga
+```
 
 This specifies which command to use as a pager, and which commands hg commands 
 you want to be piped through the pager.
@@ -197,11 +196,11 @@ To completely reset the state of your working copy to what it was at the latest
 commit, I have an alias that removes untracked files and reverts all changes in 
 the working copy:
 
-    lang:ini
-
-    [alias]
-    # Nuke everything in the working copy
-    nuke = !hg up -C . && hg clean
+```ini
+[alias]
+# Nuke everything in the working copy
+nuke = !hg up -C . && hg clean
+```
 
 remotebranches
 --------------
@@ -223,9 +222,9 @@ downloaded the plugin, you need to specify the path to where you downloaded it.
 So you'll have a line like this in your `~/.hgrc`, under the `[extensions]` 
 header:
 
-    lang:ini
-
-    remotebranches = ~/path/to/hg_remotebranches.py
+```ini
+remotebranches = ~/path/to/hg_remotebranches.py
+```
 
 shelve
 ------
@@ -258,14 +257,14 @@ After getting the plugin and installing it, you need to inject it into your
 shell prompt. You can do that by adding something like this to your 
 `~/.bash_profile`:
 
-    lang:bash
+```bash
+function hg_ps1
+{
+hg prompt "({root|basename}@{bookmark}{[{tags|quiet|,}]}{ {status|modified|unknown}}{ {shelf}}) " 2> /dev/null
+}
 
-    function hg_ps1
-    {
-        hg prompt "({root|basename}@{bookmark}{[{tags|quiet|,}]}{ {status|modified|unknown}}{ {shelf}}) " 2> /dev/null
-    }
-
-    export PS1='\e[33m\][\W] \e[31m\]$(hg_ps1)\e[0m\]'
+export PS1='\e[33m\][\W] \e[31m\]$(hg_ps1)\e[0m\]'
+```
 
 This displays, from left to right: 
 
@@ -301,9 +300,9 @@ I can't remember offhand where I originally got the autocomplete for mercurial,
 but you can grab it from my github repo: [hg-completion.bash][]. After you stick 
 that file somewhere, just add a line like this to your `~/.bash_profile`:
 
-    lang:bash
-
-    source ~/path/to/hg-completion.bash
+```bash
+source ~/path/to/hg-completion.bash
+```
 
 Workflow
 ========
@@ -331,13 +330,13 @@ By default, arcanist does not amend commits for mercurial. I wanted this
 ability, so I submitted a patch to support this. To make arcanist amend commits, 
 add the following to your `~/.arcrc` (or to your project `.arcconfig`).
 
-    lang:json
-
-    {
-      "config": {
-        "history.immutable": false
-      }
-    }
+```json
+{
+  "config": {
+    "history.immutable": false
+  }
+}
+```
 
 **EDIT**: The setting was originally `"immutable_history": false`, but it's been 
 changed to "history.immutable".
@@ -509,10 +508,10 @@ the commit specified.
 Since I always want to use `-r .` whenever I push, I have `hg nudge` aliased to 
 `hg push`. Thanks to [David Hu][] for the alias.
 
-    lang:ini
-
-    [alias]
-    nudge = push --rev .
+```ini
+[alias]
+nudge = push --rev .
+```
 
 
 If everything went okay, I close the Phabricator Maniphest task and delete the 

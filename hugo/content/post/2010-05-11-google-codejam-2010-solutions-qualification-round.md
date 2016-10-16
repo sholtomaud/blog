@@ -64,32 +64,32 @@ settings, it will be powered. This means that ultimately, the power column above
 is irrelevant. All we need to know is that the N-1 least significant bits are 
 set. This is fairly trivial to check.
 
-    lang:cpp
-
-    #include <iostream>
-    using namespace std;
-    int main() {
-      int T,N,K;
-      cin >> T;
-      for(int t = 0; t < T; t++) {
-        cin >> N >> K;
-        int mask = (1 << N) - 1;
-        printf("Case #%d: ",t+1);
-        if ( (mask & K) == mask) puts("ON");
-        else puts("OFF");
-      }
-      return 0;
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int T,N,K;
+    cin >> T;
+    for(int t = 0; t < T; t++) {
+    cin >> N >> K;
+    int mask = (1 << N) - 1;
+    printf("Case #%d: ",t+1);
+    if ( (mask & K) == mask) puts("ON");
+    else puts("OFF");
     }
+    return 0;
+}
+```
 
 Time for the large case:
 
-    lang:bash
+```bash
+$ time ./a.out < snapper.in > snapper.out
 
-    $ time ./a.out < snapper.in > snapper.out
-
-    real    0m0.071s
-    user    0m0.026s
-    sys     0m0.040s
+real    0m0.071s
+user    0m0.026s
+sys     0m0.040s
+```
 
 
 <h1>Problem 2: Fair Warning</h1>
@@ -106,44 +106,42 @@ do) then typed in my answer.
 The only remaining problem here is dealing with the large numbers, which is 
 hardly a problem in python. Here's my solution:
 
-    lang:python
+```python
+def gcd(x,y):
+    while x:
+        x, y = y % x, x
+    return y
 
-    def gcd(x,y):
-        while x:
-            x, y = y % x, x
-        return y
-
-    testcases = open("warning.in").readlines()
-    t = 1
-    for tc in testcases[1:]:
-      tc = map(lambda x: int(x), tc.split(" ")[1:])
-      if len(tc) == 0:
+testcases = open("warning.in").readlines()
+t = 1
+for tc in testcases[1:]:
+    tc = map(lambda x: int(x), tc.split(" ")[1:])
+    if len(tc) == 0:
         break
-      tc.sort()
-      #print tc
+    tc.sort()
 
-      diff = []
-      for i in range(len(tc)-1):
+    diff = []
+    for i in range(len(tc)-1):
         diff += [tc[i+1] - tc[i]]
 
-      T = diff[0]
-      for d in diff[1:]:
+    T = diff[0]
+    for d in diff[1:]:
         T = gcd(T,d)
 
-      #print T
-      print "Case #%d: %d" % (t, (-tc[0] % T))
+    print "Case #%d: %d" % (t, (-tc[0] % T))
 
-      t += 1
+    t += 1
+```
 
 Time for large case:
 
-    lang:bash
+```bash
+$ time python warning.py > warning.out
 
-    $ time python warning.py > warning.out
-
-    real    0m0.250s
-    user    0m0.037s
-    sys     0m0.021s
+real    0m0.250s
+user    0m0.037s
+sys     0m0.021s
+```
 
 <h1>Problem 3: Theme Park</h1>
 This is an optimization problem. There are a lot of different optimizations you 
@@ -161,93 +159,93 @@ given start of the line, and who ends up at the front of the line while they're
 on the roller coaster. After this, the O(R) loop is very simple. Just add the 
 number of euros for the run, then move on to the next front of the line.
 
-    lang:cpp
+```cpp
+#include <cmath>
+#include <algorithm>
+#include <iostream>
+#include <fstream>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <queue>
+#include <set>
+#include <map>
+#include <sstream>
+#include <vector>
+using namespace std;
 
-    #include <cmath>
-    #include <algorithm>
-    #include <iostream>
-    #include <fstream>
-    #include <cstdio>
-    #include <cstdlib>
-    #include <cstring>
-    #include <queue>
-    #include <set>
-    #include <map>
-    #include <sstream>
-    #include <vector>
-    using namespace std;
+#define FR(i,a,b) for(int i=(a);i<(b);++i)
+#define FOR(i,n) FR(i,0,n)
+#define SETMIN(a,b) a = min(a,b)
+#define SETMAX(a,b) a = max(a,b)
+#define PB push_back
+#define FORALL(i,v) for(typeof((v).end())i=(v).begin();i!=(v).end();++i)
+#define CLR(x,a) memset(x,a,sizeof(x))
+#define BEND(v) v.begin(),v.end()
+#define MP make_pair
+#define A first
+#define B second
 
-    #define FR(i,a,b) for(int i=(a);i<(b);++i)
-    #define FOR(i,n) FR(i,0,n)
-    #define SETMIN(a,b) a = min(a,b)
-    #define SETMAX(a,b) a = max(a,b)
-    #define PB push_back
-    #define FORALL(i,v) for(typeof((v).end())i=(v).begin();i!=(v).end();++i)
-    #define CLR(x,a) memset(x,a,sizeof(x))
-    #define BEND(v) v.begin(),v.end()
-    #define MP make_pair
-    #define A first
-    #define B second
+typedef unsigned long long int ull;
+typedef long double ld;
 
-    typedef unsigned long long int ull;
-    typedef long double ld;
+int main() {
+    freopen("themepark.in","r",stdin);
+    freopen("themepark.out","w",stdout);
 
-    int main() {
-        freopen("themepark.in","r",stdin);
-        freopen("themepark.out","w",stdout);
-
-        int T;
-        cin >> T;
-        FOR(t,T) {
-            int R,k,N;
-            cin >> R >> k >> N;
-            int grps[1001], done[1001], pts[1001], next[1001];
-            CLR(done,0);
-            queue<pair<int,int> > q;
-            FOR(i,N) {
-                cin >> grps[i];
-                q.push(MP(i,grps[i]));
-            }
-
-            while(!done[q.front().A]) {
-                int cur = 0;
-                int start = q.front().A;
-                done[start] = 1;
-
-                FOR(i,N) {
-                    if (cur + q.front().B > k) break;
-
-                    cur += q.front().B;
-                    q.push(q.front());
-                    q.pop();
-                }
-                next[start] = q.front().A;
-                pts[start] = cur;
-            }
-
-            while (!q.empty()) q.pop();
-
-            int curFront = 0;
-            ull ans = 0;
-            FOR(i,R) {
-                ans += pts[curFront];
-                curFront = next[curFront];
-            }
-
-            printf("Case #%d: %lld\n", t+1, ans);
+    int T;
+    cin >> T;
+    FOR(t,T) {
+        int R,k,N;
+        cin >> R >> k >> N;
+        int grps[1001], done[1001], pts[1001], next[1001];
+        CLR(done,0);
+        queue<pair<int,int> > q;
+        FOR(i,N) {
+            cin >> grps[i];
+            q.push(MP(i,grps[i]));
         }
-        return 0;
+
+        while(!done[q.front().A]) {
+            int cur = 0;
+            int start = q.front().A;
+            done[start] = 1;
+
+            FOR(i,N) {
+                if (cur + q.front().B > k) break;
+
+                cur += q.front().B;
+                q.push(q.front());
+                q.pop();
+            }
+            next[start] = q.front().A;
+            pts[start] = cur;
+        }
+
+        while (!q.empty()) q.pop();
+
+        int curFront = 0;
+        ull ans = 0;
+        FOR(i,R) {
+            ans += pts[curFront];
+            curFront = next[curFront];
+        }
+
+        printf("Case #%d: %lld\n", t+1, ans);
     }
+    return 0;
+}
+```
 
 Time for large test case:
 
-    lang:bash
+```bash
+$ time ./a.out
 
-    $ time ./a.out
-
-    real    0m11.606s
-    user    0m11.542s
-    sys     0m0.022s
+real    0m11.606s
+user    0m11.542s
+sys     0m0.022s
+```
 
 I might code up an O(N) solution later, which really isn't that difficult, but 
 at this point in the contest, it simply didn't matter enough.

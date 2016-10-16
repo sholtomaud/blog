@@ -105,26 +105,26 @@ As a quick example, it takes this:
 
 and produces this:
 
-    lang:html
+```html
+<h3>Markdown</h3>
 
-    <h3>Markdown</h3>
+<p>Markdown was written by John Gruber of <a href="http://daringfireball.net/">Daring Fireball</a>.</p>
 
-    <p>Markdown was written by John Gruber of <a href="http://daringfireball.net/">Daring Fireball</a>.</p>
+<p>As a quick example, it takes this:</p>
 
-    <p>As a quick example, it takes this:</p>
+<pre><code>Hello World
+-----------
 
-    <pre><code>Hello World
-    -----------
+I am pretty awesome
+</code></pre>
 
-    I am pretty awesome
-    </code></pre>
+<p>and produces this:</p>
 
-    <p>and produces this:</p>
+<pre><code>&lt;h2&gt;Hello World&lt;/h2&gt;
 
-    <pre><code>&lt;h2&gt;Hello World&lt;/h2&gt;
-
-    &lt;p&gt;I am pretty awesome&lt;/p&gt;
-    </code></pre>
+&lt;p&gt;I am pretty awesome&lt;/p&gt;
+</code></pre>
+```
 
 ### Sass
 
@@ -132,27 +132,27 @@ and produces this:
 that are simply a giant pain in vanilla CSS. One of my favorite things it does 
 is deal with nesting for you.
 
-    lang:sass
+```sass
+.container
+  h1
+    font-size: 20px
+  h2
+    font-size: 18px
 
-    .container
-      h1
-        font-size: 20px
-      h2
-        font-size: 18px
-
-        &:hover
-          text-decoration: underline
+    &:hover
+      text-decoration: underline
+```
 
 Turns into:
 
-    lang:css
-
-    .container h1 {
-      font-size: 20px; }
-    .container h2 {
-      font-size: 18px; }
-      .container h2:hover {
-        text-decoration: underline; }
+```css
+.container h1 {
+  font-size: 20px; }
+.container h2 {
+  font-size: 18px; }
+  .container h2:hover {
+    text-decoration: underline; }
+```
 
 
 Since it runs through a compiler before producing CSS, it lets you do some very 
@@ -160,40 +160,40 @@ useful things before producing the raw CSS. One of the most valuable things for
 me while working on this site was variables. It means you can do things like 
 this:
 
-    lang:sass
+```sass
+$base-color: #281e17
+$content-width: 500px
+$sidebar-width: 150px
 
-    $base-color: #281e17
-    $content-width: 500px
-    $sidebar-width: 150px
+.container
+  background-color: lighten($base-color, 50%)
+  $padding: 20px
+  padding: $padding
+  width: $content-width + $sidebar-width - 2 * $padding
 
-    .container
-      background-color: lighten($base-color, 50%)
-      $padding: 20px
-      padding: $padding
-      width: $content-width + $sidebar-width - 2 * $padding
+  .sidebar
+    width: $sidebar-width
+    background-color: lighten($base-color, 25%)
 
-      .sidebar
-        width: $sidebar-width
-        background-color: lighten($base-color, 25%)
-
-      .content
-        width: $content-width
-        color: $base-color
+  .content
+    width: $content-width
+    color: $base-color
+```
 
 And get back this:
 
-    lang:css
-
-    .container {
-      background-color: #b99a85;
-      padding: 20px;
-      width: 610px; }
-      .container .sidebar {
-        width: 150px;
-        background-color: #795b46; }
-      .container .content {
-        width: 500px;
-        color: #281e17; }
+```css
+.container {
+  background-color: #b99a85;
+  padding: 20px;
+  width: 610px; }
+  .container .sidebar {
+    width: 150px;
+    background-color: #795b46; }
+  .container .content {
+    width: 500px;
+    color: #281e17; }
+```
 
 The really cool thing about the color functions is that you can base your entire 
 website off only a few colours, then make everything relative to those. This 
@@ -235,15 +235,15 @@ my logo, sidebar and headers.
 Using it is beautifully simple. All you have to do is drop a link tag in the 
 head like the one I'm using:
 
-    lang:html
-
-    <link href='http://fonts.googleapis.com/css?family=Questrial|Sansita+One' rel='stylesheet' type='text/css'>
+```html
+<link href='http://fonts.googleapis.com/css?family=Questrial|Sansita+One' rel='stylesheet' type='text/css'>
+```
 
 And then use it like normal in a CSS rule, like so:
 
-    lang:css
-
-    font-family: Questrial, "Helvetica Neue", Arial, Helvetica, sans-serif
+```css
+font-family: Questrial, "Helvetica Neue", Arial, Helvetica, sans-serif
+```
 
 ### Nginx
 
@@ -255,39 +255,39 @@ pronounciation, "engine-ex" made a lot more sense once I heard it.
 Setting up this server was extremely simple. Since I'm only serving static 
 files, all I really needed was the following:
 
-    lang:nginx
+```nginx
+# Redirect any subdomain to the main domain
+server {
+  server_name *.jamie-wong.com;
+  rewrite ^ http://jamie-wong.com$request_uri? permanent;
+}
 
-    # Redirect any subdomain to the main domain
-    server {
-      server_name *.jamie-wong.com;
-      rewrite ^ http://jamie-wong.com$request_uri? permanent;
-    }
+server {
+  listen 80 default;
+  server_name jamie-wong.com;
+  server_name_in_redirect off;
 
-    server {
-      listen 80 default;
-      server_name jamie-wong.com;
-      server_name_in_redirect off;
+  access_log /var/log/nginx/jamie-wong.com.log;
 
-      access_log /var/log/nginx/jamie-wong.com.log;
+  index index.html index.php;
 
-      index index.html index.php;
+  try_files $uri $uri/ /404/ =404;
 
-      try_files $uri $uri/ /404/ =404;
+  # If it's in any of these folders I migrated from
+  # my shared hosting on dreamhost, load it directly
+  location ~ ^/(experiments|asciiconvert|life|Jobmine-Improved|V10|1yr)/ {
+    root /var/www/jamie-wong.com/;
+  }
 
-      # If it's in any of these folders I migrated from
-      # my shared hosting on dreamhost, load it directly
-      location ~ ^/(experiments|asciiconvert|life|Jobmine-Improved|V10|1yr)/ {
-        root /var/www/jamie-wong.com/;
-      }
+  # Otherwise, it's probably a blog page, so load it
+  # from Jekyll's generated _site directory
+  location ~ / {
+    root /var/www/jamie-wong.com/blog/_site/;
+  }
 
-      # Otherwise, it's probably a blog page, so load it
-      # from Jekyll's generated _site directory
-      location ~ / {
-        root /var/www/jamie-wong.com/blog/_site/;
-      }
-
-      error_page  404  /404/;
-    }
+  error_page  404  /404/;
+}
+```
 
 This got a lot longer than I expected it to. Time for sleep - will proofread 
 tomorrow.

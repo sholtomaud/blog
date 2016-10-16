@@ -37,27 +37,27 @@ JavaScript is, by nature, an asynchronous language. A few of the language's buil
 
 Here's a simple example:
 
-    lang:js
+```js
+window.setTimeout(function() {
+console.log("Three");
+}, 1000);
 
-    window.setTimeout(function() {
-      console.log("Three");
-    }, 1000);
-
-    console.log("One");
-    console.log("Two");
+console.log("One");
+console.log("Two");
+```
 
 Run that with Firebug, Chrome Developer Tools or whatever other console logging tools you work with and you'll see that the numbers come out "One", "Two" and then finally "Three" after a one second delay.
 
 A more useful example is retrieving data in jQuery through AJAX from the server. AJAX (for those unfamiliar) allows you to retrieve information on a web page from the server without necessitating a full page reload. A query typically looks something like this:
 
-    lang:js
-
-    $.ajax({
-      url: '/records.php',
-      success: function(data) {
-        console.log(data);
-      }
-    });
+```js
+$.ajax({
+url: '/records.php',
+success: function(data) {
+console.log(data);
+}
+});
+```
 
 Which says roughly: **Send an HTTP GET request to the path `/date`. When the server responds, log the response body to the console.**
 
@@ -72,36 +72,36 @@ Sequential Requests with a Callback
 
 For example, let's assume a page `records.php` returns the latest 10 records in a database as JSON, with a parameter `offset`, specifying how many records from the front to skip. We'll assume if it returns fewer than 10 results, there are no more. The coded solution will look something like this: 
 
-    lang:js
-
-    function allRecords(callback, offset, data) {
-      if (typeof offset === 'undefined') {
-        offset = 0;
-      }
-      if (typeof data === 'undefined') {
-        data = [];
-      }
-      $.ajax({
-        url: 'records.php',
-        data: {offset: offset},
-        success: function(dataChunk) {
-          data = data.concat(dataChunk);
-          if (dataChunk.length < 10) {
-            callback(data);
-          } else {
-            allRecords(callback, offset + 10, data);
-          }
-        }
-      });
+```js
+function allRecords(callback, offset, data) {
+if (typeof offset === 'undefined') {
+offset = 0;
+}
+if (typeof data === 'undefined') {
+data = [];
+}
+$.ajax({
+url: 'records.php',
+data: {offset: offset},
+success: function(dataChunk) {
+    data = data.concat(dataChunk);
+    if (dataChunk.length < 10) {
+    callback(data);
+    } else {
+    allRecords(callback, offset + 10, data);
     }
+}
+});
+}
+```
 
 And since there's a check for the `undefined` state of the second two parameters, they can be omitted when the function is actually called, like so:
 
-    lang:js
-
-    allRecords(function(allData) {
-      console.log(allData);
-    });
+```js
+allRecords(function(allData) {
+console.log(allData);
+});
+```
 
 And this callback will be called only after the last request finishes. Assuming there are 47 records, it would make the following requests in series, then run the callback with the concatenated arrays of data.
 
@@ -124,34 +124,34 @@ While a simple modification of the above solution would work, it's inefficient. 
 
 Assuming the same general rules as above, let's say we want to retrieve the most recent n records.
 
-    lang:js
-
-    function nRecords(n, callback) {
-      var nCallsNeeded = Math.ceil(n / 10);
-      var nCallsFinished = 0;
-      var data = [];
-      for (var i = 0; i < nCallsNeeded; i++) {
-        $.ajax({
-          url: 'records.php',
-          data: {offset : i * 10},
-          success: function(dataChunk) {
-            data = data.concat(dataChunk);
-            nCallsFinished += 1;
-            if (nCallsFinished == nCallsNeeded) {
-              callback(data.slice(0,n));
-            }
-          }
-        });
+```js
+function nRecords(n, callback) {
+  var nCallsNeeded = Math.ceil(n / 10);
+  var nCallsFinished = 0;
+  var data = [];
+  for (var i = 0; i < nCallsNeeded; i++) {
+    $.ajax({
+      url: 'records.php',
+      data: {offset : i * 10},
+      success: function(dataChunk) {
+        data = data.concat(dataChunk);
+        nCallsFinished += 1;
+        if (nCallsFinished == nCallsNeeded) {
+          callback(data.slice(0,n));
+        }
       }
-    }
+    });
+  }
+}
 
+```
 So if I want the latest 23 records, I would get them like so:
 
-    lang:js
-
-    nRecords(23, function(allData) {
-      console.log(allData);
-    });
+```js
+nRecords(23, function(allData) {
+  console.log(allData);
+});
+```
 
 If you have suggestions on ways to improve these solutions, I'm all ears.
 

@@ -46,97 +46,98 @@ On the latest assignment we are required to describe DFAs (Deterministic Finite 
 
 I can do this in Ruby:
 
-    lang:ruby
-
-    dfa = {
-      :alphabet => %w(
-        0
-        1
-      ),
-      :states => %w(
-        start
-        zero
-        0mod3
-        1mod3
-        2mod3
-      ),
-      :initial => 'start',
-      :final => %w(
-        zero
-        0mod3
-      ),
-      :transitions => {
-        'start' => [
-          ['0','zero'],
-          ['1','1mod3']
-        ],
-        '1mod3' => [
-          ['0','2mod3'],
-          ['1','0mod3']
-        ],
-        '2mod3' => [
-          ['0','1mod3'],
-          ['1','2mod3']
-        ],
-        '0mod3' => [
-          ['0','0mod3'],
-          ['1','1mod3']
-        ]
-      }
-    }
+```ruby
+dfa = {
+  :alphabet => %w(
+    0
+    1
+  ),
+  :states => %w(
+    start
+    zero
+    0mod3
+    1mod3
+    2mod3
+  ),
+  :initial => 'start',
+  :final => %w(
+    zero
+    0mod3
+  ),
+  :transitions => {
+    'start' => [
+      ['0','zero'],
+      ['1','1mod3']
+    ],
+    '1mod3' => [
+      ['0','2mod3'],
+      ['1','0mod3']
+    ],
+    '2mod3' => [
+      ['0','1mod3'],
+      ['1','2mod3']
+    ],
+    '0mod3' => [
+      ['0','0mod3'],
+      ['1','1mod3']
+    ]
+  }
+}
+```
 
 For those of you not familiar with ruby, `%w(one two three)` is equivalent to `['one','two','three']`. Just a bit of syntactic sugar.
 
 You can generate the DFA format required by Marmoset with the following function:
 
-    lang:ruby
+```ruby
+def dfa_output(dfa)
+  lines = []
+  lines << dfa[:alphabet].length.to_s
+  dfa[:alphabet].each {|c| lines << c.to_s}
 
-    def dfa_output(dfa)
-      lines = []
-      lines << dfa[:alphabet].length.to_s
-      dfa[:alphabet].each {|c| lines << c.to_s}
+  lines << dfa[:states].length.to_s
+  dfa[:states].each {|s| lines << s.to_s}
 
-      lines << dfa[:states].length.to_s
-      dfa[:states].each {|s| lines << s.to_s}
+  lines << dfa[:initial].to_s
 
-      lines << dfa[:initial].to_s
+  lines << dfa[:final].length.to_s
+  dfa[:final].each {|f| lines << f.to_s}
 
-      lines << dfa[:final].length.to_s
-      dfa[:final].each {|f| lines << f.to_s}
-
-      transitions = []
-      dfa[:transitions].each do |start,pair_array|
-        pair_array.each do |(sym,targ)| 
-          if sym.is_a? String 
-            transitions << "#{start} #{sym} #{targ}"
-          else
-            sym.each do |s|
-              transitions << "#{start} #{s} #{targ}"
-            end
-          end
+  transitions = []
+  dfa[:transitions].each do |start,pair_array|
+    pair_array.each do |(sym,targ)| 
+      if sym.is_a? String 
+        transitions << "#{start} #{sym} #{targ}"
+      else
+        sym.each do |s|
+          transitions << "#{start} #{s} #{targ}"
         end
       end
-
-      lines << transitions.length.to_s
-      lines += transitions
-
-      return lines.join("\n")
     end
+  end
+
+  lines << transitions.length.to_s
+  lines += transitions
+
+  return lines.join("\n")
+end
+```
+
 
 And then invoking with
 
-    lang:ruby
-
-    puts dfa_output(dfa)
+```ruby
+puts dfa_output(dfa)
+```
 
 I designed the function with ranges and multiple transition tokens in mind, so you can do stuff like this:
 
-    lang:ruby
-
-    'start_state' => [
-      [%w(one that other),'end_state'],
-      [1..9,'X']
-    ]
+```ruby
+'start_state' => [
+  [%w(one that other),'end_state'],
+  [1..9,'X']
+]
+```
 
 Now, this makes fixing problems, once discovered, much much simpler than trying to locate the error in the DFA format, but it still doesn't help much by way of identifying problems in the DFA itself. Probably the easiest way to look at a DFA is as a picture. Thankfully, there exists a set of tools perfect for this task known as [Graphviz][].
 
@@ -171,45 +172,45 @@ The DOT description of the above graph is as follows:
 
 And this is the ruby code to generate that output using the `dfa = { ... }` format at the beginning of the post.
 
-    lang:ruby
+```ruby
+def dot_output(dfa)
+  lines = []
+  lines << "digraph dfa {"
 
-    def dot_output(dfa)
-      lines = []
-      lines << "digraph dfa {"
+  lines << %(\t"" [shape=none])
 
-      lines << %(\t"" [shape=none])
-
-      dfa[:states].each do |state|
-        if (dfa[:final].include? state)
-          lines << %(\t"#{state}" [shape=doublecircle])
-        else
-          lines << %(\t"#{state}" [shape=circle])
-        end
-      end
-
-      lines << ''
-      lines << %(\t"" -> "#{dfa[:initial]}")
-
-      dfa[:transitions].each do |start,pair_array|
-        pair_array.each do |(sym,targ)| 
-          if sym.is_a? String
-            lines << %(\t"#{start}" -> "#{targ}" [label="#{sym}"])
-          else
-            lines << %(\t"#{start}" -> "#{targ}" [label="[#{sym.collect(&:to_s).join(',')}]"])
-          end
-        end
-      end
-
-      lines << "}"
-
-      return lines.join("\n")
+  dfa[:states].each do |state|
+    if (dfa[:final].include? state)
+      lines << %(\t"#{state}" [shape=doublecircle])
+    else
+      lines << %(\t"#{state}" [shape=circle])
     end
+  end
 
+  lines << ''
+  lines << %(\t"" -> "#{dfa[:initial]}")
+
+  dfa[:transitions].each do |start,pair_array|
+    pair_array.each do |(sym,targ)| 
+      if sym.is_a? String
+        lines << %(\t"#{start}" -> "#{targ}" [label="#{sym}"])
+      else
+        lines << %(\t"#{start}" -> "#{targ}" [label="[#{sym.collect(&:to_s).join(',')}]"])
+      end
+    end
+  end
+
+  lines << "}"
+
+  return lines.join("\n")
+end
+
+```
 Once you've installed Graphviz, you can generate a PNG of the graph by running 
 
-    lang:bash
-
-    dot -Tpng < graph.dot > graph.png
+```bash
+dot -Tpng < graph.dot > graph.png
+```
 
 Enjoy CS241 A5.
 

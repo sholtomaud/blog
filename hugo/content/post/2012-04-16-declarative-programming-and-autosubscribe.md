@@ -12,29 +12,25 @@ go watch it), I paused around 1:35. They had just said "There's no callbacks, no
 bindings, and no controllers. It just works." after showing off the code 
 something like the following:
 
-    lang:javascript
-
-    Template.color_list.colors = function() {
-      return Colors.find({}, {sort: {likes: -1, name: 1}});
-    }
+```javascript
+Template.color_list.colors = function() {
+  return Colors.find({}, {sort: {likes: -1, name: 1}});
+}
+```
 
 along with a [handlebars][] template kind of like this:
 
-{% raw %}
-
-    lang:html
-
-    <template name="color_list">
-      {{#each colors}}
-        <ul>
-          <li>
-            {{ name }}
-          </li>
-        </ul>
-      {{/each}}
-    </template>
-
-{% endraw %}
+```html
+<template name="color_list">
+  {{#each colors}}
+    <ul>
+      <li>
+        {{ name }}
+      </li>
+    </ul>
+  {{/each}}
+</template>
+```
 
 From an application developer's perspective, I thought "Wow. That is really 
 amazing". This is a perfect example of how incredible working with declarative 
@@ -67,21 +63,21 @@ Imperative Creation and Update
 If you were to write it in this style, you would probably do it with jQuery or 
 some similar DOM manipulation library, so that's what we'll use here.
 
-    lang:javascript
+```javascript
+var HelloView = function() {
+  this.h1 = $('<h1/>');
 
-    var HelloView = function() {
-      this.h1 = $('<h1/>');
+  var self = this;
+  model.bind('update', function() {
+    self.update();
+  });
+  self.update();
+};
 
-      var self = this;
-      model.bind('update', function() {
-        self.update();
-      });
-      self.update();
-    };
-
-    HelloView.prototype.update = function() {
-      this.h1.text("Salutations, " + Model.get('name') + "!");
-    }
+HelloView.prototype.update = function() {
+  this.h1.text("Salutations, " + Model.get('name') + "!");
+}
+```
 
 Mentally, I had to translate the original task into "create an element,
 listen for any updates to the model, then update the view to match the model".
@@ -99,23 +95,19 @@ Here's the same example written in Meteor style declarative programming.
 
 The template code:
 
-{% raw %}
-
-    lang:html
-
-    <template name="hello_view">
-      <h1>Salutations, {{ name }}!</h1>
-    </template>
-
-{% endraw %}
+```html
+<template name="hello_view">
+  <h1>Salutations, {{ name }}!</h1>
+</template>
+```
 
 And the JavaScript:
 
-    lang:javascript
-
-    Template.hello_view.name = function() {
-      return Model.get('name');
-    }
+```javascript
+Template.hello_view.name = function() {
+  return Model.get('name');
+}
+```
 
 In this style, we aren't manually wiring up synchronization at all.  We aren't 
 thinking in a "when this, then that" kind of mindset. We just say "this is how 
@@ -147,49 +139,49 @@ re-run when that data changes.
 
 A basic implementation would look something like this:
 
-    lang:javascript
+```javascript
+var Magic = {
+  context: null
+  autosubscribe: function(cb) {
+    Magic.context = cb;
+    Magic.context();
+  }
+};
 
-    var Magic = {
-      context: null
-      autosubscribe: function(cb) {
-        Magic.context = cb;
-        Magic.context();
-      }
-    };
+var Model = function() {
+  this.props = {};
+};
 
-    var Model = function() {
-      this.props = {};
-    };
+Model.prototype.get = function(prop) {
+  if (Magic.context != null) {
+    // An autosubscribe context is active, so subscribe it to future
+    // changes to the property
+    this.bind('change:' + prop, Magic.context);
+  }
+  return this.props[prop];
+}
 
-    Model.prototype.get = function(prop) {
-      if (Magic.context != null) {
-        // An autosubscribe context is active, so subscribe it to future
-        // changes to the property
-        this.bind('change:' + prop, Magic.context);
-      }
-      return this.props[prop];
-    }
+Model.prototype.set = function(prop, val) {
+  this.props[prop] = val;
+  this.trigger('change: ' + prop);
+}
 
-    Model.prototype.set = function(prop, val) {
-      this.props[prop] = val;
-      this.trigger('change: ' + prop);
-    }
-
-    // Implementations of bind and trigger omitted, but they would act exactly 
-    // like Backbone's
+// Implementations of bind and trigger omitted, but they would act exactly 
+// like Backbone's
+```
 
 Then it could be used like this - no manual event binding!
 
-    lang:javascript
+```javascript
+var person = new Model();
+person.set('name', 'Odeen');
 
-    var person = new Model();
-    person.set('name', 'Odeen');
+Magic.autosubscribe(function() {
+  $('h1').text('Salutations, ' + person.get('name'));
+});
 
-    Magic.autosubscribe(function() {
-      $('h1').text('Salutations, ' + person.get('name'));
-    });
-
-    person.set('name', 'Estwald');
+person.set('name', 'Estwald');
+```
 
 While Meteor did not invent the concept of live templates, this method of 
 dodging event binding seems the most powerful. While the idea of client-side 

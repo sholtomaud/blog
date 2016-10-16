@@ -115,9 +115,9 @@ hit "Save".
 The basics of this turned out to be relatively straightforward. The canvas API 
 exposes a method [`toDataURL`][12], which I use like so:
 
-    lang:javascript
-
-    var imgDataUrl = myCanvas.toDataURL('image/png');
+```javascript
+var imgDataUrl = myCanvas.toDataURL('image/png');
+```
 
 This returns a base-64 encoded `data:` URL containing a png. It might look 
 something like this:
@@ -135,16 +135,16 @@ png, then set up caching headers to make Google App Engine's Edge Caching
 servers cache the data as long as possible. The python code to do that inside a 
 webapp2 handler looks like this:
 
-    lang:python
+```python
+base64_image_data = image_url[len("data:image/png;base64,"):]
 
-    base64_image_data = image_url[len("data:image/png;base64,"):]
+self.response.headers['Content-Type'] = 'image/png'
 
-    self.response.headers['Content-Type'] = 'image/png'
+self.response.headers['Cache-Control'] = 'public, max-age=1000000'
+self.response.headers['Pragma'] = 'Public'
 
-    self.response.headers['Cache-Control'] = 'public, max-age=1000000'
-    self.response.headers['Pragma'] = 'Public'
-
-    self.response.out.write(base64.b64decode(base64_image_data))
+self.response.out.write(base64.b64decode(base64_image_data))
+```
 
 It turns out the headers that make Edge Caching kick in need to be pretty 
 specific. You can read more about them here:
@@ -260,69 +260,69 @@ steps that you need to go through:
 1. Programmatically find the path to the GAE SDK, and add that to `sys.path`.  
    This will allow you to import things from the `google` namespace in the REPL.
 
-       lang:python
+```python
+def _discover_sdk_path():
+    """Return directory from $PATH where the Google Appengine DSK lives."""
+    # adapted from {http://code.google.com/p/bcannon/source/browse/
+    # sites/py3ksupport-hrd/run_tests.py}
 
-       def _discover_sdk_path():
-           """Return directory from $PATH where the Google Appengine DSK lives."""
-           # adapted from {http://code.google.com/p/bcannon/source/browse/
-           # sites/py3ksupport-hrd/run_tests.py}
+    # Poor-man's `which` command.
+    for path in os.environ['PATH'].split(':'):
+        if os.path.isdir(path) and 'dev_appserver.py' in os.listdir(path):
+            break
+    else:
+        raise RuntimeError("couldn't find appcfg.py on $PATH")
 
-           # Poor-man's `which` command.
-           for path in os.environ['PATH'].split(':'):
-               if os.path.isdir(path) and 'dev_appserver.py' in os.listdir(path):
-                   break
-           else:
-               raise RuntimeError("couldn't find appcfg.py on $PATH")
+    # Find out where App Engine lives so we can import it.
+    app_engine_path = os.path.join(os.path.dirname(path), 'google_appengine')
+    if not os.path.isdir(app_engine_path):
+        raise RuntimeError('%s is not a directory' % app_engine_path)
+    return app_engine_path
 
-           # Find out where App Engine lives so we can import it.
-           app_engine_path = os.path.join(os.path.dirname(path), 'google_appengine')
-           if not os.path.isdir(app_engine_path):
-               raise RuntimeError('%s is not a directory' % app_engine_path)
-           return app_engine_path
-
-       sys.path.append(_discover_sdk_path())
+sys.path.append(_discover_sdk_path())
+```
 
 2. Programmatically find the root of your GAE project, and add THAT to 
    `sys.path`. This will let you import your models to play around with.
 
-       lang:python
+```python
+def _project_rootdir():
+    appengine_root = os.path.dirname(__file__)
+    while True:  # do while loop
+        if os.path.exists(os.path.join(appengine_root, 'app.yaml')):
+            return appengine_root
 
-       def _project_rootdir():
-           appengine_root = os.path.dirname(__file__)
-           while True:  # do while loop
-               if os.path.exists(os.path.join(appengine_root, 'app.yaml')):
-                   return appengine_root
+        old_appengine_root = appengine_root
+        appengine_root = os.path.dirname(appengine_root)
 
-               old_appengine_root = appengine_root
-               appengine_root = os.path.dirname(appengine_root)
+        if appengine_root == old_appengine_root:
+            # we're at and haven't found app.yaml
+            raise IOError('Unable to find app.yaml above cwd: %s'
+                        % os.path.dirname(__file__))
 
-               if appengine_root == old_appengine_root:
-                   # we're at and haven't found app.yaml
-                   raise IOError('Unable to find app.yaml above cwd: %s'
-                               % os.path.dirname(__file__))
-
-       sys.path.append(_project_rootdir())
+sys.path.append(_project_rootdir())
+```
 
 3. Get datastore access using [`remote_api_stub.ConfigureRemoteApi`][20]. This 
    is what will let you fetch and mutate models in the datastore in the REPL.  
    This requires that you have a running `dev_appserver.py`.
 
-       lang:python
+```python
+from google.appengine.ext.remote_api import remote_api_stub
 
-       from google.appengine.ext.remote_api import remote_api_stub
-
-       remote_api_stub.ConfigureRemoteApi(
-           None,
-           '/_ah/remote_api',
-           auth_func=lambda: ('test', 'test')
-           servername="localhost:8080")
+remote_api_stub.ConfigureRemoteApi(
+    None,
+    '/_ah/remote_api',
+    auth_func=lambda: ('test', 'test')
+    servername="localhost:8080")
+    ```
 
 4. Embed IPython.
 
-       lang:python
-
-       import IPython
-       IPython.embed()
+```python
+import IPython
+IPython.embed()
+```
 
 Once all that's done, you *hopefully* have a working IPython REPL for local 
 development. Enjoy!
@@ -343,32 +343,28 @@ The *one* case where HTML strings in embedded JSON cause problems is when they
 contain `</script>`. Here's an example of a template that's vulnerable to this 
 problem.
 
-{% raw %}
-
-    lang:html
-
-    <script>
-        var page = {{json.dumps(page)}};
-    </script>
-
-{% endraw %}
+```html
+<script>
+    var page = {{json.dumps(page)}};
+</script>
+```
 
 Normally, something like `{"body": "<h1>Awesome Page</h1>"}` gets passed in, and 
 we have no problem. We get this as a result:
 
-    lang:html
-
-    <script>
-        var page = {"body": "<h1>Awesome Page</h1>"};
-    </script>
+```html
+<script>
+    var page = {"body": "<h1>Awesome Page</h1>"};
+</script>
+```
 
 And this is totally fine -- no security problem. The problem comes around when 
 you inject `</script>` because it ends the script immediately, even though it 
 might be in the middle of a string. So if 
 
-    lang:json
-
-    {"body": "</script><script>alert('pwned - greetz to KA');</script>"}
+```json
+{"body": "</script><script>alert('pwned - greetz to KA');</script>"}
+```
 
 gets sent to the template, the resulting page will have an alert on it. But 
 WAIT, you might say, why not just escape any HTML that gets put into the JSON 
