@@ -127,11 +127,16 @@ article {
   padding: 30px 10px 0 10px;
 }
 
+article {
+  max-width: 750px;
+  margin: 0 auto;
+  position: relative;
+}
+
 article > * {
   /* Space all immediate children of an article by 30px, centering everything by
    * default
    */
-  max-width: 750px;
   margin: 0 auto 30px auto;
 }
 
@@ -166,4 +171,37 @@ article > p > img {
   display: block;
   margin: 0 auto;
   max-width: 100%;
+}
+
+/* Site nav */
+header {
+  height: 0;
+  overflow: visible;
+  margin: 70px auto -70px auto;
+  width: 130px;
+  /* 750 / 2 + 130 / 2 + 60 = 500 */
+  transform: translateX(-500px);
+  text-align: center;
+}
+
+header a, header a:hover {
+  color: inherit;
+  border-bottom: none;
+}
+
+.site-title {
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 125%;
+}
+
+.my-name {
+  font-size: 20px;
+  line-height: 125%;
+}
+
+.post-date {
+  font-size: 16px;
+  color: #828282;
+  line-height: 125%;
 }
