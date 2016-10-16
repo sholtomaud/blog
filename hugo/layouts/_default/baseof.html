@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <title>{{ block "title" . }}{{ end }}</title>
+  <meta property="og:image" content="http://jamie-wong.com/images/logo.png" />
+  <meta property="og:site_name" content="{{ .Site.Title }}" />
+  <meta property="fb:admins" content="1652790284" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="canonical" href="{{ .Permalink }}" />
+</head>
+<body lang="en">
+{{ block "main" . }}{{ end }}
+{{ partial "analytics.html" }}
+</body>
+</html>
