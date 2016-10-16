@@ -175,18 +175,29 @@ article > p > img {
 
 /* Site nav */
 header {
-  height: 0;
+  height: 260px;
   overflow: visible;
-  margin: 70px auto -70px auto;
+  margin: 0 auto -260px auto;
   width: 130px;
   /* 750 / 2 + 130 / 2 + 60 = 500 */
-  transform: translateX(-500px);
+  transform: translate(-500px, 70px);
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 header a, header a:hover {
   color: inherit;
   border-bottom: none;
+}
+
+.trace-of-me {
+  height: 130px;
+  width: 130px;
+}
+
+.trace-of-me > a {
+  display: block;
 }
 
 .site-title {
@@ -204,4 +215,28 @@ header a, header a:hover {
   font-size: 16px;
   color: #828282;
   line-height: 125%;
+}
+
+@media (max-width: 1130px) {
+  header {
+    height: auto;
+    margin: 30px auto 0 auto;
+    width: 100%;
+    max-width: 750px;
+    transform: none;
+    width: 290px;
+    flex-direction: row;
+  }
+
+  .trace-of-me {
+    float: left;
+  }
+
+  .site-text {
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 30px;
+  }
 }
