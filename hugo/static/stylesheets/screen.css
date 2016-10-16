@@ -27,9 +27,6 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-body {
-	line-height: 1;
-}
 blockquote, q {
 	quotes: none;
 }
@@ -44,8 +41,10 @@ table {
 }
 
 /* Typography */
-html {
+body {
   font-family: "Roboto Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+  font-size: 20px;
+  line-height: 150%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -78,11 +77,6 @@ h3 {
   color: #828282;
 }
 
-p {
-  line-height: 150%;
-  font-size: 20px;
-}
-
 strong {
   font-weight: bold;
 }
@@ -106,6 +100,14 @@ p > code {
 
 h1 > code, h2 > code, h3 > code, h4 > code, h5 > code, h6 > code, a > code {
   color: inherit;
+}
+
+ol, ul {
+  padding-left: 1.75em;
+}
+
+li + li {
+  margin-top: 15px;
 }
 
 sup {
@@ -159,6 +161,8 @@ p + h1 {
    * <pre>, so it scrolls horizontally. Fudge it to fix this.
    */
   padding-bottom: 15px;
+
+  font-size: 70%;
 }
 
 iframe {
