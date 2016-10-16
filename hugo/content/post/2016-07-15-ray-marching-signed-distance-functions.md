@@ -71,7 +71,7 @@ Which, in GLSL, translates to this:
 
 ```glsl
 float sphereSDF(vec3 p) {
-return length(p) - 1.0;
+    return length(p) - 1.0;
 }
 ```
 
@@ -130,18 +130,18 @@ Implemented in GLSL, this ray marching algorithm looks like this:
 ```glsl
 float depth = start;
 for (int i = 0; i < MAX_MARCHING_STEPS; i++) {
-float dist = sceneSDF(eye + depth * viewRayDirection);
-if (dist < EPSILON) {
-    // We're inside the scene surface!
-    return depth;
-}
-// Move along the view ray
-depth += dist;
+    float dist = sceneSDF(eye + depth * viewRayDirection);
+    if (dist < EPSILON) {
+        // We're inside the scene surface!
+        return depth;
+    }
+    // Move along the view ray
+    depth += dist;
 
-if (depth >= end) {
-    // Gone too far; give up
-    return end;
-}
+    if (depth >= end) {
+        // Gone too far; give up
+        return end;
+    }
 }
 return end;
 ```
@@ -211,14 +211,14 @@ $$</div>
 
 ```glsl
 /**
-* Using the gradient of the SDF, estimate the normal on the surface at point p.
-*/
+ * Using the gradient of the SDF, estimate the normal on the surface at point p.
+ */
 vec3 estimateNormal(vec3 p) {
-return normalize(vec3(
-    sceneSDF(vec3(p.x + EPSILON, p.y, p.z)) - sceneSDF(vec3(p.x - EPSILON, p.y, p.z)),
-    sceneSDF(vec3(p.x, p.y + EPSILON, p.z)) - sceneSDF(vec3(p.x, p.y - EPSILON, p.z)),
-    sceneSDF(vec3(p.x, p.y, p.z  + EPSILON)) - sceneSDF(vec3(p.x, p.y, p.z - EPSILON))
-));
+    return normalize(vec3(
+        sceneSDF(vec3(p.x + EPSILON, p.y, p.z)) - sceneSDF(vec3(p.x - EPSILON, p.y, p.z)),
+        sceneSDF(vec3(p.x, p.y + EPSILON, p.z)) - sceneSDF(vec3(p.x, p.y - EPSILON, p.z)),
+        sceneSDF(vec3(p.x, p.y, p.z  + EPSILON)) - sceneSDF(vec3(p.x, p.y, p.z - EPSILON))
+    ));
 }
 ```
 

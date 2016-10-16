@@ -121,15 +121,18 @@ a[rel=footnote]::after {
   content: ']'
 }
 
-/* Structure */
+/* Spacing */
+
 article {
-  max-width: 750px;
-  margin: 30px auto 0 auto;
+  padding: 30px 10px 0 10px;
 }
 
 article > * {
-  /* Space all immediate children of an article by 30px */
-  margin-bottom: 30px;
+  /* Space all immediate children of an article by 30px, centering everything by
+   * default
+   */
+  max-width: 750px;
+  margin: 0 auto 30px auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -141,4 +144,26 @@ h1, h2, h3, h4, h5, h6 {
 p + h1 {
   /* Space out sections of an article more than regular spacing */
   margin-top: 45px;
+}
+
+.highlight, article > pre, .katex-display {
+  /* Make code blocks and formulas horizontally scrollable */
+  overflow-x: auto;
+
+  /* For reasons I'm unclear of, the <code> inside the <pre> is larger than the
+   * <pre>, so it scrolls horizontally. Fudge it to fix this.
+   */
+  padding-bottom: 15px;
+}
+
+iframe {
+  display: block;
+  width: 100%;
+}
+
+article > p > img {
+  /* Center images */
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
 }
