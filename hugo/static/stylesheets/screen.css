@@ -30,9 +30,6 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
-ol, ul {
-	list-style: none;
-}
 blockquote, q {
 	quotes: none;
 }
@@ -61,11 +58,6 @@ pre, code {
   color: #4f4f4f;
 }
 
-h1 > code, h2 > code, h3 > code, h4 > code, h5 > code, h6 > code, a > code {
-  color: inherit;
-}
-
-
 h1.title {
   font-size: 36px;
   text-align: center;
@@ -74,25 +66,21 @@ h1.title {
 
 h1 {
   font-size: 32px;
-  margin-bottom: 22px;
 }
 
 h2 {
   font-size: 24px;
-  margin-bottom: 16px;
   color: #4f4f4f;
 }
 
 h3 {
   font-size: 20px;
-  margin-bottom: 14px;
   color: #828282;
 }
 
 p {
   line-height: 150%;
   font-size: 20px;
-  margin-bottom: 30px;
 }
 
 strong {
@@ -116,13 +104,41 @@ p > code {
   font-size: 95%;
 }
 
-/* syntax highlighted code block */
-.highlight > pre {
-  margin-bottom: 20px;
+h1 > code, h2 > code, h3 > code, h4 > code, h5 > code, h6 > code, a > code {
+  color: inherit;
+}
+
+sup {
+  vertical-align: super;
+  font-size: 80%;
+}
+
+a[rel=footnote]::before {
+  content: '['
+}
+
+a[rel=footnote]::after {
+  content: ']'
 }
 
 /* Structure */
 article {
   max-width: 750px;
   margin: 30px auto 0 auto;
+}
+
+article > * {
+  /* Space all immediate children of an article by 30px */
+  margin-bottom: 30px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  /* Override the spacing rule above: only move content below headers down by
+   * 10px */
+  margin-bottom: 10px;
+}
+
+p + h1 {
+  /* Space out sections of an article more than regular spacing */
+  margin-top: 45px;
 }
