@@ -10,7 +10,9 @@ url: /2016/08/05/webgl-fluid-simulation/
 <link rel="stylesheet" 
 href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
 
-<canvas id="demo" width="600" height="600"></canvas>
+<canvas id="demo" width="600" height="600">
+</canvas>
+
 <div class="caption">Click and drag to change the fluid flow. Double click to 
 reset.</div>
 
