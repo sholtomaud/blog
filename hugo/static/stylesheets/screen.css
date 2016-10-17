@@ -177,6 +177,13 @@ article > p > img {
   max-width: 100%;
 }
 
+/* Table of Contents */
+
+#TableOfContents li {
+  margin-top: 0;
+}
+
+
 /* Site nav */
 header {
   height: 260px;

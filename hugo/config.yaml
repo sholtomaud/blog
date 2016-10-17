@@ -4,6 +4,7 @@ languageCode: en-us
 title: 'Zero Wind :: Jamie Wong'
 PygmentsCodeFences: true
 pygmentsuseclasses: true
+toctoken: "{:toc}"
 blackfriday:
     extensions:
         - laxHtmlBlocks
