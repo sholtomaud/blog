@@ -141,7 +141,7 @@ a[rel=footnote]::after {
 #main {
   padding: 0 10px 0 10px;
   max-width: 750px;
-  margin: 0 auto;
+  margin: 0 auto 30px auto;
 }
 
 article > * {
@@ -201,7 +201,15 @@ article > p > img {
   margin-top: 0;
 }
 
-/* Index Page */
+/* Homepage */
+body.homepage #main {
+  max-width: 400px;
+}
+
+ul.postlist {
+  padding: 0;
+}
+
 ul.postlist li {
   list-style: none;
 }

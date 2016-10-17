@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="/stylesheets/pygments.css" />
   <link href='http://fonts.googleapis.com/css?family=Gloria+Hallelujah|Roboto+Condensed|Source+Code+Pro' rel='stylesheet' type='text/css'>
 </head>
-<body lang="en">
+<body lang="en" {{ if .IsHome }}class="homepage"{{ end }}>
 {{ partial "author.html" . }}
 <div id="main">
 {{ block "main" . }}{{ end }}
