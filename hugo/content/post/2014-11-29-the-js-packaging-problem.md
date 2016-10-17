@@ -66,8 +66,8 @@ this isn't a huge advantage.
 On the upside, this solution gives excellent cache performance. Each one of the 
 files can be separately cached, so changing one of your JS files will require 
 users to download only the things that changed since the last time they were 
-there [^1]. This is especially attractive because the biggest files, like 
-jQuery, are unlikely to change frequently.
+there[^1]. This is especially attractive because the biggest files, like jQuery, 
+are unlikely to change frequently.
 
 Even better, if you need different JS files on different pages on your site, you 
 only have to download the bits of that page that you didn't already get from 
@@ -284,16 +284,6 @@ The three most battle tested I'm aware of:
 - [RequireJS][16] with the [RequireJS Optimizer][17]. There's a specific example 
   for optimizing for multi-page apps: [example-multipage][18].
 
-[^1]: Failure to properly cache bust static resources can lead to bugs where users are running a version of your JS from a previous deploy because they have it cached in their browser. Overly aggressive cache busting (e.g. busting everything on every deploy) forces users to download things they already have.  A good solution is to hash all of your static assets when you upload them and include that hash in the filename. That way, users only download things that actually *did* change since the last time they visited the website.  
-
-[^2]: While browsers will re-use TCP connections to make multiple HTTP requests, they still open multiple TCP connections when you request many resources to allow downloading things in parallel. Within a single connection, downloading one big resource will block the download of a smaller resource because the requests on a connection are entirely serialized. SPDY solves this problem by allowing multiple streams across a single TCP connection.
-
-[^3]: Before I can do that though, I need to know when it's *safe* to move a file between packages, which requires us to have a reliable dependency graph between source files, which has been the bulk of the actual work I've done to date since <a href="/2012/08/14/khan-academy-computer-science/">working on the Computer Science Platform</a>.
-
-[^4]: There's also the question of how we load those packages (inline script tags, script with `src` attributes, dynamically JS injected script tags, or AJAX). This is a good watch if you have the time: <a href="https://www.youtube.com/watch?v=li4Y0E_x8zE">Enough with the JavaScript Already by Nicholas Zakas</a>.
-
-[^5]: Interestingly, this is a variant of the <a href="http://en.wikipedia.org/wiki/Set_cover_problem">weighted set cover problem</a>, except we also control the elements of the sets!
-
 [1]: http://en.wikipedia.org/wiki/Slow-start
 [2]: http://blog.cloudflare.com/what-makes-spdy-speedy/
 [3]: http://en.wikipedia.org/wiki/SPDY
@@ -309,3 +299,13 @@ The three most battle tested I'm aware of:
 [16]: http://requirejs.org/
 [17]: http://requirejs.org/docs/optimization.html
 [18]: https://github.com/requirejs/example-multipage
+
+[^1]: Failure to properly cache bust static resources can lead to bugs where users are running a version of your JS from a previous deploy because they have it cached in their browser. Overly aggressive cache busting (e.g. busting everything on every deploy) forces users to download things they already have.  A good solution is to hash all of your static assets when you upload them and include that hash in the filename. That way, users only download things that actually *did* change since the last time they visited the website.  
+
+[^2]: While browsers will re-use TCP connections to make multiple HTTP requests, they still open multiple TCP connections when you request many resources to allow downloading things in parallel. Within a single connection, downloading one big resource will block the download of a smaller resource because the requests on a connection are entirely serialized. SPDY solves this problem by allowing multiple streams across a single TCP connection.
+
+[^3]: Before I can do that though, I need to know when it's *safe* to move a file between packages, which requires us to have a reliable dependency graph between source files, which has been the bulk of the actual work I've done to date since <a href="/2012/08/14/khan-academy-computer-science/">working on the Computer Science Platform</a>.
+
+[^4]: There's also the question of how we load those packages (inline script tags, script with `src` attributes, dynamically JS injected script tags, or AJAX). This is a good watch if you have the time: <a href="https://www.youtube.com/watch?v=li4Y0E_x8zE">Enough with the JavaScript Already by Nicholas Zakas</a>.
+
+[^5]: Interestingly, this is a variant of the <a href="http://en.wikipedia.org/wiki/Set_cover_problem">weighted set cover problem</a>, except we also control the elements of the sets!

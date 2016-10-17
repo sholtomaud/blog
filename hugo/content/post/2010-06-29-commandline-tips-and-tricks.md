@@ -46,6 +46,7 @@ $ pwd
 ```
 
 <h2>Rerun the last command</h2>
+
 From: <a href="http://www.commandlinefu.com/commands/view/1189/run-the-previous-command-with-sudo">Run the previous command with sudo @ commandlinefu.com</a>
 
 ```bash
@@ -82,6 +83,7 @@ cat /etc/apache2/passenger_pane_vhosts/searchgraph.local.vhost.conf
 ```
 
 <h2>Modify the last command and run it</h2>
+
 From: <a href="http://www.commandlinefu.com/commands/view/19/runs-previous-command-but-replacing">Runs the previous command but replacing @ commandlinefu.com</a>
 
 ```bash
@@ -120,9 +122,10 @@ $ history 10
     529  history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head
     530  history
     531  history 10
-    ```
+```
 
 <h2>Edit and run a previous command</h2>
+
 From: <a href="http://www.commandlinefu.com/commands/view/1561/edit-the-last-or-previous-command-line-in-an-editor-then-execute">Edit the last command line in an editor then execute @ commandlinefu.com</a>
 
 This one requires a bit of explanation. The `fc` command will, by default, open 
@@ -165,6 +168,7 @@ was the command you executed two lines ago, you can use negative history numbers
     hello
 
 <h2>Follow new output to a log</h2>
+
 This one comes from my coworkers
 
 ```bash
