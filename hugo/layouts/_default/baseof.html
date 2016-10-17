@@ -14,10 +14,11 @@
   <link href='http://fonts.googleapis.com/css?family=Gloria+Hallelujah|Roboto+Condensed|Source+Code+Pro' rel='stylesheet' type='text/css'>
 </head>
 <body lang="en">
-{{ partial "header.html" . }}
+{{ partial "author.html" . }}
 <div id="main">
 {{ block "main" . }}{{ end }}
 </div>
+{{ block "footer" . }}{{ end }}
 {{ partial "analytics.html" }}
 </body>
 </html>
