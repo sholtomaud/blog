@@ -125,14 +125,10 @@ a[rel=footnote]::after {
 
 /* Spacing */
 
-article {
+#main {
   padding: 30px 10px 0 10px;
-}
-
-article {
   max-width: 750px;
   margin: 0 auto;
-  position: relative;
 }
 
 article > * {
@@ -178,9 +174,20 @@ article > p > img {
 }
 
 /* Table of Contents */
-
 #TableOfContents li {
   margin-top: 0;
+}
+
+/* Index Page */
+ul.postlist li {
+  list-style: none;
+}
+
+.postlist--date {
+  display: block;
+  font-size: 16px;
+  color: #828282;
+  line-height: 125%;
 }
 
 

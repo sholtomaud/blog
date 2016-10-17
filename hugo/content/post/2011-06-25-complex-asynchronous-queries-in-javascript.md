@@ -39,7 +39,7 @@ Here's a simple example:
 
 ```js
 window.setTimeout(function() {
-console.log("Three");
+  console.log("Three");
 }, 1000);
 
 console.log("One");
@@ -52,10 +52,10 @@ A more useful example is retrieving data in jQuery through AJAX from the server.
 
 ```js
 $.ajax({
-url: '/records.php',
-success: function(data) {
-console.log(data);
-}
+  url: '/records.php',
+  success: function(data) {
+    console.log(data);
+  }
 });
 ```
 
@@ -74,24 +74,24 @@ For example, let's assume a page `records.php` returns the latest 10 records in 
 
 ```js
 function allRecords(callback, offset, data) {
-if (typeof offset === 'undefined') {
-offset = 0;
-}
-if (typeof data === 'undefined') {
-data = [];
-}
-$.ajax({
-url: 'records.php',
-data: {offset: offset},
-success: function(dataChunk) {
-    data = data.concat(dataChunk);
-    if (dataChunk.length < 10) {
-    callback(data);
-    } else {
-    allRecords(callback, offset + 10, data);
+  if (typeof offset === 'undefined') {
+    offset = 0;
+  }
+  if (typeof data === 'undefined') {
+    data = [];
+  }
+  $.ajax({
+    url: 'records.php',
+    data: {offset: offset},
+    success: function(dataChunk) {
+      data = data.concat(dataChunk);
+      if (dataChunk.length < 10) {
+        callback(data);
+      } else {
+        allRecords(callback, offset + 10, data);
+      }
     }
-}
-});
+  });
 }
 ```
 
@@ -99,7 +99,7 @@ And since there's a check for the `undefined` state of the second two parameters
 
 ```js
 allRecords(function(allData) {
-console.log(allData);
+  console.log(allData);
 });
 ```
 

@@ -1,10 +1,11 @@
 {{ define "title" }}{{ .Title }}{{ end }}
 {{ define "main" }}
 
-<ul>
+<ul class="postlist">
 {{ range .Data.Pages.ByPublishDate }}
   <li>
     <a href="{{ .Permalink }}">{{ .Title }}</a>
+    <span class="postlist--date">{{ .Date.Format "January 2, 2006" }}</span>
   </li>
 {{ end }}
 </ul>

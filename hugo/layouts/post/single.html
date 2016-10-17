@@ -1,20 +1,5 @@
 {{ define "title" }}{{ .Title }}{{ end }}
 {{ define "main" }}
-<header>
-  <div class="trace-of-me">
-    <a href="/">
-      <img class="regular" src="/images/Avatar Trace.svg" />
-      <img class="eyebrow" src="/images/Eyebrow Raise.svg" />
-    </a>
-  </div>
-  <div class="site-text">
-    <a href="/">
-      <div class="site-title">Zerø Wind</div>
-    </a>
-    <div class="my-name">Jamie Wong</div>
-    <div class="post-date">{{ .Date.Format "January 2, 2006" }}</div>
-  </div>
-</header>
 <article>
 <h1 class="title">{{ .Title}}</h1>
 {{ .Content }}
