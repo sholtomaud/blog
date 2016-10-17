@@ -60,8 +60,10 @@ var animateOnScroll = function(simulation) {
 };
 </script>
 
+<figure>
 <canvas id="smooth-highres" width="700" height="500"></canvas>
-<div class='caption'>Click any of the animations to pause</div>
+<figcaption>Click any of the animations to pause</figcaption>
+</figure>
 <script>
 var smoothHighres = base.clone({
     canvas: document.getElementById("smooth-highres"),
@@ -81,10 +83,11 @@ algorithm or bit of math backing it.
 Reading a bit about particle simulations on Wikipedia, I stumbled upon 
 [metaballs][1]. In 3D, metaballs looks something like this:
 
+<figure>
 <img src="/images/14-08-11/Metaball_contact_sheet.png" />
-<div class="caption">From <a 
-href="http://en.wikipedia.org/wiki/Metaballs">Metaballs</a> on 
-Wikipedia</a></div>
+<figcaption>From <a href="http://en.wikipedia.org/wiki/Metaballs">Metaballs</a> 
+on Wikipedia</a></figcaption>
+</figure>
 
 This looked like it had the potential to yield some cool behaviour, so I decided 
 to dive in. To start, I just wanted some circles bouncing around, like this:
@@ -138,9 +141,11 @@ let's say:
 If we sample the \\( f(x,y) \\) in a grid and plot the results, we get something 
 like this:
 
+<figure>
 <canvas id="corner-samples" width="700" height="500"></canvas>
-<div class='caption'>The cells highlighted in green have a sample with \( f(x, 
-y) > 1 \) at their center.</div>
+<figcaption>The cells highlighted in green have a sample with \( f(x, y) > 1 \) 
+at their center.</figcaption>
+</figure>
 <script>
 var cornerSamples = base.clone({
     canvas: document.getElementById("corner-samples"),
@@ -159,7 +164,9 @@ animateOnScroll(cornerSamples);
 
 If we increase the resolution, we start getting a kind of amoeba-blobby effect.
 
+<figure>
 <canvas id="blocky-threshold" width="700" height="500"></canvas>
+</figure>
 <script>
 var blockyThreshold = base.clone({
     canvas: document.getElementById("blocky-threshold"),
@@ -173,7 +180,8 @@ animateOnScroll(blockyThreshold);
 </script>
 
 You might be thinking that this still looks a little blocky. We sampled in a 
-grid, so why didn't we just sample every pixel instead to make it look smoother?  
+grid, so why didn't we just sample every pixel instead to make it look smoother? 
+
 Well, for 40 bouncing circles, on a 700x500 grid, that would be on the order of 
 14 million operations. If we want to have a nice smooth 60fps animation, that 
 would be 840 million operations per second. JavaScript engines may be fast 
@@ -198,9 +206,11 @@ a line in some cells, instead of just filling in the entire square.
 
 Sampling the corners looks like this:
 
+<figure>
 <canvas id="thresholded-corners" width="700" height="500"></canvas>
-<div class="caption">The corners where \( f(x,y) \geq 1 \) are highlighted in 
-green.</div>
+<figcaption>The corners where \( f(x,y) \geq 1 \) are highlighted in 
+green.</figcaption>
+</figure>
 <script>
 var thresholdedCorners = base.clone({
     canvas: document.getElementById("thresholded-corners"),
@@ -224,11 +234,13 @@ of our blobs will run through that cell.
 Since there are only 2^4 possible configurations of a cell's corners, we can 
 just enumerate them all.
 
+<figure>
 <img src="/images/14-08-11/marching-squares-mapping.png" />
-<div class="caption">The configuration number between 0-15 is computed by 
-assigning a value of 0 to each of the corners where \( f(x, y) \lt 1 \), and a 
-value of 1 where \( f(x, y) \geq 1 \), then interpreting these bits as a binary 
-number, ordered (southwest, southeast, northeast, northwest).</div>
+<figcaption>The configuration number between 0-15 is computed by assigning a 
+value of 0 to each of the corners where \( f(x, y) \lt 1 \), and a value of 1 
+where \( f(x, y) \geq 1 \), then interpreting these bits as a binary number, 
+ordered (southwest, southeast, northeast, northwest).</figcaption>
+</figure>
 
 To the keen observer, you'll notice that configurations 5 and 10 are ambiguous, 
 because we can't be sure if the center of the cell is inside our boundary or 
@@ -285,11 +297,13 @@ Consider these examples, and see how even though these are all of the same 0-16
 type, the underlying samples should intuitively result in noticeably different 
 lines.
 
+<figure>
 <img src="/images/14-08-11/lerp-examples.png" />
-<div class="caption">
+<figcaption>
 Even though each of these cells would be classified as type "0100 = 2", the 
 green line approximating the set of points within the cell where \( f(x, y) = 1 
-\) can vary dramatically depending on the underlying sample values.</div>
+\) can vary dramatically depending on the underlying sample values.</figcaption>
+</figure>
 
 To calculate how to adjust these lines based on the original corner sample 
 values, we're going to apply [linear interpolation][2]. Given the point labels 
@@ -362,11 +376,13 @@ As a bonus, I also implemented the blocky version of this (no marching squares)
 on the Khan Academy Computer Science platform, using [Voronoi diagram][5]-esque 
 coloring for the cells. 
 
+<figure>
 <img src="/images/14-08-11/metaballs-on-ka.png" />
-<div class="caption"><a 
+<figcaption><a 
 href="https://www.khanacademy.org/cs/Metaballs%21/6209526669246464">
 Metaballs! on Khan Academy
-</a></div>
+</a></figcaption>
+</figure>
 
 # Applications
 
@@ -377,15 +393,19 @@ Before we had crazy high resolution satellite imaging of everything, we could've
 taken elevation samples in a grid, then drawn contour lines for a fixed number 
 of elevations to create maps like this:
 
+<figure>
 <img src="/images/14-08-11/contour-map.jpg" />
+</figure>
 
 Another application of this you might've seen without realizing it is applying 
 tilesets in games. There's a great explanation of that in a blog post called 
 [Squares Made for Marching][3] on Project Renegade. Linear interpolation doesn't 
 apply to this version of the algorithm.
 
+<figure>
 <img src="/images/14-08-11/tile-corner-samples.png" />
-<div class="caption">From Project Renegade.</div>
+<figcaption>From Project Renegade.</figcaption>
+</figure>
 
 If you extend the method to 3D, you get the [Marching Cubes][4] algorithm, which 
 is the same concept but with far more configurations to deal with. Once you're 
@@ -393,10 +413,11 @@ working in 3D, you can use the algorithm to visualize things like MRI slices
 where you want to draw isosurfaces (3D equivalent of contour lines) representing 
 surfaces of equal density.
 
+<figure>
 <img src="/images/14-08-11/marching-cubes-head.png" />
-<div class="caption">From <a 
-href="http://en.wikipedia.org/wiki/Marching_cubes">Marching Cubes</a> on 
-Wikipedia</div>
+<figcaption>From <a href="http://en.wikipedia.org/wiki/Marching_cubes">Marching 
+Cubes</a> on Wikipedia</figcaption>
+</figure>
 
 That's all for now. After enjoying Introduction to Computer Graphics (CS 488) at 
 uWaterloo, then remembering how much I enjoyed it from helping out a friend, I 

@@ -98,16 +98,28 @@ p > code {
   font-size: 95%;
 }
 
+figure {
+  text-align: center;
+}
+
+.caption, caption, figcaption {
+  font-style: italic;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1;
+}
+
+blockquote {
+  font-style:italic;
+  padding: 0 3em 0 2em;
+}
+
 h1 > code, h2 > code, h3 > code, h4 > code, h5 > code, h6 > code, a > code {
   color: inherit;
 }
 
-ol, ul {
-  padding-left: 1.75em;
-}
-
-li + li {
-  margin-top: 15px;
+.highlight, article > pre {
+  font-size: 70%;
 }
 
 sup {
@@ -138,6 +150,10 @@ article > * {
   margin: 0 auto 30px auto;
 }
 
+blockquote p {
+  margin-bottom: 30px;
+}
+
 h1, h2, h3, h4, h5, h6 {
   /* Override the spacing rule above: only move content below headers down by
    * 10px */
@@ -149,6 +165,14 @@ p + h1 {
   margin-top: 45px;
 }
 
+ol, ul {
+  padding-left: 1.75em;
+}
+
+li + li {
+  margin-top: 15px;
+}
+
 .highlight, article > pre, .katex-display {
   /* Make code blocks and formulas horizontally scrollable */
   overflow-x: auto;
@@ -157,8 +181,6 @@ p + h1 {
    * <pre>, so it scrolls horizontally. Fudge it to fix this.
    */
   padding-bottom: 15px;
-
-  font-size: 70%;
 }
 
 iframe {

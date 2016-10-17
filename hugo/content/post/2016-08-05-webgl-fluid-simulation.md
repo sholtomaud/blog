@@ -10,9 +10,11 @@ url: /2016/08/05/webgl-fluid-simulation/
 <link rel="stylesheet" 
 href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
 
+<figure>
 <canvas id="demo" width="600" height="600"></canvas>
-<div class="caption">Click and drag to change the fluid flow. Double click to 
-reset.</div>
+<figcaption>Click and drag to change the fluid flow. Double click to 
+reset.</figcaption>
+</figure>
 
 *Note: The demos in this post rely on WebGL features that might not be 
 implemented in mobile browsers.*
@@ -165,9 +167,11 @@ the exact same routine to advect velocity through itself. Below, watch the
 velocity change over time, with an initial velocity field of \\( \vec u = (1,
 \sin(2 \pi y)) \\).
 
+<figure>
 <canvas id="advectV1" width="400" height="400"></canvas>
-<div class="caption">See how the changes you make by dragging propagate through 
-space via advection.</div>
+<figcaption>See how the changes you make by dragging propagate through space via 
+advection.</figcaption>
+</figure>
 
 If you tried playing around with this, and saw a bunch of weird hard edges and 
 might've thought to yourself "I don't think fluids work like that...", you'd be 

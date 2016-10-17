@@ -87,8 +87,10 @@ Just as in raytracing, we select a position for the camera, put a grid in front
 of it, send rays from the camera through each point in the grid, with each grid 
 point corresponding to a pixel in the output image.
 
+<figure>
 <img src="/images/16-07-11/raytrace.png">
-<div class="caption">From "Ray tracing" on Wikipedia</div>
+<figcaption>From "Ray tracing" on Wikipedia</figcaption>
+</figure>
 
 The difference comes in how the scene is defined, which in turn changes our 
 options for finding the intersection between the view ray and the scene.
@@ -117,7 +119,12 @@ accuracy) using "sphere tracing".  Instead of taking a tiny step, we take the
 maximum step we know is safe without going through the surface: we step by the 
 distance to the surface, which the SDF provides us!
 
+<figure>
 <img src="/images/16-07-11/spheretrace.jpg">
+<figcaption>From <a 
+href="http://http.developer.nvidia.com/GPUGems2/gpugems2_chapter08.html">GPU 
+Gems 2: Chapter 8.</a></figcaption>
+</figure>
 
 In this diagram, \\( p_0 \\) is the camera. The blue line lies along the ray 
 direction cast from the camera through the view plane. The first step taken is 
@@ -287,7 +294,10 @@ Constructive solid geometry, or CSG for short, is a method of creating complex
 geometric shapes from simple ones via boolean operations. This diagram from 
 WikiPedia shows what's possible with the technique:
 
+<figure>
 <img src="/images/16-07-11/csg.png">
+<figcaption>From "Constructive solid geometry" on Wikipedia</figcaption>
+</figure>
 
 CSG is built on 3 primitive operations: intersection ( \\( \cap \\) ), union ( 
 \\( \cup \\) ), and difference ( \\( - \\) ).
