@@ -27,7 +27,6 @@ type="text/css">
 <script src="http://jamie-wong.com/experiments/fifteen-puzzle/src/puzzle.js"></script>
 
 <div id="puzzle" style="margin: 0 auto 20px auto"></div>
-
 <script>var puzzle = new Puzzle($('#puzzle'))</script>
 
 Before you read this, play with the above puzzle. You can move the blocks around 

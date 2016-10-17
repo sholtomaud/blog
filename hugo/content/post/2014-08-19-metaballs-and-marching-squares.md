@@ -61,8 +61,7 @@ var animateOnScroll = function(simulation) {
 </script>
 
 <canvas id="smooth-highres" width="700" height="500"></canvas>
-<div class="caption">Click any of the animations to pause</div>
-
+<div class='caption'>Click any of the animations to pause</div>
 <script>
 var smoothHighres = base.clone({
     canvas: document.getElementById("smooth-highres"),
@@ -91,7 +90,6 @@ This looked like it had the potential to yield some cool behaviour, so I decided
 to dive in. To start, I just wanted some circles bouncing around, like this:
 
 <canvas id="bouncing-circles" width="700" height="500"></canvas>
-
 <script>
 var bouncingCircles = base.clone({
     canvas: document.getElementById("bouncing-circles"),
@@ -162,7 +160,6 @@ animateOnScroll(cornerSamples);
 If we increase the resolution, we start getting a kind of amoeba-blobby effect.
 
 <canvas id="blocky-threshold" width="700" height="500"></canvas>
-
 <script>
 var blockyThreshold = base.clone({
     canvas: document.getElementById("blocky-threshold"),
@@ -204,7 +201,6 @@ Sampling the corners looks like this:
 <canvas id="thresholded-corners" width="700" height="500"></canvas>
 <div class="caption">The corners where \( f(x,y) \geq 1 \) are highlighted in 
 green.</div>
-
 <script>
 var thresholdedCorners = base.clone({
     canvas: document.getElementById("thresholded-corners"),
@@ -243,7 +239,6 @@ When we perform this mapping process for all of the cells in the grid, we end up
 with something like this:
 
 <canvas id="45-deg" width="700" height="500"></canvas>
-
 <script>
 var fortyFiveDeg = base.clone({
     canvas: document.getElementById("45-deg"),
@@ -351,7 +346,6 @@ And if we crank up the resolution and hide the debug info, we're left with this
 pretty result:
 
 <canvas id="smooth-highres-2" width="700" height="500"></canvas>
-
 <script>
 var smoothHighRes2 = base.clone({
     canvas: document.getElementById("smooth-highres-2"),
