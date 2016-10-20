@@ -18,18 +18,10 @@ From there, you should be able to run
     hugo server
 
 TODO:
-[ ] Theme
-[ ] RSS feed
-[ ] Unlist posts
-[ ] Disqus, disabled by default
-[ ] GitHub, Twitter links
-[ ] Previous and next links
-
-Components
-[ ] Image w/ Caption
-[ ] YouTube embeds
-[ ] Shadertoy embeds
-[ ] Codepen embeds
-[ ] Custom embeds (i.e. the ones from the fluid sim post)
-[ ] Blockquotes
-[ ] Select better colorscheme for pygments
+[ ] RSS feed (atom.xml)
+[ ] Bio somewhere?
+[ ] Delete Jekyll?
+[ ] Email subscription?
+[ ] robots.txt
+[ ] Sitemap?
+[ ] katex pre-rendering?
