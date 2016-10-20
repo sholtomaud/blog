@@ -21,9 +21,9 @@ TODO:
 [ ] Theme
 [ ] RSS feed
 [ ] Unlist posts
-[ ] Table of contents
-[ ] Rename post files to not contain the date in them any more
 [ ] Disqus, disabled by default
+[ ] GitHub, Twitter links
+[ ] Previous and next links
 
 Components
 [ ] Image w/ Caption

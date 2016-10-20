@@ -4,8 +4,26 @@
 <h1 class="title">{{ .Title}}</h1>
 {{ .Content }}
 </article>
-{{ end }}
-
-{{ define "footer" }}
+<hr />
 {{ partial "author.html" . }}
+<div class="adjacent-posts">
+  {{ if .Next }}
+  <div class="adjacent-posts--prev">
+      <span class="adjacent-posts--relative">Previously</span>
+      <a href="{{ .Next.Permalink }}">
+        {{.Next.Title}}
+      </a>
+      <span class="postlist--date">{{ .Next.Date.Format "January 2, 2006" }}</span>
+  </div>
+  {{ end }}
+  {{ if .Prev }}
+  <div class="adjacent-posts--next">
+    <span class="adjacent-posts--relative">Up next</span>
+    <a href="{{ .Prev.Permalink }}">
+      {{.Prev.Title}}
+    </a>
+    <span class="postlist--date">{{ .Prev.Date.Format "January 2, 2006" }}</span>
+  </div>
+  {{ end }}
+</div>
 {{ end }}

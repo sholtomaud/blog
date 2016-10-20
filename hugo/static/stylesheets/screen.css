@@ -137,11 +137,15 @@ a[rel=footnote]::after {
 }
 
 /* Spacing */
+* {
+  box-sizing: border-box;
+}
 
 #main {
-  padding: 0 10px 0 10px;
   max-width: 750px;
+  width: 100%;
   margin: 0 auto 30px auto;
+  padding: 0 10px 0 10px;
 }
 
 article > * {
@@ -196,6 +200,12 @@ article > p > img {
   max-width: 100%;
 }
 
+hr {
+  border: 0;
+  border-bottom: 1px solid #828282;
+  width: 80%;
+}
+
 /* Table of Contents */
 #TableOfContents li {
   margin-top: 0;
@@ -221,15 +231,12 @@ ul.postlist li {
   line-height: 125%;
 }
 
-
 /* Author block */
 .author {
   text-align: center;
   display: flex;
   flex-direction: column;
   margin: 30px auto 30px auto;
-  width: 100%;
-  max-width: 750px;
   transform: none;
   width: 290px;
   flex-direction: row;
@@ -275,4 +282,31 @@ ul.postlist li {
   flex-direction: column;
   justify-content: center;
   margin-left: 30px;
+}
+
+/* Adjacent links block */
+.adjacent-posts {
+  display: flex;
+  width: 750px;
+  max-width: 100%;
+  justify-content: space-between;
+  padding: 0 10px 0 10px;
+  margin-bottom: 30px;
+}
+
+.adjacent-posts--relative {
+  display: block;
+  text-transform: uppercase;
+  color: #828282;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.adjacent-posts--prev {
+  text-align: left;
+}
+
+.adjacent-posts--next {
+  margin-left: 30px;
+  text-align: right;
 }
