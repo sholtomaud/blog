@@ -216,6 +216,10 @@ body.homepage #main {
   max-width: 400px;
 }
 
+body.homepage p {
+  margin-bottom: 30px;
+}
+
 ul.postlist {
   padding: 0;
 }
