@@ -25,3 +25,4 @@ TODO:
 [ ] robots.txt
 [ ] Sitemap?
 [ ] katex pre-rendering?
+[ ] Twitter/GitHub links
