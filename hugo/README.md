@@ -14,17 +14,11 @@ set your $GOPATH to something sensible
 
 Then run
 
-    go get github.com/jlfwong/hugo
+    make install
 
-From there, you should be able to run
+From there, you should be able to boot the server on port 1313 by running:
 
-    hugo server
-
-You'll also need pygments for the syntax highlighting, otherwise I'll 
-accidentally upload a version of my site with no syntax highlighting (for like 
-the 3rd time)
-
-    sudo pip install Pygments
+    make
 
 TODO:
 [ ] Bio somewhere?
