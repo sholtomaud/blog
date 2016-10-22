@@ -1,0 +1,19 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ .Site.Title }}</title>
+  <link href="http://jamie-wong.com/atom.xml" rel="self"/>
+  <link href="http://jamie-wong.com/"/>
+  <updated>{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</updated>
+  <id>http://jamie-wong.com/</id>
+  <author>
+    <name>Jamie Wong</name>
+  </author>
+  {{ range first 20 .Data.Pages }}
+  <entry>
+    <title>{{ .Title }}</title>
+    <link href="{{ .Permalink }}"/>
+    <updated>{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</updated>
+    <id>{{ .Permalink }}</id>
+    {{ `<content type="html"><![CDATA` | safeHTML }}[{{ .Content }}]]></content>
+  </entry>
+  {{ end }}
+</feed>

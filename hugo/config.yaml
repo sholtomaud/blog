@@ -5,6 +5,8 @@ title: 'Zero Wind :: Jamie Wong'
 PygmentsCodeFences: true
 pygmentsuseclasses: true
 toctoken: "{:toc}"
+disableRSS: false
+rssuri: atom.xml
 blackfriday:
     extensions:
         - laxHtmlBlocks
