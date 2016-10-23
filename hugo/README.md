@@ -21,7 +21,6 @@ From there, you should be able to boot the server on port 1313 by running:
     make
 
 TODO:
-[ ] Bio somewhere?
 [ ] Delete Jekyll?
 [ ] Twitter/GitHub links
 

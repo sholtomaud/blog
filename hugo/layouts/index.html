@@ -11,7 +11,7 @@ I work on design tools at <a href="https://www.figma.com">Figma</a>.</p>
 {{ range .Data.Pages.ByPublishDate }}
   <li>
     <a href="{{ .Permalink }}">{{ .Title }}</a>
-    <span class="postlist--date">{{ .Date.Format "January 2, 2006" }}</span>
+    <span class="postlist__date">{{ .Date.Format "January 2, 2006" }}</span>
   </li>
 {{ end }}
 </ul>

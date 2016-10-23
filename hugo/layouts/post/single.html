@@ -22,21 +22,21 @@
 {{ partial "author.html" . }}
 <div class="adjacent-posts">
   {{ if .Next }}
-  <div class="adjacent-posts--prev">
-      <span class="adjacent-posts--relative">Previously</span>
+  <div class="adjacent-posts__prev">
+      <span class="adjacent-posts__relative">Previously</span>
       <a href="{{ .Next.Permalink }}">
         {{.Next.Title}}
       </a>
-      <span class="postlist--date">{{ .Next.Date.Format "January 2, 2006" }}</span>
+      <span class="postlist__date">{{ .Next.Date.Format "January 2, 2006" }}</span>
   </div>
   {{ end }}
   {{ if .Prev }}
-  <div class="adjacent-posts--next">
-    <span class="adjacent-posts--relative">Up next</span>
+  <div class="adjacent-posts__next">
+    <span class="adjacent-posts__relative">Up next</span>
     <a href="{{ .Prev.Permalink }}">
       {{.Prev.Title}}
     </a>
-    <span class="postlist--date">{{ .Prev.Date.Format "January 2, 2006" }}</span>
+    <span class="postlist__date">{{ .Prev.Date.Format "January 2, 2006" }}</span>
   </div>
   {{ end }}
 </div>

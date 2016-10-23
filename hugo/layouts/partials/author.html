@@ -1,17 +1,15 @@
 <div class="author">
-  <div class="trace-of-me">
+  <a class="author__trace-of-me" href="/">
+    <img class="author__trace-of-me__regular" src="/images/Avatar Trace.svg" />
+    <img class="author__trace-of-me__eyebrow" src="/images/Eyebrow Raise.svg" />
+  </a>
+  <div class="author__site-text">
     <a href="/">
-      <img class="regular" src="/images/Avatar Trace.svg" />
-      <img class="eyebrow" src="/images/Eyebrow Raise.svg" />
+      <div class="author__site-title">Zerø Wind</div>
     </a>
-  </div>
-  <div class="site-text">
-    <a href="/">
-      <div class="site-title">Zerø Wind</div>
-    </a>
-    <div class="my-name">Jamie Wong</div>
+    <div class="author__my-name">Jamie Wong</div>
     {{ if .IsPage }}
-    <div class="post-date">{{ .Date.Format "January 2, 2006" }}</div>
+    <div class="author__post-date">{{ .Date.Format "January 2, 2006" }}</div>
     {{ end }}
   </div>
 </div>

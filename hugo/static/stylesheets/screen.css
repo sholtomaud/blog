@@ -224,7 +224,7 @@ ul.postlist li {
   list-style: none;
 }
 
-.postlist--date {
+.postlist__date {
   display: block;
   font-size: 16px;
   color: #828282;
@@ -247,36 +247,36 @@ ul.postlist li {
   border-bottom: none;
 }
 
-.trace-of-me > a {
+a.author__trace-of-me {
   display: block;
   width: 130px;
   height: 130px;
 }
 
-.trace-of-me img.regular { display: block; }
-.trace-of-me img.eyebrow { display: none; }
+.author__trace-of-me img.author__trace-of-me__regular { display: block; }
+.author__trace-of-me img.author__trace-of-me__eyebrow { display: none; }
 
-.trace-of-me:hover img.regular { display: none; }
-.trace-of-me:hover img.eyebrow { display: block; }
+.author__trace-of-me:hover img.author__trace-of-me__regular { display: none; }
+.author__trace-of-me:hover img.author__trace-of-me__eyebrow { display: block; }
 
-.site-title {
+.author__site-title {
   font-size: 30px;
   font-weight: bold;
   line-height: 125%;
 }
 
-.my-name {
+.author__my-name {
   font-size: 20px;
   line-height: 125%;
 }
 
-.post-date {
+.author__post-date {
   font-size: 16px;
   color: #828282;
   line-height: 125%;
 }
 
-.site-text {
+.author__site-text {
   height: 130px;
   display: flex;
   flex-direction: column;
@@ -294,7 +294,7 @@ ul.postlist li {
   margin-bottom: 30px;
 }
 
-.adjacent-posts--relative {
+.adjacent-posts__relative {
   display: block;
   text-transform: uppercase;
   color: #828282;
@@ -302,11 +302,11 @@ ul.postlist li {
   line-height: 1;
 }
 
-.adjacent-posts--prev {
+.adjacent-posts__prev {
   text-align: left;
 }
 
-.adjacent-posts--next {
+.adjacent-posts__next {
   margin-left: 30px;
   text-align: right;
 }
