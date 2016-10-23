@@ -20,11 +20,8 @@ From there, you should be able to boot the server on port 1313 by running:
 
     make
 
-TODO:
-[ ] Delete Jekyll?
-[ ] Twitter/GitHub links
-
 TODO maybe later:
+[ ] Delete Jekyll?
 [ ] katex pre-rendering?
 [ ] Email subscription?
 [ ] Get rid of date from file names

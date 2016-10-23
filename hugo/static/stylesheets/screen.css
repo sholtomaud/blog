@@ -247,17 +247,22 @@ ul.postlist li {
   border-bottom: none;
 }
 
-a.author__trace-of-me {
+a.author__logo {
   display: block;
   width: 130px;
   height: 130px;
 }
 
-.author__trace-of-me img.author__trace-of-me__regular { display: block; }
-.author__trace-of-me img.author__trace-of-me__eyebrow { display: none; }
+.author__logo img.author__logo__regular { display: block; }
+.author__logo img.author__logo__eyebrow { display: none; }
 
-.author__trace-of-me:hover img.author__trace-of-me__regular { display: none; }
-.author__trace-of-me:hover img.author__trace-of-me__eyebrow { display: block; }
+.author__logo:hover img.author__logo__regular { display: none; }
+.author__logo:hover img.author__logo__eyebrow { display: block; }
+
+.author__elsewhere img {
+    width: 20px;
+    height: 20px;
+}
 
 .author__site-title {
   font-size: 30px;
