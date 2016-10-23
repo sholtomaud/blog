@@ -155,7 +155,7 @@ article > * {
   margin: 0 auto 30px auto;
 }
 
-blockquote p {
+p {
   margin-bottom: 30px;
 }
 
@@ -214,10 +214,6 @@ hr {
 /* Homepage */
 body.homepage #main {
   max-width: 400px;
-}
-
-body.homepage p {
-  margin-bottom: 30px;
 }
 
 ul.postlist {
@@ -313,4 +309,21 @@ ul.postlist li {
 .adjacent-posts--next {
   margin-left: 30px;
   text-align: right;
+}
+
+.endpost-blurb {
+  font-size: 80%;
+  font-style: italic;
+  color: #828282;
+  line-height: 1.25;
+}
+
+.twitter-calls-to-action {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.twitter-calls-to-action iframe + iframe {
+  margin-left: 10px;
 }

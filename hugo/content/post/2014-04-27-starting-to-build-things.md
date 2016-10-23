@@ -184,7 +184,7 @@ If you still find yourself at a loss for ideas, click into one of the folders of
 know where to get started, feel free to [shoot me an email][].
 
 If you’re reading this as an experienced programmer, I want to hear about the 
-cool projects you did to get started. Leave a comment!
+cool projects you did to get started.
 
 [previous post]: /2013/05/05/something-out-of-nothing/
 [pythagorean triples]: http://en.wikipedia.org/wiki/Pythagorean_triple
