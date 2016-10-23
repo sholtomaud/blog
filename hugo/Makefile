@@ -21,4 +21,4 @@ build: require_pygments
 deploy_without_building:
 	rsync -rtzh --progress --delete public/ ubuntu@jamie-wong.com:/var/www/jamie-wong.com/blog/
 
-deploy: build deploy_without_build
+deploy: build deploy_without_building
