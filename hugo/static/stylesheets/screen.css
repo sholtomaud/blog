@@ -287,6 +287,10 @@ a.author__logo:hover #eyebrows {
   line-height: 125%;
 }
 
+.author .author__site-title:hover {
+  color: #ff6d6d;
+}
+
 .author__my-name {
   font-size: 20px;
   line-height: 125%;

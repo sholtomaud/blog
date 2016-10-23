@@ -3,24 +3,23 @@
     {{ partial "logo.svg" . }}
   </a>
   <div class="author__site-text">
-    <a href="/">
-      <div class="author__site-title">Zerø Wind</div>
-    </a>
-    <div class="author__my-name">Jamie Wong</div>
+    <a href="/" class="author__site-title">Zerø Wind</a>
+
+    <span class="author__my-name">Jamie Wong</span>
+
     <div class="author__elsewhere">
-      <a href="https://twitter.com/jlfwong">
-        {{ partial "twitter.svg" . }}
-      </a>
-      <a href="https://github.com/jlfwong">
-        {{ partial "github.svg" . }}
-      </a>
+      <a href="https://twitter.com/jlfwong">{{ partial "twitter.svg" . }}</a>
+      <a href="https://github.com/jlfwong">{{ partial "github.svg" . }}</a>
     </div>
-    <div class="author__post-date">
+
+    <span class="author__post-date">
       {{ if .IsPage }}
-        {{ .Date.Format "January 2, 2006" }}</div>
+        {{ .Date.Format "January 2, 2006" }}
       {{ else }}
-        <span title="I wonder who'll update this if I die...">1991 - ???</span>
+        <span title="I wonder who'll update this if I die...">
+          1991 - ???
+        </span>
       {{ end }}
-    </div>
+    </span>
   </div>
 </div>
