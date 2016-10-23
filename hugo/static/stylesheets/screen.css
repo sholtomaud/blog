@@ -253,15 +253,32 @@ a.author__logo {
   height: 130px;
 }
 
-.author__logo img.author__logo__regular { display: block; }
-.author__logo img.author__logo__eyebrow { display: none; }
+a.author__logo #eyebrows {
+  transition: transform 0.15s ease-in-out;
+}
 
-.author__logo:hover img.author__logo__regular { display: none; }
-.author__logo:hover img.author__logo__eyebrow { display: block; }
+a.author__logo:hover #eyebrows {
+  transform: translateY(-3px);
+}
 
-.author__elsewhere img {
-    width: 20px;
-    height: 20px;
+.author__elsewhere {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+
+.author__elsewhere svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.author__elsewhere svg:hover {
+  fill: #ff6d6d;
+}
+
+.author__elsewhere a + a {
+  margin-left: 10px;
 }
 
 .author__site-title {

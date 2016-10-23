@@ -1,7 +1,6 @@
 <div class="author">
-  <a class="author__logo" href="/">
-    <img class="author__logo__regular" src="/images/Avatar Trace.svg" />
-    <img class="author__logo__eyebrow" src="/images/Eyebrow Raise.svg" />
+  <a class="author__logo" href="/" title="Can I help you?">
+    {{ partial "logo.svg" . }}
   </a>
   <div class="author__site-text">
     <a href="/">
@@ -10,14 +9,18 @@
     <div class="author__my-name">Jamie Wong</div>
     <div class="author__elsewhere">
       <a href="https://twitter.com/jlfwong">
-        <img src="/images/icons/twitter.svg" alt="twitter" />
+        {{ partial "twitter.svg" . }}
       </a>
-      <a href="http://github.com/jlfwong">
-        <img src="/images/icons/github.svg" alt="github" />
+      <a href="https://github.com/jlfwong">
+        {{ partial "github.svg" . }}
       </a>
     </div>
-    {{ if .IsPage }}
-    <div class="author__post-date">{{ .Date.Format "January 2, 2006" }}</div>
-    {{ end }}
+    <div class="author__post-date">
+      {{ if .IsPage }}
+        {{ .Date.Format "January 2, 2006" }}</div>
+      {{ else }}
+        <span title="I wonder who'll update this if I die...">1991 - ???</span>
+      {{ end }}
+    </div>
   </div>
 </div>
