@@ -7,6 +7,7 @@ pygmentsuseclasses: true
 toctoken: "{:toc}"
 disableRSS: false
 rssuri: atom.xml
+taxonomies: []
 blackfriday:
     extensions:
         - laxHtmlBlocks
