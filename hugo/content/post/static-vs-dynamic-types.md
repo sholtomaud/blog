@@ -94,7 +94,7 @@ and TypeScript.
 
 ## Iteration Speed
 
-This is arguable the biggest downside of statically typed languages. Type 
+This is arguably the biggest downside of statically typed languages. Type 
 checking, as it turns out, is frequently slow. And since in most of these 
 languages, type resolution is pre-requisite to code generation, slow type 
 checking means slow compiling. Slow compiling means slow iteration time.
@@ -125,8 +125,8 @@ a->setName("Gertrude")
 ```
 
 Haskell and Scala do their best to dodge this problem by not letting you have 
-`null`, instead representing optional fields explicitly with an 
-`Option<User>`/`Maybe<User>`, where it forces you to deal with the fact that it 
+`null`, instead representing optional fields explicitly with a
+`Maybe User`/`Option[User]`, where it forces you to deal with the fact that it 
 might be missing, and not just assume it's there.
 
 ## Editing Support
@@ -213,7 +213,7 @@ shouldn't be forced to tell the computer information it already knows.
 The more complete version of this idea is type inference, and the first time I 
 saw it was in Haskell, as concisely explained in [Learn You a Haskell for Great 
 Good!: Types and Typeclasses][9], and is explained with a bit more detail in 
-[TypeScript's Type Interference Documentation][11]. 
+[TypeScript's Type Inference Documentation][11]. 
 
 So we get concise syntax without sacrificing type information.
 
@@ -373,6 +373,11 @@ If you like thinking about language tradeoffs and want stories more informed by
 experience, you should read through Steve Yegge's [Is Weak Typing Strong 
 Enough?][29].
 
+**EDIT**: My fellow uWaterloo Software Engineering 2014 classmate, [Ming-Ho 
+Yee][31],
+is a PhD student in programming language design, so he naturally had some things 
+to say about this post. You can read his thoughts in [his response][30].
+
 
 [0]: https://www.figma.com/
 [1]: https://git-scm.com/book/en/v2
@@ -404,3 +409,5 @@ Enough?][29].
 [27]: https://golang.org/doc/faq#creating_a_new_language
 [28]: https://www.typescriptlang.org/docs/release-notes/typescript-2.0.html
 [29]: https://sites.google.com/site/steveyegge2/is-weak-typing-strong-enough
+[30]: http://mhyee.com/blog/pl_blog_response.html
+[31]: http://mhyee.com/
