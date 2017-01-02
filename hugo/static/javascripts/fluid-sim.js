@@ -473,7 +473,7 @@ window.FluidSim = function(canvasId, options) {
     var canvasTop = canvas.offsetTop;
 
     var containerTop = window.scrollY;
-    var containerBottom = window.scrollY + container.offsetHeight;
+    var containerBottom = window.scrollY + window.innerHeight;
 
     if (middleIn) {
       return (containerTop < (canvasTop + canvasBottom) / 2 &&
