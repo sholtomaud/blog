@@ -102,6 +102,10 @@ figure {
   text-align: center;
 }
 
+figure > img {
+  max-width: 100%;
+}
+
 caption, figcaption {
   font-style: italic;
   text-align: center;
@@ -195,6 +199,13 @@ iframe {
 
 article > p > img {
   /* Center images */
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+article > p > svg {
+  /* Center svg */
   display: block;
   margin: 0 auto;
   max-width: 100%;
