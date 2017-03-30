@@ -269,7 +269,7 @@ transformation matrix, and then make our own in GLSL.
  */
 mat4 viewMatrix(vec3 eye, vec3 center, vec3 up) {
 	vec3 f = normalize(center - eye);
-	vec3 s = cross(f, up);
+	vec3 s = normalize(cross(f, up));
 	vec3 u = cross(s, f);
 	return mat4(
 		vec4(s, 0.0),
